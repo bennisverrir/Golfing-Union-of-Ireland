@@ -46,6 +46,9 @@ void ConsoleUI::run(){
     cout << "Please enter one of the following commands:"<< endl;
     cout << "list - This will list all the computer scientists " << endl;
     cout << "add - This will add a computer scientists " << endl;
+    cout << "find" << endl;
+    cout << "delete" << endl;
+    cout << "quit" << endl;
 
     string command;
     cin >> command;
@@ -127,6 +130,14 @@ void ConsoleUI::run(){
     {
 
     }
+    else if (command == "find")
+    {
+        cout << "Please enter the string you want to search";
+        string name;
+        cin >> name;
+        _service.findLegend(name);
+    }
+        
     cout << "continue?" << endl;
 
     cin >> keepGoing;
