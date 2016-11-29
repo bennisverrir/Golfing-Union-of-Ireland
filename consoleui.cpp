@@ -33,7 +33,7 @@ void ConsoleUI::run(){
         string name;
         char gender;
         int born;
-
+        int death;
         int flag = 0;
         do{
             flag = 0;
@@ -41,7 +41,7 @@ void ConsoleUI::run(){
 
 
         cin >> name;
-        for(int i = 0;i < name.size() && flag == 0 ;i++)
+        for(size_t i = 0;i < name.size() && flag == 0 ;i++)
         {
             if(isalpha(name[i]) || isupper(name[i])) //checking for a valid name
             {
@@ -73,11 +73,20 @@ void ConsoleUI::run(){
         cin >> born;
         if(born < 0 || born > 2016)
         {
-            cout << "Please enter a valid year of birth";
+            cout << "Please enter a valid year of birth"<<endl;
         }
-        }while(born < 0 || born > 2016); //checking for a valid birth
+        }while(born < 0 || born > 2016);
 
-        Legend newLegend (name, gender, born);
+        do{
+        cout << "Enter the year of death" << endl;
+        cin >> death;
+        if(death < born || death > 2016)
+        {
+            cout << "Please enter a valid year of death"<<endl;
+        }
+        }while(death < born || death > 2016);//checking for a valid death
+
+        Legend newLegend (name, gender, born, death);
         //_service.addLegend(newLegend);
 
     } else if (command == "delete")

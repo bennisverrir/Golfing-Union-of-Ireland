@@ -57,7 +57,7 @@ void dataAccess::writeFile(Legend writeLegend)
     if(file.is_open())
     {
         file << endl << writeLegend.getName() << "," << writeLegend.getGender() << ","
-             << writeLegend.getBorn << "," << writeLegend.getDeath;
+             << writeLegend.getBorn() << "," << writeLegend.getDeath();
     }
 
     file.close();

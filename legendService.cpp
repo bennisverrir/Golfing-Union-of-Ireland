@@ -13,7 +13,8 @@ vector <Legend> LegendService::getLegends(){
     legend = a.readFile();
     return legend;
 }
-void addLegend(string name, string gender, int born, int death){
+void addLegend(string name, char gender, int born, int death){
     Legend a (name, gender, born, death);
-    writeFile (a);
+    dataAccess braeikka;
+    braeikka.writeFile(a);
 }
