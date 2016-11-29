@@ -28,3 +28,16 @@ void LegendService::addLegend(string name, char gender, int born, int death){
     Legend person (name, gender, born, death);
     a.writeFile(person);
 }
+
+vector <Legend> LegendService::findLegend(string nameToFind){
+    vector <Legend> legend;
+    vector <Legend> targetLegend;
+    dataAccess a;
+    legend = a.readFile();
+    for (size_t i = 0;i < legend.size(); i++ ){
+        if (legend[i].getName().find(nameToFind) != string::npos) {
+        targetLegend.push_back(legend[i]);
+        }
+    }
+    return targetLegend;
+}
