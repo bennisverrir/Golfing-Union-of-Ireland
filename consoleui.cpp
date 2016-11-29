@@ -1,6 +1,7 @@
 #include "consoleui.h"
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include "legend.h"
 
 using namespace std;
@@ -23,6 +24,18 @@ ostream& operator << (ostream& out,const vector<Legend>& rhs)
     return out;
 }
 
+void ConsoleUI::sort(char command, vector<Legend>& legends)
+{
+   if(command == 'a')
+   {
+       cout << _service.getSort();
+   }
+   if(command == 'n')
+   {
+       cout << legends;
+   }
+}
+
 ConsoleUI::ConsoleUI(){}
 
 void ConsoleUI::run(){
@@ -40,7 +53,15 @@ void ConsoleUI::run(){
     if (command == "list"){
         vector <Legend> legends = _service.getLegends();
 
-        cout << legends;
+        char sortCommand;
+
+        cout << "How do you want to sort" << endl;
+        cout << "a - Alphabetical order" << endl;
+        cout << "n - No particular sorting" << endl;
+
+        cin >> sortCommand;
+
+        sort(sortCommand, legends);
 
     } else if (command == "add"){
 
@@ -110,4 +131,5 @@ void ConsoleUI::run(){
 
     cin >> keepGoing;
     }while(keepGoing == 'y');
+
 }
