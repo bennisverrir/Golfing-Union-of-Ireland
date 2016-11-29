@@ -14,6 +14,7 @@ public:
     LegendService();
     vector <Legend> getLegends ();
     vector <Legend> getSort ();
+    vector <Legend> findLegend(string nameToFind);
    void addLegend (string name, char gender, int born, int death);
 };
 
