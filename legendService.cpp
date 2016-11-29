@@ -1,6 +1,11 @@
 #include "legendService.h"
-#include "dataaccess.h"
+#include <iostream>
+#include <algorithm>
 
+struct legendComparison
+{
+    bool operator() (Legend i,Legend j){return(i.getName() < j.getName());}
+};
 
 LegendService::LegendService()
 {
@@ -9,12 +14,17 @@ LegendService::LegendService()
 
 vector <Legend> LegendService::getLegends(){
     vector <Legend> legend;
-    dataAccess a;
     legend = a.readFile();
     return legend;
 }
-void addLegend(string name, char gender, int born, int death){
-    Legend a (name, gender, born, death);
-    dataAccess braeikka;
-    braeikka.writeFile(a);
+vector <Legend> LegendService::getSort(){
+    vector <Legend> legends2;
+    legends2 = a.readFile();
+    legendComparison cmp;
+    sort(legends2.begin(), legends2.end(), cmp);
+    return legends2;
+}
+void LegendService::addLegend(string name, char gender, int born, int death){
+    Legend person (name, gender, born, death);
+    a.writeFile(person);
 }
