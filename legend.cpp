@@ -4,8 +4,49 @@ Legend::Legend()
 {
 
 }
-Legend::Legend (string name, string gender, int born){
+Legend::Legend(string name, char gender, int born, int death)
+{
+    setName(name);
+    setGender(gender);
+    setBorn(born);
+    setDeath(death);
+}
+
+void Legend::setName(string name)
+{
     _name = name;
+}
+
+void Legend::setGender(char gender)
+{
     _gender = gender;
+}
+
+void Legend::setBorn(int born)
+{
     _born = born;
+}
+
+void Legend::setDeath(int death)
+{
+    _death = death;
+}
+
+
+
+string Legend::getName() const
+{
+    return _name;
+}
+char Legend::getGender() const
+{
+    return _gender;
+}
+int Legend::getBorn() const
+{
+    return _born;
+}
+int Legend::getDeath() const
+{
+    return _death;
 }
