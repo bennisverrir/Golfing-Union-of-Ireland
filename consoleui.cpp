@@ -132,7 +132,7 @@ void ConsoleUI::run(){
     }
     else if (command == "find")
     {
-        cout << "Please enter the string you want to search";
+        cout << "Please enter the string you want to search" <<": ";  
         string name;
         cin >> name;
         _service.findLegend(name);
