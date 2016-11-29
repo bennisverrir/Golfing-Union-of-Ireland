@@ -52,7 +52,7 @@ void dataAccess::writeFile(Legend writeLegend)
 {
     ofstream file;
 
-    file.open("legends.txt", ios::app);
+    file.open("legend.txt", ios::app);
 
     if(file.is_open())
     {
