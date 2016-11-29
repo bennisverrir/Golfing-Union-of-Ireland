@@ -1,0 +1,24 @@
+Alan Turing,M,1912,1954
+
+Linus Torvalds,M,1969,0
+
+Richard Stallman,M,1953,0
+
+Charles Babbage,M,1791,1871
+
+Ada Lovelace,F,1815,1852
+
+Grace Hopper,F,1906,1992
+
+Anita Borg,F,1949,2003
+
+Alan J. Perlis,M,1922,1990
+
+Edsger W. Dijkstra,M,1930,2002
+
+Andrew Chi-Chih Yao,M,1946,0 
+
+John Vincent Atanasoff,M,1903,1995
+
+Blaise Pascal,M,1623,1662
+
