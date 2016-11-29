@@ -5,52 +5,66 @@
 
 using namespace std;
 
-ConsoleUI::ConsoleUI()
+ostream& operator << (ostream& out,const vector<Legend>& rhs)
 {
+    for (size_t i = 0; i < rhs.size(); i++)
+    {
+        out << rhs[i].getName() << " ";
+        out << rhs[i].getGender() << " ";
+        out << rhs[i].getBorn() << " ";
+        if(rhs[i].getDeath() != 0)
+        {
+            out << rhs[i].getDeath();
+        }
 
+        out << endl;
+    }
+
+    return out;
 }
+
+ConsoleUI::ConsoleUI(){}
+
 void ConsoleUI::run(){
 
     char keepGoing;
     do{
 
     cout << "Please enter one of the following commands:"<< endl;
-    cout << "list " << endl;
-    cout << "add " << endl;
+    cout << "list - This will list all the computer scientists " << endl;
+    cout << "add - This will add a computer scientists " << endl;
 
     string command;
     cin >> command;
 
     if (command == "list"){
         vector <Legend> legends = _service.getLegends();
-        for (size_t i = 0; i < legends.size(); i++)
-        {
-            cout << legends[i].getName() << ", ";
-            cout << legends[i].getGender() << ", ";
-            cout << legends[i].getBorn() << endl;
-        }
+
+        cout << legends;
+
     } else if (command == "add"){
+
         string name;
         char gender;
         int born;
         int death;
         int flag = 0;
+
         do{
             flag = 0;
-        cout << "Enter the name"<< endl;
+            cout << "Enter the name: ";
+            cin >> name;
 
-
-        cin >> name;
-        for(size_t i = 0;i < name.size() && flag == 0 ;i++)
-        {
-            if(isalpha(name[i]) || isupper(name[i])) //checking for a valid name
+            for(size_t i = 0;i < name.size() && flag == 0 ;i++)
             {
-            flag = 0;
-            }
-            else
-            {
-            flag = 1;
-            }
+             if(isalpha(name[i]) || isupper(name[i])) //checking for a valid name
+             {
+              flag = 0;
+             }
+             else
+             {
+                flag = 1;
+             }
         }
         if(flag == 1)
         {
@@ -59,17 +73,17 @@ void ConsoleUI::run(){
         }while(flag == 1);
 
         do{
-        cout << "Enter the gender" << endl;
+        cout << "Enter the gender: ";
         cin >> gender;
-        if(gender != 'm' && gender != 'f')
+        if(gender != toupper('m') && gender != toupper('f'))
         {
             cout << "Please enter a valid gender";
         }
         }
-        while(gender != 'm' && gender != 'f'); //checking for a valid gender
+        while(gender != toupper('m') && gender != toupper('f')); //checking for a valid gender
 
         do{
-        cout << "Enter the year of birth" << endl;
+        cout << "Enter the year of birth: ";
         cin >> born;
         if(born < 0 || born > 2016)
         {
@@ -78,7 +92,7 @@ void ConsoleUI::run(){
         }while(born < 0 || born > 2016);
 
         do{
-        cout << "Enter the year of death" << endl;
+        cout << "Enter the year of death: ";
         cin >> death;
         if(death < born || death > 2016)
         {
@@ -86,8 +100,7 @@ void ConsoleUI::run(){
         }
         }while(death < born || death > 2016);//checking for a valid death
 
-        Legend newLegend (name, gender, born, death);
-        //_service.addLegend(newLegend);
+        _service.addLegend(name, gender, born, death);
 
     } else if (command == "delete")
     {
