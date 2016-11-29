@@ -40,7 +40,7 @@ ConsoleUI::ConsoleUI(){}
 
 void ConsoleUI::run(){
 
-    char keepGoing;
+    string keepGoing;
     do{
 
     cout << "Please enter one of the following commands:"<< endl;
@@ -50,8 +50,10 @@ void ConsoleUI::run(){
     cout << "delete" << endl;
     cout << "quit" << endl;
 
+
     string command;
     cin >> command;
+    keepGoing = command;
 
     if (command == "list"){
         vector <Legend> legends = _service.getLegends();
@@ -138,9 +140,10 @@ void ConsoleUI::run(){
         _service.findLegend(name);
     }
         
-    cout << "continue?" << endl;
+    //cout << "continue?" << endl;
 
-    cin >> keepGoing;
-    }while(keepGoing == 'y');
+    cout << endl;
+    //cin >> keepGoing;
+    }while(keepGoing != "quit");
 
 }
