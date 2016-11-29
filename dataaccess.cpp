@@ -11,7 +11,7 @@ vector<Legend> dataAccess::readFile()
 
     vector<Legend> returnVector;
 
-    file.open("legends.txt");
+    file.open("legend.txt");
     string line;
     string name;
     char gender;
