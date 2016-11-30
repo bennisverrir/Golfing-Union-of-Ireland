@@ -1,5 +1,4 @@
 #include "legendService.h"
-#include <iostream>
 #include <algorithm>
 
 struct legendComparison
@@ -78,8 +77,6 @@ void LegendService::deleteLegend(int index, vector<Legend> deleteVector)
             break;
         }
     }
-
-    cout << index <<  " sadas " << endl;
 
     a.deleteLine(newLegend);
 
