@@ -8,6 +8,7 @@ class ConsoleUI
 public:
     ConsoleUI();
     void run ();
+    friend ostream& operator << (ostream& out,const vector<Legend>& rhs);
 private:
     LegendService _service;
     void sort(char command, vector<Legend>& legends);
