@@ -101,7 +101,7 @@ bool ConsoleUI::checkName(string name, bool flag)
 {
     for(size_t i = 0; i < name.size() && flag ;i++)
     {
-         if(isalpha(name[i]) || isupper(name[i])) //checking for a valid name
+         if(isalpha(name[i]) || isupper(name[i]) || name[i] == ' ') //checking for a valid name
          {
             flag = true;
          }
@@ -121,7 +121,8 @@ string ConsoleUI::getName(string name)
 
     do{
         cout << "Enter the name: ";
-        cin >> name;
+        cin.ignore();
+        getline(cin,name);
 
         flag = checkName(name, flag);
 
