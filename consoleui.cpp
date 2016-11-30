@@ -294,7 +294,8 @@ void ConsoleUI::run(){
     }
     else
     {
-        cout << "Invalid Command!" << endl;
+        if(keepGoing != "quit")
+        {cout << "Invalid Command!" << endl;}
     }
         
 
