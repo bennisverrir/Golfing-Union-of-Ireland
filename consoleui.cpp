@@ -264,7 +264,7 @@ void ConsoleUI::run(){
     {
         CommandList();
 
-   
+    }
     else if (command == "add")
     {
       commandAdd();
