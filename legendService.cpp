@@ -6,6 +6,14 @@ struct legendComparison
 {
     bool operator() (Legend i,Legend j){return(i.getName() < j.getName());}
 };
+struct legendComparisonGender
+{
+    bool operator() (Legend i,Legend j){return(i.getGender() < j.getGender());}
+};
+struct legendComparisonBirth
+{
+    bool operator() (Legend i,Legend j){return(i.getBorn() < j.getBorn());}
+};
 
 LegendService::LegendService()
 {
@@ -23,6 +31,22 @@ vector <Legend> LegendService::getSort(){
     legendComparison cmp;
     sort(legends2.begin(), legends2.end(), cmp);
     return legends2;
+}
+vector <Legend> LegendService::getSortGender() //copy
+{
+    vector <Legend> legends3;
+    legends3 = a.readFile();
+    legendComparisonGender cmp;
+    sort(legends3.begin(), legends3.end(), cmp);
+    return legends3;
+}
+vector <Legend> LegendService::getSortDateOfBirth() //copy
+{
+    vector <Legend> legends4;
+    legends4 = a.readFile();
+    legendComparisonBirth cmp;
+    sort(legends4.begin(), legends4.end(), cmp);
+    return legends4;
 }
 void LegendService::addLegend(string name, char gender, int born, int death){
     Legend person (name, gender, born, death);
