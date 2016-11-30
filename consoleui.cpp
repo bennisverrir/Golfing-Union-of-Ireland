@@ -36,6 +36,14 @@ void ConsoleUI::sort(char command, vector<Legend>& legends)
    {
        cout << legends;
    }
+    if(command == 'g')
+   {
+   cout << _service.getSortGender();
+   }
+   if(command == 'b')
+   {
+       cout << _service.getSortDateOfBirth();
+   }
 }
 
 void ConsoleUI::CommandList()
@@ -47,6 +55,8 @@ void ConsoleUI::CommandList()
     cout << "How do you want to sort" << endl;
     cout << "a - Alphabetical order" << endl;
     cout << "n - No particular sorting" << endl;
+    cout << "g - Alphabetical order" << endl;
+    cout << "b - Date of birth order" << endl;
 
     cout << endl;
     cin >> sortCommand;
