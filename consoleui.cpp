@@ -149,23 +149,20 @@ string ConsoleUI::getName(string name)
     return name;
 }
 
-void ConsoleUI::getGender(char &gender)
+void ConsoleUI::CommandFind()
 {
-    do
-    {
-        cout << "Enter the gender: ";
-        cin >> gender;
-
-        gender = toupper(gender);
-
-        if(gender != toupper('m') && gender != toupper('f'))
+    cout << "Please enter the string you want to search" <<": ";  
+        string name;
+        cin >> name;
+        vector <Legend> toPrint = _service.findLegend(name);
+        if(toPrint.size() > 0)
         {
-            cout << "Please enter a valid gender";
+            cout << toPrint;
         }
-
-    }while(gender != toupper('m') && gender != toupper('f'));
-
-
+        else
+        {
+            cout << endl <<"No results from that query!" << endl;
+        }
 }
 
 void ConsoleUI::getBorn(int &born)
