@@ -50,3 +50,12 @@ int Legend::getDeath() const
 {
     return _death;
 }
+int Legend::getDeathAge() const
+{
+    return getDeath()-getBorn();
+}
+
+int Legend::getAge() const
+{
+    return 2016-getBorn();
+}

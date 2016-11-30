@@ -22,6 +22,8 @@ public:
     char getGender() const;
     int getBorn() const;
     int getDeath() const;
+    int getAge() const;
+    int getDeathAge()const;
 
 
 
