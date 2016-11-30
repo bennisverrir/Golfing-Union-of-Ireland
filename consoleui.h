@@ -14,8 +14,13 @@ private:
     void CommandList();
     void CommandFind();
     void CommandDelete();
-
-
+    void displayCommands();
+    bool checkName(string name, bool flag);
+    string getName(string name);
+    char getGender(char gender);
+    int getBorn(int born);
+    int getDeath(int death, int born);
+    void commandAdd();
 };
 
 #endif // CONSOLEUI_H
