@@ -18,6 +18,9 @@ ostream& operator << (ostream& out,const vector<Legend>& rhs)
         if(rhs[i].getDeath() != 0)
         {
             out << rhs[i].getDeath();
+            out <<", Died " << rhs[i].getDeathAge() <<" years old";
+        } else{
+            out << ", " << rhs[i].getAge()<< " Years old";
         }
 
         out << endl;
