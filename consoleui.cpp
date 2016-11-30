@@ -6,6 +6,8 @@
 
 using namespace std;
 
+ConsoleUI::ConsoleUI(){}
+
 ostream& operator << (ostream& out,const vector<Legend>& rhs)
 {
     for (size_t i = 0; i < rhs.size(); i++)
@@ -36,7 +38,34 @@ void ConsoleUI::sort(char command, vector<Legend>& legends)
    }
 }
 
-ConsoleUI::ConsoleUI(){}
+void ConsoleUI::CommandList()
+{
+    vector <Legend> legends = _service.getLegends();
+
+    char sortCommand;
+
+    cout << "How do you want to sort" << endl;
+    cout << "a - Alphabetical order" << endl;
+    cout << "n - No particular sorting" << endl;
+
+    cin >> sortCommand;
+
+    sort(sortCommand, legends);
+}
+
+void ConsoleUI::CommandFind()
+{
+    cout << "Please enter the string you want to search" <<": ";
+    string name;
+    cin >> name;
+    _service.findLegend(name);
+}
+
+void ConsoleUI::CommandDelete()
+{
+
+}
+
 
 void ConsoleUI::run(){
 
@@ -55,20 +84,12 @@ void ConsoleUI::run(){
     cin >> command;
     keepGoing = command;
 
-    if (command == "list"){
-        vector <Legend> legends = _service.getLegends();
+    if (command == "list")
+    {
+        CommandList();
 
-        char sortCommand;
-
-        cout << "How do you want to sort" << endl;
-        cout << "a - Alphabetical order" << endl;
-        cout << "n - No particular sorting" << endl;
-
-        cin >> sortCommand;
-
-        sort(sortCommand, legends);
-
-    } else if (command == "add"){
+    }
+    else if (command == "add"){
 
         string name;
         char gender;
@@ -128,22 +149,20 @@ void ConsoleUI::run(){
 
         _service.addLegend(name, gender, born, death);
 
-    } else if (command == "delete")
+    }
+    else if (command == "delete")
     {
-
+        CommandDelete();
     }
     else if (command == "find")
     {
-        cout << "Please enter the string you want to search" <<": ";  
-        string name;
-        cin >> name;
-        _service.findLegend(name);
+       CommandFind();
     }
         
-    //cout << "continue?" << endl;
+
 
     cout << endl;
-    //cin >> keepGoing;
+
     }while(keepGoing != "quit");
 
 }
