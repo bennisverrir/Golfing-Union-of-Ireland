@@ -10,7 +10,7 @@ ConsoleUI::ConsoleUI(){}
 
 ostream& operator << (ostream& out,const vector<Legend>& rhs)
 {
-    cout << setw(30) << left << "Name" << setw(11) << "Gender" << setw(10) <<
+    cout << setw(7) << left <<  "No." << setw(30) << left << "Name" << setw(11) << "Gender" << setw(10) <<
             "Born" <<  setw(11) << " Died" << endl;
     for(int i = 0; i < 40; i++)
     {
@@ -20,7 +20,7 @@ ostream& operator << (ostream& out,const vector<Legend>& rhs)
 
     for (size_t i = 0; i < rhs.size(); i++)
     {
-        out << setw(30) << left << rhs[i].getName();
+        out << setw(7) << (i+1) << setw(30) << left << rhs[i].getName();
         out << setw(10) << rhs[i].getGender() << " ";
         out << setw(10) <<  rhs[i].getBorn() << " ";
         if(rhs[i].getDeath() != 0)
@@ -98,6 +98,30 @@ void ConsoleUI::CommandFind()
 
 void ConsoleUI::CommandDelete()
 {
+    string deleteName;
+
+    cout << "Who do you want to delete? ";
+    cin >> deleteName;
+
+    vector<Legend> deleteLegend = _service.findLegend(deleteName);
+
+    if(deleteLegend.size() > 0)
+    {
+        cout << deleteLegend;
+
+        cout << "What number do you want to delete? ";
+
+        int number;
+
+        cin >> number;
+
+        _service.deleteLegend(number, deleteLegend);
+    }
+    else
+    {
+        cout << endl <<"No results from that query!" << endl;
+    }
+
 
 }
 
