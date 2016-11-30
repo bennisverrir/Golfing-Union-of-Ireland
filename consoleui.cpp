@@ -70,7 +70,7 @@ void ConsoleUI::CommandList()
     cout << "a - Alphabetical order" << endl;
     cout << "n - No particular sorting" << endl;
     cout << "g - Gender order" << endl;
-    cout << "b - Date of birth order" << endl;
+    cout << "b - Year of birth order" << endl;
 
     cout << endl;
     cin >> sortCommand;
@@ -104,7 +104,7 @@ void ConsoleUI::displayCommands()
     cout << "add - This will add a computer scientists " << endl;
     cout << "find - This will find a computer scientists from the list" << endl;
     cout << "delete - This will delete a computer scientists from the list" << endl;
-    cout << "quit - This will quit the programme" << endl;
+    cout << "quit - This will quit the program" << endl;
 
     cout << endl;
 }
