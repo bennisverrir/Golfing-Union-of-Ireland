@@ -72,8 +72,13 @@ void dataAccess::deleteLine(vector<Legend> deleteLegend)
     {
         for(size_t i = 0; i < deleteLegend.size(); i++)
         {
-            file << endl << deleteLegend[i].getName() << "," << deleteLegend[i].getGender() << ","
+            file << deleteLegend[i].getName() << "," << deleteLegend[i].getGender() << ","
                  << deleteLegend[i].getBorn() << "," << deleteLegend[i].getDeath();
+
+            if(i != (deleteLegend.size() - 1))
+            {
+                file << endl;
+            }
         }
     }
 
