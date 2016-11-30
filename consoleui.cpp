@@ -71,10 +71,13 @@ void ConsoleUI::CommandList()
 
 void ConsoleUI::CommandFind()
 {
-    cout << "Please enter the string you want to search" <<": ";
-    string name;
-    cin >> name;
-    _service.findLegend(name);
+    cout << "Please enter the string you want to search" <<": ";  
+        string name;
+        cin >> name;
+        vector <string> toPrint = _service.findLegend(name);
+        for (size_t i = 0; i < toPrint.size(); i++){
+            cout << toPrint[i] << endl;
+        }
 }
 
 void ConsoleUI::CommandDelete()
@@ -261,7 +264,7 @@ void ConsoleUI::run(){
     {
         CommandList();
 
-    }
+   
     else if (command == "add")
     {
       commandAdd();
