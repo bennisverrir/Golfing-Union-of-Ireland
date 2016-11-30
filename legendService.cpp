@@ -53,12 +53,14 @@ void LegendService::addLegend(string name, char gender, int born, int death){
     a.writeFile(person);
 }
 
-vector <string> LegendService::findLegend(string nameToFind){
+vector <Legend> LegendService::findLegend(string nameToFind){
     vector <Legend> legend = a.readFile();
     string myString;
-    vector <string> returnVector;
+    vector <Legend> returnVector;
     for (size_t i = 0;i < legend.size(); i++ ){
         if (legend[i].getName().find(nameToFind) != string::npos) {
+            returnVector.push_back(legend[i]);
+            /*
             myString = legend[i].getName();
             myString.append ("\t ");
             myString += legend[i].getGender();
@@ -67,6 +69,7 @@ vector <string> LegendService::findLegend(string nameToFind){
             myString.append ("\t ");
             myString.append (to_string(legend[i].getDeath()));
             returnVector.push_back(myString);
+            */
         }
     }
     return returnVector;
