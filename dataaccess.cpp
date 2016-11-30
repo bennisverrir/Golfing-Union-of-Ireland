@@ -1,5 +1,5 @@
-#include "dataaccess.h"
-
+﻿#include "dataaccess.h"
+#include <cstdio>
 dataAccess::dataAccess()
 {
 
@@ -48,17 +48,35 @@ vector<Legend> dataAccess::readFile()
 
     return returnVector;
 }
-void dataAccess::writeFile(Legend writeLegend)
+void dataAccess::writeFile(Legend writeLegend, string fileName)
 {
     ofstream file;
 
-    file.open("legend.txt", ios::app);
+    file.open(fileName, ios::app);
 
     if(file.is_open())
     {
         file << endl << writeLegend.getName() << "," << writeLegend.getGender() << ","
              << writeLegend.getBorn() << "," << writeLegend.getDeath();
     }
+    file.close();
+}
+
+void dataAccess::deleteLine(vector<Legend> deleteLegend)
+{
+    ofstream file;
+
+    file.open("legend.txt", ios::trunc);
+
+    if(file.is_open())
+    {
+        for(size_t i = 0; i < deleteLegend.size(); i++)
+        {
+            file << endl << deleteLegend[i].getName() << "," << deleteLegend[i].getGender() << ","
+                 << deleteLegend[i].getBorn() << "," << deleteLegend[i].getDeath();
+        }
+    }
 
     file.close();
+
 }

@@ -16,7 +16,8 @@ public:
     dataAccess();
 
     vector<Legend> readFile();
-    void writeFile(Legend writeLegend);
+    void writeFile(Legend writeLegend, string fileName);
+    void deleteLine(vector<Legend> deleteLegend);
 };
 
 #endif // DATAACCESS_H

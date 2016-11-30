@@ -50,7 +50,7 @@ vector <Legend> LegendService::getSortDateOfBirth() //copy
 }
 void LegendService::addLegend(string name, char gender, int born, int death){
     Legend person (name, gender, born, death);
-    a.writeFile(person);
+    a.writeFile(person, "legend.txt");
 }
 
 vector <Legend> LegendService::findLegend(string nameToFind){
@@ -60,18 +60,27 @@ vector <Legend> LegendService::findLegend(string nameToFind){
     for (size_t i = 0;i < legend.size(); i++ ){
         if (legend[i].getName().find(nameToFind) != string::npos) {
             returnVector.push_back(legend[i]);
-            /*
-            myString = legend[i].getName();
-            myString.append ("\t ");
-            myString += legend[i].getGender();
-            myString.append ("\t ");
-            myString.append (to_string(legend[i].getBorn()));
-            myString.append ("\t ");
-            myString.append (to_string(legend[i].getDeath()));
-            returnVector.push_back(myString);
-            */
         }
     }
     return returnVector;
+}
+
+void LegendService::deleteLegend(int index, vector<Legend> deleteVector)
+{
+    vector<Legend> newLegend = getLegends();
+
+    for(size_t i = 0; i < newLegend.size(); i++)
+    {
+        if((deleteVector[index-1].getName() == newLegend[i].getName()) && (deleteVector[index-1].getGender() == newLegend[i].getGender()) &&
+           (deleteVector[index-1].getBorn() == newLegend[i].getBorn()) && (deleteVector[index-1].getDeath() == newLegend[i].getDeath()))
+        {
+            newLegend.erase(newLegend.begin()+i);
+            break;
+        }
+    }
+
+    cout << index <<  " sadas " << endl;
+
+    a.deleteLine(newLegend);
 
 }
