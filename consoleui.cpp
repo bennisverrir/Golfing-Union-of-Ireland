@@ -6,6 +6,8 @@
 
 using namespace std;
 
+ConsoleUI::ConsoleUI(){}
+
 ostream& operator << (ostream& out,const vector<Legend>& rhs)
 {
     for (size_t i = 0; i < rhs.size(); i++)
@@ -36,114 +38,193 @@ void ConsoleUI::sort(char command, vector<Legend>& legends)
    }
 }
 
-ConsoleUI::ConsoleUI(){}
+void ConsoleUI::CommandList()
+{
+    vector <Legend> legends = _service.getLegends();
 
-void ConsoleUI::run(){
+    char sortCommand;
 
-    string keepGoing;
-    do{
+    cout << "How do you want to sort" << endl;
+    cout << "a - Alphabetical order" << endl;
+    cout << "n - No particular sorting" << endl;
 
+    cin >> sortCommand;
+
+    sort(sortCommand, legends);
+}
+
+void ConsoleUI::CommandFind()
+{
+    cout << "Please enter the string you want to search" <<": ";
+    string name;
+    cin >> name;
+    _service.findLegend(name);
+}
+
+void ConsoleUI::CommandDelete()
+{
+
+}
+
+
+
+
+void ConsoleUI::displayCommands()
+{
     cout << "Please enter one of the following commands:"<< endl;
     cout << "list - This will list all the computer scientists " << endl;
     cout << "add - This will add a computer scientists " << endl;
     cout << "find" << endl;
     cout << "delete" << endl;
     cout << "quit" << endl;
+}
+
+bool ConsoleUI::checkName(string name, bool flag)
+{
+    for(size_t i = 0; i < name.size() && flag ;i++)
+    {
+         if(isalpha(name[i]) || isupper(name[i])) //checking for a valid name
+         {
+            flag = true;
+         }
+         else
+         {
+            flag = false;
+         }
+    }
 
 
-    string command;
-    cin >> command;
-    keepGoing = command;
+    return flag;
+}
 
-    if (command == "list"){
-        vector <Legend> legends = _service.getLegends();
+string ConsoleUI::getName(string name)
+{
+    bool flag = true;
 
-        char sortCommand;
+    do{
+        cout << "Enter the name: ";
+        cin >> name;
 
-        cout << "How do you want to sort" << endl;
-        cout << "a - Alphabetical order" << endl;
-        cout << "n - No particular sorting" << endl;
+        flag = checkName(name, flag);
 
-        cin >> sortCommand;
 
-        sort(sortCommand, legends);
-
-    } else if (command == "add"){
-
-        string name;
-        char gender;
-        int born;
-        int death;
-        int flag = 0;
-
-        do{
-            flag = 0;
-            cout << "Enter the name: ";
-            cin >> name;
-
-            for(size_t i = 0;i < name.size() && flag == 0 ;i++)
-            {
-             if(isalpha(name[i]) || isupper(name[i])) //checking for a valid name
-             {
-              flag = 0;
-             }
-             else
-             {
-                flag = 1;
-             }
-        }
-        if(flag == 1)
+        if(!flag)
         {
             cout << "Please enter a valid name, only with letters" << endl;
         }
-        }while(flag == 1);
 
-        do{
+    }while(!flag);
+
+    return name;
+}
+
+void ConsoleUI::getGender(char &gender)
+{
+    do
+    {
         cout << "Enter the gender: ";
         cin >> gender;
+
+        gender = toupper(gender);
+
         if(gender != toupper('m') && gender != toupper('f'))
         {
             cout << "Please enter a valid gender";
         }
-        }
-        while(gender != toupper('m') && gender != toupper('f')); //checking for a valid gender
 
-        do{
+    }while(gender != toupper('m') && gender != toupper('f'));
+
+
+}
+
+void ConsoleUI::getBorn(int &born)
+{
+    do
+    {
         cout << "Enter the year of birth: ";
         cin >> born;
+
         if(born < 0 || born > 2016)
         {
-            cout << "Please enter a valid year of birth"<<endl;
+             cout << "Please enter a valid year of birth" <<endl;
         }
-        }while(born < 0 || born > 2016);
 
-        do{
+    }while(born < 0 || born > 2016);
+
+
+}
+
+void ConsoleUI::getDeath(int &death, int born)
+{
+    do
+    {
         cout << "Enter the year of death: ";
         cin >> death;
+
         if(death < born || death > 2016)
         {
-            cout << "Please enter a valid year of death"<<endl;
+            cout << "Please enter a valid year of death" << endl;
         }
-        }while(death < born || death > 2016);//checking for a valid death
+    }while(death < born || death > 2016);
 
-        _service.addLegend(name, gender, born, death);
+}
 
-    } else if (command == "delete")
+void ConsoleUI::commandAdd()
+{
+    string name;
+    char gender;
+    int born;
+    int death;
+
+
+    name = getName(name);
+
+    getGender(gender); //checking for a valid gender
+
+    getBorn(born);
+
+    getDeath(death, born);
+
+
+    _service.addLegend(name, gender, born, death);
+}
+
+void ConsoleUI::run(){
+
+    string keepGoing;
+
+    do{
+
+        displayCommands();
+
+        string command;
+
+        cin >> command;
+        keepGoing = command;
+
+    if (command == "list")
     {
+        CommandList();
 
+    }
+    else if (command == "add")
+    {
+      commandAdd();
+
+    }
+    else if (command == "delete")
+    {
+        CommandDelete();
     }
     else if (command == "find")
     {
-        cout << "Please enter the string you want to search" <<": ";  
-        string name;
-        cin >> name;
-        _service.findLegend(name);
+       CommandFind();
     }
         
-    //cout << "continue?" << endl;
+
 
     cout << endl;
-    //cin >> keepGoing;
+
     }while(keepGoing != "quit");
 
 }
