@@ -60,11 +60,11 @@ vector <string> LegendService::findLegend(string nameToFind){
     for (size_t i = 0;i < legend.size(); i++ ){
         if (legend[i].getName().find(nameToFind) != string::npos) {
             myString = legend[i].getName();
-            myString.append (", ");
+            myString.append ("/t ");
             myString += legend[i].getGender();
-            myString.append (", ");
+            myString.append ("/t ");
             myString.append (to_string(legend[i].getBorn()));
-            myString.append (", ");
+            myString.append ("/t ");
             myString.append (to_string(legend[i].getDeath()));
             returnVector.push_back(myString);
         }
