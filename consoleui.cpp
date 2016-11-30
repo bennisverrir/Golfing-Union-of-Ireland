@@ -48,9 +48,12 @@ void ConsoleUI::CommandList()
     cout << "a - Alphabetical order" << endl;
     cout << "n - No particular sorting" << endl;
 
+    cout << endl;
     cin >> sortCommand;
 
     sort(sortCommand, legends);
+
+
 }
 
 void ConsoleUI::CommandFind()
@@ -77,6 +80,8 @@ void ConsoleUI::displayCommands()
     cout << "find" << endl;
     cout << "delete" << endl;
     cout << "quit" << endl;
+
+    cout << endl;
 }
 
 bool ConsoleUI::checkName(string name, bool flag)
@@ -154,19 +159,55 @@ void ConsoleUI::getBorn(int &born)
 
 }
 
+bool ConsoleUI::checkIfDead()
+{
+    char command = ' ';
+
+    while(command != toupper('y') && command != toupper('n'))
+    {
+        cout << "Are they alive (y/n)? ";
+
+        cin >> command;
+
+        command = toupper(command);
+
+        if(command != toupper('y') && command != toupper('n'))
+        {
+            cout << "Please enter a valid command" << endl;
+        }
+    }
+
+    if(command == toupper('y'))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+
+}
+
 void ConsoleUI::getDeath(int &death, int born)
 {
-    do
-    {
-        cout << "Enter the year of death: ";
-        cin >> death;
-
-        if(death < born || death > 2016)
+   if(checkIfDead())
+   {
+        do
         {
-            cout << "Please enter a valid year of death" << endl;
-        }
-    }while(death < born || death > 2016);
+            cout << "Enter the year of death: ";
+            cin >> death;
 
+            if(death < born || death > 2016)
+            {
+                cout << "Please enter a valid year of death" << endl;
+            }
+
+        }while(death < born || death > 2016);
+    }
+    else
+   {
+       death = 0;
+   }
 }
 
 void ConsoleUI::commandAdd()

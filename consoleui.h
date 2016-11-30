@@ -19,6 +19,7 @@ private:
     string getName(string name);
     void getGender(char &gender);
     void getBorn(int &born);
+    bool checkIfDead();
     void getDeath(int &death, int born);
     void commandAdd();
 };
