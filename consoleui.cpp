@@ -55,7 +55,7 @@ void ConsoleUI::CommandList()
     cout << "How do you want to sort" << endl;
     cout << "a - Alphabetical order" << endl;
     cout << "n - No particular sorting" << endl;
-    cout << "g - Alphabetical order" << endl;
+    cout << "g - Gender order" << endl;
     cout << "b - Date of birth order" << endl;
 
     cout << endl;
