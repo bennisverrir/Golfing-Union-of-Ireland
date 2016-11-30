@@ -118,12 +118,14 @@ string ConsoleUI::getName(string name)
     return name;
 }
 
-char ConsoleUI::getGender(char gender)
+void ConsoleUI::getGender(char &gender)
 {
     do
     {
         cout << "Enter the gender: ";
         cin >> gender;
+
+        gender = toupper(gender);
 
         if(gender != toupper('m') && gender != toupper('f'))
         {
@@ -132,10 +134,10 @@ char ConsoleUI::getGender(char gender)
 
     }while(gender != toupper('m') && gender != toupper('f'));
 
-    return gender;
+
 }
 
-int ConsoleUI::getBorn(int born)
+void ConsoleUI::getBorn(int &born)
 {
     do
     {
@@ -149,10 +151,10 @@ int ConsoleUI::getBorn(int born)
 
     }while(born < 0 || born > 2016);
 
-    return born;
+
 }
 
-int ConsoleUI::getDeath(int death, int born)
+void ConsoleUI::getDeath(int &death, int born)
 {
     do
     {
@@ -165,7 +167,6 @@ int ConsoleUI::getDeath(int death, int born)
         }
     }while(death < born || death > 2016);
 
-    return death;
 }
 
 void ConsoleUI::commandAdd()
@@ -178,11 +179,11 @@ void ConsoleUI::commandAdd()
 
     name = getName(name);
 
-    gender = getGender(gender); //checking for a valid gender
+    getGender(gender); //checking for a valid gender
 
-    born = getBorn(born);
+    getBorn(born);
 
-    death = getDeath(death, born);
+    getDeath(death, born);
 
 
     _service.addLegend(name, gender, born, death);
@@ -201,18 +202,9 @@ void ConsoleUI::run(){
         cin >> command;
         keepGoing = command;
 
-    if (command == "list"){
-        vector <Legend> legends = _service.getLegends();
-
-        char sortCommand;
-
-        cout << "How do you want to sort" << endl;
-        cout << "a - Alphabetical order" << endl;
-        cout << "n - No particular sorting" << endl;
-
-        cin >> sortCommand;
-
-        sort(sortCommand, legends);
+    if (command == "list")
+    {
+        CommandList();
 
     }
     else if (command == "add")
