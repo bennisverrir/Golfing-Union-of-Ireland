@@ -10,17 +10,27 @@ ConsoleUI::ConsoleUI(){}
 
 ostream& operator << (ostream& out,const vector<Legend>& rhs)
 {
+    cout << setw(30) << left << "Name" << setw(11) << "Gender" << setw(10) <<
+            "Born" <<  setw(11) << " Died" << endl;
+    for(int i = 0; i < 40; i++)
+    {
+        cout << "--";
+    }
+    cout << endl;
+
     for (size_t i = 0; i < rhs.size(); i++)
     {
-        out << rhs[i].getName() << " ";
-        out << rhs[i].getGender() << " ";
-        out << rhs[i].getBorn() << " ";
+        out << setw(30) << left << rhs[i].getName();
+        out << setw(10) << rhs[i].getGender() << " ";
+        out << setw(10) <<  rhs[i].getBorn() << " ";
         if(rhs[i].getDeath() != 0)
         {
-            out << rhs[i].getDeath();
-            out <<", Died " << rhs[i].getDeathAge() <<" years old";
-        } else{
-            out << ", " << rhs[i].getAge()<< " Years old";
+            out << setw(10) << rhs[i].getDeath();
+            out << setw(5) <<"Died " << rhs[i].getDeathAge() <<" years old";
+        }
+        else
+        {
+            out << setw(10) << "     " << rhs[i].getAge()<< " years old";
         }
 
         out << endl;
@@ -28,6 +38,7 @@ ostream& operator << (ostream& out,const vector<Legend>& rhs)
 
     return out;
 }
+
 
 void ConsoleUI::sort(char command, vector<Legend>& legends)
 {
