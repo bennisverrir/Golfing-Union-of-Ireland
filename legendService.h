@@ -16,7 +16,7 @@ public:
     vector <Legend> getSort ();
     vector <Legend> getSortGender (); 
     vector <Legend> getSortDateOfBirth ();
-    vector <string> findLegend(string nameToFind);
+    vector <Legend> findLegend(string nameToFind);
    void addLegend (string name, char gender, int born, int death);
 };
 

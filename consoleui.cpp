@@ -85,10 +85,8 @@ void ConsoleUI::CommandFind()
     cout << "Please enter the string you want to search" <<": ";  
         string name;
         cin >> name;
-        vector <string> toPrint = _service.findLegend(name);
-        for (size_t i = 0; i < toPrint.size(); i++){
-            cout << toPrint[i] << endl;
-        }
+        vector <Legend> toPrint = _service.findLegend(name);
+        cout << toPrint;
 }
 
 void ConsoleUI::CommandDelete()
