@@ -275,6 +275,10 @@ void ConsoleUI::run(){
     {
        CommandFind();
     }
+    else
+    {
+        cout << "Invalid Command!" << endl;
+    }
         
 
 
