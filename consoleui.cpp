@@ -101,7 +101,8 @@ void ConsoleUI::CommandDelete()
     string deleteName;
 
     cout << "Who do you want to delete? ";
-    cin >> deleteName;
+    cin.ignore();
+    getline(cin,deleteName);
 
     vector<Legend> deleteLegend = _service.findLegend(deleteName);
 
