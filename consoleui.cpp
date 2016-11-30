@@ -86,7 +86,14 @@ void ConsoleUI::CommandFind()
         string name;
         cin >> name;
         vector <Legend> toPrint = _service.findLegend(name);
-        cout << toPrint;
+        if(toPrint.size() > 0)
+        {
+            cout << toPrint;
+        }
+        else
+        {
+            cout << endl <<"No results from that query!" << endl;
+        }
 }
 
 void ConsoleUI::CommandDelete()
@@ -149,20 +156,21 @@ string ConsoleUI::getName(string name)
     return name;
 }
 
-void ConsoleUI::CommandFind()
+void ConsoleUI::getGender(char &gender)
 {
-    cout << "Please enter the string you want to search" <<": ";  
-        string name;
-        cin >> name;
-        vector <Legend> toPrint = _service.findLegend(name);
-        if(toPrint.size() > 0)
+    do
+    {
+        cout << "Enter the gender: ";
+        cin >> gender;
+
+        gender = toupper(gender);
+
+        if(gender != toupper('m') && gender != toupper('f'))
         {
-            cout << toPrint;
+            cout << "Please enter a valid gender";
         }
-        else
-        {
-            cout << endl <<"No results from that query!" << endl;
-        }
+
+    }while(gender != toupper('m') && gender != toupper('f'));
 }
 
 void ConsoleUI::getBorn(int &born)
