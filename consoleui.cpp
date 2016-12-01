@@ -326,12 +326,22 @@ void ConsoleUI::commandAdd()
     char gender;
     int born;
     int death;
+    bool valid;
     
     name = getName(name);
     getGender(gender); //checking for a valid gender
     getBorn(born);
     getDeath(death, born);
-    _service.addLegend(name, gender, born, death);
+    _service.addLegend(name, gender, born, death, valid);
+
+    if(!valid)
+    {
+        cout << endl << "This person is already in the list" << endl;
+    }
+    else
+    {
+        cout << endl << "Legend Added!" << endl;
+    }
 }
 
 void ConsoleUI::run(){
