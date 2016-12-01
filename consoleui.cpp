@@ -375,7 +375,7 @@ void ConsoleUI::getBorn(int &born)
     do
     {
         cout << "Enter the year of birth: ";
-        cin >> born;
+        validateInput(born);
 
         if(born < 0 || born > 2016)
         {
@@ -425,7 +425,7 @@ void ConsoleUI::getDeath(int &death, int born)
         do
         {
             cout << "Enter the year of death: ";
-            cin >> death;
+            validateInput(death);
 
             if(death < born || death > 2016)
             {
