@@ -8,6 +8,7 @@ This program is a database that keeps basic information about famous computer sc
 
 Availible commands:
 
+
 Menu:
 
 Please enter one of the following commands:
@@ -25,6 +26,7 @@ clear  - this will clear the screen
 quit   - This will quit the program
 
 the answer to life - (hidden)
+
 
 list:
 
@@ -53,6 +55,7 @@ Are they alive (y/n)? n
 
 Enter the year of death: 777
 
+
 find:
 
 Which parameter would you like to search for?
@@ -65,12 +68,15 @@ b - Born (year)
 
 d - Died (year)
 
+
 delete
+
 Who do you want to delete? John Doe
 
 No.    Name                          Gender     Born       Died      
 --------------------------------------------------------------------------------
 1      John Doe                      M          666        777       Died 111 years old
+
 What number do you want to delete? 1
 
 The line has been deleted
