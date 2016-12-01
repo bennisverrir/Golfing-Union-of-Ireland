@@ -14,10 +14,11 @@ class dataAccess
 {
 public:
     dataAccess();
-
     vector<Legend> readFile();
     void writeFile(Legend writeLegend, string fileName);
     void deleteLine(vector<Legend> deleteLegend);
+private:
+    const string fileName = "legend.txt";
 };
 
 #endif // DATAACCESS_H

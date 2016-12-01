@@ -1,5 +1,7 @@
 ﻿#include "dataaccess.h"
 #include <cstdio>
+
+
 dataAccess::dataAccess()
 {
 
@@ -11,7 +13,7 @@ vector<Legend> dataAccess::readFile()
 
     vector<Legend> returnVector;
 
-    file.open("legend.txt");
+    file.open(fileName);
     string line;
     string name;
     char gender;
@@ -66,7 +68,7 @@ void dataAccess::deleteLine(vector<Legend> deleteLegend)
 {
     ofstream file;
 
-    file.open("legend.txt", ios::trunc);
+    file.open(fileName, ios::trunc);
 
     if(file.is_open())
     {
