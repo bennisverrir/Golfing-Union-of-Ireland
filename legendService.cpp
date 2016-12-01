@@ -28,6 +28,22 @@ vector <Legend> LegendService::getLegends()
     legend = a.readFile();
     return legend;
 }
+
+bool LegendService::checkForValid(Legend legend)
+{
+    vector<Legend> legends = getLegends();
+
+    for(int i = 0; i < legends.size(); i++)
+    {
+        if(legends[i] == legend)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 vector <Legend> LegendService::getSort()
 {
     vector <Legend> legends2;
@@ -60,11 +76,23 @@ vector <Legend> LegendService::getSortStillAlive()
     sort(legends5.begin(), legends5.end(), cmp);
     return legends5;
 }
-void LegendService::addLegend(string name, char gender, int born, int death)
+void LegendService::addLegend(string name, char gender, int born, int death, bool &boolValid)
 {
     Legend person (name, gender, born, death);
-    a.writeFile(person, "legend.txt");
+
+    bool valid = checkForValid(person);
+
+    if(valid)
+    {
+        boolValid = true;
+        a.writeFile(person, "legend.txt");
+    }
+    else
+    {
+        boolValid = false;
+    }
 }
+
 
 vector <Legend> LegendService::findLegend(string nameToFind){
     vector <Legend> legend = a.readFile();
