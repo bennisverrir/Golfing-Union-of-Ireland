@@ -16,6 +16,7 @@ private:
     void subCommandFind(char command, vector <Legend> &toPrint);
     void CommandFind();
     void CommandDelete();
+    void commandClear();
     void displayCommands();
     bool checkName(string name, bool flag);
     string getName(string name);
