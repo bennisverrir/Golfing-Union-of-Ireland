@@ -7,7 +7,9 @@
 using namespace std;
 
 ConsoleUI::ConsoleUI(){}
-
+/*function displayCommands, @return void.
+* displays a list of commands at the users disposal.
+*/
 void ConsoleUI::displayCommands()
 {
     cout << "Please enter one of the following commands:"<< endl;
@@ -20,7 +22,10 @@ void ConsoleUI::displayCommands()
 
     cout << endl;
 }
-
+/*function deleteLegend, @return void.
+* reads input from user, if input matches a command it performs that command, if not outputs error.
+* runs until the user inputs the quit command.
+*/
 void ConsoleUI::run()
 {
     string keepGoing;
@@ -61,7 +66,9 @@ void ConsoleUI::run()
 
     }while(keepGoing != "quit");
 }
-
+/*function <<, @param instance of ostream and Legend vector instance, @return ostream.
+* outputs all information about listed legends in a table.
+*/
 ostream& operator << (ostream& out,const vector<Legend>& rhs)
 {
     out << endl;
@@ -94,7 +101,31 @@ ostream& operator << (ostream& out,const vector<Legend>& rhs)
 
     return out;
 }
+/*function commandList, @return void.
+*outputs a list of sorting catagories and their commands, then outputs that to the sort function.
+*/
+void ConsoleUI::CommandList()
+{
+    vector <Legend> legends = _service.getLegends();
 
+    char sortCommand;
+
+    cout << "How do you want to sort" << endl;
+    cout << "a - Alphabetical order" << endl;
+    cout << "n - No particular sorting" << endl;
+    cout << "g - Gender order" << endl;
+    cout << "b - Year of birth order" << endl;
+    cout << "l - Still alive order(those who are still alive appear first)" << endl;
+
+
+    cout << endl;
+    cin >> sortCommand;
+
+    sort(sortCommand, legends);
+}
+/*function sort, @param output from commmandListand vector Legend instance, @return void.
+* sorts list of legends in a order according to what the user inputs in the commandList function.
+*/
 void ConsoleUI::sort(char command, vector<Legend>& legends)
 {
    if(command == 'a') //Alphabetical order
@@ -118,30 +149,13 @@ void ConsoleUI::sort(char command, vector<Legend>& legends)
        cout << _service.getSortStillAlive();
    }
 }
-
-void ConsoleUI::CommandList()
-{
-    vector <Legend> legends = _service.getLegends();
-
-    char sortCommand;
-
-    cout << "How do you want to sort" << endl;
-    cout << "a - Alphabetical order" << endl;
-    cout << "n - No particular sorting" << endl;
-    cout << "g - Gender order" << endl;
-    cout << "b - Year of birth order" << endl;
-    cout << "l - Still alive order(those who are still alive appear first)" << endl;
-
-
-    cout << endl;
-    cin >> sortCommand;
-
-    sort(sortCommand, legends);
-}
-void ConsoleUI::validateInput(int &intValue)   // validates that input for an int is a number not letter.
+/*function validateInput, @param an integer value, @return void.
+* validates that the input from the user is an integer value.
+*/
+void ConsoleUI::validateInput(int &intValue)
 {
     cin >> intValue;
-    while (cin.fail())
+    while (cin.fail())      // runs if input is not an integer value
     {
         cout <<endl<< "Please enter a valid input" << endl;
         std::cin.clear();
@@ -149,6 +163,31 @@ void ConsoleUI::validateInput(int &intValue)   // validates that input for an in
         cin >> intValue;
     }
 }
+void ConsoleUI::CommandFind()
+{
+    cout << "Which parameter would you like to search for?" << endl;
+    cout << "n - Name" << endl;
+    cout << "g - Gender" << endl;
+    cout << "b - Born (year)" << endl;
+    cout << "d - Died (year)" << endl;
+
+    char whatToFind;
+    cin >> whatToFind;
+    vector <Legend> toPrint;
+
+    subCommandFind (whatToFind, toPrint);
+    if(toPrint.size() > 0)
+    {
+        cout << toPrint;
+    }
+    else
+    {
+        cout << endl <<"No results from that query!" << endl;
+    }
+}
+/*function subCommandFind, @param an integer value, @return void.
+* validates that the input from the user is an integer value.
+*/
 void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint)
 {
     if (command == 'n')
@@ -195,28 +234,6 @@ void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint)
     }
 }
 
-void ConsoleUI::CommandFind()
-{
-    cout << "Which parameter would you like to search for?" << endl;
-    cout << "n - Name" << endl;
-    cout << "g - Gender" << endl;
-    cout << "b - Born (year)" << endl;
-    cout << "d - Died (year)" << endl;
-
-    char whatToFind;
-    cin >> whatToFind;
-    vector <Legend> toPrint;
-
-    subCommandFind (whatToFind, toPrint);
-    if(toPrint.size() > 0)
-    {
-        cout << toPrint;
-    }
-    else
-    {
-        cout << endl <<"No results from that query!" << endl;
-    }
-}
 
 string ConsoleUI::rightName(string name)       //makes sure the first letter in every name is uppercase
 {
