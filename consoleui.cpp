@@ -186,10 +186,15 @@ void ConsoleUI::CommandDelete()
 
         int number;
 
-        cin >> number;
+       int max = _service.findLegend(deleteName).size();
+        if(number<1|| number>max)
+        {
+           cout<<endl<< "Invalid number!"<<endl;
+        }
+        else{
 
         _service.deleteLegend(number, deleteLegend);
-        
+        }
         cout << "The line has been deleted" << endl;
     }
     else
