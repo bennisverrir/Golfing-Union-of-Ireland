@@ -193,7 +193,7 @@ void LegendService::deleteLegend(int index, vector<Legend> deleteVector)
 
     for(size_t i = 0; i < newLegend.size(); i++)
     {
-        if((deleteVector[index-1] == newLegend[i])
+        if(deleteVector[index-1] == newLegend[i])
         {
             newLegend.erase(newLegend.begin()+i);
             break;
