@@ -10,7 +10,9 @@ Availible commands:
 
 Menu:
 Please enter one of the following commands:
+
 list   - This will list all the computer scientists 
+
 add    - This will add a computer scientists 
 find   - This will find a computer scientists from the list
 delete - This will delete a computer scientists from the list
