@@ -174,7 +174,7 @@ void ConsoleUI::CommandDelete()
     cin.ignore();
     getline(cin,deleteName);
     
-    deleteName = rightName(string name);
+    deleteName = rightName(deleteName);
 
     vector<Legend> deleteLegend = _service.findLegend(deleteName);
 
