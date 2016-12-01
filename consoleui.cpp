@@ -184,8 +184,8 @@ void ConsoleUI::CommandDelete()
 
         cout << "What number do you want to delete? ";
 
-        int number
-        cin >> number
+        int number;
+        cin >> number;
 
         int max = _service.findLegend(deleteName).size();
         if(number<1|| number>max)
