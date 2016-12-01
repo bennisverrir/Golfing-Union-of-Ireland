@@ -19,19 +19,21 @@ LegendService::LegendService()
 
 }
 
-vector <Legend> LegendService::getLegends(){
+vector <Legend> LegendService::getLegends()
+{
     vector <Legend> legend;
     legend = a.readFile();
     return legend;
 }
-vector <Legend> LegendService::getSort(){
+vector <Legend> LegendService::getSort()
+{
     vector <Legend> legends2;
     legends2 = a.readFile();
     legendComparison cmp;
     sort(legends2.begin(), legends2.end(), cmp);
     return legends2;
 }
-vector <Legend> LegendService::getSortGender() //copy
+vector <Legend> LegendService::getSortGender()
 {
     vector <Legend> legends3;
     legends3 = a.readFile();
@@ -39,7 +41,7 @@ vector <Legend> LegendService::getSortGender() //copy
     sort(legends3.begin(), legends3.end(), cmp);
     return legends3;
 }
-vector <Legend> LegendService::getSortDateOfBirth() //copy
+vector <Legend> LegendService::getSortDateOfBirth()
 {
     vector <Legend> legends4;
     legends4 = a.readFile();
@@ -47,17 +49,21 @@ vector <Legend> LegendService::getSortDateOfBirth() //copy
     sort(legends4.begin(), legends4.end(), cmp);
     return legends4;
 }
-void LegendService::addLegend(string name, char gender, int born, int death){
+void LegendService::addLegend(string name, char gender, int born, int death)
+{
     Legend person (name, gender, born, death);
     a.writeFile(person, "legend.txt");
 }
 
-vector <Legend> LegendService::findLegend(string nameToFind){
+vector <Legend> LegendService::findLegend(string nameToFind)
+{
     vector <Legend> legend = a.readFile();
     string myString;
     vector <Legend> returnVector;
-    for (size_t i = 0;i < legend.size(); i++ ){
-        if (legend[i].getName().find(nameToFind) != string::npos) {
+    for (size_t i = 0;i < legend.size(); i++ )
+    {
+        if (legend[i].getName().find(nameToFind) != string::npos) 
+        {
             returnVector.push_back(legend[i]);
         }
     }
