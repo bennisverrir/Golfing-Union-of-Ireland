@@ -179,6 +179,11 @@ void ConsoleUI::CommandDelete()
     }
 }
 
+void commandClear()
+{
+    system("cls");
+}
+
 void ConsoleUI::displayCommands()
 {
     cout << "Please enter one of the following commands:"<< endl;
@@ -186,6 +191,7 @@ void ConsoleUI::displayCommands()
     cout << "add - This will add a computer scientists " << endl;
     cout << "find - This will find a computer scientists from the list" << endl;
     cout << "delete - This will delete a computer scientists from the list" << endl;
+    cout << "clear - this will clear the screen" << endl;
     cout << "quit - This will quit the program" << endl;
 
     cout << endl;
@@ -380,6 +386,10 @@ void ConsoleUI::run(){
     else if (command == "find")
     {
        CommandFind();
+    }
+    else if(command == "clear")
+    {
+        commandClear();
     }
     else
     {
