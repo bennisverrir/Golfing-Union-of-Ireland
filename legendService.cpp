@@ -118,7 +118,7 @@ void LegendService::addLegend(string name, char gender, int born, int death, boo
     if(valid)
     {
         boolValid = true;
-        a.writeFile(person, "legend.txt");
+        a.writeFile(person);
     }
     else
     {
