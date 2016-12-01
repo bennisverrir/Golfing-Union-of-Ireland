@@ -9,10 +9,9 @@ This program is a database that keeps basic information about famous computer sc
 Availible commands:
 
 Menu:
+
 Please enter one of the following commands:
-
 list   - This will list all the computer scientists 
-
 add    - This will add a computer scientists 
 find   - This will find a computer scientists from the list
 delete - This will delete a computer scientists from the list
@@ -21,6 +20,7 @@ quit   - This will quit the program
 42     -(hidden)
 
 list:
+
 How do you want to sort
 a - Alphabetical order
 n - No particular sorting
@@ -29,6 +29,7 @@ b - Year of birth order
 l - Still alive order(those who are still alive appear first)
 
 add:
+
 Enter the name: John Doe
 Enter the gender: M
 Enter the year of birth: 666
@@ -36,6 +37,7 @@ Are they alive (y/n)? n
 Enter the year of death: 777
 
 find:
+
 Which parameter would you like to search for?
 n - Name
 g - Gender
