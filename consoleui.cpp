@@ -179,7 +179,7 @@ void ConsoleUI::CommandDelete()
     }
 }
 
-void commandClear()
+void ConsoleUI::commandClear()
 {
     system("cls");
 }
