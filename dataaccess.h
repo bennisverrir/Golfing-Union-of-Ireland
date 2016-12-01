@@ -15,7 +15,7 @@ class dataAccess
 public:
     dataAccess();
     vector<Legend> readFile();
-    void writeFile(Legend writeLegend, string fileName);
+    void writeFile(Legend writeLegend);
     void deleteLine(vector<Legend> deleteLegend);
 private:
     const string fileName = "legend.txt";
