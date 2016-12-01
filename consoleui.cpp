@@ -151,6 +151,21 @@ void ConsoleUI::CommandFind()
     }
 }
 
+string ConsoleUI::rightName(string name)
+{
+    name[0] = toupper(name[0]);
+
+    for(size_t i = 1; i < name.size(); i++)
+    {
+        if(name[i] == ' ' && i != (name.size() - 1u))
+        {
+            name[i+1] = toupper(name[i+1]);
+        }
+    }
+
+    return name;
+}
+
 void ConsoleUI::CommandDelete()
 {
     string deleteName;
@@ -158,6 +173,8 @@ void ConsoleUI::CommandDelete()
     cout << "Who do you want to delete? ";
     cin.ignore();
     getline(cin,deleteName);
+    
+    deleteName = rightName(deleteName);
 
     vector<Legend> deleteLegend = _service.findLegend(deleteName);
 
@@ -169,9 +186,16 @@ void ConsoleUI::CommandDelete()
 
         int number;
 
-        cin >> number;
+       int max = _service.findLegend(deleteName).size();
+        if(number<1|| number>max)
+        {
+           cout<<endl<< "Invalid number!"<<endl;
+        }
+        else{
 
         _service.deleteLegend(number, deleteLegend);
+        }
+        cout << "The line has been deleted" << endl;
     }
     else
     {
@@ -214,20 +238,7 @@ bool ConsoleUI::checkName(string name, bool flag)
 
     return flag;
 }
-string ConsoleUI::rightName(string name)
-{
-    name[0] = toupper(name[0]);
 
-    for(size_t i = 1; i < name.size(); i++)
-    {
-        if(name[i] == ' ' && i != (name.size() - 1u))
-        {
-            name[i+1] = toupper(name[i+1]);
-        }
-    }
-
-    return name;
-}
 
 string ConsoleUI::getName(string name)
 {
