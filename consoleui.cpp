@@ -8,10 +8,64 @@ using namespace std;
 
 ConsoleUI::ConsoleUI(){}
 
+void ConsoleUI::displayCommands()
+{
+    cout << "Please enter one of the following commands:"<< endl;
+    cout << "list   - This will list all the computer scientists " << endl;
+    cout << "add    - This will add a computer scientists " << endl;
+    cout << "find   - This will find a computer scientists from the list" << endl;
+    cout << "delete - This will delete a computer scientists from the list" << endl;
+    cout << "clear  - this will clear the screen" << endl;
+    cout << "quit   - This will quit the program" << endl;
+
+    cout << endl;
+}
+
+void ConsoleUI::run()
+{
+    string keepGoing;
+
+    do{
+
+        displayCommands();
+        string command;
+        cin >> command;
+        keepGoing = command;
+
+    if (command == "list")
+    {
+        CommandList();
+    }
+    else if (command == "add")
+    {
+      commandAdd();
+    }
+    else if (command == "delete")
+    {
+        CommandDelete();
+    }
+    else if (command == "find")
+    {
+       CommandFind();
+    }
+    else if(command == "clear")
+    {
+        commandClear();
+    }
+    else
+    {
+        if(keepGoing != "quit")
+        {cout << "Invalid Command!" << endl;}
+    }
+    cout << endl;
+
+    }while(keepGoing != "quit");
+}
+
 ostream& operator << (ostream& out,const vector<Legend>& rhs)
 {
     out << endl;
-    
+
     out << setw(7) << left <<  "No." << setw(30) << left << "Name" << setw(11) << "Gender" << setw(10) <<
             "Born" <<  setw(11) << " Died" << endl;
     for(int i = 0; i < 40; i++)
@@ -25,7 +79,7 @@ ostream& operator << (ostream& out,const vector<Legend>& rhs)
         out << setw(7) << (i+1) << setw(30) << left << rhs[i].getName();
         out << setw(10) << rhs[i].getGender() << " ";
         out << setw(10) <<  rhs[i].getBorn() << " ";
-        if(rhs[i].getDeath() != 0)
+        if(rhs[i].getDeath() != 0)                                      // output information about legend.
         {
             out << setw(10) << rhs[i].getDeath();
             out << setw(5) <<"Died " << rhs[i].getDeathAge() <<" years old";
@@ -84,10 +138,12 @@ void ConsoleUI::CommandList()
 
     sort(sortCommand, legends);
 }
-void ConsoleUI::validateInput(int &intValue){
+void ConsoleUI::validateInput(int &intValue)   // validates that input for an int is a number not letter.
+{
     cin >> intValue;
-    while (cin.fail()){
-        cout << "Please enter a valid input" << endl;
+    while (cin.fail())
+    {
+        cout <<endl<< "Please enter a valid input" << endl;
         std::cin.clear();
         std::cin.ignore(256,'\n');
         cin >> intValue;
@@ -100,7 +156,8 @@ void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint)
         string name;
         cout << "Enter a name to search for: ";
         cin >> name;
-        toPrint = _service.findLegend(name);
+        toPrint = _service.findLegend(name); // sends the input name into the search function
+                                             // and assigns its value to the return value.
     } 
     else if (command == 'g')
     {
@@ -109,8 +166,9 @@ void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint)
         cin >> gender;
         if (toupper (gender) == 'M'|| toupper(gender) == 'F')
         {
-            toPrint = _service.findLegend(gender);
-        } else 
+            toPrint = _service.findLegend(gender);           //sends in the input gender to the
+        }                                                    //search function.
+        else
         {
             cout << "Please enter a valid gender (M/F): ";
             subCommandFind (command, toPrint);
@@ -125,11 +183,12 @@ void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint)
         {
             toPrint = _service.findLegend(year, true);
         }
-        else
+        else        // sends year and if they are dead or not to the search function.
         {
             toPrint = _service.findLegend(year, false);
         }
-    } else 
+    }
+    else
     {
         cout << "Please enter a valid command (n/g/b/d)" << endl;
         CommandFind();
@@ -159,7 +218,7 @@ void ConsoleUI::CommandFind()
     }
 }
 
-string ConsoleUI::rightName(string name)
+string ConsoleUI::rightName(string name)       //makes sure the first letter in every name is uppercase
 {
     name[0] = toupper(name[0]);
 
@@ -173,7 +232,10 @@ string ConsoleUI::rightName(string name)
 
     return name;
 }
-
+/*function deleteLegend, @param list index and Legend instance, @return void.
+* Accepts the index of a legend from a sorted list of legends and
+*
+*/
 void ConsoleUI::CommandDelete()
 {
     string deleteName;
@@ -189,23 +251,20 @@ void ConsoleUI::CommandDelete()
     if(deleteLegend.size() > 0)
     {
         cout << deleteLegend;
-
         cout << "What number do you want to delete? ";
 
         int number;
-        cin >> number;
-
+        validateInput(number);
         int max = _service.findLegend(deleteName).size();
         if(number<1|| number>max)
         {
            cout<<endl<< "Invalid number!"<<endl;
         }
-        else{
-
-        _service.deleteLegend(number, deleteLegend);
+        else
+        {
+        _service.deleteLegend(number, deleteLegend); // deletes the legend
         cout << "The line has been deleted" << endl;
-        }
-        
+        } 
     }
     else
     {
@@ -215,21 +274,9 @@ void ConsoleUI::CommandDelete()
 
 void ConsoleUI::commandClear()
 {
-    system("cls");
+    system("cls"); // clears the screen
 }
 
-void ConsoleUI::displayCommands()
-{
-    cout << "Please enter one of the following commands:"<< endl;
-    cout << "list   - This will list all the computer scientists " << endl;
-    cout << "add    - This will add a computer scientists " << endl;
-    cout << "find   - This will find a computer scientists from the list" << endl;
-    cout << "delete - This will delete a computer scientists from the list" << endl;
-    cout << "clear  - this will clear the screen" << endl;
-    cout << "quit   - This will quit the program" << endl;
-
-    cout << endl;
-}
 bool ConsoleUI::checkName(string name, bool flag)
 {
     for(size_t i = 0; i < name.size(); i++)
@@ -254,7 +301,8 @@ string ConsoleUI::getName(string name)
 {
     bool flag = true;
 
-    do{
+    do
+    {
         cout << "Enter the name: ";
         cin.ignore();
         getline(cin,name);
@@ -330,7 +378,6 @@ bool ConsoleUI::checkIfDead()
     {
         return true;
     }
-
 }
 
 void ConsoleUI::getDeath(int &death, int born)
@@ -379,45 +426,3 @@ void ConsoleUI::commandAdd()
     }
 }
 
-void ConsoleUI::run(){
-
-    string keepGoing;
-
-    do{
-
-        displayCommands();
-        string command;
-        cin >> command;
-        keepGoing = command;
-
-    if (command == "list")
-    {
-        CommandList();
-
-    }
-    else if (command == "add")
-    {
-      commandAdd();
-
-    }
-    else if (command == "delete")
-    {
-        CommandDelete();
-    }
-    else if (command == "find")
-    {
-       CommandFind();
-    }
-    else if(command == "clear")
-    {
-        commandClear();
-    }
-    else
-    {
-        if(keepGoing != "quit")
-        {cout << "Invalid Command!" << endl;}
-    }
-    cout << endl;
-
-    }while(keepGoing != "quit");
-}
