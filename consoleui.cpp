@@ -164,6 +164,7 @@ string ConsoleUI::getName(string name)
     bool flag = true;
 
     do{
+        bool flag = true;
         cout << "Enter the name: ";
         cin.ignore();
         getline(cin,name);
