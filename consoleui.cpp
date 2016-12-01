@@ -59,6 +59,10 @@ void ConsoleUI::sort(char command, vector<Legend>& legends)
    {
        cout << _service.getSortDateOfBirth();
    }
+     if(command == 'l')
+   {
+       cout << _service.getSortStillAlive();
+   }
 }
 
 void ConsoleUI::CommandList()
@@ -72,6 +76,8 @@ void ConsoleUI::CommandList()
     cout << "n - No particular sorting" << endl;
     cout << "g - Gender order" << endl;
     cout << "b - Year of birth order" << endl;
+    cout << "l - Still alive order" << endl;
+
 
     cout << endl;
     cin >> sortCommand;
