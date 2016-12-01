@@ -142,25 +142,25 @@ void ConsoleUI::displayCommands()
 
     cout << endl;
 }
-
 bool ConsoleUI::checkName(string name, bool flag)
 {
     for(size_t i = 0; i < name.size(); i++)
     {
-         if(isalpha(name[i]) || isupper(name[i]) || name[i] == ' ') //checking for a valid name
+
+         if(isalpha(name[i]) || name[i] == ' ') //checking for a valid name
          {
             flag = true;
          }
          else
          {
             flag = false;
+            break;
          }
     }
 
 
     return flag;
 }
-
 string ConsoleUI::getName(string name)
 {
     bool flag = true;
