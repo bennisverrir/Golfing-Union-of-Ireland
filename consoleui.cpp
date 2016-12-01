@@ -163,10 +163,10 @@ bool ConsoleUI::checkName(string name, bool flag)
 
 string ConsoleUI::getName(string name)
 {
-    bool flag = true;
+   
 
     do{
-        flag = true;
+        bool flag = true;
         cout << "Enter the name: ";
         cin.ignore();
         getline(cin,name);
