@@ -88,17 +88,17 @@ void ConsoleUI::CommandList()
 void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint){
     if (command == 'n'){
         string name;
-        cout << "Who would you like to find?" << endl;
+        cout << "Enter a name to search for: " << endl;
         cin >> name;
         toPrint = _service.findLegend(name);
     } else if (command == 'g'){
         char gender;
-        cout << "Gender to search for: (M/F)" << endl;
+        cout << "Enter a gender to search for(M/F): " << endl;
         cin >> gender;
         if (toupper (gender) == 'M'|| toupper(gender) == 'F'){
             toPrint = _service.findLegend(gender);
         } else {
-            cout << "Please enter a valid gender (M/F)"<< endl;
+            cout << "Please enter a valid gender (M/F): "<< endl;
             subCommandFind (command, toPrint);
         }
     } else if (command == 'b' || command == 'd'){
@@ -111,7 +111,7 @@ void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint){
             toPrint = _service.findLegend(year, false);
         }
     } else {
-        cout << "Please enter a valid command. (n/g/b/d)." << endl;
+        cout << "Please enter a valid command (n/g/b/d)" << endl;
         CommandFind();
     }
 }
