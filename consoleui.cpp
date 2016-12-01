@@ -187,12 +187,12 @@ void ConsoleUI::commandClear()
 void ConsoleUI::displayCommands()
 {
     cout << "Please enter one of the following commands:"<< endl;
-    cout << "list - This will list all the computer scientists " << endl;
-    cout << "add - This will add a computer scientists " << endl;
-    cout << "find - This will find a computer scientists from the list" << endl;
+    cout << "list   - This will list all the computer scientists " << endl;
+    cout << "add    - This will add a computer scientists " << endl;
+    cout << "find   - This will find a computer scientists from the list" << endl;
     cout << "delete - This will delete a computer scientists from the list" << endl;
-    cout << "clear - this will clear the screen" << endl;
-    cout << "quit - This will quit the program" << endl;
+    cout << "clear  - this will clear the screen" << endl;
+    cout << "quit   - This will quit the program" << endl;
 
     cout << endl;
 }
