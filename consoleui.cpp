@@ -189,6 +189,8 @@ void ConsoleUI::CommandDelete()
         cin >> number;
 
         _service.deleteLegend(number, deleteLegend);
+        
+        cout << "The line has been deleted" << endl;
     }
     else
     {
