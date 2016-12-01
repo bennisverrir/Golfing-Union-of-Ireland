@@ -18,6 +18,7 @@ private:
     void displayCommands();
     bool checkName(string name, bool flag);
     string getName(string name);
+    string rightName(string name);
     void getGender(char &gender);
     void getBorn(int &born);
     bool checkIfDead();
