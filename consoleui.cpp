@@ -10,13 +10,15 @@ ConsoleUI::ConsoleUI(){}
 
 ostream& operator << (ostream& out,const vector<Legend>& rhs)
 {
-    cout << setw(7) << left <<  "No." << setw(30) << left << "Name" << setw(11) << "Gender" << setw(10) <<
+    out << endl;
+    
+    out << setw(7) << left <<  "No." << setw(30) << left << "Name" << setw(11) << "Gender" << setw(10) <<
             "Born" <<  setw(11) << " Died" << endl;
-    for(int i = 0; i < 40; i++)
+    for(int i = 0; i < 40; i++
     {
-        cout << "--";
+        out << "--";
     }
-    cout << endl;
+    out << endl;
 
     for (size_t i = 0; i < rhs.size(); i++)
     {
@@ -164,7 +166,7 @@ string ConsoleUI::getName(string name)
     bool flag = true;
 
     do{
-        bool flag = true;
+        flag = true;
         cout << "Enter the name: ";
         cin.ignore();
         getline(cin,name);
