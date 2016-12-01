@@ -20,7 +20,7 @@ ostream& operator << (ostream& out,const vector<Legend>& rhs)
     }
     out << endl;
 
-    for (size_t i = 0; i < rhs.size(); i++)
+    for (size_t i = 0; i < rhs.size(); i++) //creating the output table
     {
         out << setw(7) << (i+1) << setw(30) << left << rhs[i].getName();
         out << setw(10) << rhs[i].getGender() << " ";
