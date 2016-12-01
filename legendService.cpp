@@ -18,7 +18,6 @@ LegendService::LegendService()
 {
 
 }
-
 vector <Legend> LegendService::getLegends()
 {
     vector <Legend> legend;
@@ -83,7 +82,5 @@ void LegendService::deleteLegend(int index, vector<Legend> deleteVector)
             break;
         }
     }
-
     a.deleteLine(newLegend);
-
 }
