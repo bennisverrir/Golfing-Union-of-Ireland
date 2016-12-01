@@ -84,7 +84,15 @@ void ConsoleUI::CommandList()
 
     sort(sortCommand, legends);
 }
-
+void ConsoleUI::validateInput(int &intValue){
+    cin >> intValue;
+    while (cin.fail()){
+        cout << "Please enter a valid input" << endl;
+        std::cin.clear();
+        std::cin.ignore(256,'\n');
+        cin >> intValue;
+    }
+}
 void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint)
 {
     if (command == 'n')
@@ -112,7 +120,7 @@ void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint)
     {
         int year;
         cout << "Enter a year to search for: ";
-        cin >> year;
+        validateInput(year);
         if (command == 'b')
         {
             toPrint = _service.findLegend(year, true);
