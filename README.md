@@ -11,37 +11,58 @@ Availible commands:
 Menu:
 
 Please enter one of the following commands:
+
 list   - This will list all the computer scientists 
+
 add    - This will add a computer scientists 
+
 find   - This will find a computer scientists from the list
+
 delete - This will delete a computer scientists from the list
+
 clear  - this will clear the screen
+
 quit   - This will quit the program
-42     -(hidden)
+
+the answer to life - (hidden)
 
 list:
 
 How do you want to sort
+
 a - Alphabetical order
+
 n - No particular sorting
+
 g - Gender order
+
 b - Year of birth order
+
 l - Still alive order(those who are still alive appear first)
+
 
 add:
 
 Enter the name: John Doe
+
 Enter the gender: M
+
 Enter the year of birth: 666
+
 Are they alive (y/n)? n
+
 Enter the year of death: 777
 
 find:
 
 Which parameter would you like to search for?
+
 n - Name
+
 g - Gender
+
 b - Born (year)
+
 d - Died (year)
 
 delete
@@ -51,6 +72,7 @@ No.    Name                          Gender     Born       Died
 --------------------------------------------------------------------------------
 1      John Doe                      M          666        777       Died 111 years old
 What number do you want to delete? 1
+
 The line has been deleted
 
 quit:
