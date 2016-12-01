@@ -27,6 +27,7 @@ private:
     bool checkIfDead();
     void getDeath(int &death, int born);
     void commandAdd();
+    void fortyTwo();
 };
 
 #endif // CONSOLEUI_H
