@@ -4,15 +4,11 @@
 #include <string>
 using namespace std;
 
-
 class Legend
 {
 public:
     Legend();
     Legend(string name, char gender, int born, int death);
-
-
-
 
     void setName(string);
     void setGender(char);
@@ -24,9 +20,6 @@ public:
     int getDeath() const;
     int getAge() const;
     int getDeathAge()const;
-
-
-
 
 private:
     string _name;
