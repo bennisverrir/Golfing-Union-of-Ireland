@@ -195,7 +195,7 @@ void ConsoleUI::getGender(char &gender)
 
         if(gender != toupper('m') && gender != toupper('f'))
         {
-            cout << "Please enter a valid gender";
+            cout << "Please enter a valid gender" << endl;
         }
 
     }while(gender != toupper('m') && gender != toupper('f'));
