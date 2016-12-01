@@ -10,6 +10,7 @@ public:
     Legend();
     Legend(string name, char gender, int born, int death);
 
+    friend bool operator == (Legend &lhs, Legend &rhs);
     void setName(string);
     void setGender(char);
     void setBorn(int);
