@@ -85,32 +85,44 @@ void ConsoleUI::CommandList()
     sort(sortCommand, legends);
 }
 
-void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint){
-    if (command == 'n'){
+void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint)
+{
+    if (command == 'n')
+    {
         string name;
         cout << "Enter a name to search for: ";
         cin >> name;
         toPrint = _service.findLegend(name);
-    } else if (command == 'g'){
+    } 
+    else if (command == 'g')
+    {
         char gender;
         cout << "Enter a gender to search for(M/F): ";
         cin >> gender;
-        if (toupper (gender) == 'M'|| toupper(gender) == 'F'){
+        if (toupper (gender) == 'M'|| toupper(gender) == 'F')
+        {
             toPrint = _service.findLegend(gender);
-        } else {
+        } else 
+        {
             cout << "Please enter a valid gender (M/F): ";
             subCommandFind (command, toPrint);
         }
-    } else if (command == 'b' || command == 'd'){
+    } 
+    else if (command == 'b' || command == 'd')
+    {
         int year;
         cout << "Enter a year to search for: ";
         cin >> year;
-        if (command == 'b'){
+        if (command == 'b')
+        {
             toPrint = _service.findLegend(year, true);
-        } else {
+        }
+        else
+        {
             toPrint = _service.findLegend(year, false);
         }
-    } else {
+    } else 
+    {
         cout << "Please enter a valid command (n/g/b/d)" << endl;
         CommandFind();
     }
@@ -216,14 +228,11 @@ string ConsoleUI::getName(string name)
     bool flag = true;
 
     do{
-
         cout << "Enter the name: ";
         cin.ignore();
         getline(cin,name);
 
         flag = checkName(name, flag);
-
-
         if(!flag)
         {
             cout << "Please enter a valid name, only with letters" << endl;
@@ -232,7 +241,6 @@ string ConsoleUI::getName(string name)
     }while(!flag);
 
     name = rightName(name);
-
     return name;
 }
 
@@ -378,9 +386,7 @@ void ConsoleUI::run(){
         if(keepGoing != "quit")
         {cout << "Invalid Command!" << endl;}
     }
-        
     cout << endl;
 
     }while(keepGoing != "quit");
-
 }
