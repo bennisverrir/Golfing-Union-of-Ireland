@@ -54,19 +54,49 @@ void LegendService::addLegend(string name, char gender, int born, int death)
     a.writeFile(person, "legend.txt");
 }
 
-vector <Legend> LegendService::findLegend(string nameToFind)
-{
+vector <Legend> LegendService::findLegend(string nameToFind){
     vector <Legend> legend = a.readFile();
-    string myString;
     vector <Legend> returnVector;
-    for (size_t i = 0;i < legend.size(); i++ )
-    {
-        if (legend[i].getName().find(nameToFind) != string::npos) 
-        {
+    for (size_t i = 0;i < legend.size(); i++ ){
+        if (legend[i].getName().find(nameToFind) != string::npos) {
             returnVector.push_back(legend[i]);
         }
     }
     return returnVector;
+}
+
+vector <Legend> LegendService::findLegend(char genderToFind){
+    vector <Legend> legend = a.readFile();
+    vector <Legend> returnVector;
+    for (size_t i = 0;i < legend.size(); i++ ){
+        if (legend[i].getGender() == toupper (genderToFind)){
+            returnVector.push_back(legend[i]);
+        }
+    }
+    return returnVector;
+}
+
+vector <Legend> LegendService::findLegend(int yearToFind, bool select){
+    vector <Legend> legend = a.readFile();
+    vector <Legend> returnVector;
+    if(select == true)
+    {
+        for (size_t i = 0;i < legend.size(); i++ ){
+            if (legend[i].getBorn() == yearToFind){
+                returnVector.push_back(legend[i]);
+            }
+        }
+        return returnVector;
+    }
+    else
+    {
+        for (size_t i = 0;i < legend.size(); i++ ){
+            if (legend[i].getDeath() == yearToFind){
+                returnVector.push_back(legend[i]);
+            }
+        }
+        return returnVector;
+    }
 }
 
 void LegendService::deleteLegend(int index, vector<Legend> deleteVector)
