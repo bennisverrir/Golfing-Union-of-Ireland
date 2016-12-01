@@ -152,16 +152,33 @@ bool ConsoleUI::checkName(string name, bool flag)
 
     return flag;
 }
+string ConsoleUI::rightName(string name)
+{
+    name[0] = toupper(name[0]);
+
+    for(size_t i = 1; i < name.size(); i++)
+    {
+        if(name[i] == ' ' && i != (name.size() - 1u))
+        {
+            name[i+1] = toupper(name[i+1]);
+        }
+    }
+
+    return name;
+}
+
 string ConsoleUI::getName(string name)
 {
     bool flag = true;
-    
+
     do{
+
         cout << "Enter the name: ";
         cin.ignore();
         getline(cin,name);
 
         flag = checkName(name, flag);
+
 
         if(!flag)
         {
@@ -169,6 +186,8 @@ string ConsoleUI::getName(string name)
         }
 
     }while(!flag);
+
+    name = rightName(name);
 
     return name;
 }
