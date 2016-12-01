@@ -41,7 +41,6 @@ ostream& operator << (ostream& out,const vector<Legend>& rhs)
     return out;
 }
 
-
 void ConsoleUI::sort(char command, vector<Legend>& legends)
 {
    if(command == 'a')
@@ -78,8 +77,6 @@ void ConsoleUI::CommandList()
     cin >> sortCommand;
 
     sort(sortCommand, legends);
-
-
 }
 
 void ConsoleUI::CommandFind()
@@ -124,12 +121,7 @@ void ConsoleUI::CommandDelete()
     {
         cout << endl <<"No results from that query!" << endl;
     }
-
-
 }
-
-
-
 
 void ConsoleUI::displayCommands()
 {
@@ -146,7 +138,6 @@ bool ConsoleUI::checkName(string name, bool flag)
 {
     for(size_t i = 0; i < name.size(); i++)
     {
-
          if(isalpha(name[i]) || name[i] == ' ') //checking for a valid name
          {
             flag = true;
@@ -164,15 +155,13 @@ bool ConsoleUI::checkName(string name, bool flag)
 string ConsoleUI::getName(string name)
 {
     bool flag = true;
-
+    
     do{
-
         cout << "Enter the name: ";
         cin.ignore();
         getline(cin,name);
 
         flag = checkName(name, flag);
-
 
         if(!flag)
         {
@@ -215,7 +204,6 @@ void ConsoleUI::getBorn(int &born)
 
     }while(born < 0 || born > 2016);
 
-
 }
 
 bool ConsoleUI::checkIfDead()
@@ -227,7 +215,7 @@ bool ConsoleUI::checkIfDead()
         cout << "Are they alive (y/n)? ";
 
         cin >> command;
-
+        
         command = toupper(command);
 
         if(command != toupper('y') && command != toupper('n'))
@@ -275,17 +263,11 @@ void ConsoleUI::commandAdd()
     char gender;
     int born;
     int death;
-
-
+    
     name = getName(name);
-
     getGender(gender); //checking for a valid gender
-
     getBorn(born);
-
     getDeath(death, born);
-
-
     _service.addLegend(name, gender, born, death);
 }
 
@@ -296,9 +278,7 @@ void ConsoleUI::run(){
     do{
 
         displayCommands();
-
         string command;
-
         cin >> command;
         keepGoing = command;
 
@@ -326,8 +306,6 @@ void ConsoleUI::run(){
         {cout << "Invalid Command!" << endl;}
     }
         
-
-
     cout << endl;
 
     }while(keepGoing != "quit");
