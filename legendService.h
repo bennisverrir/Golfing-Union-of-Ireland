@@ -4,7 +4,6 @@
 #include <vector>
 #include "legend.h"
 
-
 using namespace std;
 
 class LegendService
