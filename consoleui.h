@@ -13,6 +13,7 @@ private:
     LegendService _service;
     void sort(char command, vector<Legend>& legends);
     void CommandList();
+    void validateInput (int &intValue);
     void subCommandFind(char command, vector <Legend> &toPrint);
     void CommandFind();
     void CommandDelete();
