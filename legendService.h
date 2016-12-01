@@ -15,6 +15,7 @@ public:
     vector <Legend> getSort ();
     vector <Legend> getSortGender (); 
     vector <Legend> getSortDateOfBirth ();
+    vector <Legend> getSortStillAlive ();
     vector <Legend> findLegend(string nameToFind);
     vector <Legend> findLegend(char genderToFind);
     vector <Legend> findLegend(int yearToFind, bool select);
