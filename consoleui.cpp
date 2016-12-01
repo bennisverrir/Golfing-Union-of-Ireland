@@ -145,7 +145,7 @@ void ConsoleUI::displayCommands()
 
 bool ConsoleUI::checkName(string name, bool flag)
 {
-    for(size_t i = 0; i < name.size() && flag ;i++)
+    for(size_t i = 0; i < name.size(); i++)
     {
          if(isalpha(name[i]) || isupper(name[i]) || name[i] == ' ') //checking for a valid name
          {
