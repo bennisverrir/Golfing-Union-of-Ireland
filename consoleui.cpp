@@ -76,7 +76,7 @@ void ConsoleUI::CommandList()
     cout << "n - No particular sorting" << endl;
     cout << "g - Gender order" << endl;
     cout << "b - Year of birth order" << endl;
-    cout << "l - Still alive order" << endl;
+    cout << "l - Still alive order(those who are still alive appear first)" << endl;
 
 
     cout << endl;
