@@ -14,7 +14,7 @@ ostream& operator << (ostream& out,const vector<Legend>& rhs)
     
     out << setw(7) << left <<  "No." << setw(30) << left << "Name" << setw(11) << "Gender" << setw(10) <<
             "Born" <<  setw(11) << " Died" << endl;
-    for(int i = 0; i < 40; i++
+    for(int i = 0; i < 40; i++)
     {
         out << "--";
     }
