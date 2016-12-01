@@ -1,5 +1,4 @@
 #include "legendService.h"
-#include <algorithm>
 
 /* struct legendComparison
  * @returns order of (2) legends based on names, gender birth year or if they're still alive
@@ -8,24 +7,36 @@
  */
 struct legendComparison
 {
-    bool operator() (Legend i,Legend j){return(i.getName() < j.getName());}
+    bool operator() (Legend i,Legend j)
+    {
+        return(i.getName() < j.getName());
+    }
 };
 struct legendComparisonGender
 {
-    bool operator() (Legend i,Legend j){return(i.getGender() < j.getGender());}
+    bool operator() (Legend i,Legend j)
+    {
+        return(i.getGender() < j.getGender());
+    }
 };
 struct legendComparisonBirth
 {
-    bool operator() (Legend i,Legend j){return(i.getBorn() < j.getBorn());}
+    bool operator() (Legend i,Legend j)
+    {
+        return(i.getBorn() < j.getBorn());
+    }
 };
 struct legendComparisonStillAlive
 {
-    bool operator() (Legend i,Legend j){return(i.getDeath() < j.getDeath());}
+    bool operator() (Legend i,Legend j)
+    {
+        return(i.getDeath() < j.getDeath());
+    }
 };
 
 LegendService::LegendService()
 {
-
+    fileOpen = false;
 }
 /* function getLegends
  * @return vector of legends as read from file.
@@ -34,7 +45,7 @@ LegendService::LegendService()
 vector <Legend> LegendService::getLegends()
 {
     vector <Legend> legend;
-    legend = a.readFile();
+    legend = a.readFile(fileOpen);
     return legend;
 }
 /* function checkForValid @param user input class legend.
@@ -46,7 +57,7 @@ bool LegendService::checkForValid(Legend legend)
 {
     vector<Legend> legends = getLegends();
 
-    for(int i = 0; i < legends.size(); i++)
+    for(size_t i = 0; i < legends.size(); i++)
     {
         if(legends[i] == legend)
         {
@@ -118,7 +129,7 @@ void LegendService::addLegend(string name, char gender, int born, int death, boo
     if(valid)
     {
         boolValid = true;
-        a.writeFile(person, "legend.txt");
+        a.writeFile(person, fileOpen);
     }
     else
     {
@@ -131,7 +142,7 @@ void LegendService::addLegend(string name, char gender, int born, int death, boo
  * accepts a input string (name) and compares to set name of the inputs from file.
  */
 vector <Legend> LegendService::findLegend(string nameToFind){
-    vector <Legend> legend = a.readFile();
+    vector <Legend> legend = getLegends();
     vector <Legend> returnVector;
     for (size_t i = 0;i < legend.size(); i++ ){
         if (legend[i].getName().find(nameToFind) != string::npos) {
@@ -145,7 +156,7 @@ vector <Legend> LegendService::findLegend(string nameToFind){
  * accepts a input character (gender) and compares to set gender.
  */
 vector <Legend> LegendService::findLegend(char genderToFind){
-    vector <Legend> legend = a.readFile();
+    vector <Legend> legend = getLegends();
     vector <Legend> returnVector;
     for (size_t i = 0;i < legend.size(); i++ ){
         if (legend[i].getGender() == toupper (genderToFind)){
@@ -160,7 +171,7 @@ vector <Legend> LegendService::findLegend(char genderToFind){
  * depending on the boolean parameter.
  */
 vector <Legend> LegendService::findLegend(int yearToFind, bool select){
-    vector <Legend> legend = a.readFile();
+    vector <Legend> legend = getLegends();
     vector <Legend> returnVector;
     if(select == true)
     {
@@ -187,18 +198,25 @@ vector <Legend> LegendService::findLegend(int yearToFind, bool select){
  * loops through the entire file to find a matching index of the legend to delete
  * then deletes the entry specified.
  */
-void LegendService::deleteLegend(int index, vector<Legend> deleteVector)
+void LegendService::deleteLegend(int index, vector<Legend> &deleteVector)
 {
     vector<Legend> newLegend = getLegends();
 
     for(size_t i = 0; i < newLegend.size(); i++)
     {
-        if((deleteVector[index-1].getName() == newLegend[i].getName()) && (deleteVector[index-1].getGender() == newLegend[i].getGender()) &&
-           (deleteVector[index-1].getBorn() == newLegend[i].getBorn()) && (deleteVector[index-1].getDeath() == newLegend[i].getDeath()))
+        if(deleteVector[index-1] == newLegend[i])
         {
             newLegend.erase(newLegend.begin()+i);
             break;
         }
     }
-    a.deleteLine(newLegend);
+    a.deleteLine(newLegend, fileOpen);
+}
+/*function getFileOpen
+ * @return bool.
+ * returns true if file is open and false if file could not be open.
+ */
+bool LegendService::getFileOpen()
+{
+    return fileOpen;
 }

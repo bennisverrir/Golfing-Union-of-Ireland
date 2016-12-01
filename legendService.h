@@ -1,14 +1,15 @@
 #ifndef LEGENDSERVICE_H
 #define LEGENDSERVICE_H
-#include "dataaccess.h"
+
+#include <algorithm>
 #include <vector>
 #include "legend.h"
+#include "dataaccess.h"
 
 using namespace std;
 
 class LegendService
 {
-    dataAccess a;
 public:
     LegendService();
     vector <Legend> getLegends ();
@@ -21,7 +22,12 @@ public:
     vector <Legend> findLegend(char genderToFind);
     vector <Legend> findLegend(int yearToFind, bool select);
     void addLegend (string name, char gender, int born, int death, bool &boolValid);
-    void deleteLegend(int index, vector<Legend> deleteVector);
+    void deleteLegend(int index, vector<Legend> &deleteVector);
+    bool getFileOpen();
+
+private:
+    dataAccess a;
+    bool fileOpen;
 };
 
 #endif // LEGENDSERVICE_H

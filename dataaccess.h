@@ -6,6 +6,7 @@
 #include <sstream>
 #include <string>
 #include <cstdlib>
+#include <cstdio>
 #include "legend.h"
 
 using namespace std;
@@ -14,9 +15,9 @@ class dataAccess
 {
 public:
     dataAccess();
-    vector<Legend> readFile();
-    void writeFile(Legend writeLegend);
-    void deleteLine(vector<Legend> deleteLegend);
+    vector<Legend> readFile(bool &fileError);
+    void writeFile(Legend writeLegend, bool &fileError);
+    void deleteLine(vector<Legend> &deleteLegend, bool &fileError);
 private:
     const string fileName = "legend.txt";
 };

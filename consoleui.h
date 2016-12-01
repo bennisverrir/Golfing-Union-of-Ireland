@@ -1,6 +1,10 @@
 #ifndef CONSOLEUI_H
 #define CONSOLEUI_H
 
+#include <string>
+#include <iostream>
+#include <iomanip>
+#include "legend.h"
 #include "legendService.h"
 
 class ConsoleUI
