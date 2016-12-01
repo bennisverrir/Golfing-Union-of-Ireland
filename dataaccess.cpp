@@ -1,4 +1,4 @@
-﻿#include "dataaccess.h"
+#include "dataaccess.h"
 #include <cstdio>
 
 
@@ -6,7 +6,10 @@ dataAccess::dataAccess()
 {
 
 }
-
+/*Function readFile, @return vector<Legend>
+* Reads one line at a time from a file and generates a instance of Legend
+* Then pushes the Legend instance into a vector and retuns a vector<Legend>.
+*/
 vector<Legend> dataAccess::readFile()
 {
     ifstream file;
@@ -50,7 +53,12 @@ vector<Legend> dataAccess::readFile()
 
     return returnVector;
 }
-void dataAccess::writeFile(Legend writeLegend, string fileName)
+
+/*Function writeFile, @param Legend
+* Takes a Legend and writes all information about it in a new line in a file
+*/
+
+void dataAccess::writeFile(Legend writeLegend)
 {
     ofstream file;
 
@@ -64,6 +72,10 @@ void dataAccess::writeFile(Legend writeLegend, string fileName)
     file.close();
 }
 
+/*Function deleteLine, @param vector<Legend>
+* Takes the @param which is a vector of all the Legend without the deleted Legend
+* writes over the file the information of all the Legend in the vector into the file.
+*/
 void dataAccess::deleteLine(vector<Legend> deleteLegend)
 {
     ofstream file;
