@@ -7,21 +7,8 @@
 using namespace std;
 
 ConsoleUI::ConsoleUI(){}
-/*function displayCommands, @return void.
-* displays a list of commands at the users disposal.
-*/
-void ConsoleUI::displayCommands()
-{
-    cout << "Please enter one of the following commands:"<< endl;
-    cout << "list   - This will list all the computer scientists " << endl;
-    cout << "add    - This will add a computer scientists " << endl;
-    cout << "find   - This will find a computer scientists from the list" << endl;
-    cout << "delete - This will delete a computer scientists from the list" << endl;
-    cout << "clear  - this will clear the screen" << endl;
-    cout << "quit   - This will quit the program" << endl;
 
-    cout << endl;
-}
+
 /*function deleteLegend, @return void.
 * reads input from user, if input matches a command it performs that command, if not outputs error.
 * runs until the user inputs the quit command.
@@ -66,6 +53,23 @@ void ConsoleUI::run()
 
     }while(keepGoing != "quit");
 }
+
+/*function displayCommands, @return void.
+* displays a list of commands at the users disposal.
+*/
+void ConsoleUI::displayCommands()
+{
+    cout << "Please enter one of the following commands:"<< endl;
+    cout << "list   - This will list all the computer scientists " << endl;
+    cout << "add    - This will add a computer scientists " << endl;
+    cout << "find   - This will find a computer scientists from the list" << endl;
+    cout << "delete - This will delete a computer scientists from the list" << endl;
+    cout << "clear  - this will clear the screen" << endl;
+    cout << "quit   - This will quit the program" << endl;
+
+    cout << endl;
+}
+
 /*function <<, @param instance of ostream and Legend vector instance, @return ostream.
 * outputs all information about listed legends in a table.
 */
@@ -293,9 +297,7 @@ void ConsoleUI::commandClear()
 {
     system("cls"); // clears the screen
 }
-/*Function checkName
-*@parm list: name, flag
-*@return bool(true/false).
+/*Function checkName @parm list: name, flag @return bool(true/false).
 *Checks if the person is still alive, and errorchecks the input. 
 */
 bool ConsoleUI::checkName(string name, bool flag)
@@ -316,9 +318,7 @@ bool ConsoleUI::checkName(string name, bool flag)
 
     return flag;
 }
-/*Function getName
-*@parm list: name, flag.
-*@return name.
+/*Function getName @parm list: name, flag. @return name.
 *Takes the input name and checks if it is valid. 
 */
 string ConsoleUI::getName(string name)
@@ -342,9 +342,7 @@ string ConsoleUI::getName(string name)
     name = rightName(name);
     return name;
 }
-/*Function getGender
-*@parm list: gender
-*@return void.
+/*Function getGender @parm list: gender @return void.
 *This function takes the gender input. And checks if it is valid. 
 */
 void ConsoleUI::getGender(char &gender)
@@ -363,9 +361,7 @@ void ConsoleUI::getGender(char &gender)
 
     }while(gender != toupper('m') && gender != toupper('f'));
 }
-/*Function getBorn
-*@parm list: born
-*@return void.
+/*Function getBorn @parm list: born @return void.
 *This function takes in the year of birth, and checks if it is valid. 
 */
 void ConsoleUI::getBorn(int &born)
@@ -383,9 +379,7 @@ void ConsoleUI::getBorn(int &born)
     }while(born < 0 || born > 2016);
 
 }
-/*Function checkIfDead
-*@parm list: command
-*@return bool(true/false).
+/*Function checkIfDead @parm list: command @return bool(true/false).
 *Checks if the person is still alive, and errorchecks the input. 
 */
 bool ConsoleUI::checkIfDead()
@@ -415,9 +409,7 @@ bool ConsoleUI::checkIfDead()
         return true;
     }
 }
-/*Function getDeath checks if the year
-*@parm list: death
-*@return void.
+/*Function getDeath checks if the year @parm list: death @return void.
 *Checks if the year of death is valid. 
 */
 void ConsoleUI::getDeath(int &death, int born)
@@ -441,9 +433,7 @@ void ConsoleUI::getDeath(int &death, int born)
        death = 0;
    }
 }
-/*Function commandAdd checks if the year
-*@parm list: gender, born, death, valid
-*@return void.
+/*Function commandAdd checks if the year @parm list: gender, born, death, valid @return void.
 This function checks if the input name is valid, if it is already in the list.
 */
 void ConsoleUI::commandAdd()
