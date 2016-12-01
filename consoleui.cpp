@@ -250,8 +250,8 @@ string ConsoleUI::rightName(string name)       //makes sure the first letter in 
     return name;
 }
 /*function deleteLegend, @param list index and Legend instance, @return void.
-* Accepts the index of a legend from a sorted list of legends and
-*
+* Accepts the index of a legend from a sorted list of legends. If it returns
+* multiple legends, it lets the user decide which legend you wan to delete.
 */
 void ConsoleUI::CommandDelete()
 {
@@ -293,7 +293,11 @@ void ConsoleUI::commandClear()
 {
     system("cls"); // clears the screen
 }
-
+/*Function checkName
+*@parm list: name, flag
+*@return bool(true/false).
+*Checks if the person is still alive, and errorchecks the input. 
+*/
 bool ConsoleUI::checkName(string name, bool flag)
 {
     for(size_t i = 0; i < name.size(); i++)
@@ -312,8 +316,11 @@ bool ConsoleUI::checkName(string name, bool flag)
 
     return flag;
 }
-
-
+/*Function getName
+*@parm list: name, flag.
+*@return name.
+*Takes the input name and checks if it is valid. 
+*/
 string ConsoleUI::getName(string name)
 {
     bool flag = true;
@@ -335,7 +342,11 @@ string ConsoleUI::getName(string name)
     name = rightName(name);
     return name;
 }
-
+/*Function getGender
+*@parm list: gender
+*@return void.
+*This function takes the gender input. And checks if it is valid. 
+*/
 void ConsoleUI::getGender(char &gender)
 {
     do
@@ -352,7 +363,11 @@ void ConsoleUI::getGender(char &gender)
 
     }while(gender != toupper('m') && gender != toupper('f'));
 }
-
+/*Function getBorn
+*@parm list: born
+*@return void.
+*This function takes in the year of birth, and checks if it is valid. 
+*/
 void ConsoleUI::getBorn(int &born)
 {
     do
@@ -368,7 +383,11 @@ void ConsoleUI::getBorn(int &born)
     }while(born < 0 || born > 2016);
 
 }
-
+/*Function checkIfDead
+*@parm list: command
+*@return bool(true/false).
+*Checks if the person is still alive, and errorchecks the input. 
+*/
 bool ConsoleUI::checkIfDead()
 {
     char command = ' ';
@@ -396,7 +415,11 @@ bool ConsoleUI::checkIfDead()
         return true;
     }
 }
-
+/*Function getDeath checks if the year
+*@parm list: death
+*@return void.
+*Checks if the year of death is valid. 
+*/
 void ConsoleUI::getDeath(int &death, int born)
 {
    if(checkIfDead())
@@ -418,7 +441,11 @@ void ConsoleUI::getDeath(int &death, int born)
        death = 0;
    }
 }
-
+/*Function commandAdd checks if the year
+*@parm list: gender, born, death, valid
+*@return void.
+This function checks if the input name is valid, if it is already in the list.
+*/
 void ConsoleUI::commandAdd()
 {
     string name;
