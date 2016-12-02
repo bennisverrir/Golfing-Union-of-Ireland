@@ -280,7 +280,7 @@ void ConsoleUI::CommandDelete()
 {
     string deleteName;
 
-    cout << "Who do you want to delete? ";
+    cout << "Who do you want to delete (press enter to get the full list)?  ";
 
     getline(cin,deleteName);
     
