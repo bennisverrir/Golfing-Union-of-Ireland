@@ -4,6 +4,8 @@
 
 A team of extreme dreams
 
+Link to this repository: https://github.com/bennisverrir/DreamTeamExtreme/
+
 This project is a collective work of 6 people, individual commits can have been moderated and/or monitored by 2 or more people. It is a layered structure of database handling.
 
 Presentation layer - ConsoleUI, handles all cin and cout logic, translates user input commands and sends them forward to the business logic layer.
