@@ -222,7 +222,7 @@ string ConsoleUI::getName(string name)
         flag = checkName(name, flag);
         if(!flag)
         {
-            cout << "Please enter a valid name, only with letters" << endl;
+            cout << "Please enter a valid name: " << endl;
         }
 
     }while(!flag);
