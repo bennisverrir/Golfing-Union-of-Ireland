@@ -238,8 +238,14 @@ bool ConsoleUI::checkName(string name, bool flag)
 {
     for(size_t i = 0; i < name.size(); i++)
     {
-         if(isalpha(name[i]) || name[i] == ' ') //checking for a valid name
+         if(isalpha(name[i]) || name[i] == ' ' || name[i] == '.' || name[i] == '-') //checking for a valid name
          {
+            if((name[i] == '.' && ((name[i] == name[i-1] ) || name[i-1] == '-')) && ((name[i] == '-' && ((name[i] == name[i-1] ) || name[i-1] == '.'))))
+            {
+                flag = false;
+                break;
+            }
+
             flag = true;
          }
          else
