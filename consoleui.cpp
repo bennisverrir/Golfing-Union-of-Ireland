@@ -303,7 +303,7 @@ void ConsoleUI::CommandDelete()
         else
         {
         _service.deleteLegend(number, deleteLegend); // deletes the legend
-        cout << "The line has been deleted" << endl;
+        cout << endl << "The line has been deleted" << endl;
         } 
     }
     else
