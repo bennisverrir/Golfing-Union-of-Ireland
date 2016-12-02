@@ -12,27 +12,27 @@ class ConsoleUI
 public:
     ConsoleUI();
     void run ();
-    friend ostream& operator << (ostream& out,const vector<Legend>& rhs);
 private:
     LegendService _service;
-    void sort(char command, vector<Legend>& legends);
-    void CommandList();
-    void validateInput (int &intValue);
-    void subCommandFind(char command, vector <Legend> &toPrint);
-    void CommandFind();
-    void CommandDelete();
-    void commandClear();
+
     void displayCommands();
-    bool checkName(string name, bool flag);
+    void commandList();
+    void checkForFileError();
+    void sort(char command, vector<Legend>& legends);
+    void commandAdd();
     string getName(string name);
+    bool checkName(string name, bool flag);
     string rightName(string name);
     void getGender(char &gender);
     void getBorn(int &born);
-    bool checkIfDead();
+    void validateInput (int &intValue);
     void getDeath(int &death, int born);
-    void commandAdd();
+    bool checkIfDead();
+    void commandDelete();
+    void commandFind();
+    void subCommandFind(char command, vector <Legend> &toPrint);
+    void commandClear();
     void fortyTwo();
-    void checkForFileError();
 };
 
 #endif // CONSOLEUI_H

@@ -61,7 +61,7 @@ void ConsoleUI::run()
 
     if (command == "list")
     {
-        CommandList();
+        commandList();
     }
     else if (command == "add")
     {
@@ -69,11 +69,11 @@ void ConsoleUI::run()
     }
     else if (command == "delete")
     {
-        CommandDelete();
+        commandDelete();
     }
     else if (command == "find")
     {
-       CommandFind();
+       commandFind();
     }
     else if(command == "clear")
     {
@@ -112,7 +112,7 @@ void ConsoleUI::displayCommands()
 /*function commandList, @return void.
 *outputs a list of sorting catagories and their commands, then outputs that to the sort function.
 */
-void ConsoleUI::CommandList()
+void ConsoleUI::commandList()
 {
     vector <Legend> legends = _service.getLegends();
 
@@ -134,7 +134,9 @@ void ConsoleUI::CommandList()
 
 }
 
-//TODO
+/*function checkForFileError, @return void
+ *Calls getFileOpen from legendService and closes the application if the file failed to open
+ */
 void ConsoleUI::checkForFileError()
 {
     if(!_service.getFileOpen())
@@ -388,7 +390,7 @@ bool ConsoleUI::checkIfDead()
 * Calls find function to match search string, deletes person from that list based on index input
 *
 */
-void ConsoleUI::CommandDelete()
+void ConsoleUI::commandDelete()
 {
     string deleteName;
 
@@ -434,7 +436,7 @@ void ConsoleUI::CommandDelete()
  *asks the user what he wants to search and then calls subCommandFind and passes in a vector.
  *Then prints out the vector from subCommandFind
  */
-void ConsoleUI::CommandFind()
+void ConsoleUI::commandFind()
 {
     cout << "Which parameter would you like to search for?" << endl;
     cout << "n - Name" << endl;
@@ -514,7 +516,7 @@ void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint)
     else
     {
         cout << "Please enter a valid command (n/g/b/d)" << endl;
-        CommandFind();
+        commandFind();
     }
 }
 
