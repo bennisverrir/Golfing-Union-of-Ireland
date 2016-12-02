@@ -17,7 +17,10 @@ void ConsoleUI::run()
 
         displayCommands();
         string command;
-        cin.ignore(0);
+        
+        cin.clear();
+        cin.sync();
+        
         getline(cin, command);
         keepGoing = command;
 
@@ -208,7 +211,9 @@ void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint)
     {
         string name;
         cout << "Enter a name to search for: ";
-        cin >> name;
+        
+        cin.ignore();
+        getline(cin,name);
         toPrint = _service.findLegend(name); // sends the input name into the search function
                                              // and assigns its value to the return value.
     } 
@@ -253,11 +258,15 @@ string ConsoleUI::rightName(string name)       //makes sure the first letter in 
 {
     name[0] = toupper(name[0]);
 
-    for(size_t i = 1; i < name.size(); i++)
+    for(size_t i = 0; i < name.size(); i++)
     {
         if(name[i] == ' ' && i != (name.size() - 1u))
         {
             name[i+1] = toupper(name[i+1]);
+        }
+        else
+        {
+            name[i+1] = tolower(name[i+1]);
         }
     }
 
@@ -272,7 +281,7 @@ void ConsoleUI::CommandDelete()
     string deleteName;
 
     cout << "Who do you want to delete? ";
-    cin.ignore();
+
     getline(cin,deleteName);
     
     deleteName = rightName(deleteName);
@@ -338,7 +347,7 @@ string ConsoleUI::getName(string name)
     do
     {
         cout << "Enter the name: ";
-        cin.ignore();
+
         getline(cin,name);
 
         flag = checkName(name, flag);
