@@ -32,6 +32,7 @@ private:
     void getDeath(int &death, int born);
     void commandAdd();
     void fortyTwo();
+    void checkForFileError();
 };
 
 #endif // CONSOLEUI_H
