@@ -230,7 +230,7 @@ void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint)
     else if (command == 'b' || command == 'd')
     {
         int year;
-        cout << "Enter a year to search for: ";
+        cout << "Enter a year to search for: (3 or 4 digits)";
         validateInput(year);
         if (command == 'b')
         {
@@ -359,7 +359,7 @@ void ConsoleUI::getGender(char &gender)
 {
     do
     {
-        cout << "Enter the gender: ";
+        cout << "Enter the gender (M/F): ";
         cin >> gender;
 
         gender = toupper(gender);
@@ -378,7 +378,7 @@ void ConsoleUI::getBorn(int &born)
 {
     do
     {
-        cout << "Enter the year of birth: ";
+        cout << "Enter the year of birth (3 or 4 digits): ";
         validateInput(born);
 
         if(born < 0 || born > 2016)
@@ -428,7 +428,7 @@ void ConsoleUI::getDeath(int &death, int born)
    {
         do
         {
-            cout << "Enter the year of death: ";
+            cout << "Enter the year of death (3 or 4 digits): ";
             validateInput(death);
 
             if(death < born || death > 2016)
