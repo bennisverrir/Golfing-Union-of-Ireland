@@ -18,10 +18,10 @@ public:
     vector <Legend> getSortGender (); 
     vector <Legend> getSortDateOfBirth ();
     vector <Legend> getSortStillAlive ();
+    void addLegend (string name, char gender, int born, int death, bool &boolValid);
     vector <Legend> findLegend(string nameToFind);
     vector <Legend> findLegend(char genderToFind);
     vector <Legend> findLegend(int yearToFind, bool select);
-    void addLegend (string name, char gender, int born, int death, bool &boolValid);
     void deleteLegend(int index, vector<Legend> &deleteVector);
     bool getFileOpen();
 
