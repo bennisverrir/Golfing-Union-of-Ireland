@@ -39,7 +39,7 @@ private:
     void getComputerType(int computerType);
     bool getWasBuilt(bool wasBuilt);
     string getComputerName(string ComputerName);
-    void sortComputer(char sortComputerCommand, vector<computer>& computers);
+    void sortComputer(char sortComputerCommand, vector<Computer>& computers);
 };
 
 #endif // CONSOLEUI_H
