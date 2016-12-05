@@ -3,7 +3,7 @@
 dataAccess::dataAccess()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    dbName = "Prufa.sqlite";
+    dbName = "ComputingDatabase.sqlite";
 }
 /*Function readFile,@param bool @return vector<Legend>
 * Reads one line at a time from a file and generates a instance of Legend
