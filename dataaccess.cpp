@@ -33,11 +33,11 @@ vector<Legend> dataAccess::readFile(bool &fileOpen)
     {
 
         string name = query.value("Name").toString().toStdString();
-        char gender = query.value("Gender").toChar().toLatin1();
+        string gender = query.value("Gender").toString().toStdString();
         int born = query.value("Birth").toUInt();
         int death = query.value("Death").toUInt();
 
-        legends.push_back(Legend(name, gender, born, death));
+        legends.push_back(Legend(name, gender[0], born, death));
     }
 
     db.close();
@@ -73,7 +73,7 @@ void dataAccess::writeFile(Legend writeLegend, bool &fileOpen)
     query.prepare("INSERT INTO Scientists(Name, Gender, Birth,Death,IsDead) VALUES(:name, :gender, :born, :death, :isDead)");
 
     query.bindValue(":name", QString::fromStdString(writeLegend.getName()));
-    query.bindValue(":gender", writeLegend.getGender());
+    query.bindValue(":gender", QChar::fromLatin1(writeLegend.getGender()));
     query.bindValue(":born", writeLegend.getBorn());
     query.bindValue(":death", writeLegend.getDeath());
     query.bindValue(":isDead", isDead);
