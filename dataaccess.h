@@ -7,12 +7,16 @@
 #include <string>
 #include <cstdlib>
 #include <cstdio>
+#include <QTSql>
 #include "legend.h"
 
 using namespace std;
 
 class dataAccess
 {
+    QSqlDatabase db;
+    QString dbName;
+
 public:
     dataAccess();
     vector<Legend> readFile(bool &fileError);
