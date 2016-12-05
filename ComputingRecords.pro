@@ -15,11 +15,13 @@ SOURCES += main.cpp \
     legend.cpp \
     legendService.cpp \
     dataaccess.cpp \
-    computer.cpp
+    computer.cpp \
+    computerService.cpp
 
 HEADERS += \
     consoleui.h \
     legend.h \
     legendService.h \
     dataaccess.h \
-    computer.h
+    computer.h \
+    computerService.h
