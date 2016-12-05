@@ -636,7 +636,7 @@ void ConsoleUI::commandAddComputer()
 
 void ConsoleUI::commandListComputers()
 {
-   vector <computer> computers = _service.getComputers();
+   vector <Computer> computers = _service.getComputers();
 
     checkForFileError();
 
