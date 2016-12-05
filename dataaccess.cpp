@@ -26,7 +26,7 @@ vector<Legend> dataAccess::readFile(bool &fileOpen)
     QSqlQuery query(db);
 
 
-    query.exec("SELECT * FROM Legend");
+    query.exec("SELECT * FROM Scientists");
 
 
     while(query.next())
@@ -34,8 +34,8 @@ vector<Legend> dataAccess::readFile(bool &fileOpen)
 
         string name = query.value("Name").toString().toStdString();
         char gender = query.value("Gender").toChar().toLatin1();
-        int born = query.value("BirthYear").toUInt();
-        int death = query.value("DeathYear").toUInt();
+        int born = query.value("Birth").toUInt();
+        int death = query.value("Death").toUInt();
 
         legends.push_back(Legend(name, gender, born, death));
     }
@@ -70,13 +70,13 @@ void dataAccess::writeFile(Legend writeLegend, bool &fileOpen)
     }
 
 
-    query.prepare("INSERT INTO Legend(Name,BirthYear,DeathYear,IsDead,Gender) VALUES(:name, :born, :death, :isDead,:gender)");
+    query.prepare("INSERT INTO Scientists(Name, Gender, Birth,Death,IsDead) VALUES(:name, :gender, :born, :death, :isDead)");
 
     query.bindValue(":name", QString::fromStdString(writeLegend.getName()));
+    query.bindValue(":gender", writeLegend.getGender());
     query.bindValue(":born", writeLegend.getBorn());
     query.bindValue(":death", writeLegend.getDeath());
     query.bindValue(":isDead", isDead);
-    query.bindValue(":gender", writeLegend.getGender());
 
     query.exec();
 
