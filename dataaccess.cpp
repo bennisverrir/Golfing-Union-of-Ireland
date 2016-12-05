@@ -1,10 +1,9 @@
 #include "dataaccess.h"
 
-
-
 dataAccess::dataAccess()
 {
-
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    dbName = "Prufa.sqlite";
 }
 /*Function readFile,@param bool @return vector<Legend>
 * Reads one line at a time from a file and generates a instance of Legend
@@ -13,52 +12,38 @@ dataAccess::dataAccess()
 */
 vector<Legend> dataAccess::readFile(bool &fileOpen)
 {
-    ifstream file;
+    vector<Legend> legends;
 
-    vector<Legend> returnVector;
+    db.setDatabaseName(dbName);
 
-    file.open(fileName);
-    string line;
-    string name;
-    char gender;
-    int born;
-    int death;
+    db.open();
 
-    if(file.is_open())
+    if(db.open())
     {
         fileOpen = true;
-
-        while(getline(file,line))
-        {
-            stringstream linestream(line);
-
-            string sBorn;
-            string sDeath;
-            string sGender;
-
-            getline(linestream, name, ',');
-            getline(linestream, sGender, ',');
-            getline(linestream, sBorn, ',');
-            getline(linestream, sDeath, ',');
-
-            born = atoi(sBorn.c_str());
-            death = atoi(sDeath.c_str());
-            gender = sGender[0];
-
-            Legend tempLegend(name, gender, born, death);
-
-            returnVector.push_back(tempLegend);
-
-        }
     }
-    else
+
+    QSqlQuery query(db);
+
+
+    query.exec("SELECT * FROM Legend");
+
+
+    while(query.next())
     {
-        fileOpen = false;
+
+        string name = query.value("Name").toString().toStdString();
+        char gender = query.value("Gender").toChar().toLatin1();
+        int born = query.value("BirthYear").toUInt();
+        int death = query.value("DeathYear").toUInt();
+
+        legends.push_back(Legend(name, gender, born, death));
     }
 
-    file.close();
+    db.close();
 
-    return returnVector;
+    return legends;
+
 }
 
 /*Function writeFile, @param Legend and bool
@@ -68,24 +53,35 @@ vector<Legend> dataAccess::readFile(bool &fileOpen)
 
 void dataAccess::writeFile(Legend writeLegend, bool &fileOpen)
 {
-    ofstream file;
 
-    file.open(fileName, ios::app);
+    db.open();
 
-    if(file.is_open())
+    QSqlQuery query(db);
+
+    bool isDead;
+
+    if(writeLegend.getDeath() == 0)
     {
-        fileOpen = true;
-
-        file << endl << writeLegend.getName() << "," << writeLegend.getGender() << ","
-             << writeLegend.getBorn() << "," << writeLegend.getDeath();
+        isDead = 0;
     }
     else
     {
-        fileOpen = false;
+        isDead = 1;
     }
-    file.close();
-}
 
+
+    query.prepare("INSERT INTO Legend(Name,BirthYear,DeathYear,IsDead,Gender) VALUES(:name, :born, :death, :isDead,:gender)");
+
+    query.bindValue(":name", QString::fromStdString(writeLegend.getName()));
+    query.bindValue(":born", writeLegend.getBorn());
+    query.bindValue(":death", writeLegend.getDeath());
+    query.bindValue(":isDead", isDead);
+    query.bindValue(":gender", writeLegend.getGender());
+
+    query.exec();
+
+    db.close();
+}
 /*Function deleteLine, @param vector<Legend> and bool
 * Takes the @param which is a vector of all the Legend without the deleted Legend
 * writes over the file the information of all the Legend in the vector into the file.
@@ -93,30 +89,5 @@ void dataAccess::writeFile(Legend writeLegend, bool &fileOpen)
 */
 void dataAccess::deleteLine(vector<Legend> &deleteLegend, bool &fileOpen)
 {
-    ofstream file;
-
-    file.open(fileName, ios::trunc);
-
-    if(file.is_open())
-    {
-        fileOpen = true;
-
-        for(size_t i = 0; i < deleteLegend.size(); i++)
-        {
-            file << deleteLegend[i].getName() << "," << deleteLegend[i].getGender() << ","
-                 << deleteLegend[i].getBorn() << "," << deleteLegend[i].getDeath();
-
-            if(i != (deleteLegend.size() - 1))
-            {
-                file << endl;
-            }
-        }
-    }
-    else
-    {
-        fileOpen = false;
-    }
-
-    file.close();
 
 }
