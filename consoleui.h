@@ -6,6 +6,7 @@
 #include <iomanip>
 #include "legend.h"
 #include "legendService.h"
+#include "computerService.h"
 
 class ConsoleUI
 {
@@ -14,6 +15,7 @@ public:
     void run ();
 private:
     LegendService _service;
+    ComputerService  _cService;
 
     void displayCommands();
     void commandList();

@@ -615,12 +615,13 @@ void ConsoleUI::commandAddComputer()
   //  bool valid;
 
     computerName = getName(computerName);
-    getBuildYear(buildYear);
+}
+    /*getBuildYear(buildYear);
     getComputerType(computerType);
-    getWasBuilt(wasBuilt);
+    wasBuilt = getWasBuilt(wasBuilt);
   //  _service.addComputer(computerName, buildYear, computerType, wasBuilt);
 }
-   /* if(!valid)
+    if(!valid)
     {
         cout << endl << "This Computer is already in the list" << endl;
     }
@@ -651,7 +652,7 @@ void ConsoleUI::commandListComputers()
 
     cin >> sortComputerCommand;
 
-   sortComputer(sortComputerCommand, computers);
+   //sortComputer(sortComputerCommand, computers);
 
 
 }

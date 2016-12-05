@@ -118,6 +118,7 @@ void dataAccess::writeFile(Legend writeLegend, bool &fileOpen)
 
     db.close();
 }
+
 /*Function deleteLine, @param vector<Legend> and bool
 * Takes the @param which is a vector of all the Legend without the deleted Legend
 * writes over the file the information of all the Legend in the vector into the file.
