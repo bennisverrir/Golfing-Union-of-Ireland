@@ -37,6 +37,66 @@ ostream& operator << (ostream& out,const vector<Legend>& rhs)
 
     return out;
 }
+ostream& operator << (ostream& out,const vector<Computer>& rhs)
+{
+    out << endl;
+
+   out << setw(7) << left <<  "No." << setw(30) << left << "Name" << setw(11) << "Build Year" << setw(5) <<" "<<
+            "Computer Type"<<endl;
+    for(int i = 0; i < 35; i++)
+    {
+        out << "--";
+    }
+    out << endl;
+
+    for (size_t i = 0; i < rhs.size(); i++) //creating the output table
+    {
+
+        out << setw(7) << (i+1) << setw(30) << left << rhs[i].getName();
+        if(rhs[i].getWasBuilt())
+        {
+            out << setw(10) << rhs[i].getBuildYear() << " ";
+            if(rhs[i].getComputerType() == '1')                                      // output information about legend.
+            {
+                out << setw(5)<<" " << "Mechanical";
+            }
+            else if(rhs[i].getComputerType() == '2')
+            {
+                out << setw(5)<<" " << "Electrical";
+            }
+            else if(rhs[i].getComputerType() == '3')
+            {
+                out << setw(5)<<" " << "Transistor";
+            }
+             else if(rhs[i].getComputerType() == '4')
+            {
+                out << setw(5)<<" " << "Electromechnical";
+            }
+        }
+        else
+        {
+            if(rhs[i].getComputerType() == '1')                                      // output information about legend.
+            {
+                out << setw(16)<<" " << "Mechanical";
+            }
+            else if(rhs[i].getComputerType() == '2')
+            {
+                out << setw(16)<<" " << "Electrical";
+            }
+            else if(rhs[i].getComputerType() == '3')
+            {
+                out << setw(16)<<" " << "Transistor";
+            }
+            else if(rhs[i].getComputerType() == '4')
+            {
+                out << setw(16)<<" " << "Electromechnical";
+            }
+        }
+        out << endl;
+    }
+
+    return out;
+}
 
 ConsoleUI::ConsoleUI(){}
 
