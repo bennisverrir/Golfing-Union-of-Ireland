@@ -7,7 +7,7 @@
 #include <string>
 #include <cstdlib>
 #include <cstdio>
-#include <QTSql>
+#include <QtSql>
 #include "legend.h"
 
 using namespace std;
