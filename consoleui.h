@@ -33,6 +33,13 @@ private:
     void subCommandFind(char command, vector <Legend> &toPrint);
     void commandClear();
     void fortyTwo();
+    void commandListComputers();
+    void commandAddComputer();
+    void getBuildYear(int buildYear);
+    void getComputerType(int computerType);
+    bool getWasBuilt(bool wasBuilt);
+    string getComputerName(string ComputerName);
+    void sortComputer(char sortComputerCommand, vector<computer>& computers);
 };
 
 #endif // CONSOLEUI_H
