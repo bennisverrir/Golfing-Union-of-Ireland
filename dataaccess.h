@@ -9,6 +9,7 @@
 #include <cstdio>
 #include <QtSql>
 #include "legend.h"
+#include "computer.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ class dataAccess
 public:
     dataAccess();
     vector<Legend> readFile(bool &fileError);
+    vector<Computer> readComputerFile(bool &fileOpen);
     void writeFile(Legend writeLegend, bool &fileError);
     void deleteLine(vector<Legend> &deleteLegend, bool &fileError);
 private:

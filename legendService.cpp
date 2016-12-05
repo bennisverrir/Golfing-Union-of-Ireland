@@ -48,6 +48,12 @@ vector <Legend> LegendService::getLegends()
     legend = a.readFile(fileOpen);
     return legend;
 }
+vector <Computer> LegendService::getComputers()
+{
+    vector <Computer> computers;
+    computers = a.readComputerFile(fileOpen);
+    return computers;
+}
 /* function checkForValid @param user input class legend.
  * @return boolean value of whether input is already listed.
  * runs user input legend through vector of listed inputs (from file),

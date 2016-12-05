@@ -46,6 +46,42 @@ vector<Legend> dataAccess::readFile(bool &fileOpen)
 
 }
 
+vector<Computer> dataAccess::readComputerFile(bool &fileOpen)
+{
+    vector<Computer> legends;
+
+    db.setDatabaseName(dbName);
+
+    db.open();
+
+    if(db.open())
+    {
+        fileOpen = true;
+    }
+
+    QSqlQuery query(db);
+
+
+    query.exec("SELECT * FROM Computer");
+
+
+    while(query.next())
+    {
+
+        string name = query.value("Name").toString().toStdString();
+        int buildYear = query.value("BuildYear").toUInt();
+        string computerType = query.value("ComputerType").toString().toStdString();
+        bool wasBuilt = query.value("wasBuilt").toBool();
+
+        legends.push_back(Computer(name, buildYear, computerType[0], wasBuilt));
+    }
+
+    db.close();
+
+    return legends;
+
+}
+
 /*Function writeFile, @param Legend and bool
 * Takes a Legend and writes all information about it in a new line in a file
 * sets fileOpen to true if file is open and false if it could not be open

@@ -13,6 +13,7 @@ class LegendService
 public:
     LegendService();
     vector <Legend> getLegends ();
+    vector <Computer> getComputers();
     bool checkForValid(Legend legend);
     vector <Legend> getSort ();
     vector <Legend> getSortGender (); 
