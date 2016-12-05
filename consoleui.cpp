@@ -123,6 +123,10 @@ void ConsoleUI::run()
     {
         commandList();
     }
+    else if (command == "list computer")
+    {
+      commandListComputers();
+    }
     else if (command == "add")
     {
       commandAdd();
@@ -143,6 +147,11 @@ void ConsoleUI::run()
     {
         fortyTwo();
     }
+    else if(command == "add computer")
+    {
+        commandAddComputer();
+
+    }
     else
     {
         if(command != "quit")
@@ -160,10 +169,13 @@ void ConsoleUI::displayCommands()
 {
     cout << "Please enter one of the following commands:"<< endl;
     cout << "list   - This will list all the computer scientists " << endl;
+    cout << "list   - This will list all the computers " << endl;
     cout << "add    - This will add a computer scientists " << endl;
+    cout << "add computer - This will add a computer " << endl;
     cout << "find   - This will find a computer scientists from the list" << endl;
     cout << "delete - This will delete a computer scientists from the list" << endl;
     cout << "clear  - this will clear the screen" << endl;
+    
     cout << "quit   - This will quit the program" << endl;
 
     cout << endl;
@@ -594,6 +606,55 @@ void ConsoleUI::commandClear()
     system("cls"); // clears the screen
 }
 
+void ConsoleUI::commandAddComputer()
+{
+    string computerName;
+    int buildYear;
+    char computerType;
+    bool wasBuilt;
+  //  bool valid;
+
+    computerName = getName(computerName);
+    getBuildYear(buildYear);
+    getComputerType(computerType);
+    getWasBuilt(wasBuilt);
+  //  _service.addComputer(computerName, buildYear, computerType, wasBuilt);
+}
+   /* if(!valid)
+    {
+        cout << endl << "This Computer is already in the list" << endl;
+    }
+    else
+    {
+        cout << endl << "Computer Added!" << endl;
+    }
+}
+
+*/
+
+
+
+void ConsoleUI::commandListComputers()
+{
+   vector <computer> computers = _service.getComputers();
+
+    checkForFileError();
+
+    char sortComputerCommand;
+
+    cout << "How do you want to sort"<< endl;
+    cout << "a - Alphabetical order" << endl;
+    cout << "b - Built year order" << endl;
+    cout << "w - Was built" << endl;
+    cout << "t - Type of computer order" << endl;
+    cout << "n - No particular sorting" << endl << endl;
+
+    cin >> sortComputerCommand;
+
+   sortComputer(sortComputerCommand, computers);
+
+
+}
 /*function fortyTwo, @return void
  *prints out the answer to life the universe and evertything
  */
