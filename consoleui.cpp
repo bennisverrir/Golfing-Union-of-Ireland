@@ -107,7 +107,7 @@ ConsoleUI::ConsoleUI(){}
 */
 void ConsoleUI::run()
 {
-    string command, command2;
+    string command, command2, command3;
 
     do{
 
