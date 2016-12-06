@@ -5,8 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include "legend.h"
-#include "legendService.h"
-#include "computerService.h"
+#include "service.h"
 
 class ConsoleUI
 {
@@ -14,13 +13,12 @@ public:
     ConsoleUI();
     void run ();
 private:
-    LegendService _service;
+    Service _service;
     //ComputerService  _cService;
 
     void displayCommands();
     void commandList();
-    void checkForFileError();
-    void sort(int command, vector<Legend>& legends);
+    //void checkForFileError();
     void commandAdd();
     string getName(string name);
     bool checkName(string name, bool flag);
@@ -32,7 +30,7 @@ private:
     bool checkIfDead();
     void commandDelete();
     void commandFind();
-    void subCommandFind(char command, vector <Legend> &toPrint);
+    void subCommandFind(int command, vector <Legend> &toPrint);
     void commandClear();
     void fortyTwo();
     void commandListComputers();

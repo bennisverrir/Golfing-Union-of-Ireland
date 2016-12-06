@@ -13,15 +13,13 @@ TEMPLATE = app
 SOURCES += main.cpp \
     consoleui.cpp \
     legend.cpp \
-    legendService.cpp \
     dataaccess.cpp \
     computer.cpp \
-    computerService.cpp
+    service.cpp
 
 HEADERS += \
     consoleui.h \
     legend.h \
-    legendService.h \
     dataaccess.h \
     computer.h \
-    computerService.h
+    service.h

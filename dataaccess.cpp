@@ -162,6 +162,7 @@ void dataAccess::deleteLine(vector<Legend> &deleteLegend, bool &fileOpen){}
 vector<Legend> dataAccess::sortLegend(int sort)
 {
     QString sortString;
+    QString order = "ORDER BY ";
 
     switch(sort)
     {
@@ -177,6 +178,9 @@ vector<Legend> dataAccess::sortLegend(int sort)
         case 3:
             sortString = "Death";
         break;
+        case 4:
+            order = "";
+        break;
     }
 
     vector<Legend> returnLegends;
@@ -184,8 +188,7 @@ vector<Legend> dataAccess::sortLegend(int sort)
     db.open();
 
     QSqlQuery query(db);
-
-    query.exec("Select * FROM Scientists ORDER BY " + sortString + " ASC");
+    query.exec("Select * FROM Scientists " + order + sortString + " ASC");
 
     returnLegends = pushingLegendVector(query);
 

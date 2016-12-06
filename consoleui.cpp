@@ -125,14 +125,15 @@ void ConsoleUI::run()
                 cout << "[2] - to list all the computers" << endl;
 
                 cin >> command2;
+                _service.setTableName(command2);
 
                 if(command2 == 1)
-                {
+                { 
                     commandList();
                 }
                 else if(command2 == 2)
                 {
-                    commandListComputers();
+                    //commandListComputers();
                 }
                 else
                 {
@@ -150,6 +151,7 @@ void ConsoleUI::run()
              cout << "[2] - to add a command" << endl;
 
              cin >> command3;
+             _service.setTableName(command3);
             if(command3 == 1)
             {
                 commandAdd();
@@ -174,10 +176,11 @@ void ConsoleUI::run()
         int command4;
           do{
              cout << "Enter one of the following commands:" << endl;
-             cout << "s - to find a scientist" << endl;
-             cout << "c - to find a computer" << endl;
+             cout << "1 - to find a scientist" << endl;
+             cout << "2 - to find a computer" << endl;
 
              cin >> command4;
+             _service.setTableName(command4);
                 if(command4 == 1)
                 {
                     commandFind();
@@ -202,7 +205,7 @@ void ConsoleUI::run()
     }
     else if(command == 999)
     {
-        _service.addComputer("Gervinho", 1000, 3, 1);
+       // _service.requestComputerAdd("Gervinho", 1000, 3, 1);
     }
     else
     {
@@ -235,10 +238,6 @@ void ConsoleUI::displayCommands()
 */
 void ConsoleUI::commandList()
 {
-    vector <Legend> legends = _service.getLegends();
-
-    checkForFileError();
-
     int sortCommand;
 
     cout << "How do you want to sort"<< endl;
@@ -249,56 +248,11 @@ void ConsoleUI::commandList()
     cout << "[5] - No particular sorting" << endl << endl;
 
     cin >> sortCommand;
+    _service.setCaseField(sortCommand);
 
-    sort(sortCommand, legends);
+    //sort(sortCommand);
+    cout << _service.requestLegendSort();
 
-
-}
-
-/*function checkForFileError, @return void
- *Calls getFileOpen from legendService and closes the application if the file failed to open
- */
-void ConsoleUI::checkForFileError()
-{
-    if(!_service.getFileOpen())
-    {
-        cout << "Could not open file" << endl;
-        exit(1);
-    }
-}
-
-/*function sort, @param output from commmandListand vector Legend instance, @return void.
-* sorts list of legends in a order according to what the user inputs in the commandList function.
-*/
-void ConsoleUI::sort(int command, vector<Legend>& legends)
-{
-    cout << "COMMAND " << command;
-
-   if(command == 1) //Alphabetical order
-   {
-       cout << _service.getSort(0);
-       checkForFileError();
-
-   }
-   if(command == 5) //no order
-   {
-       cout << legends;
-   }
-    if(command == 2) //gender order
-   {
-   cout << _service.getSort(1);
-   checkForFileError();
-   }
-   if(command == 3) //Date of birth order
-   {
-       cout << _service.getSort(2); 
-       checkForFileError();
-   }
-     if(command == 4) //Still Alive order
-   {
-       cout << _service.getSort(3);
-       checkForFileError();
-   }
 
 }
 
@@ -317,16 +271,9 @@ void ConsoleUI::commandAdd()
     getGender(gender); //checking for a valid gender
     getBorn(born);
     getDeath(death, born);
-    _service.addLegend(name, gender, born, death, valid);
+    _service.requestLegendAdd(name, gender, born, death);
 
-    if(!valid)
-    {
-        cout << endl << "This person is already in the list" << endl;
-    }
-    else
-    {
-        cout << endl << "Legend Added!" << endl;
-    }
+    cout << endl << "Legend Added!" << endl;
 }
 
 /*Function getName @parm list: name, flag. @return name.
@@ -531,7 +478,7 @@ bool ConsoleUI::checkIfDead()
     deleteName = rightName(deleteName);
 
     vector<Legend> deleteLegend = _service.findLegend(deleteName);
-    checkForFileError();
+
 
 
     if(deleteLegend.size() > 0)
@@ -542,7 +489,7 @@ bool ConsoleUI::checkIfDead()
         int number;
         validateInput(number);
         int max = _service.findLegend(deleteName).size();
-        checkForFileError();
+
 
         if(number<1|| number>max)
         {
@@ -551,7 +498,7 @@ bool ConsoleUI::checkIfDead()
         else
         {
         _service.deleteLegend(number, deleteLegend); // deletes the legend
-        checkForFileError();
+
 
         cout << endl << "The line has been deleted" << endl;
         }
@@ -573,10 +520,10 @@ void ConsoleUI::commandFind()
     cout << "[2] - Gender" << endl;
     cout << "[3] - Born (year)" << endl;
     cout << "[4] - Died (year)" << endl;
-
-    char whatToFind;
+    int whatToFind;
     cin >> whatToFind;
-    vector <Legend> toPrint;
+    _service.setCaseField(whatToFind);
+    vector <Legend> toPrint = _service.requestLegendSearch();
 
     subCommandFind (whatToFind, toPrint);
     if(toPrint.size() > 0)
@@ -592,9 +539,9 @@ void ConsoleUI::commandFind()
 /*function subCommandFind, @param an integer value, @return void.
 * validates that the input from the user is an integer value.
 */
-void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint)
+void ConsoleUI::subCommandFind(int command, vector <Legend> &toPrint)
 {
-    if (command == 'n')
+    if (command == 1)
     {
         string name;
         cout << "Enter a name to search for: ";
@@ -603,21 +550,23 @@ void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint)
         getline(cin,name);
 
         name = rightName(name);
+        _service.setSearchField (name);
 
-        toPrint = _service.findLegend(name); // sends the input name into the search function
+        toPrint = _service.requestLegendSearch(); // sends the input name into the search function
                                              // and assigns its value to the return value.
-        checkForFileError();
+
     } 
-    else if (command == 'g')
+    else if (command == 2)
     {
         char gender;
         cout << "Enter a gender to search for(M/F): ";
         cin >> gender;
         if (toupper (gender) == 'M'|| toupper(gender) == 'F')
         {
-            toPrint = _service.findLegend(gender);           //sends in the input gender to the
+            _service.setSearchField(gender);
+            toPrint = _service.requestLegendSearch();           //sends in the input gender to the
                                                              //search function.
-            checkForFileError();
+
         }
 
         else
@@ -626,22 +575,14 @@ void ConsoleUI::subCommandFind(char command, vector <Legend> &toPrint)
             subCommandFind (command, toPrint);
         }
     } 
-    else if (command == 'b' || command == 'd')
+    else if (command == 3 || command == 4)
     {
         int year;
         cout << "Enter a year to search for: (3 or 4 digits)";
         validateInput(year);
-        if (command == 'b')
-        {
-            toPrint = _service.findLegend(year, true);
-            checkForFileError();
-        }
-        else        // sends year and if they are dead or not to the search function.
-        {
-            toPrint = _service.findLegend(year, false);
-            checkForFileError();
+        _service.setSearchField(year);
+        toPrint = _service.requestLegendSearch();
 
-        }
     }
     else
     {
@@ -686,12 +627,12 @@ void ConsoleUI::commandAddComputer()
 */
 
 
-
+/*
 void ConsoleUI::commandListComputers()
 {
    vector <Computer> computers = _service.getComputers();
 
-    checkForFileError();
+
 
     char sortComputerCommand;
 
