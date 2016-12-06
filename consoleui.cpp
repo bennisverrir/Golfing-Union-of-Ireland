@@ -119,16 +119,28 @@ void ConsoleUI::run()
         
         getline(cin, command);
 
-    if (command == "list")
-    {
-        commandList();
-    }
-    else if (command == "list computer")
-    {
-      //commandListComputers();
+        if (command == "list")
+      {
 
-        cout << _service.getComputers();
+        do{
+         cout << "Enter one of the following commands:" << endl;
+         cout << "s - to list all the scientists" << endl;
+         cout << "t - to list all the computers" << endl;
 
+         cin >> command2;
+        if(command2 == "s")
+        {
+            commandList();
+        }
+        else if(command2 == "t")
+        {
+            commandListComputers();
+        }
+        else
+        {
+            cout << "please enter a valid command" << endl;
+        }
+        }while(command2 != "s"|| command2 != "t");
     }
     else if (command == "add")
     {
@@ -175,8 +187,7 @@ void ConsoleUI::run()
 void ConsoleUI::displayCommands()
 {
     cout << "Please enter one of the following commands:"<< endl;
-    cout << "list   - This will list all the computer scientists " << endl;
-    cout << "list   - This will list all the computers " << endl;
+    cout << "list   - This will list all the computer scientists or computers" << endl;
     cout << "add    - This will add a computer scientists " << endl;
     cout << "add computer - This will add a computer " << endl;
     cout << "find   - This will find a computer scientists from the list" << endl;
