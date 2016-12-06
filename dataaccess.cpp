@@ -91,18 +91,6 @@ void dataAccess::writeComputerFile(Computer writeComputer, bool &fileOpen)
 
     QSqlQuery query(db);
 
-    query.exec("SELECT * FROM ComputerType");
-
-    while(query.next())
-    {
-        if(query.value("Name") == QString::fromStdString(writeComputer.getComputerType()))
-        {
-            cID = query.value("ID").toUInt();
-        }
-    }
-
-
-
     query.prepare("INSERT INTO Computer(Name, BuildYear, ComputerTypeID,WasBuilt) VALUES(:name, :buildYear, :computerType, :wasBuilt)");
 
     query.bindValue(":name", QString::fromStdString(writeComputer.getName()));

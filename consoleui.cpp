@@ -41,8 +41,8 @@ ostream& operator << (ostream& out,const vector<Computer>& rhs)
 {
     out << endl;
 
-   out << setw(7) << left <<  "No." << setw(30) << left << "Name" << setw(11) << "Build Year" << setw(5) <<" "<<
-            "Computer Type"<<endl;
+   out << setw(7) << left <<  "No." << setw(30) << left << "Name" << setw(11) << "Build Year" << setw(5) << " " <<
+            "Computer Type" << endl;
     for(int i = 0; i < 35; i++)
     {
         out << "--";
@@ -54,9 +54,15 @@ ostream& operator << (ostream& out,const vector<Computer>& rhs)
 
         out << setw(7) << (i+1) << setw(30) << left << rhs[i].getName();
 
-        out << setw(10) << rhs[i].getBuildYear() << " ";
-
-        out << setw(5) << rhs[i].getComputerType() << setw(10);
+        if(rhs[i].getBuildYear() != 0)
+        {
+            out << setw(10) << rhs[i].getBuildYear() << setw(6) << " ";
+        }
+        else
+        {
+            out << setw(10) << "    " << setw(6) << " ";
+        }
+        out << setw(5) << rhs[i].getComputerType() ;
 
         out << endl;
     }
@@ -570,28 +576,21 @@ void ConsoleUI::commandAddComputer()
 {
     string computerName;
     int buildYear;
-    char computerType;
+    string computerType;
     bool wasBuilt;
-  //  bool valid;
+    bool valid;
 
     computerName = getName(computerName);
-}
-    /*getBuildYear(buildYear);
-    getComputerType(computerType);
-    wasBuilt = getWasBuilt(wasBuilt);
-  //  _service.addComputer(computerName, buildYear, computerType, wasBuilt);
-}
-    if(!valid)
-    {
-        cout << endl << "This Computer is already in the list" << endl;
-    }
-    else
-    {
-        cout << endl << "Computer Added!" << endl;
-    }
+
+    getBorn(buildYear);
+    getName(computerType);
+    wasBuilt = true;
+
+    _service.requestComputerAdd(computerName, buildYear, computerType, wasBuilt);
+
 }
 
-*/
+
 
 
 
