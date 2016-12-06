@@ -212,7 +212,7 @@ void ConsoleUI::run()
     }
     cout << endl;
 
-    }while(command != "quit");
+    }while(command != 6);
 }
 
 /*function displayCommands, @return void.
@@ -240,7 +240,7 @@ void ConsoleUI::commandList()
 
     checkForFileError();
 
-    char sortCommand;
+    int sortCommand;
 
     cout << "How do you want to sort"<< endl;
     cout << "[1] - Alphabetical order" << endl;
