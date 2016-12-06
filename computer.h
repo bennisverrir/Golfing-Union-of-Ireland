@@ -9,7 +9,7 @@ class Computer
 {
 public:
     Computer();
-    Computer(string name, int buildYear, char computerType, bool wasBuilt);
+    Computer(string name, int buildYear, int computerType, bool wasBuilt);
 
     friend bool operator == (Computer &lhs, Computer &rhs);
     void setName(string);
