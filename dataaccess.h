@@ -29,6 +29,7 @@ public:
     void deleteLine(vector<Legend> &deleteLegend, bool &fileError);
     vector<Legend> sortLegend(int sort);
     vector<Computer> sortComputer(int sort);
+    vector<Legend> findLegend(int whatToFind, string sort,bool &fileOpen);
 private:
     const string fileName = "legend.txt";
 };
