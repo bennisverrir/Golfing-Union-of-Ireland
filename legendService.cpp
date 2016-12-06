@@ -143,6 +143,15 @@ void LegendService::addLegend(string name, char gender, int born, int death, boo
     }
 }
 
+void LegendService::addComputer(string name, int yearBuilt, char computerType, bool wasBuilt)
+{
+    Computer person (name, yearBuilt, computerType, wasBuilt);
+
+    a.writeComputerFile(person, fileOpen);
+
+}
+
+
 /* function findLegend, @param the name input
  * @returns a vector of matching inputs (from file)
  * accepts a input string (name) and compares to set name of the inputs from file.

@@ -23,6 +23,7 @@ public:
     vector<Legend> readFile(bool &fileError);
     vector<Computer> readComputerFile(bool &fileOpen);
     void writeFile(Legend writeLegend, bool &fileError);
+    void writeComputerFile(Computer writeComputer, bool &fileError);
     void deleteLine(vector<Legend> &deleteLegend, bool &fileError);
 private:
     const string fileName = "legend.txt";

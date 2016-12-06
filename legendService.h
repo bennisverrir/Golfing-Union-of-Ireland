@@ -20,6 +20,7 @@ public:
     vector <Legend> getSortDateOfBirth ();
     vector <Legend> getSortStillAlive ();
     void addLegend (string name, char gender, int born, int death, bool &boolValid);
+    void addComputer(string name, int yearBuilt, char computerType, bool wasBuilt);
     vector <Legend> findLegend(string nameToFind);
     vector <Legend> findLegend(char genderToFind);
     vector <Legend> findLegend(int yearToFind, bool select);

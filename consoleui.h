@@ -15,7 +15,7 @@ public:
     void run ();
 private:
     LegendService _service;
-    ComputerService  _cService;
+    //ComputerService  _cService;
 
     void displayCommands();
     void commandList();

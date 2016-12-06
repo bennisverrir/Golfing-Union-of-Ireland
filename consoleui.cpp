@@ -125,7 +125,10 @@ void ConsoleUI::run()
     }
     else if (command == "list computer")
     {
-      commandListComputers();
+      //commandListComputers();
+
+        cout << _service.getComputers();
+
     }
     else if (command == "add")
     {
@@ -151,6 +154,10 @@ void ConsoleUI::run()
     {
         commandAddComputer();
 
+    }
+    else if(command == "lol")
+    {
+        _service.addComputer("Gervinho", 1000, 3, 1);
     }
     else
     {

@@ -1,4 +1,5 @@
 #include "dataaccess.h"
+#include <QDebug>
 
 dataAccess::dataAccess()
 {
@@ -113,6 +114,25 @@ void dataAccess::writeFile(Legend writeLegend, bool &fileOpen)
     query.bindValue(":born", writeLegend.getBorn());
     query.bindValue(":death", writeLegend.getDeath());
     query.bindValue(":isDead", isDead);
+
+    query.exec();
+
+    db.close();
+}
+
+
+void dataAccess::writeComputerFile(Computer writeComputer, bool &fileOpen)
+{
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.prepare("INSERT INTO Computer(Name, BuildYear, ComputerType,WasBuilt) VALUES(:name, :buildYear, :computerType, :wasBuilt)");
+
+    query.bindValue(":name", QString::fromStdString(writeComputer.getName()));
+    query.bindValue(":buildYear", writeComputer.getBuildYear());
+    query.bindValue(":computerType", writeComputer.getComputerType());
+    query.bindValue(":wasBuilt", writeComputer.getWasBuilt());
 
     query.exec();
 
