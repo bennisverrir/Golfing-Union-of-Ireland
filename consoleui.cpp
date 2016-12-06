@@ -170,9 +170,28 @@ void ConsoleUI::run()
     {
         commandDelete();
     }
-    else if (command == "find")
+     else if (command == "find")
     {
-       commandFind();
+        string command4;
+          do{
+             cout << "Enter one of the following commands:" << endl;
+             cout << "s - to find a scientist" << endl;
+             cout << "c - to find a computer" << endl;
+
+             cin >> command4;
+                if(command4 == "s")
+                {
+                    commandFind();
+                }
+                else if(command4 == "c")
+                {
+                    //TODO: Find fyrir gombuter
+                }
+                else
+                {
+                    cout << "please enter a valid command" << endl;
+                }
+                }while(command4 != "s" && command4 != "c");
     }
     else if(command == "clear")
     {
@@ -204,10 +223,9 @@ void ConsoleUI::displayCommands()
     cout << "Please enter one of the following commands:"<< endl;
     cout << "list   - To list all the computer scientists or computers" << endl;
     cout << "add    - To add a computer scientist or a computer " << endl;
-    cout << "find   - This will find a computer scientists from the list" << endl;
+    cout << "find   - To find a computer scientist from the list or a computer" << endl;
     cout << "delete - This will delete a computer scientists from the list" << endl;
     cout << "clear  - this will clear the screen" << endl;
-    
     cout << "quit   - This will quit the program" << endl;
 
     cout << endl;
