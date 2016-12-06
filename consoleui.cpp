@@ -243,7 +243,7 @@ void ConsoleUI::sort(char command, vector<Legend>& legends)
 {
    if(command == 'a') //Alphabetical order
    {
-       cout << _service.getSort();
+       cout << _service.getSort(0);
        checkForFileError();
 
    }
@@ -253,17 +253,17 @@ void ConsoleUI::sort(char command, vector<Legend>& legends)
    }
     if(command == 'g') //gender order
    {
-   cout << _service.getSortGender();
+   cout << _service.getSort(1);
    checkForFileError();
    }
    if(command == 'b') //Date of birth order
    {
-       cout << _service.getSortDateOfBirth(); 
+       cout << _service.getSort(2); 
        checkForFileError();
    }
      if(command == 'l') //Still Alive order
    {
-       cout << _service.getSortStillAlive();
+       cout << _service.getSort(3);
        checkForFileError();
    }
 
