@@ -5,7 +5,27 @@ dataAccess::dataAccess()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
     dbName = "ComputingDatabase.sqlite";
+    db.setDatabaseName(dbName);
 }
+
+vector<Legend> dataAccess::pushingLegendVector(QSqlQuery query)
+{
+    vector<Legend> legends;
+
+    while(query.next())
+    {
+
+        string name = query.value("Name").toString().toStdString();
+        string gender = query.value("Gender").toString().toStdString();
+        int born = query.value("Birth").toUInt();
+        int death = query.value("Death").toUInt();
+
+        legends.push_back(Legend(name, gender[0], born, death));
+    }
+
+    return legends;
+}
+
 /*Function readFile,@param bool @return vector<Legend>
 * Reads one line at a time from a file and generates a instance of Legend
 * Then pushes the Legend instance into a vector and retuns a vector<Legend>.
@@ -14,8 +34,6 @@ dataAccess::dataAccess()
 vector<Legend> dataAccess::readFile(bool &fileOpen)
 {
     vector<Legend> legends;
-
-    db.setDatabaseName(dbName);
 
     db.open();
 
@@ -29,17 +47,7 @@ vector<Legend> dataAccess::readFile(bool &fileOpen)
 
     query.exec("SELECT * FROM Scientists");
 
-
-    while(query.next())
-    {
-
-        string name = query.value("Name").toString().toStdString();
-        string gender = query.value("Gender").toString().toStdString();
-        int born = query.value("Birth").toUInt();
-        int death = query.value("Death").toUInt();
-
-        legends.push_back(Legend(name, gender[0], born, death));
-    }
+    legends = pushingLegendVector(query);
 
     db.close();
 
@@ -50,8 +58,6 @@ vector<Legend> dataAccess::readFile(bool &fileOpen)
 vector<Computer> dataAccess::readComputerFile(bool &fileOpen)
 {
     vector<Computer> legends;
-
-    db.setDatabaseName(dbName);
 
     db.open();
 
@@ -144,7 +150,40 @@ void dataAccess::writeComputerFile(Computer writeComputer, bool &fileOpen)
 * writes over the file the information of all the Legend in the vector into the file.
 * sets fileOpen to true if file is open and false if it could not be open
 */
-void dataAccess::deleteLine(vector<Legend> &deleteLegend, bool &fileOpen)
-{
+void dataAccess::deleteLine(vector<Legend> &deleteLegend, bool &fileOpen){}
 
+vector<Legend> dataAccess::sortLegend(int sort)
+{
+    QString sortString;
+
+    switch(sort)
+    {
+        case 0:
+            sortString = "Name";
+        break;
+        case 1:
+            sortString = "Gender";
+        break;
+        case 2:
+            sortString = "Birth";
+        break;
+        case 3:
+            sortString = "Death";
+        break;
+    }
+
+    vector<Legend> returnLegends;
+
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.exec("Select * FROM Scientists ORDER BY " + sortString + " ASC");
+
+    returnLegends = pushingLegendVector(query);
+
+    db.close();
+
+    return returnLegends;
 }
+
