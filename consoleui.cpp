@@ -140,7 +140,7 @@ void ConsoleUI::run()
         {
             cout << "please enter a valid command" << endl;
         }
-        }while(command2 != "s"|| command2 != "t");
+        }while(command2 != "s"&& command2 != "t");
     }
     else if (command == "add")
     {
