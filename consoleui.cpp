@@ -113,38 +113,37 @@ void ConsoleUI::run()
 
         displayCommands();
 
-        
-        cin.clear();
-        cin.sync();
-        
-        getline(cin, command);
+        cin >> command;
 
         if (command == 1)
-      {
+        {
 
-        do{
-         cout << "Enter one of the following commands:" << endl;
-         cout << "[1] - to list all the scientists" << endl;
-         cout << "[2] - to list all the computers" << endl;
+            do
+            {
+                cout << "Enter one of the following commands:" << endl;
+                cout << "[1] - to list all the scientists" << endl;
+                cout << "[2] - to list all the computers" << endl;
 
-         cin >> command2;
-        if(command2 == "1")
-        {
-            commandList();
-        }
-        else if(command2 == "2")
-        {
-            commandListComputers();
-        }
-        else
-        {
-            cout << "please enter a valid command" << endl;
-        }
-        }while(command2 != 1 && command2 != 2);
-    }
+                cin >> command2;
+
+                if(command2 == 1)
+                {
+                    commandList();
+                }
+                else if(command2 == 2)
+                {
+                    commandListComputers();
+                }
+                else
+                {
+                    cout << "please enter a valid command" << endl;
+                }
+                
+              }while(command2 != 1 && command2 != 2);
+         }   
     else if (command == 2)
     {
-        string command3;
+        int command3;
             do{
              cout << "Enter one of the following commands:" << endl;
              cout << "[1] - to add a scientist" << endl;
@@ -168,7 +167,7 @@ void ConsoleUI::run()
 
     else if (command == 4)
     {
-        commandDelete();
+        //commandDelete();
     }
      else if (command == 3)
     {
@@ -197,11 +196,11 @@ void ConsoleUI::run()
     {
         commandClear();
     }
-    else if(command == "the answer to life")
+    else if(command == 42)
     {
         fortyTwo();
     }
-    else if(command == "lol")
+    else if(command == 999)
     {
         _service.addComputer("Gervinho", 1000, 3, 1);
     }
@@ -273,6 +272,8 @@ void ConsoleUI::checkForFileError()
 */
 void ConsoleUI::sort(int command, vector<Legend>& legends)
 {
+    cout << "COMMAND " << command;
+
    if(command == 1) //Alphabetical order
    {
        cout << _service.getSort(0);
@@ -518,7 +519,8 @@ bool ConsoleUI::checkIfDead()
 * Calls find function to match search string, deletes person from that list based on index input
 *
 */
-void ConsoleUI::commandDelete()
+
+/*void ConsoleUI::commandDelete()
 {
     string deleteName;
 
@@ -558,7 +560,7 @@ void ConsoleUI::commandDelete()
     {
         cout << endl <<"No results from that query!" << endl;
     }
-}
+}*/
 
 /*function commandFind, @return void
  *asks the user what he wants to search and then calls subCommandFind and passes in a vector.
