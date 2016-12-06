@@ -144,8 +144,27 @@ void ConsoleUI::run()
     }
     else if (command == "add")
     {
-      commandAdd();
+            do{
+             cout << "Enter one of the following commands:" << endl;
+             cout << "s - to add a scientist" << endl;
+             cout << "c - to add a command" << endl;
+
+             cin >> command3;
+            if(command3 == "s")
+            {
+                commandAdd();
+            }
+            else if(command3 == "c")
+            {
+                commandAddComputer();
+            }
+            else
+            {
+                cout << "please enter a valid command" << endl;
+            }
+            }while(command3 != "s" && command3 != "c");
     }
+
     else if (command == "delete")
     {
         commandDelete();
@@ -161,11 +180,6 @@ void ConsoleUI::run()
     else if(command == "the answer to life")
     {
         fortyTwo();
-    }
-    else if(command == "add computer")
-    {
-        commandAddComputer();
-
     }
     else if(command == "lol")
     {
@@ -187,9 +201,8 @@ void ConsoleUI::run()
 void ConsoleUI::displayCommands()
 {
     cout << "Please enter one of the following commands:"<< endl;
-    cout << "list   - This will list all the computer scientists or computers" << endl;
-    cout << "add    - This will add a computer scientists " << endl;
-    cout << "add computer - This will add a computer " << endl;
+    cout << "list   - To list all the computer scientists or computers" << endl;
+    cout << "add    - To add a computer scientist or a computer " << endl;
     cout << "find   - This will find a computer scientists from the list" << endl;
     cout << "delete - This will delete a computer scientists from the list" << endl;
     cout << "clear  - this will clear the screen" << endl;
