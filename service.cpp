@@ -40,6 +40,8 @@ vector <Legend> Service::requestLegendSearch(){
     vector <Legend> returnVector;
     bool myTempBool = true;
     returnVector = a.findLegend (_caseField, _searchString, myTempBool);
+
+    return returnVector;
 }
 
 vector <Computer> Service::requestComputerSearch(){

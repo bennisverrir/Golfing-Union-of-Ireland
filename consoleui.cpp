@@ -287,6 +287,7 @@ string ConsoleUI::getName(string name)
     {
         cout << "Enter the name: ";
 
+        cin.ignore();
         getline(cin,name);
 
         flag = checkName(name, flag);
@@ -523,7 +524,7 @@ void ConsoleUI::commandFind()
     int whatToFind;
     cin >> whatToFind;
     _service.setCaseField(whatToFind);
-    vector <Legend> toPrint = _service.requestLegendSearch();
+    vector <Legend> toPrint;
 
     subCommandFind (whatToFind, toPrint);
     if(toPrint.size() > 0)
