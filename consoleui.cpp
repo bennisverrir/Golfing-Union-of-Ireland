@@ -107,7 +107,7 @@ ConsoleUI::ConsoleUI(){}
 */
 void ConsoleUI::run()
 {
-    string command, command2, command3;
+    string command, command2;
 
     do{
 
@@ -144,6 +144,7 @@ void ConsoleUI::run()
     }
     else if (command == "add")
     {
+        string command3;
             do{
              cout << "Enter one of the following commands:" << endl;
              cout << "s - to add a scientist" << endl;
