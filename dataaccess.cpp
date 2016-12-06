@@ -26,6 +26,24 @@ vector<Legend> dataAccess::pushingLegendVector(QSqlQuery query)
     return legends;
 }
 
+vector<Computer> dataAccess::pushingComputerVector(QSqlQuery query)
+{
+    vector<Computer> computers;
+
+    while(query.next())
+    {
+
+        string name = query.value("Name").toString().toStdString();
+        int buildYear = query.value("BuildYear").toUInt();
+        string computerType = query.value("ComputerType").toString().toStdString();
+        bool wasBuilt = query.value("wasBuilt").toBool();
+
+        computers.push_back(Computer(name, buildYear, computerType[0], wasBuilt));
+    }
+
+    return computers;
+}
+
 /*Function readFile,@param bool @return vector<Legend>
 * Reads one line at a time from a file and generates a instance of Legend
 * Then pushes the Legend instance into a vector and retuns a vector<Legend>.
@@ -57,7 +75,7 @@ vector<Legend> dataAccess::readFile(bool &fileOpen)
 
 vector<Computer> dataAccess::readComputerFile(bool &fileOpen)
 {
-    vector<Computer> legends;
+    vector<Computer> computers;
 
     db.open();
 
@@ -68,24 +86,13 @@ vector<Computer> dataAccess::readComputerFile(bool &fileOpen)
 
     QSqlQuery query(db);
 
-
     query.exec("SELECT * FROM Computer");
 
-
-    while(query.next())
-    {
-
-        string name = query.value("Name").toString().toStdString();
-        int buildYear = query.value("BuildYear").toUInt();
-        string computerType = query.value("ComputerType").toString().toStdString();
-        bool wasBuilt = query.value("wasBuilt").toBool();
-
-        legends.push_back(Computer(name, buildYear, computerType[0], wasBuilt));
-    }
+    computers = pushingComputerVector(query);
 
     db.close();
 
-    return legends;
+    return computers;
 
 }
 
@@ -181,6 +188,42 @@ vector<Legend> dataAccess::sortLegend(int sort)
     query.exec("Select * FROM Scientists ORDER BY " + sortString + " ASC");
 
     returnLegends = pushingLegendVector(query);
+
+    db.close();
+
+    return returnLegends;
+}
+
+
+vector<Computer> dataAccess::sortComputer(int sort)
+{
+    QString sortString;
+
+    switch(sort)
+    {
+        case 0:
+            sortString = "Name";
+        break;
+        case 1:
+            sortString = "BuildYear";
+        break;
+        case 2:
+            sortString = "ComputerType";
+        break;
+        case 3:
+            sortString = "WasBuilt";
+        break;
+    }
+
+    vector<Computer> returnLegends;
+
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.exec("Select * FROM Computer ORDER BY " + sortString + " ASC");
+
+    returnLegends = pushingComputerVector(query);
 
     db.close();
 

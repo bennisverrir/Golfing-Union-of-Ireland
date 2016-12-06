@@ -21,12 +21,14 @@ class dataAccess
 public:
     dataAccess();
     vector<Legend> pushingLegendVector(QSqlQuery query);
+    vector<Computer> pushingComputerVector(QSqlQuery query);
     vector<Legend> readFile(bool &fileError);
     vector<Computer> readComputerFile(bool &fileOpen);
     void writeFile(Legend writeLegend, bool &fileError);
     void writeComputerFile(Computer writeComputer, bool &fileError);
     void deleteLine(vector<Legend> &deleteLegend, bool &fileError);
     vector<Legend> sortLegend(int sort);
+    vector<Computer> sortComputer(int sort);
 private:
     const string fileName = "legend.txt";
 };

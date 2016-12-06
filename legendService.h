@@ -15,7 +15,7 @@ public:
     vector <Legend> getLegends ();
     vector <Computer> getComputers();
     bool checkForValid(Legend legend);
-    vector <Legend> getSort ();
+    vector <Legend> getSort (int sort);
     vector <Legend> getSortGender (); 
     vector <Legend> getSortDateOfBirth ();
     vector <Legend> getSortStillAlive ();

@@ -78,11 +78,9 @@ bool LegendService::checkForValid(Legend legend)
  * utilizes legendComparison struct to compare names (1 at a time)
  * of entries in unsorted vector to sorted vector. (selection sort)
  */
-vector <Legend> LegendService::getSort()
+vector <Legend> LegendService::getSort(int sort)
 {
-    vector <Legend> legends2 = getLegends();
-    legendComparison cmp;
-    sort(legends2.begin(), legends2.end(), cmp);
+    vector <Legend> legends2 = a.sortLegend(sort);
     return legends2;
 }
 /* function getSortGender
@@ -90,37 +88,37 @@ vector <Legend> LegendService::getSort()
  * utilizes legendComparisonGender struct to compare genders (1 at a time)
  * of entries of unsorted vector to sorted vector (selection sort).
  */
-vector <Legend> LegendService::getSortGender()
+/*vector <Legend> LegendService::getSortGender()
 {
     vector <Legend> legends3 = getLegends();
     legendComparisonGender cmp;
     sort(legends3.begin(), legends3.end(), cmp);
     return legends3;
-}
+}*/
 /* function getSortDateOfBirth
  * @return sorted vector of legends
  * utilizes legendComparisonBirth struct to compare birth year (1 at a time)
  * of entries in unsorted vector to sorted vector (selection sort).
  */
-vector <Legend> LegendService::getSortDateOfBirth()
+/*vector <Legend> LegendService::getSortDateOfBirth()
 {
     vector <Legend> legends4 = getLegends();
     legendComparisonBirth cmp;
     sort(legends4.begin(), legends4.end(), cmp);
     return legends4;
-}
+}*/
 /* function getSortStillAlive
  * @return sorted vector of legends
  * utilizes the legendComparisonStillAlive struct to compare values of year died (1 at a time)
  * of entries in unsorted vector to sorted vector (selection sort).
  */
-vector <Legend> LegendService::getSortStillAlive()
+/*vector <Legend> LegendService::getSortStillAlive()
 {
     vector <Legend> legends5 = getLegends();
     legendComparisonStillAlive cmp;
     sort(legends5.begin(), legends5.end(), cmp);
     return legends5;
-}
+}*/
 /* function addLegend @param user input name, gender, year born and died (if applicable)
  * and a bool that determines if the legend is already listed.
  * @return void
