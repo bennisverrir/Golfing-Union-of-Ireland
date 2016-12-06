@@ -20,7 +20,7 @@ private:
     void displayCommands();
     void commandList();
     void checkForFileError();
-    void sort(char command, vector<Legend>& legends);
+    void sort(int command, vector<Legend>& legends);
     void commandAdd();
     string getName(string name);
     bool checkName(string name, bool flag);
