@@ -16,7 +16,7 @@ Computer::Computer()
 {
 
 }
-Computer::Computer(string name, int buildYear, int computerType, bool wasBuilt)
+Computer::Computer(string name, int buildYear, string computerType, bool wasBuilt)
 {
     setName(name);
     setBuildYear(buildYear);
@@ -34,7 +34,7 @@ void Computer::setBuildYear(int buildYear)
     _buildYear = buildYear;
 }
 
-void Computer::setComputerType(char computerType)
+void Computer::setComputerType(string computerType)
 {
     _computerType = computerType;
 }
@@ -54,7 +54,7 @@ int Computer::getBuildYear() const
 {
     return _buildYear;
 }
-char Computer::getComputerType() const
+string Computer::getComputerType() const
 {
     return _computerType;
 }

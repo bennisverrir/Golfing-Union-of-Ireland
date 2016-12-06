@@ -53,45 +53,11 @@ ostream& operator << (ostream& out,const vector<Computer>& rhs)
     {
 
         out << setw(7) << (i+1) << setw(30) << left << rhs[i].getName();
-        if(rhs[i].getWasBuilt())
-        {
-            out << setw(10) << rhs[i].getBuildYear() << " ";
-            if(rhs[i].getComputerType() == '1')                                      // output information about legend.
-            {
-                out << setw(5)<<" " << "Mechanical";
-            }
-            else if(rhs[i].getComputerType() == '2')
-            {
-                out << setw(5)<<" " << "Electrical";
-            }
-            else if(rhs[i].getComputerType() == '3')
-            {
-                out << setw(5)<<" " << "Transistor";
-            }
-             else if(rhs[i].getComputerType() == '4')
-            {
-                out << setw(5)<<" " << "Electromechnical";
-            }
-        }
-        else
-        {
-            if(rhs[i].getComputerType() == '1')                                      // output information about legend.
-            {
-                out << setw(16)<<" " << "Mechanical";
-            }
-            else if(rhs[i].getComputerType() == '2')
-            {
-                out << setw(16)<<" " << "Electrical";
-            }
-            else if(rhs[i].getComputerType() == '3')
-            {
-                out << setw(16)<<" " << "Transistor";
-            }
-            else if(rhs[i].getComputerType() == '4')
-            {
-                out << setw(16)<<" " << "Electromechnical";
-            }
-        }
+
+        out << setw(10) << rhs[i].getBuildYear() << " ";
+
+        out << setw(5) << rhs[i].getComputerType() << setw(10);
+
         out << endl;
     }
 
@@ -133,7 +99,7 @@ void ConsoleUI::run()
                 }
                 else if(command2 == 2)
                 {
-                    //commandListComputers();
+                    commandListComputers();
                 }
                 else
                 {
@@ -628,14 +594,10 @@ void ConsoleUI::commandAddComputer()
 */
 
 
-/*
+
 void ConsoleUI::commandListComputers()
 {
-   vector <Computer> computers = _service.getComputers();
-
-
-
-    char sortComputerCommand;
+    int command;
 
     cout << "How do you want to sort"<< endl;
     cout << "[1] - Alphabetical order" << endl;
@@ -644,9 +606,11 @@ void ConsoleUI::commandListComputers()
     cout << "[4] - Type of computer order" << endl;
     cout << "[5] - No particular sorting" << endl << endl;
 
-    cin >> sortComputerCommand;
+    cin >> command;
 
-   //sortComputer(sortComputerCommand, computers);
+    _service.setCaseField(command);
+
+    cout << _service.requestComputerSort();
 
 
 }
