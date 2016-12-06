@@ -21,8 +21,10 @@ public:
         vector <Legend> requestLegendSearch();
         vector <Computer> requestComputerSearch();
         void requestLegendAdd(string name, char gender, int born, int death);
-        void requestComputerAdd(string name, int yearBuilt, int computerType, bool wasBuilt);
+        void requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt);
         vector <Legend> requestLegendSort();
+        vector <Computer> requestComputerSort();
+
 
 private:
         dataAccess a;

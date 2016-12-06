@@ -32,69 +32,18 @@ vector<Computer> dataAccess::pushingComputerVector(QSqlQuery query)
 
     while(query.next())
     {
-
         string name = query.value("Name").toString().toStdString();
         int buildYear = query.value("BuildYear").toUInt();
-        string computerType = query.value("ComputerType").toString().toStdString();
-        bool wasBuilt = query.value("wasBuilt").toBool();
+        string computerType = query.value("TypeName").toString().toStdString();
+        bool wasBuilt = query.value("WasBuilt").toBool();
 
-        computers.push_back(Computer(name, buildYear, computerType[0], wasBuilt));
+        computers.push_back(Computer(name, buildYear, computerType, wasBuilt));
     }
 
     return computers;
 }
 
-/*Function readFile,@param bool @return vector<Legend>
-* Reads one line at a time from a file and generates a instance of Legend
-* Then pushes the Legend instance into a vector and retuns a vector<Legend>.
-* sets fileOpen to true if file is open and false if it could not be open
-*/
-vector<Legend> dataAccess::readFile(bool &fileOpen)
-{
-    vector<Legend> legends;
 
-    db.open();
-
-    if(db.open())
-    {
-        fileOpen = true;
-    }
-
-    QSqlQuery query(db);
-
-
-    query.exec("SELECT * FROM Scientists");
-
-    legends = pushingLegendVector(query);
-
-    db.close();
-
-    return legends;
-
-}
-
-vector<Computer> dataAccess::readComputerFile(bool &fileOpen)
-{
-    vector<Computer> computers;
-
-    db.open();
-
-    if(db.open())
-    {
-        fileOpen = true;
-    }
-
-    QSqlQuery query(db);
-
-    query.exec("SELECT * FROM Computer");
-
-    computers = pushingComputerVector(query);
-
-    db.close();
-
-    return computers;
-
-}
 
 /*Function writeFile, @param Legend and bool
 * Takes a Legend and writes all information about it in a new line in a file
@@ -136,15 +85,29 @@ void dataAccess::writeFile(Legend writeLegend, bool &fileOpen)
 
 void dataAccess::writeComputerFile(Computer writeComputer, bool &fileOpen)
 {
+    int cID;
+
     db.open();
 
     QSqlQuery query(db);
 
-    query.prepare("INSERT INTO Computer(Name, BuildYear, ComputerType,WasBuilt) VALUES(:name, :buildYear, :computerType, :wasBuilt)");
+    query.exec("SELECT * FROM ComputerType");
+
+    while(query.next())
+    {
+        if(query.value("Name") == QString::fromStdString(writeComputer.getComputerType()))
+        {
+            cID = query.value("ID").toUInt();
+        }
+    }
+
+
+
+    query.prepare("INSERT INTO Computer(Name, BuildYear, ComputerTypeID,WasBuilt) VALUES(:name, :buildYear, :computerType, :wasBuilt)");
 
     query.bindValue(":name", QString::fromStdString(writeComputer.getName()));
     query.bindValue(":buildYear", writeComputer.getBuildYear());
-    query.bindValue(":computerType", writeComputer.getComputerType());
+    query.bindValue(":computerTypeID", cID);
     query.bindValue(":wasBuilt", writeComputer.getWasBuilt());
 
     query.exec();
@@ -200,20 +163,24 @@ vector<Legend> dataAccess::sortLegend(int sort)
 vector<Computer> dataAccess::sortComputer(int sort)
 {
     QString sortString;
+    QString order = "ORDER BY ";
 
     switch(sort)
     {
         case 0:
-            sortString = "Name";
+            sortString = "c.Name";
         break;
         case 1:
             sortString = "BuildYear";
         break;
         case 2:
-            sortString = "ComputerType";
+            sortString = "ct.Name";
         break;
         case 3:
-            sortString = "WasBuilt";
+            sortString = "c.WasBuilt";
+        break;
+        case 4:
+            order = "";
         break;
     }
 
@@ -223,7 +190,13 @@ vector<Computer> dataAccess::sortComputer(int sort)
 
     QSqlQuery query(db);
 
-    query.exec("Select * FROM Computer ORDER BY " + sortString + " ASC");
+    QString sqlCommand = "Select c.Name, c.BuildYear, ct.Name AS TypeName, c.WasBuilt FROM Computer c "
+                         "INNER JOIN ComputerType ct "
+                         "ON c.ComputerTypeID = ct.ID "+ order + sortString + " ASC";
+
+    query.exec(sqlCommand);
+
+    qDebug() << "COMMAND: " << sqlCommand;
 
     returnLegends = pushingComputerVector(query);
 
