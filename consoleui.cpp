@@ -107,7 +107,7 @@ ConsoleUI::ConsoleUI(){}
 */
 void ConsoleUI::run()
 {
-    string command, command2;
+    int command, command2;
 
     do{
 
@@ -119,20 +119,20 @@ void ConsoleUI::run()
         
         getline(cin, command);
 
-        if (command == "list")
+        if (command == 1)
       {
 
         do{
          cout << "Enter one of the following commands:" << endl;
-         cout << "s - to list all the scientists" << endl;
-         cout << "t - to list all the computers" << endl;
+         cout << "[1] - to list all the scientists" << endl;
+         cout << "[2] - to list all the computers" << endl;
 
          cin >> command2;
-        if(command2 == "s")
+        if(command2 == "1")
         {
             commandList();
         }
-        else if(command2 == "t")
+        else if(command2 == "2")
         {
             commandListComputers();
         }
@@ -140,22 +140,22 @@ void ConsoleUI::run()
         {
             cout << "please enter a valid command" << endl;
         }
-        }while(command2 != "s"&& command2 != "t");
+        }while(command2 != 1 && command2 != 2);
     }
-    else if (command == "add")
+    else if (command == 2)
     {
         string command3;
             do{
              cout << "Enter one of the following commands:" << endl;
-             cout << "s - to add a scientist" << endl;
-             cout << "c - to add a command" << endl;
+             cout << "[1] - to add a scientist" << endl;
+             cout << "[2] - to add a command" << endl;
 
              cin >> command3;
-            if(command3 == "s")
+            if(command3 == 1)
             {
                 commandAdd();
             }
-            else if(command3 == "c")
+            else if(command3 == 2)
             {
                 commandAddComputer();
             }
@@ -163,27 +163,27 @@ void ConsoleUI::run()
             {
                 cout << "please enter a valid command" << endl;
             }
-            }while(command3 != "s" && command3 != "c");
+            }while(command3 != 1 && command3 != 2);
     }
 
-    else if (command == "delete")
+    else if (command == 4)
     {
         commandDelete();
     }
-     else if (command == "find")
+     else if (command == 3)
     {
-        string command4;
+        int command4;
           do{
              cout << "Enter one of the following commands:" << endl;
              cout << "s - to find a scientist" << endl;
              cout << "c - to find a computer" << endl;
 
              cin >> command4;
-                if(command4 == "s")
+                if(command4 == 1)
                 {
                     commandFind();
                 }
-                else if(command4 == "c")
+                else if(command4 == 2)
                 {
                     //TODO: Find fyrir gombuter
                 }
@@ -191,9 +191,9 @@ void ConsoleUI::run()
                 {
                     cout << "please enter a valid command" << endl;
                 }
-                }while(command4 != "s" && command4 != "c");
+                }while(command4 != 1 && command4 != 2);
     }
-    else if(command == "clear")
+    else if(command == 5)
     {
         commandClear();
     }
@@ -207,7 +207,7 @@ void ConsoleUI::run()
     }
     else
     {
-        if(command != "quit")
+        if(command != 6)
         {cout << "Invalid Command!" << endl;}
     }
     cout << endl;
@@ -220,13 +220,13 @@ void ConsoleUI::run()
 */
 void ConsoleUI::displayCommands()
 {
-    cout << "Please enter one of the following commands:"<< endl;
-    cout << "list   - To list all the computer scientists or computers" << endl;
-    cout << "add    - To add a computer scientist or a computer " << endl;
-    cout << "find   - To find a computer scientist from the list or a computer" << endl;
-    cout << "delete - This will delete a computer scientists from the list" << endl;
-    cout << "clear  - this will clear the screen" << endl;
-    cout << "quit   - This will quit the program" << endl;
+    cout << "Please enter one of the following numbers:"<< endl;
+    cout << "[1]   - To list all the computer scientists or computers" << endl;
+    cout << "[2]    - To add a computer scientist or a computer " << endl;
+    cout << "[3]   - To find a computer scientist from the list or a computer" << endl;
+    cout << "[4] - This will delete a computer scientists from the list" << endl;
+    cout << "[5]  - this will clear the screen" << endl;
+    cout << "[6]   - This will quit the program" << endl;
 
     cout << endl;
 }
@@ -243,11 +243,11 @@ void ConsoleUI::commandList()
     char sortCommand;
 
     cout << "How do you want to sort"<< endl;
-    cout << "a - Alphabetical order" << endl;
-    cout << "g - Gender order" << endl;
-    cout << "b - Year of birth order" << endl;
-    cout << "l - Still alive order(those who are still alive appear first)" << endl;
-    cout << "n - No particular sorting" << endl << endl;
+    cout << "[1] - Alphabetical order" << endl;
+    cout << "[2] - Gender order" << endl;
+    cout << "[3] - Year of birth order" << endl;
+    cout << "[4] - Still alive order(those who are still alive appear first)" << endl;
+    cout << "[5] - No particular sorting" << endl << endl;
 
     cin >> sortCommand;
 
@@ -271,29 +271,29 @@ void ConsoleUI::checkForFileError()
 /*function sort, @param output from commmandListand vector Legend instance, @return void.
 * sorts list of legends in a order according to what the user inputs in the commandList function.
 */
-void ConsoleUI::sort(char command, vector<Legend>& legends)
+void ConsoleUI::sort(int command, vector<Legend>& legends)
 {
-   if(command == 'a') //Alphabetical order
+   if(command == 1) //Alphabetical order
    {
        cout << _service.getSort(0);
        checkForFileError();
 
    }
-   if(command == 'n') //no order
+   if(command == 5) //no order
    {
        cout << legends;
    }
-    if(command == 'g') //gender order
+    if(command == 2) //gender order
    {
    cout << _service.getSort(1);
    checkForFileError();
    }
-   if(command == 'b') //Date of birth order
+   if(command == 3) //Date of birth order
    {
        cout << _service.getSort(2); 
        checkForFileError();
    }
-     if(command == 'l') //Still Alive order
+     if(command == 4) //Still Alive order
    {
        cout << _service.getSort(3);
        checkForFileError();
@@ -567,10 +567,10 @@ void ConsoleUI::commandDelete()
 void ConsoleUI::commandFind()
 {
     cout << "Which parameter would you like to search for?" << endl;
-    cout << "n - Name" << endl;
-    cout << "g - Gender" << endl;
-    cout << "b - Born (year)" << endl;
-    cout << "d - Died (year)" << endl;
+    cout << "[1] - Name" << endl;
+    cout << "[2] - Gender" << endl;
+    cout << "[3] - Born (year)" << endl;
+    cout << "[4] - Died (year)" << endl;
 
     char whatToFind;
     cin >> whatToFind;
@@ -694,11 +694,11 @@ void ConsoleUI::commandListComputers()
     char sortComputerCommand;
 
     cout << "How do you want to sort"<< endl;
-    cout << "a - Alphabetical order" << endl;
-    cout << "b - Built year order" << endl;
-    cout << "w - Was built" << endl;
-    cout << "t - Type of computer order" << endl;
-    cout << "n - No particular sorting" << endl << endl;
+    cout << "[1] - Alphabetical order" << endl;
+    cout << "[2] - Built year order" << endl;
+    cout << "[3] - Was built" << endl;
+    cout << "[4] - Type of computer order" << endl;
+    cout << "[5] - No particular sorting" << endl << endl;
 
     cin >> sortComputerCommand;
 
