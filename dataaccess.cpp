@@ -194,7 +194,6 @@ vector<Legend> dataAccess::sortLegend(int sort)
     return returnLegends;
 }
 
-
 vector<Computer> dataAccess::sortComputer(int sort)
 {
     QString sortString;
@@ -229,4 +228,63 @@ vector<Computer> dataAccess::sortComputer(int sort)
 
     return returnLegends;
 }
+
+vector<Legend> dataAccess::findLegend(int whatToFind, string find, bool &fileOpen)
+{
+    QString findString = QString::fromStdString(find);
+    QString collumnToFind;
+    QString keyWord;
+
+    switch(whatToFind)
+    {
+        case 0:
+            collumnToFind = "Name ";
+            keyWord = "LIKE ";
+            findString  = "'" + findString + "%'";
+        break;
+        case 1:
+            collumnToFind = "Gender ";
+            keyWord = "= ";
+            findString = "'" + findString + "'";
+        break;
+        case 2:
+            collumnToFind = "Birth ";
+            keyWord = "= ";
+        break;
+        case 3:
+            collumnToFind = "Death ";
+            keyWord = "= ";
+        break;
+    }
+
+    qDebug() << "STRING " << findString << endl;
+
+    vector<Legend> returnLegends;
+
+    db.open();
+
+    if(db.isOpen())
+    {
+        fileOpen = true;
+    }
+    else
+    {
+        fileOpen = false;
+    }
+
+    QSqlQuery query(db);
+
+    QString command = "Select * FROM Scientists WHERE " + collumnToFind + keyWord +  findString;
+
+    query.exec(command);
+
+    qDebug() << "COMMAND " << command;
+
+    returnLegends = pushingLegendVector(query);
+
+    db.close();
+
+    return returnLegends;
+}
+
 
