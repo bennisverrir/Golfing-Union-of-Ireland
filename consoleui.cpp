@@ -70,6 +70,29 @@ ostream& operator << (ostream& out,const vector<Computer>& rhs)
     return out;
 }
 
+ostream& operator << (ostream& out, const vector<string>& rhs)
+{
+    out << setw(7) << left << "No." << setw(30) << left << "Type" << endl;
+
+    for(int i = 0; i < 20; i++)
+    {
+        out << "--";
+    }
+
+    out << endl << setw(7) << "0" << setw(30) << "Add a computerType";
+
+
+    out << endl;
+
+    for(size_t i = 0; i < rhs.size(); i++)
+    {
+        out << setw(7) << (i+1) << setw(30) << rhs[i] << endl;
+    }
+
+    return out;
+}
+
+
 ConsoleUI::ConsoleUI(){}
 
 
@@ -576,23 +599,36 @@ void ConsoleUI::commandAddComputer()
 {
     string computerName;
     int buildYear;
+    int index = 0;
     string computerType;
     bool wasBuilt;
     bool valid;
 
-    computerName = getName(computerName);
 
-    getBorn(buildYear);
-    getName(computerType);
-    wasBuilt = true;
+    cout << "The name of the computer? ";
 
-    _service.requestComputerAdd(computerName, buildYear, computerType, wasBuilt);
+    cin.ignore();
+    getline(cin,computerName);
+
+    cout << "What year was it built? ";
+    validateInput(buildYear);
+
+    commandListComputerTypes();
+
+    cout << "What computer Type? ";
+    cin >> index;
+
+    if(index == 0)
+    {
+        addComputerType();
+        index = _service.requestComputerTypes().size();
+    }
+
+    cout << "INDEX: " << index;
+
+    _service.requestComputerAdd(computerName, buildYear, computerType, wasBuilt, index);
 
 }
-
-
-
-
 
 void ConsoleUI::commandListComputers()
 {
@@ -612,6 +648,10 @@ void ConsoleUI::commandListComputers()
     cout << _service.requestComputerSort();
 
 
+}
+void ConsoleUI::commandListComputerTypes()
+{
+    cout << _service.requestComputerTypes();
 }
 /*function fortyTwo, @return void
  *prints out the answer to life the universe and evertything
@@ -659,9 +699,18 @@ void ConsoleUI::fortyTwo()
     cout<<"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"<<endl;
     cout<<"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"<<endl;
     cout<<"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"<<endl;
-
-
 }
 
+void ConsoleUI::addComputerType()
+{
+    string name;
+
+    cout << "Name of ComputerType? ";
+
+    cin.ignore();
+    getline(cin, name);
+
+    _service.requestComputerTypeAdd(name);
+}
 
 

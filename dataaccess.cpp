@@ -83,20 +83,18 @@ void dataAccess::writeFile(Legend writeLegend, bool &fileOpen)
 }
 
 
-void dataAccess::writeComputerFile(Computer writeComputer, bool &fileOpen)
+void dataAccess::writeComputerFile(Computer writeComputer, bool &fileOpen, int index)
 {
-    int cID;
-
     db.open();
 
     QSqlQuery query(db);
 
-    query.prepare("INSERT INTO Computer(Name, BuildYear, ComputerTypeID,WasBuilt) VALUES(:name, :buildYear, :computerType, :wasBuilt)");
+    query.prepare("INSERT INTO Computer(Name, BuildYear, WasBuilt, ComputerTypeID) VALUES(:name, :buildYear, :wasBuilt, :computerTypeID)");
 
     query.bindValue(":name", QString::fromStdString(writeComputer.getName()));
     query.bindValue(":buildYear", writeComputer.getBuildYear());
-    query.bindValue(":computerTypeID", cID);
     query.bindValue(":wasBuilt", writeComputer.getWasBuilt());
+    query.bindValue(":computerTypeID", index);
 
     query.exec();
 
@@ -251,4 +249,37 @@ vector<Legend> dataAccess::findLegend(int whatToFind, string find, bool &fileOpe
     return returnLegends;
 }
 
+vector<string> dataAccess::getComputerTypes()
+{
+    vector<string> returnVector;
 
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.exec("Select Name FROM ComputerType");
+
+    while(query.next())
+    {
+        returnVector.push_back(query.value("Name").toString().toStdString());
+    }
+
+    db.close();
+
+    return returnVector;
+}
+
+void dataAccess::addComputerType(string newComputerType)
+{
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.prepare("INSERT INTO ComputerType(Name) VALUES(:name)");
+
+    query.bindValue(":name", QString::fromStdString(newComputerType));
+
+    query.exec();
+
+    db.close();
+}

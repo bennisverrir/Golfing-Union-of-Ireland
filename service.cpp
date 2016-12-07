@@ -57,10 +57,10 @@ void Service::requestLegendAdd(string name, char gender, int born, int death){
     a.writeFile(myNewLegend, myTempBool);
 }
 
-void Service::requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt){
+void Service::requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt,int index){
     Computer myNewComputer (name, yearBuilt, computerType, wasBuilt);
     bool myTempBool = true;
-    a.writeComputerFile (myNewComputer, myTempBool);
+    a.writeComputerFile (myNewComputer, myTempBool, index);
 }
 vector <Legend> Service::requestLegendSort(){
 
@@ -69,5 +69,14 @@ vector <Legend> Service::requestLegendSort(){
 vector <Computer> Service::requestComputerSort(){
 
     return a.sortComputer(_caseField);
+}
+vector <string> Service::requestComputerTypes()
+{
+    return a.getComputerTypes();
+}
+
+void Service::requestComputerTypeAdd(string name)
+{
+    a.addComputerType(name);
 }
 

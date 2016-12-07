@@ -40,6 +40,8 @@ private:
     bool getWasBuilt(bool wasBuilt);
     string getComputerName(string ComputerName);
     void sortComputer(char sortComputerCommand, vector<Computer>& computers);
+    void commandListComputerTypes();
+    void addComputerType();
 };
 
 #endif // CONSOLEUI_H
