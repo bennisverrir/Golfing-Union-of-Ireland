@@ -29,7 +29,8 @@ public:
     void deleteLine(vector<Legend> &deleteLegend, bool &fileError);
     vector<Legend> sortLegend(int sort);
     vector<Computer> sortComputer(int sort);
-    vector<Legend> findLegend(int whatToFind, string sort,bool &fileOpen);
+    vector<Legend> findLegend(int whatToFind, string sort);
+    vector<Computer> findComputer(int whatToFind, string find);
     vector<string> getComputerTypes();
     void addComputerType(string newComputerType);
     vector<Relation> getRelation();
