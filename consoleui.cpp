@@ -137,60 +137,59 @@ ConsoleUI::ConsoleUI(){}
 */
 void ConsoleUI::run()
 {
-    int command, command2;
+    int command;
 
     do{
 
         displayCommands();
-
-        cin >> command;
+        validateInput(command);
 
         if (command == 1)
         {
 
-            do
-            {
+           // do
+          //  {
                 coutChoice(command);
 
-                cin >> command2;
-                _service.setTableName(command2);
+                validateInput2(command);
+                _service.setTableName(command);
 
-                if(command2 == 1)
+                if(command == 1)
                 { 
                     commandList();
                 }
-                else if(command2 == 2)
+                else if(command == 2)
                 {
                     commandListComputers();
                 }
-                else
-                {
-                    cout << "please enter a valid command" << endl;
-                }
+               // else
+               // {
+               //     cout << "please enter a valid command" << endl;
+                //}
                 
-              }while(command2 != 1 && command2 != 2);
+            //  }while(command != 1 && command != 2);
          }   
     else if (command == 2)
     {
-        int command3;
-            do{
+        int command;
+           // do{
              coutChoice(command);
 
-             cin >> command3;
-             _service.setTableName(command3);
-            if(command3 == 1)
+             validateInput2(command);
+             _service.setTableName(command);
+            if(command == 1)
             {
                 commandAdd();
             }
-            else if(command3 == 2)
+            else if(command == 2)
             {
                 commandAddComputer();
             }
-            else
-            {
-                cout << "please enter a valid command" << endl;
-            }
-            }while(command3 != 1 && command3 != 2);
+           // else
+           // {
+           //     cout << "please enter a valid command" << endl;
+         //   }
+           // }while(command != 1 && command != 2);
     }
 
     else if (command == 4)
@@ -199,25 +198,25 @@ void ConsoleUI::run()
     }
      else if (command == 3)
     {
-        int command4;
-          do{
+        int command;
+          //do{
             coutChoice(command);
 
-             cin >> command4;
-             _service.setTableName(command4);
-                if(command4 == 1)
+             validateInput(command);
+             _service.setTableName(command);
+                if(command == 1)
                 {
                     commandFind();
                 }
-                else if(command4 == 2)
+                else if(command == 2)
                 {
                     commandFindComputer();
                 }
                 else
-                {
+               // {
                     cout << "please enter a valid command" << endl;
-                }
-                }while(command4 != 1 && command4 != 2);
+               // }
+              //  }while(command != 1 && command != 2);
     }
     else if(command == 5)
     {
@@ -239,6 +238,19 @@ void ConsoleUI::run()
     cout << endl;
 
     }while(command != 6);
+}
+void ConsoleUI::validateInput2(int &command)
+{
+    cin >> command;
+    cout <<"slinur";
+    while (cin.fail() || command != 2 && command != 1)      // runs if input is not an integer value
+    {
+        cout <<"slinur2" << endl;
+        cout <<endl<< "Please enter a valid input!!!" << endl;
+        std::cin.clear();
+        std::cin.ignore(256,'\n');
+        cin >> command;
+    }
 }
 
 void ConsoleUI::coutChoice(int command)
