@@ -28,6 +28,7 @@ private:
     void getGender(char &gender);
     void getBorn(int &born);
     void validateInput (int &intValue);
+    void validateInput2 (int &command);
     void getDeath(int &death, int born);
     bool checkIfDead();
     void commandDelete();
