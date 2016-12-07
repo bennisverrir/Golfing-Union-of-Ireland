@@ -51,8 +51,6 @@ vector<Computer> dataAccess::pushingComputerVector(QSqlQuery query)
     return computers;
 }
 
-
-
 /*Function writeFile, @param Legend and bool
 * Takes a Legend and writes all information about it in a new line in a file
 * sets fileOpen to true if file is open and false if it could not be open
@@ -350,16 +348,9 @@ void dataAccess::addRelation(Relation relation)
     int scientistID = 0;
     int computerID = 0;
 
-    query.exec("SELECT ID, Name FROM Scientists WHERE Name LIKE '" + scientistName + "'");
-    query.first();
+    scientistID = getID(query, scientistName, "Scientists");
 
-    scientistID = query.value("ID").toUInt();
-
-    query.exec("SELECT ID, Name FROM Computer WHERE Name LIKE '" + computerName + "'");
-
-    query.first();
-
-    computerID = query.value("ID").toUInt();
+    computerID = getID(query, computerName, "Computer");
 
     query.prepare("INSERT INTO Combine(Sc,Co) Values(:sc, :co)");
 
@@ -368,4 +359,34 @@ void dataAccess::addRelation(Relation relation)
 
     query.exec();
 
+}
+
+void dataAccess::editLegend(Legend oldLegend, Legend editLegend)
+{
+    QSqlQuery query(db);
+
+    QString name = QString::fromStdString(editLegend.getName());
+    QString oldName = QString::fromStdString(oldLegend.getName());
+    int ID = getID(query, oldName, "Scientists");
+    bool isDead = (editLegend.getDeath() == 0 ? false : true);
+
+
+    query.exec("UPDATE Scientists"
+               " SET Name = " + name + ", Gender = " + editLegend.getGender() +
+               ", Birth = " + editLegend.getBorn() + ", Death " + editLegend.getDeath() +
+               ", IsDead = " + isDead +
+               " WHERE ID = " + ID);
+
+    qDebug() << "ERROR: " << query.lastError().text() << endl;
+
+}
+
+int dataAccess::getID(QSqlQuery query, QString name, QString tableName)
+{
+    query.exec("SELECT ID, Name FROM " + tableName + " WHERE Name LIKE '" + name + "'");
+    query.first();
+
+    int returnInt = query.value("ID").toUInt();
+
+    return returnInt;
 }

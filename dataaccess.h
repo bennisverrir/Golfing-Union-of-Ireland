@@ -35,6 +35,8 @@ public:
     void addComputerType(string newComputerType);
     vector<Relation> getRelation();
     void addRelation(Relation relation);
+    void editLegend(Legend oldLegend, Legend editLegend);
+    int getID(QSqlQuery query, QString name, QString tableName);
 private:
     const string fileName = "legend.txt";
 };
