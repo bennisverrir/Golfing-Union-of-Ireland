@@ -505,58 +505,6 @@ bool ConsoleUI::checkIfDead()
     }
 }
 
-/*
- * function CommandDelete, @return void.
-* Calls find function to match search string, deletes person from that list based on index input
-*
-*/
-
-/*void ConsoleUI::commandDelete()
-{
-    string deleteName;
-
-    cout << "Who do you want to delete (press enter to get the full list)?  ";
-
-    getline(cin,deleteName);
-
-    deleteName = rightName(deleteName);
-
-    vector<Legend> deleteLegend = _service.findLegend(deleteName);
-
-
-
-    if(deleteLegend.size() > 0)
-    {
-        cout << deleteLegend;
-        cout << "What number do you want to delete? ";
-
-        int number;
-        validateInput(number);
-        int max = _service.findLegend(deleteName).size();
-
-
-        if(number<1|| number>max)
-        {
-           cout<<endl<< "Invalid number!"<<endl;
-        }
-        else
-        {
-        _service.deleteLegend(number, deleteLegend); // deletes the legend
-
-
-        cout << endl << "The line has been deleted" << endl;
-        }
-    }
-    else
-    {
-        cout << endl <<"No results from that query!" << endl;
-    }
-}*/
-
-/*function commandFind, @return void
- *asks the user what he wants to search and then calls subCommandFind and passes in a vector.
- *Then prints out the vector from subCommandFind
- */
 void ConsoleUI::commandFind()
 {
     cout << "Which parameter would you like to search for?" << endl;
