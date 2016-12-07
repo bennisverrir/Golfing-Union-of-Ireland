@@ -10,6 +10,7 @@
 #include <QtSql>
 #include "legend.h"
 #include "computer.h"
+#include "relation.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ public:
     vector<Legend> findLegend(int whatToFind, string sort,bool &fileOpen);
     vector<string> getComputerTypes();
     void addComputerType(string newComputerType);
+    vector<Relation> getRelation();
 private:
     const string fileName = "legend.txt";
 };

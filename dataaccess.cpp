@@ -283,3 +283,27 @@ void dataAccess::addComputerType(string newComputerType)
 
     db.close();
 }
+
+vector<Relation> dataAccess::getRelation()
+{
+    vector<Relation> returnVector;
+
+    QSqlQuery query(db);
+
+    QString sqlCommand = "SELECT  s.Name, c.Name AS ComputerName From Scientists s, Computer c, Combine co "
+                         "WHERE  s.ID = co.Sc AND c.ID = co.Co";
+    string scientistName;
+    string computerName;
+
+    query.prepare(sqlCommand);
+
+    while(query.next())
+    {
+        scientistName = query.value("Name").toString().toStdString();
+        computerName = query.value("ComputerName").toString().toStdString();
+
+        returnVector.push_back(Relation(scientistName, computerName));
+    }
+
+    return returnVector;
+}
