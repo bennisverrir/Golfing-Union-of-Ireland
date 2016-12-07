@@ -383,17 +383,18 @@ void dataAccess::editLegend(Legend oldLegend, Legend editLegend)
 
     QString name = QString::fromStdString(editLegend.getName());
     QString oldName = QString::fromStdString(oldLegend.getName());
-    int ID = getID(query, oldName, "Scientists");
-    bool isDead = (editLegend.getDeath() == 0 ? false : true);
+    QString ID = QString::fromStdString(to_string(getID(query, oldName, "Scientists")));
+    QString isDead = QString::fromStdString(to_string((editLegend.getDeath() == 0 ? 0 : 1)));
+    QString born = QString::fromStdString(to_string(editLegend.getBorn()));
+    QString death =  QString::fromStdString(to_string(editLegend.getDeath()));
 
+    QString command = "UPDATE Scientists"
+                      " SET Name = '" + name + "', Gender = '" + editLegend.getGender() +
+                      "' , Birth = " + born + ", Death = " + death +
+                      ", IsDead = " + isDead +
+                      " WHERE ID = " + ID;
 
-    query.exec("UPDATE Scientists"
-               " SET Name = " + name + ", Gender = " + editLegend.getGender() +
-               ", Birth = " + editLegend.getBorn() + ", Death " + editLegend.getDeath() +
-               ", IsDead = " + isDead +
-               " WHERE ID = " + ID);
-
-    qDebug() << "ERROR: " << query.lastError().text() << endl;
+    query.exec(command);
 
 }
 
