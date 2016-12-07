@@ -6,6 +6,13 @@ dataAccess::dataAccess()
     db = QSqlDatabase::addDatabase("QSQLITE");
     dbName = "ComputingDatabase.sqlite";
     db.setDatabaseName(dbName);
+
+    db.open();
+}
+
+dataAccess::~dataAccess()
+{
+    db.close();
 }
 
 vector<Legend> dataAccess::pushingLegendVector(QSqlQuery query)
@@ -296,6 +303,8 @@ vector<Relation> dataAccess::getRelation()
     string computerName;
 
     query.prepare(sqlCommand);
+
+    query.exec();
 
     while(query.next())
     {

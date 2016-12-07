@@ -21,6 +21,7 @@ class dataAccess
 
 public:
     dataAccess();
+    ~dataAccess();
     vector<Legend> pushingLegendVector(QSqlQuery query);
     vector<Computer> pushingComputerVector(QSqlQuery query);
     void writeFile(Legend writeLegend, bool &fileError);

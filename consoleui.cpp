@@ -235,7 +235,7 @@ void ConsoleUI::run()
     }
     else if(command == 999)
     {
-       // _service.requestComputerAdd("Gervinho", 1000, 3, 1);
+       cout << _service.requestRelationSearch();
     }
     else
     {
