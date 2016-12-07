@@ -217,7 +217,7 @@ void ConsoleUI::run()
                 }
                 else if(command4 == 2)
                 {
-                    //TODO: Find fyrir gombuter
+                    commandFindComputer();
                 }
                 else
                 {
@@ -606,6 +606,20 @@ void ConsoleUI::subCommandFind(int command, vector <Legend> &toPrint)
     }
 }
 
+void ConsoleUI::commandFindComputer()
+{
+    string name;
+
+    _service.setCaseField(1);
+    cout << "What to search? ";
+
+    cin.ignore();
+    getline(cin, name);
+
+    _service.setSearchField(name);
+    cout << _service.requestComputerSearch();
+}
+
 /*function commandClear, @return void
  * Clears the screen
  */
@@ -643,7 +657,29 @@ void ConsoleUI::commandAddComputer()
         index = _service.requestComputerTypes().size();
     }
 
-    cout << "INDEX: " << index;
+    char yesNo;
+
+    cout << "Want to add a relation? ";
+    cin >> yesNo;
+
+    if(yesNo == 'y')
+    {
+        _service.setCaseField(1);
+        vector<Legend> print = _service.requestLegendSort();
+        cout << print;
+
+
+        int indexCommand;
+
+        cout << "What relation? ";
+        cin >> indexCommand;
+
+
+        for(unsigned int i = 0; i < print.size(); i++)
+        {
+            cout << i << " SOL " << print[i].getName() << endl;
+        }
+    }
 
     _service.requestComputerAdd(computerName, buildYear, computerType, wasBuilt, index);
 

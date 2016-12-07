@@ -357,3 +357,15 @@ vector<Relation> dataAccess::getRelation()
 
     return returnVector;
 }
+
+/*void dataAccess::addRelation(string scientist, string computer)
+{
+    QSqlQuery query(db);
+
+    query.exec()
+
+    query.prepare("INSERT INTO Combine(Sc,Co) Values(:sc, :co)");
+
+    query.bindValue(":sc",);
+    query.bindValue(":co",);
+}*/

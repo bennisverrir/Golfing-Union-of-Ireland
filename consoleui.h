@@ -43,6 +43,7 @@ private:
     void sortComputer(char sortComputerCommand, vector<Computer>& computers);
     void commandListComputerTypes();
     void addComputerType();
+    void commandFindComputer();
 };
 
 #endif // CONSOLEUI_H
