@@ -209,7 +209,7 @@ vector<Legend> dataAccess::findLegend(int whatToFind, string find)
         case 0:
             collumnToFind = "Name ";
             keyWord = "LIKE ";
-            findString  = "'" + findString + "%'";
+            findString  = "'%" + findString + "%'";
         break;
         case 1:
             collumnToFind = "Gender ";
@@ -258,7 +258,7 @@ vector<Computer> dataAccess::findComputer(int whatToFind, string find)
         case 0:
             collumnToFind = "c.Name ";
             keyWord = "LIKE ";
-            findString  = "'" + findString + "%'";
+            findString  = "'%" + findString + "%'";
         break;
         case 1:
             collumnToFind = "c.BuildYear ";
@@ -284,9 +284,11 @@ vector<Computer> dataAccess::findComputer(int whatToFind, string find)
     QSqlQuery query(db);
 
     QString command = "Select c.Name,c.BuildYear, c.WasBuilt, ct.Name AS TypeName "
-                       "FROM Computer c, ComputerType ct WHERE c.ComputerTypeID = ct.ID AND" + collumnToFind + keyWord +  findString;
+                       "FROM Computer c, ComputerType ct WHERE c.ComputerTypeID = ct.ID AND " + collumnToFind + keyWord +  findString;
 
     query.exec(command);
+
+    qDebug() << "ERROR: " << query.lastError().text() << endl;
 
     returnComputers = pushingComputerVector(query);
 
