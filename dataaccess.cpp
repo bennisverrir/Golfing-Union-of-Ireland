@@ -198,7 +198,7 @@ vector<Computer> dataAccess::sortComputer(int sort)
     return returnLegends;
 }
 
-vector<Legend> dataAccess::findLegend(int whatToFind, string find, bool &fileOpen)
+vector<Legend> dataAccess::findLegend(int whatToFind, string find)
 {
     QString findString = QString::fromStdString(find);
     QString collumnToFind;
@@ -209,7 +209,7 @@ vector<Legend> dataAccess::findLegend(int whatToFind, string find, bool &fileOpe
         case 0:
             collumnToFind = "Name ";
             keyWord = "LIKE ";
-            findString  = "'" + findString + "%'";
+            findString  = "'%" + findString + "%'";
         break;
         case 1:
             collumnToFind = "Gender ";
@@ -232,15 +232,6 @@ vector<Legend> dataAccess::findLegend(int whatToFind, string find, bool &fileOpe
 
     db.open();
 
-    if(db.isOpen())
-    {
-        fileOpen = true;
-    }
-    else
-    {
-        fileOpen = false;
-    }
-
     QSqlQuery query(db);
 
     QString command = "Select * FROM Scientists WHERE " + collumnToFind + keyWord +  findString;
@@ -254,6 +245,56 @@ vector<Legend> dataAccess::findLegend(int whatToFind, string find, bool &fileOpe
     db.close();
 
     return returnLegends;
+}
+
+vector<Computer> dataAccess::findComputer(int whatToFind, string find)
+{
+    QString findString = QString::fromStdString(find);
+    QString collumnToFind;
+    QString keyWord;
+
+    switch(whatToFind)
+    {
+        case 0:
+            collumnToFind = "c.Name ";
+            keyWord = "LIKE ";
+            findString  = "'%" + findString + "%'";
+        break;
+        case 1:
+            collumnToFind = "c.BuildYear ";
+            keyWord = "= ";
+            findString = "'" + findString + "'";
+        break;
+        case 2:
+            collumnToFind = "c.WasBuilt ";
+            keyWord = "= ";
+        break;
+        case 3:
+            collumnToFind = "ct.Name";
+            keyWord = "LIKE ";
+        break;
+    }
+
+    qDebug() << "STRING " << findString << endl;
+
+    vector<Computer> returnComputers;
+
+    db.open();
+
+    QSqlQuery query(db);
+
+    QString command = "Select c.Name,c.BuildYear, c.WasBuilt, ct.Name AS TypeName "
+                       "FROM Computer c, ComputerType ct WHERE c.ComputerTypeID = ct.ID AND " + collumnToFind + keyWord +  findString;
+
+    query.exec(command);
+
+    qDebug() << "ERROR: " << query.lastError().text() << endl;
+
+    returnComputers = pushingComputerVector(query);
+
+    db.close();
+
+    return returnComputers;
 }
 
 vector<string> dataAccess::getComputerTypes()
