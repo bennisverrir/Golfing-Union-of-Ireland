@@ -137,60 +137,45 @@ ConsoleUI::ConsoleUI(){}
 */
 void ConsoleUI::run()
 {
-    int command, command2;
+    int command;
 
     do{
 
         displayCommands();
-
-        cin >> command;
+        validateInput(command);
 
         if (command == 1)
         {
-
-            do
-            {
                 coutChoice(command);
 
-                cin >> command2;
-                _service.setTableName(command2);
+                validateInput2(command);
+                _service.setTableName(command);
 
-                if(command2 == 1)
+                if(command == 1)
                 { 
                     commandList();
                 }
-                else if(command2 == 2)
+                else if(command == 2)
                 {
                     commandListComputers();
                 }
-                else
-                {
-                    cout << "please enter a valid command" << endl;
-                }
-                
-              }while(command2 != 1 && command2 != 2);
          }   
     else if (command == 2)
     {
-        int command3;
-            do{
+        int command;
              coutChoice(command);
 
-             cin >> command3;
-             _service.setTableName(command3);
-            if(command3 == 1)
+             validateInput2(command);
+             _service.setTableName(command);
+            if(command == 1)
             {
                 commandAdd();
             }
-            else if(command3 == 2)
+            else if(command == 2)
             {
                 commandAddComputer();
             }
-            else
-            {
-                cout << "please enter a valid command" << endl;
-            }
-            }while(command3 != 1 && command3 != 2);
+
     }
 
     else if (command == 4)
@@ -199,25 +184,20 @@ void ConsoleUI::run()
     }
      else if (command == 3)
     {
-        int command4;
-          do{
+        int command;
+          
             coutChoice(command);
 
-             cin >> command4;
-             _service.setTableName(command4);
-                if(command4 == 1)
+             validateInput(command);
+             _service.setTableName(command);
+                if(command == 1)
                 {
                     commandFind();
                 }
-                else if(command4 == 2)
+                else if(command == 2)
                 {
                     commandFindComputer();
                 }
-                else
-                {
-                    cout << "please enter a valid command" << endl;
-                }
-                }while(command4 != 1 && command4 != 2);
     }
     else if(command == 5)
     {
@@ -239,6 +219,17 @@ void ConsoleUI::run()
     cout << endl;
 
     }while(command != 6);
+}
+void ConsoleUI::validateInput2(int &command)
+{
+    cin >> command;
+    while (cin.fail() || command != 2 && command != 1)      // runs if input is not an integer value
+    {      
+        cout <<endl<< "Please enter a valid input!!!" << endl;
+        std::cin.clear();
+        std::cin.ignore(256,'\n');
+        cin >> command;
+    }
 }
 
 void ConsoleUI::coutChoice(int command)
@@ -506,58 +497,6 @@ bool ConsoleUI::checkIfDead()
     }
 }
 
-/*
- * function CommandDelete, @return void.
-* Calls find function to match search string, deletes person from that list based on index input
-*
-*/
-
-/*void ConsoleUI::commandDelete()
-{
-    string deleteName;
-
-    cout << "Who do you want to delete (press enter to get the full list)?  ";
-
-    getline(cin,deleteName);
-
-    deleteName = rightName(deleteName);
-
-    vector<Legend> deleteLegend = _service.findLegend(deleteName);
-
-
-
-    if(deleteLegend.size() > 0)
-    {
-        cout << deleteLegend;
-        cout << "What number do you want to delete? ";
-
-        int number;
-        validateInput(number);
-        int max = _service.findLegend(deleteName).size();
-
-
-        if(number<1|| number>max)
-        {
-           cout<<endl<< "Invalid number!"<<endl;
-        }
-        else
-        {
-        _service.deleteLegend(number, deleteLegend); // deletes the legend
-
-
-        cout << endl << "The line has been deleted" << endl;
-        }
-    }
-    else
-    {
-        cout << endl <<"No results from that query!" << endl;
-    }
-}*/
-
-/*function commandFind, @return void
- *asks the user what he wants to search and then calls subCommandFind and passes in a vector.
- *Then prints out the vector from subCommandFind
- */
 void ConsoleUI::commandFind()
 {
     cout << "Which parameter would you like to search for?" << endl;
@@ -661,24 +600,30 @@ void ConsoleUI::commandClear()
 void ConsoleUI::commandAddComputer()
 {
     string computerName;
+    string scientistName;
     int buildYear;
     int index = 0;
     string computerType;
     bool wasBuilt;
     bool valid;
+    char built;
 
 
-    cout << "The name of the computer? ";
+    cout << "Enter the name: ";
 
     cin.ignore();
     getline(cin,computerName);
-
-    cout << "What year was it built? ";
-    validateInput(buildYear);
+    cout << "was it built (y/n): ";
+    cin >> built;
+    if(built == 'y')
+    {
+        cout << "Year of build (4 digits): ";
+        validateInput(buildYear);
+    }
 
     commandListComputerTypes();
 
-    cout << "What computer Type? ";
+    cout << "Enter Computer Type(0-" << _service.requestComputerTypes().size() << "): ";
     cin >> index;
 
     if(index == 0)
@@ -688,31 +633,27 @@ void ConsoleUI::commandAddComputer()
     }
 
     char yesNo;
-
-    cout << "Want to add a relation? ";
-    cin >> yesNo;
-
-    if(yesNo == 'y')
-    {
-        _service.setCaseField(1);
-        vector<Legend> print = _service.requestLegendSort();
-        cout << print;
-
-
-        int indexCommand;
-
-        cout << "What relation? ";
-        cin >> indexCommand;
-
-
-        for(unsigned int i = 0; i < print.size(); i++)
-        {
-            cout << i << " SOL " << print[i].getName() << endl;
-        }
-    }
-
     _service.requestComputerAdd(computerName, buildYear, computerType, wasBuilt, index);
 
+    do{
+        cout << "Add relation (y/n): ";
+        cin >> yesNo;
+
+        if(yesNo == 'y')
+        {
+            _service.setCaseField(1);
+            vector<Legend> print = _service.requestLegendSort();
+            cout << print;
+
+            int indexCommand;
+
+            cout << "Relation (1-"<<_service.requestLegendSort().size() <<"): ";
+            cin >> indexCommand;
+            scientistName = print[indexCommand-1].getName();
+        }
+        _service.requestRelationAdd(scientistName, computerName);
+
+    }while(yesNo != 'n' || yesNo != 'N');
 }
 
 void ConsoleUI::commandListComputers()
