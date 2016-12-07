@@ -198,10 +198,6 @@ void ConsoleUI::run()
                 {
                     commandFindComputer();
                 }
-                else
-               // {
-                    cout << "please enter a valid command" << endl;
-
     }
     else if(command == 5)
     {
