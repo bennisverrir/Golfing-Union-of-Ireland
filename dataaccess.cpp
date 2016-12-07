@@ -351,7 +351,6 @@ void dataAccess::addRelation(Relation relation)
     int computerID = 0;
 
     query.exec("SELECT ID, Name FROM Scientists WHERE Name LIKE '" + scientistName + "'");
-
     query.first();
 
     scientistID = query.value("ID").toUInt();
@@ -368,4 +367,5 @@ void dataAccess::addRelation(Relation relation)
     query.bindValue(":co", computerID);
 
     query.exec();
+
 }
