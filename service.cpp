@@ -78,7 +78,8 @@ void Service::requestComputerAdd(string name, int yearBuilt, string computerType
     a.writeComputerFile (myNewComputer, myTempBool, index);
 }
 void Service::requestRelationAdd (string scientistName, string computerName){
-
+    Relation myNewRelation (scientistName, computerName);
+    a.addRelation (myNewRelation);
 }
 
 vector <Legend> Service::requestLegendSort(){

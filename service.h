@@ -31,7 +31,7 @@ public:
         void requestRelationAdd (string scientistName, string computerName);
         vector <Legend> requestLegendSort();
         vector <Computer> requestComputerSort();
-        vector<string> requestComputerTypes();
+        vector <string> requestComputerTypes();
         void requestComputerTypeAdd(string name);
 
 
