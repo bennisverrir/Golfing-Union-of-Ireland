@@ -2,9 +2,26 @@
 
 using namespace std;
 
+/*function displayCommands, @return void.
+* displays a list of commands at the users disposal.
+*/
+void ConsoleUI::displayCommands()
+{
+    cout << "Please enter one of the following numbers:"<< endl;
+    cout << "[1] - To list all the computer scientists or computers" << endl;
+    cout << "[2] - To add a computer scientist or a computer " << endl;
+    cout << "[3] - To find a computer scientist from the list or a computer" << endl;
+    cout << "[4] - This will delete a computer scientists from the list" << endl;
+    cout << "[5] - this will clear the screen" << endl;
+    cout << "[6] - This will quit the program" << endl;
+
+    cout << endl;
+}
+
 /*function <<, @param instance of ostream and Legend vector instance, @return ostream.
 * outputs all information about listed legends in a table.
 */
+
 ostream& operator << (ostream& out,const vector<Legend>& rhs)
 {
     out << endl;
@@ -143,7 +160,7 @@ void ConsoleUI::run()
             do{
              cout << "Enter one of the following commands:" << endl;
              cout << "[1] - to add a scientist" << endl;
-             cout << "[2] - to add a command" << endl;
+             cout << "[2] - to add a computer" << endl;
 
              cin >> command3;
              _service.setTableName(command3);
@@ -210,22 +227,6 @@ void ConsoleUI::run()
     cout << endl;
 
     }while(command != 6);
-}
-
-/*function displayCommands, @return void.
-* displays a list of commands at the users disposal.
-*/
-void ConsoleUI::displayCommands()
-{
-    cout << "Please enter one of the following numbers:"<< endl;
-    cout << "[1]   - To list all the computer scientists or computers" << endl;
-    cout << "[2]    - To add a computer scientist or a computer " << endl;
-    cout << "[3]   - To find a computer scientist from the list or a computer" << endl;
-    cout << "[4] - This will delete a computer scientists from the list" << endl;
-    cout << "[5]  - this will clear the screen" << endl;
-    cout << "[6]   - This will quit the program" << endl;
-
-    cout << endl;
 }
 
 /*function commandList, @return void.
