@@ -242,10 +242,8 @@ void ConsoleUI::run()
 void ConsoleUI::validateInput2(int &command)
 {
     cin >> command;
-    cout <<"slinur";
     while (cin.fail() || command != 2 && command != 1)      // runs if input is not an integer value
-    {
-        cout <<"slinur2" << endl;
+    {      
         cout <<endl<< "Please enter a valid input!!!" << endl;
         std::cin.clear();
         std::cin.ignore(256,'\n');
