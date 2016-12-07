@@ -358,14 +358,14 @@ vector<Relation> dataAccess::getRelation()
     return returnVector;
 }
 
-/*void dataAccess::addRelation(string scientist, string computer)
+void dataAccess::addRelation(Relation relation)
 {
     QSqlQuery query(db);
 
-    query.exec()
+    query.exec();
 
     query.prepare("INSERT INTO Combine(Sc,Co) Values(:sc, :co)");
 
-    query.bindValue(":sc",);
-    query.bindValue(":co",);
-}*/
+   // query.bindValue(":sc",);
+   // query.bindValue(":co",);
+}

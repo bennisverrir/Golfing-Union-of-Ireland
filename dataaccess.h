@@ -34,6 +34,7 @@ public:
     vector<string> getComputerTypes();
     void addComputerType(string newComputerType);
     vector<Relation> getRelation();
+    void addRelation(Relation relation);
 private:
     const string fileName = "legend.txt";
 };
