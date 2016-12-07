@@ -111,10 +111,12 @@ void dataAccess::writeComputerFile(Computer writeComputer, bool &fileOpen, int i
 */
 void dataAccess::deleteLine(vector<Legend> &deleteLegend, bool &fileOpen){}
 
-vector<Legend> dataAccess::sortLegend(int sort)
+vector<Legend> dataAccess::sortLegend(int sort, bool ascDesc)
 {
     QString sortString;
     QString order = "ORDER BY ";
+    QString reverse;
+
 
     switch(sort)
     {
@@ -135,12 +137,26 @@ vector<Legend> dataAccess::sortLegend(int sort)
         break;
     }
 
+    if (ascDesc)
+    {
+        reverse = " ASC";
+    }
+    else
+    {
+        reverse = " DESC";
+    }
+
     vector<Legend> returnLegends;
 
 
 
     QSqlQuery query(db);
-    query.exec("Select * FROM Scientists " + order + sortString + " ASC");
+
+    QString command = "Select * FROM Scientists " + order + sortString + reverse;
+
+    query.exec("Select * FROM Scientists " + order + sortString + reverse);
+
+    qDebug() << "command; " << command << endl;
 
     returnLegends = pushingLegendVector(query);
 

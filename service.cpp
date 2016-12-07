@@ -23,6 +23,19 @@ void Service::setTableName (int command)
 void Service::setCaseField (int command)
 {
     _caseField = command - 1;
+
+}
+
+void Service::setAscDescOrder (int command)
+{
+    if (command == 1)
+    {
+        _ascDeseOrder = true;
+    }
+    else
+    {
+        _ascDeseOrder = false;
+    }
 }
 
 void Service::setSearchField (string toSearch)
@@ -113,7 +126,7 @@ void Service::requestRelationAdd (string scientistName, string computerName)
 
 vector <Legend> Service::requestLegendSort()
 {
-    return a.sortLegend(_caseField);
+    return a.sortLegend(_caseField, _ascDeseOrder);
 }
 
 vector <Computer> Service::requestComputerSort()

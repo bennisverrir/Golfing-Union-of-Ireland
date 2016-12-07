@@ -273,6 +273,8 @@ void ConsoleUI::commandList()
 {
     int sortCommand;
 
+    int ascDesc;
+
     cout << "How do you want to sort"<< endl;
     cout << "[1] - Alphabetical order" << endl;
     cout << "[2] - Gender order" << endl;
@@ -281,7 +283,16 @@ void ConsoleUI::commandList()
     cout << "[5] - No particular sorting" << endl << endl;
 
     cin >> sortCommand;
+
+    cout << "Do you want it:" << endl;
+    cout << "[1] - Ascending" << endl;
+    cout << "[2] - Descending"  << endl;
+
+    cin >> ascDesc;
+
     _service.setCaseField(sortCommand);
+
+    _service.setAscDescOrder(ascDesc);
 
     //sort(sortCommand);
     cout << _service.requestLegendSort();
@@ -708,6 +719,8 @@ void ConsoleUI::commandListComputers()
 {
     int command;
 
+    int commandtwo;
+
     cout << "How do you want to sort"<< endl;
     cout << "[1] - Alphabetical order" << endl;
     cout << "[2] - Built year order" << endl;
@@ -717,9 +730,18 @@ void ConsoleUI::commandListComputers()
 
     cin >> command;
 
+    cout << "Do you want it:" << endl;
+    cout << "[1] - Ascending" << endl;
+    cout << "[2] - Descending"  << endl;
+
+    cin >> commandtwo;
+
     _service.setCaseField(command);
 
+     _service.setAscDescOrder(commandtwo);
+
     cout << _service.requestComputerSort();
+
 
 
 }

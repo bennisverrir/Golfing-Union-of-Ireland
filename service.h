@@ -16,6 +16,7 @@ public:
     Service();
         void setTableName (int command);
         void setCaseField (int command);
+        void setAscDescOrder (int command);
         void setSearchField (string toSearch);
         void setSearchField (int toSearch);
         void setSearchField (char toSearch);
@@ -39,6 +40,7 @@ private:
         dataAccess a;
         string _tableName;
         int _caseField;
+        bool _ascDeseOrder;
         string _searchString;
 };
 

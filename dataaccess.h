@@ -27,7 +27,7 @@ public:
     void writeFile(Legend writeLegend, bool &fileError);
     void writeComputerFile(Computer writeComputer, bool &fileError, int index);
     void deleteLine(vector<Legend> &deleteLegend, bool &fileError);
-    vector<Legend> sortLegend(int sort);
+    vector<Legend> sortLegend(int sort, bool ascDesc);
     vector<Computer> sortComputer(int sort);
     vector<Legend> findLegend(int whatToFind, string sort);
     vector<Computer> findComputer(int whatToFind, string find);
