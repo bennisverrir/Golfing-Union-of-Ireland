@@ -46,6 +46,7 @@ private:
     void commandListComputerTypes();
     void addComputerType();
     void commandFindComputer();
+    void commandEdit();
 };
 
 #endif // CONSOLEUI_H
