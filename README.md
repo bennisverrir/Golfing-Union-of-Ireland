@@ -20,7 +20,6 @@ This program is a database that keeps basic information about famous computer sc
 
 Availible commands:
 
-
 Menu (from start):
 
 list   - This will list all the computer scientists (goes into sorting options)
