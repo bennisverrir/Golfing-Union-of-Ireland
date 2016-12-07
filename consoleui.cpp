@@ -180,7 +180,7 @@ void ConsoleUI::run()
 
     else if (command == 4)
     {
-        //commandDelete();
+        commandEdit();
     }
      else if (command == 3)
     {
@@ -686,6 +686,41 @@ void ConsoleUI::commandListComputers()
 
 
 }
+
+void ConsoleUI::commandEdit()
+{
+    int index = 0;
+    string name;
+    char gender;
+    int born = 0;
+    int death = 0;
+
+    commandFind();
+
+    cout << "Who do you want to edit? ";
+    cin >> index;
+
+    Legend oldLegend =  _service.requestLegendSearch()[index-1];
+
+    cout << "Old Name: " << oldLegend.getName() << endl;
+    cout << "New Name: ";
+    cin.ignore();
+    getline(cin, name);
+    cout << "Old gender: " << oldLegend.getGender() << endl;
+    cout << "New gender: ";
+    cin >> gender;
+    cout << "Old birth Year: " << oldLegend.getBorn() << endl;
+    cout << "New birth Year: ";
+    validateInput(born);
+    cout << "Old death year: " << oldLegend.getDeath() << endl;
+    cout << "New death year: ";
+    validateInput(death);
+
+    cout << endl;
+    
+    _service.requestLegendEdit(name, toupper(gender), born, death, oldLegend);
+}
+
 void ConsoleUI::commandListComputerTypes()
 {
     cout << _service.requestComputerTypes();
