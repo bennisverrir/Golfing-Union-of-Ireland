@@ -12,7 +12,8 @@ dataAccess::dataAccess()
 
 dataAccess::~dataAccess()
 {
-    db.close();
+     db.close();
+
 }
 
 vector<Legend> dataAccess::pushingLegendVector(QSqlQuery query)
@@ -60,8 +61,6 @@ vector<Computer> dataAccess::pushingComputerVector(QSqlQuery query)
 void dataAccess::writeFile(Legend writeLegend, bool &fileOpen)
 {
 
-    db.open();
-
     QSqlQuery query(db);
 
     bool isDead;
@@ -86,13 +85,11 @@ void dataAccess::writeFile(Legend writeLegend, bool &fileOpen)
 
     query.exec();
 
-    db.close();
 }
 
 
 void dataAccess::writeComputerFile(Computer writeComputer, bool &fileOpen, int index)
 {
-    db.open();
 
     QSqlQuery query(db);
 
@@ -105,7 +102,6 @@ void dataAccess::writeComputerFile(Computer writeComputer, bool &fileOpen, int i
 
     query.exec();
 
-    db.close();
 }
 
 /*Function deleteLine, @param vector<Legend> and bool
@@ -141,14 +137,12 @@ vector<Legend> dataAccess::sortLegend(int sort)
 
     vector<Legend> returnLegends;
 
-    db.open();
+
 
     QSqlQuery query(db);
     query.exec("Select * FROM Scientists " + order + sortString + " ASC");
 
     returnLegends = pushingLegendVector(query);
-
-    db.close();
 
     return returnLegends;
 }
@@ -179,7 +173,7 @@ vector<Computer> dataAccess::sortComputer(int sort)
 
     vector<Computer> returnLegends;
 
-    db.open();
+
 
     QSqlQuery query(db);
 
@@ -192,8 +186,6 @@ vector<Computer> dataAccess::sortComputer(int sort)
     qDebug() << "COMMAND: " << sqlCommand;
 
     returnLegends = pushingComputerVector(query);
-
-    db.close();
 
     return returnLegends;
 }
@@ -230,7 +222,7 @@ vector<Legend> dataAccess::findLegend(int whatToFind, string find)
 
     vector<Legend> returnLegends;
 
-    db.open();
+
 
     QSqlQuery query(db);
 
@@ -241,8 +233,6 @@ vector<Legend> dataAccess::findLegend(int whatToFind, string find)
     qDebug() << "COMMAND " << command;
 
     returnLegends = pushingLegendVector(query);
-
-    db.close();
 
     return returnLegends;
 }
@@ -279,7 +269,7 @@ vector<Computer> dataAccess::findComputer(int whatToFind, string find)
 
     vector<Computer> returnComputers;
 
-    db.open();
+
 
     QSqlQuery query(db);
 
@@ -292,8 +282,6 @@ vector<Computer> dataAccess::findComputer(int whatToFind, string find)
 
     returnComputers = pushingComputerVector(query);
 
-    db.close();
-
     return returnComputers;
 }
 
@@ -301,7 +289,7 @@ vector<string> dataAccess::getComputerTypes()
 {
     vector<string> returnVector;
 
-    db.open();
+
 
     QSqlQuery query(db);
 
@@ -312,15 +300,11 @@ vector<string> dataAccess::getComputerTypes()
         returnVector.push_back(query.value("Name").toString().toStdString());
     }
 
-    db.close();
-
     return returnVector;
 }
 
 void dataAccess::addComputerType(string newComputerType)
 {
-    db.open();
-
     QSqlQuery query(db);
 
     query.prepare("INSERT INTO ComputerType(Name) VALUES(:name)");
@@ -329,7 +313,6 @@ void dataAccess::addComputerType(string newComputerType)
 
     query.exec();
 
-    db.close();
 }
 
 vector<Relation> dataAccess::getRelation()
@@ -360,12 +343,29 @@ vector<Relation> dataAccess::getRelation()
 
 void dataAccess::addRelation(Relation relation)
 {
-    QSqlQuery query(db);
 
-    query.exec();
+    QSqlQuery query(db);
+    QString scientistName = QString::fromStdString(relation.getLegendName());
+    QString computerName = QString::fromStdString(relation.getComputerName());
+    int scientistID = 0;
+    int computerID = 0;
+
+    query.exec("SELECT ID, Name FROM Scientists WHERE Name LIKE '" + scientistName + "'");
+    query.first();
+
+    scientistID = query.value("ID").toUInt();
+
+    query.exec("SELECT ID, Name FROM Computer WHERE Name LIKE '" + computerName + "'");
+
+    query.first();
+
+    computerID = query.value("ID").toUInt();
 
     query.prepare("INSERT INTO Combine(Sc,Co) Values(:sc, :co)");
 
-   // query.bindValue(":sc",);
-   // query.bindValue(":co",);
+    query.bindValue(":sc", scientistID);
+    query.bindValue(":co", computerID);
+
+    query.exec();
+
 }
