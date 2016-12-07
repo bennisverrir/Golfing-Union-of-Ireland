@@ -5,6 +5,8 @@
 #include <vector>
 #include "legend.h"
 #include "dataaccess.h"
+#include "computer.h"
+#include "relation.h"
 
 using namespace std;
 
@@ -20,6 +22,7 @@ public:
         void setSearchField (bool toSearch);
         vector <Legend> requestLegendSearch();
         vector <Computer> requestComputerSearch();
+        vector <Relation> requestRelationSearch();
         void requestLegendAdd(string name, char gender, int born, int death);
         void requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt, int index);
         vector <Legend> requestLegendSort();

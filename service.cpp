@@ -47,7 +47,13 @@ vector <Legend> Service::requestLegendSearch(){
 vector <Computer> Service::requestComputerSearch(){
     vector <Computer> returnVector;
     bool myTempBool = true;
-    //returnVector = a.findComputer (_caseField, _searchString, myTempbool);
+    //returnVector = a.findComputer (_caseField, _searchString, myTempBool);
+    return returnVector;
+}
+vector <Relation> Service::requestRelationSearch(){
+    vector <Relation> returnVector;
+    bool myTempBool = true;
+    returnVector = a.getRelation();
     return returnVector;
 }
 
