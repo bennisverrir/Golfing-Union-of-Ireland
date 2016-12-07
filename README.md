@@ -89,6 +89,7 @@ delete
 
 (delete options)
 
+
 Who do you want to delete? John Doe ("John Doe" is a sample input, expects a string (name), empty string displays full list)
 
 No.    Name                          Gender     Born       Died      
