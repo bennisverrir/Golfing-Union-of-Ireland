@@ -6,6 +6,7 @@
 #include <iomanip>
 #include "legend.h"
 #include "service.h"
+#include "relation.h"
 
 class ConsoleUI
 {
