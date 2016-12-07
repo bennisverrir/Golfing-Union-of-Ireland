@@ -20,11 +20,15 @@ public:
         void setSearchField (int toSearch);
         void setSearchField (char toSearch);
         void setSearchField (bool toSearch);
+        string getTableName () const;
+        int getCaseField() const;
+        string getSearchField() const;
         vector <Legend> requestLegendSearch();
         vector <Computer> requestComputerSearch();
         vector <Relation> requestRelationSearch();
         void requestLegendAdd(string name, char gender, int born, int death);
         void requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt, int index);
+        void requestRelationAdd (string scientistName, string computerName);
         vector <Legend> requestLegendSort();
         vector <Computer> requestComputerSort();
         vector<string> requestComputerTypes();
