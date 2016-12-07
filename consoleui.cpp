@@ -150,9 +150,7 @@ void ConsoleUI::run()
 
             do
             {
-                cout << "Enter one of the following commands:" << endl;
-                cout << "[1] - to list all the scientists" << endl;
-                cout << "[2] - to list all the computers" << endl;
+                coutChoice(command);
 
                 cin >> command2;
                 _service.setTableName(command2);
@@ -176,9 +174,7 @@ void ConsoleUI::run()
     {
         int command3;
             do{
-             cout << "Enter one of the following commands:" << endl;
-             cout << "[1] - to add a scientist" << endl;
-             cout << "[2] - to add a computer" << endl;
+             coutChoice(command);
 
              cin >> command3;
              _service.setTableName(command3);
@@ -205,9 +201,7 @@ void ConsoleUI::run()
     {
         int command4;
           do{
-             cout << "Enter one of the following commands:" << endl;
-             cout << "1 - to find a scientist" << endl;
-             cout << "2 - to find a computer" << endl;
+            coutChoice(command);
 
              cin >> command4;
              _service.setTableName(command4);
@@ -245,6 +239,31 @@ void ConsoleUI::run()
     cout << endl;
 
     }while(command != 6);
+}
+
+void ConsoleUI::coutChoice(int command)
+{
+    string com = " ";
+    if(command == 1)
+    {
+        cout << "Enter one of the following commands:" << endl;
+        cout << "[1] - to list scientists" << endl;
+        cout << "[2] - to list computers" << endl;
+    }
+    else if(command == 2)
+    {
+        com = "add";
+    }
+    else if(command ==3){
+        com = "find";
+    }
+    if(command ==2||command==3)
+    {
+    cout << "Enter one of the following commands:" << endl;
+    cout << "[1] - to "<< com <<" a scientist" << endl;
+    cout << "[2] - to "<< com <<" a computer" << endl;
+    }
+
 }
 
 /*function commandList, @return void.
@@ -287,7 +306,7 @@ void ConsoleUI::commandAdd()
     getDeath(death, born);
     _service.requestLegendAdd(name, gender, born, death);
 
-    cout << endl << "Legend Added!" << endl;
+    cout << endl << "Scientist Added!" << endl;
 }
 
 /*Function getName @parm list: name, flag. @return name.

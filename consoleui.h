@@ -8,6 +8,7 @@
 #include "service.h"
 #include "relation.h"
 
+
 class ConsoleUI
 {
 public:
@@ -16,7 +17,7 @@ public:
 private:
     Service _service;
     //ComputerService  _cService;
-
+    void coutChoice(int command);
     void displayCommands();
     void commandList();
     //void checkForFileError();
