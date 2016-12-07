@@ -650,24 +650,30 @@ void ConsoleUI::commandClear()
 void ConsoleUI::commandAddComputer()
 {
     string computerName;
+    string scientistName;
     int buildYear;
     int index = 0;
     string computerType;
     bool wasBuilt;
     bool valid;
+    char built;
 
 
-    cout << "The name of the computer? ";
+    cout << "Enter the name: ";
 
     cin.ignore();
     getline(cin,computerName);
-
-    cout << "What year was it built? ";
-    validateInput(buildYear);
+    cout << "was it built (y/n): ";
+    cin >> built;
+    if(built == 'y')
+    {
+        cout << "Year of build (4 digits): ";
+        validateInput(buildYear);
+    }
 
     commandListComputerTypes();
 
-    cout << "What computer Type? ";
+    cout << "Enter Computer Type(0-" << _service.requestComputerTypes().size() << "): ";
     cin >> index;
 
     if(index == 0)
@@ -677,31 +683,27 @@ void ConsoleUI::commandAddComputer()
     }
 
     char yesNo;
-
-    cout << "Want to add a relation? ";
-    cin >> yesNo;
-
-    if(yesNo == 'y')
-    {
-        _service.setCaseField(1);
-        vector<Legend> print = _service.requestLegendSort();
-        cout << print;
-
-
-        int indexCommand;
-
-        cout << "What relation? ";
-        cin >> indexCommand;
-
-
-        for(unsigned int i = 0; i < print.size(); i++)
-        {
-            cout << i << " SOL " << print[i].getName() << endl;
-        }
-    }
-
     _service.requestComputerAdd(computerName, buildYear, computerType, wasBuilt, index);
 
+    do{
+        cout << "Add relation (y/n): ";
+        cin >> yesNo;
+
+        if(yesNo == 'y')
+        {
+            _service.setCaseField(1);
+            vector<Legend> print = _service.requestLegendSort();
+            cout << print;
+
+            int indexCommand;
+
+            cout << "Relation (1-"<<_service.requestLegendSort().size() <<"): ";
+            cin >> indexCommand;
+            scientistName = print[indexCommand-1].getName();
+        }
+        _service.requestRelationAdd(scientistName, computerName);
+
+    }while(yesNo != 'n' || yesNo != 'N');
 }
 
 void ConsoleUI::commandListComputers()
