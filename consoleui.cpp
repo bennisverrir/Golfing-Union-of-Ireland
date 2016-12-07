@@ -146,9 +146,6 @@ void ConsoleUI::run()
 
         if (command == 1)
         {
-
-           // do
-          //  {
                 coutChoice(command);
 
                 validateInput2(command);
@@ -162,17 +159,10 @@ void ConsoleUI::run()
                 {
                     commandListComputers();
                 }
-               // else
-               // {
-               //     cout << "please enter a valid command" << endl;
-                //}
-                
-            //  }while(command != 1 && command != 2);
          }   
     else if (command == 2)
     {
         int command;
-           // do{
              coutChoice(command);
 
              validateInput2(command);
@@ -185,11 +175,7 @@ void ConsoleUI::run()
             {
                 commandAddComputer();
             }
-           // else
-           // {
-           //     cout << "please enter a valid command" << endl;
-         //   }
-           // }while(command != 1 && command != 2);
+
     }
 
     else if (command == 4)
@@ -199,7 +185,7 @@ void ConsoleUI::run()
      else if (command == 3)
     {
         int command;
-          //do{
+          
             coutChoice(command);
 
              validateInput(command);
@@ -215,8 +201,7 @@ void ConsoleUI::run()
                 else
                // {
                     cout << "please enter a valid command" << endl;
-               // }
-              //  }while(command != 1 && command != 2);
+
     }
     else if(command == 5)
     {
