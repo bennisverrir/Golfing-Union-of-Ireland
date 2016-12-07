@@ -8,6 +8,8 @@ void Service::setTableName (int command){
         _tableName = "Scientists";
     } else if (command == 2){
         _tableName = "Computers";
+    } else if (command == 3){
+        _tableName = "Relations";
     }
 }
 
@@ -35,19 +37,26 @@ void Service::setSearchField (bool toSearch){
         _searchString = "0";
     }
 }
+string Service::getTableName(){
+    return _tableName;
+}
+int Service::getCaseField (){
+    return _caseField;
+}
+string Service::getSearchField(){
+    return _searchString;
+}
 
 vector <Legend> Service::requestLegendSearch(){
     vector <Legend> returnVector;
-    bool myTempBool = true;
-    returnVector = a.findLegend (_caseField, _searchString, myTempBool);
+    returnVector = a.findLegend (_caseField, _searchString);
 
     return returnVector;
 }
 
 vector <Computer> Service::requestComputerSearch(){
     vector <Computer> returnVector;
-    bool myTempBool = true;
-    //returnVector = a.findComputer (_caseField, _searchString, myTempBool);
+    returnVector = a.findComputer (_caseField, _searchString);
     return returnVector;
 }
 vector <Relation> Service::requestRelationSearch(){
@@ -68,6 +77,10 @@ void Service::requestComputerAdd(string name, int yearBuilt, string computerType
     bool myTempBool = true;
     a.writeComputerFile (myNewComputer, myTempBool, index);
 }
+void Service::requestRelationAdd (string scientistName, string computerName){
+
+}
+
 vector <Legend> Service::requestLegendSort(){
 
     return a.sortLegend(_caseField);
