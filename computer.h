@@ -10,8 +10,10 @@ class Computer
 public:
     Computer();
     Computer(string name, int buildYear, string computerType, bool wasBuilt);
+    Computer (int iD, string name, int buildYear, string computerType, bool wasBuilt);
 
     friend bool operator == (Computer &lhs, Computer &rhs);
+    void setID(int iD);
     void setName(string);
     void setBuildYear(int);
     void setComputerType(string);
@@ -26,6 +28,7 @@ private:
     int _buildYear;
     string _computerType;
     bool _wasBuilt;
+    int _myID;
 };
 
 #endif // COMPUTER_H

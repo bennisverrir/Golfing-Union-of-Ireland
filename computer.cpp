@@ -23,6 +23,18 @@ Computer::Computer(string name, int buildYear, string computerType, bool wasBuil
     setComputerType(computerType);
     setWasBuilt(wasBuilt);
 }
+Computer::Computer (int iD, string name, int buildYear, string computerType, bool wasBuilt)
+{
+    setID (iD);
+    setName(name);
+    setBuildYear(buildYear);
+    setComputerType(computerType);
+    setWasBuilt(wasBuilt);
+}
+void Computer::setID(int iD)
+{
+    _myID = iD;
+}
 
 void Computer::setName(string name)
 {
