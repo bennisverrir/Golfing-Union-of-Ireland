@@ -33,10 +33,14 @@ public:
     vector<Computer> findComputer(int whatToFind, string find);
     vector<string> getComputerTypes();
     void addComputerType(string newComputerType);
-    vector<Relation> getRelation();
+    vector<Relation> sortRelation(int sort, bool ascDesc);
     void addRelation(Relation relation);
     void editLegend(Legend oldLegend, Legend editLegend);
+    void editComputer(Computer oldComputer, Computer editComputer);
+    void editRelation(Relation relation);
     int getID(QSqlQuery query, QString name, QString tableName);
+    void findNonRelatedRelation(Legend scientist);
+    void findNonRelatedRelation(Computer computer);
 private:
     const string fileName = "legend.txt";
 };

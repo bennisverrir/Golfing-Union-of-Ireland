@@ -115,6 +115,15 @@ vector<Legend> dataAccess::sortLegend(int sort, bool ascDesc)
     QString order = "ORDER BY ";
     QString reverse;
 
+    if (ascDesc)
+    {
+        reverse = " ASC";
+    }
+    else
+    {
+        reverse = " DESC";
+    }
+
 
     switch(sort)
     {
@@ -132,16 +141,8 @@ vector<Legend> dataAccess::sortLegend(int sort, bool ascDesc)
         break;
         case 4:
             order = "";
+            reverse = "";
         break;
-    }
-
-    if (ascDesc)
-    {
-        reverse = " ASC";
-    }
-    else
-    {
-        reverse = " DESC";
     }
 
     vector<Legend> returnLegends;
@@ -260,12 +261,11 @@ vector<Computer> dataAccess::findComputer(int whatToFind, string find)
         case 0:
             collumnToFind = "c.Name ";
             keyWord = "LIKE ";
-            findString  = "'%" + findString + "%'";
+
         break;
         case 1:
             collumnToFind = "c.BuildYear ";
             keyWord = "= ";
-            findString = "'" + findString + "'";
         break;
         case 2:
             collumnToFind = "c.WasBuilt ";
@@ -276,6 +276,8 @@ vector<Computer> dataAccess::findComputer(int whatToFind, string find)
             keyWord = "LIKE ";
         break;
     }
+
+    findString  = "'%" + findString + "%'";
 
     qDebug() << "STRING " << findString << endl;
 
@@ -327,14 +329,44 @@ void dataAccess::addComputerType(string newComputerType)
 
 }
 
-vector<Relation> dataAccess::getRelation()
+vector<Relation> dataAccess::sortRelation(int sort, bool ascDesc)
 {
+    QString order = "";
+    QString orderCommand = " Order By ";
+    QString reverse;
+
+    if (ascDesc)
+    {
+        reverse = " ASC";
+    }
+    else
+    {
+        reverse = " DESC";
+    }
+
+    switch(sort)
+    {
+        case 1:
+            order = "s.Name";
+        break;
+
+        case 2:
+            order = "c.Name";
+        break;
+
+        case 3:
+            order = "";
+            orderCommand = "";
+            reverse = "";
+        break;
+    }
+
     vector<Relation> returnVector;
 
     QSqlQuery query(db);
 
     QString sqlCommand = "SELECT  s.Name, c.Name AS ComputerName From Scientists s, Computer c, Combine co "
-                         "WHERE  s.ID = co.Sc AND c.ID = co.Co";
+                         "WHERE  s.ID = co.Sc AND c.ID = co.Co " + orderCommand + order;
     string scientistName;
     string computerName;
 
@@ -375,6 +407,30 @@ void dataAccess::addRelation(Relation relation)
 
 }
 
+/*vector<Legend> dataAccess::findNonRelatedRelation(string name)
+{
+    QSqlQuery query(db);
+    QString qName = QString::fromStdString(name);
+    int ID = getID(query, qName, "Combine");
+
+    query.prepare("Select c.Name, c.BuildYear, ct.Name AS TypeName, c.WasBuilt FROM Computer c "
+                  "INNER JOIN ComputerType ct "
+                  "ON c.ComputerTypeID = ct.ID "+ order + sortString);
+
+    query.exec();
+}*/
+
+void dataAccess::findNonRelatedRelation(Computer computer)
+{
+    QSqlQuery query(db);
+    QString qName = QString::fromStdString(computer.getName());
+    int ID = getID(query, qName, "Combine");
+
+    query.prepare("SELECT Sc, Co FROM Combine WHERE Co != " + ID);
+
+    query.exec();
+}
+
 void dataAccess::editLegend(Legend oldLegend, Legend editLegend)
 {
     QSqlQuery query(db);
@@ -396,6 +452,34 @@ void dataAccess::editLegend(Legend oldLegend, Legend editLegend)
 
 }
 
+void dataAccess::editComputer(Computer oldComputer, Computer editComputer)
+{
+    QSqlQuery query(db);
+
+    QString name = QString::fromStdString(editComputer.getName());
+    QString oldName = QString::fromStdString(oldComputer.getName());
+    QString ID = QString::fromStdString(to_string(getID(query, oldName, "Scientists")));
+    QString buildYear = QString::fromStdString(to_string(editComputer.getBuildYear()));
+    QString wasBuilt = QString::fromStdString(to_string(editComputer.getBuildYear() == 0 ? 0 : 1));
+    QString computerType = QString::fromStdString(editComputer.getComputerType());
+
+    int computerTypeID = 0;
+
+    query.exec("SELECT * FROM ComputerType WHERE Name LIKE " + computerType);
+
+    computerTypeID = query.value("ID").toUInt();
+
+    QString command = "UPDATE Computer"
+                      " SET Name = '" + name + "',  BuildYear = '" + buildYear +
+                      "' , ComputerTypeID = " + computerTypeID + ", BuildYear = " + buildYear +
+                      ", WasBuilt = " + wasBuilt +
+                      " WHERE ID = " + ID;
+
+    qDebug() << "COMMAND: " << command << endl;
+
+    query.exec(command);
+}
+
 int dataAccess::getID(QSqlQuery query, QString name, QString tableName)
 {
     query.exec("SELECT ID, Name FROM " + tableName + " WHERE Name LIKE '" + name + "'");
@@ -404,4 +488,24 @@ int dataAccess::getID(QSqlQuery query, QString name, QString tableName)
     int returnInt = query.value("ID").toUInt();
 
     return returnInt;
+}
+
+void dataAccess::editRelation(Relation relation)
+{
+
+    QSqlQuery query(db);
+    QString scientistName = QString::fromStdString(relation.getLegendName());
+    QString computerName = QString::fromStdString(relation.getComputerName());
+    QString scientistID = 0;
+    QString computerID = 0;
+
+    scientistID = QString::fromStdString(to_string(getID(query, scientistName, "Scientists")));
+
+    computerID =  QString::fromStdString(to_string(getID(query, computerName, "Computer")));
+
+    query.prepare("UPDATE Combine"
+                  " SET Sc = " + scientistID + ", Co = " + computerID);
+
+    query.exec();
+
 }
