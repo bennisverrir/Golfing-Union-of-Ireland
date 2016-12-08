@@ -310,8 +310,10 @@ void ConsoleUI::commandListScientists()
     _numOfChoices = 5;
     validateCommand(sortCommand);
 
-    ascDesc();
-
+    if(sortCommand != 5)
+    {
+        ascDesc();
+    }
 
     _service.setCaseField(sortCommand);
     cout << _service.requestLegendSort();
@@ -721,17 +723,16 @@ void ConsoleUI::commandListComputers()
     cout << "[3] - Was built" << endl;
     cout << "[4] - Type of computer order" << endl;
     cout << "[5] - No particular sorting" << endl << endl;
-
+    
     _numOfChoices = 5;
     validateCommand(command);
 
-    ascDesc();
-
+    if(command != 5)
+    {
+        ascDesc();
+    }
     _service.setCaseField(command);
-
     cout << _service.requestComputerSort();
-
-
 }
 
 void ConsoleUI::commandEditScientist()
