@@ -103,6 +103,15 @@ vector <Relation> Service::requestRelationSearch()
     returnVector = a.getRelation();
     return returnVector;
 }
+void Service::requestNonRelatedComputer(string scientistName)
+{
+    a.findNonRelatedRelation(scientistName);
+}
+
+void Service::requestNonRelatedScientist(string computerName)
+{
+    a.findNonRelatedRelation (computerName);
+}
 
 void Service::requestLegendAdd(string name, char gender, int born, int death)
 {
@@ -129,25 +138,25 @@ void Service::requestLegendEdit (string name, char gender, int born, int death, 
 }
 void Service::requestComputerEdit (string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer){
     Computer myEditedComputer (name, yearBuilt, computerType, wasBuilt);
-    //a.editComputer(oldComputer, myEditedComputer);
+    a.editComputer(oldComputer, myEditedComputer);
 }
 void Service::requestRelationEdit (string scientistName, string computerName, Relation oldRelation){
     Relation myEditedRelation (scientistName, computerName);
-    //a.editRelation (oldRelation, myEditedRelation);
+    a.editRelation (oldRelation, myEditedRelation);
 }
 
 vector <Legend> Service::requestLegendSort()
 {
-    return a.sortLegend(_caseField, _ascDeseOrder);
+    return a.sortLegend(_caseField, _ascDescOrder);
 }
 
 vector <Computer> Service::requestComputerSort()
 {
-    return a.sortComputer(_caseField);
+    return a.sortComputer(_caseField, _ascDeseOrder);
 }
 vector <Relation> Service::requestRelationSort()
 {
-    //return a.sortRelation(_caseField);
+    return a.sortRelation(_caseField, _ascDeseOrder);
 }
 
 vector <string> Service::requestComputerTypes()

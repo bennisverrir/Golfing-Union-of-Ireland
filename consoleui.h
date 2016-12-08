@@ -22,6 +22,7 @@ private:
     void commandListScientists();
     //void checkForFileError();
     void commandAddScientist();
+    void commandEditComputer();
     void getName(string &name);
     bool checkName(string name, bool flag);
     string rightName(string name);

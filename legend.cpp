@@ -23,6 +23,18 @@ Legend::Legend(string name, char gender, int born, int death)
     setBorn(born);
     setDeath(death);
 }
+Legend::Legend (int iD, string name, char gender, int born, int death)
+{
+    setID (iD);
+    setName(name);
+    setGender(gender);
+    setBorn(born);
+    setDeath(death);
+}
+void Legend::setID (int iD)
+{
+    _myID = iD;
+}
 
 void Legend::setName(string name)
 {

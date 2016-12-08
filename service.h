@@ -27,6 +27,8 @@ public:
         vector <Legend> requestLegendSearch();
         vector <Computer> requestComputerSearch();
         vector <Relation> requestRelationSearch();
+        void requestNonRelatedComputer(Legend);
+        void requestNonRelatedScientist(Computer);
         void requestLegendAdd(string name, char gender, int born, int death);
         void requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt, int index);
         void requestRelationAdd (string scientistName, string computerName);

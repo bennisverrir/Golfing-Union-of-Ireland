@@ -768,6 +768,40 @@ void ConsoleUI::commandEditScientist()
     _service.requestLegendEdit(name, toupper(gender), born, death, oldLegend);
 }
 
+void ConsoleUI::commandEditComputer()
+{
+    int index = 0;
+    string name;;
+    bool wasBuilt;
+    int buildYear;
+    string type;
+
+    commandFindComputer();
+
+    cout << "Who do you want to edit? ";
+    cin >> index;
+
+    Computer oldComputer =  _service.requestComputerSearch()[index-1];
+
+    cout << "Old Name: " << oldComputer.getName() << endl;
+    cout << "New Name: ";
+
+    cin.ignore();
+    getline(cin, name);
+    cout << "Old was Built: " << oldComputer.getWasBuilt() << endl;
+    cout << "New was built: ";
+    cin >> wasBuilt;
+    cout << "Old built Year: " << oldComputer.getBuildYear() << endl;
+    cout << "New built Year: ";
+    cin >> buildYear;
+    cout << "Old computer type: " << oldComputer.getComputerType() << endl;
+    cout << "New computer type: ";
+    cin >> type;
+
+    cout << endl;
+
+    _service.requestComputerEdit(name, buildYear, type, wasBuilt, oldComputer);
+}
 void ConsoleUI::commandListComputerTypes()
 {
     cout << _service.requestComputerTypes();
