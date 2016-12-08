@@ -50,6 +50,7 @@ private:
     void ascDesc();
     void validateGender(char &gender);
     void validateInputYN(char &toValidate);
+    void subCommandFindComputer(int command, vector<Computer> &toPrint);
 
 
     int _numOfChoices;

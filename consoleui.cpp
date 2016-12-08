@@ -7,6 +7,7 @@ using namespace std;
 */
 void ConsoleUI::displayCommands()
 {
+    cout << endl;
     cout << "Please enter one of the following numbers:"<< endl;
     cout << "[1] - To list all the computer scientists or computers" << endl;
     cout << "[2] - To add a computer scientist or a computer " << endl;
@@ -340,7 +341,6 @@ void ConsoleUI::commandAddScientist()
     char gender;
     int born;
     int death;
-    bool valid;
 
     getName(name);
     getGender(gender);             //checking for a valid gender
@@ -462,7 +462,7 @@ bool ConsoleUI::checkIfDead()
 {
     char command = ' ';
 
-    cout << "Are they alive (y/n)? ";
+    cout << "Are they alive (Y/N)? ";
 
     validateInputYN(command);
 
@@ -500,6 +500,8 @@ void ConsoleUI::commandFindScientist()
         cout << endl <<"No results from that query!" << endl;
     }
 }//buinn
+
+
 
 /*function subCommandFind, @param an integer value, @return void.
 * validates that the input from the user is an integer value.
@@ -564,15 +566,85 @@ void ConsoleUI::commandFindComputer()
 {
     string name;
 
+    cout << "Which parameter would you like to search for?" << endl;
+    cout << "[1] - Name" << endl;
+    cout << "[2] - Build (year)" << endl;
+    cout << "[3] - Type" << endl;
+
+   /* commandListComputerTypes();
+
+    cout << "Enter Computer Type(0-" << _service.requestComputerTypes().size() << "): ";*/
+    int whatToFind;
+    validateCommand(whatToFind);
+
     _service.setCaseField(1);
-    cout << "What to search? ";
+    //cout << "What to search? "<<endl;
 
-    cin.ignore();
-    getline(cin, name);
+    _service.setCaseField(whatToFind);
+    vector <Computer> toPrint;
 
-    _service.setSearchField(name);
-    cout << _service.requestComputerSearch();
+    subCommandFindComputer(whatToFind, toPrint);
+    if(toPrint.size() > 0)
+    {
+        cout << toPrint;
+    }
+    else
+    {
+        cout << endl <<"No results from that query!" << endl;
+    }
+
+
 }
+
+/*function subCommandFind, @param an integer value, @return void.
+* validates that the input from the user is an integer value.
+*/
+void ConsoleUI::subCommandFindComputer(int command, vector <Computer> &toPrint)
+{
+    switch(command)
+    {
+        case 1:
+        {
+            string name;
+            cout << "Enter a name to search for: ";
+
+            cin.ignore();
+            getline(cin,name);
+
+            name = rightName(name);
+            _service.setSearchField (name);
+
+            toPrint = _service.requestComputerSearch();
+
+            break;
+        }
+        case 2:
+        {
+            int buildYear;
+            cout << "Enter a year to search for: (4 digits):";
+            validateYear(0,buildYear);
+
+            _service.setSearchField(buildYear);
+            toPrint = _service.requestComputerSearch();
+
+            break;
+        }
+        case 3:
+        {
+            int computerType = 0;
+            cout << "Enter a type to search for(1-"<< _service.requestComputerTypes().size() << "): ";
+            commandListComputerTypes();
+            cin >> computerType;
+
+            _service.setCaseField(computerType);
+            _service.setSearchField(_service.requestComputerTypes()[computerType-1]);
+            toPrint = _service.requestComputerSearch();
+
+            break;
+        }
+    }
+}//buinn
+
 
 /*function commandClear, @return void
  * Clears the screen
@@ -590,14 +662,13 @@ void ConsoleUI::commandAddComputer()
     int index = 0;
     string computerType;
     bool wasBuilt;
-    bool valid;
     char built;
 
     cout << "Enter the name: ";
     cin.ignore();
     getline(cin,computerName);
 
-    cout << "was it built (y/n): ";
+    cout << "was it built (Y/N): ";
 
     validateInputYN(built);
     if(built == toupper('y'))
@@ -624,7 +695,7 @@ void ConsoleUI::commandAddComputer()
 
     do
     {
-        cout << "Add relation (y/n): ";
+        cout << "Add relation (Y/N): ";
         validateInputYN(yesNo);
         if(yesNo == 'Y')
         {
@@ -643,8 +714,6 @@ void ConsoleUI::commandAddComputer()
 void ConsoleUI::commandListComputers()
 {
     int command;
-
-    int commandtwo;
 
     cout << "How do you want to sort"<< endl;
     cout << "[1] - Alphabetical order" << endl;
@@ -785,7 +854,7 @@ void ConsoleUI::validateInputYN(char &toValidate)
     toValidate = toupper(toValidate);
     while (cin.fail() || (toValidate != 'Y' && toValidate != 'N'))
     {
-        cout <<endl<< "Please enter (y/n) :";
+        cout <<endl<< "Please enter (Y/N) :";
         std::cin.clear();
         std::cin.ignore(256,'\n');
         cin >> toValidate;
