@@ -19,20 +19,20 @@ private:
     //ComputerService  _cService;
     void coutChoice(int command);
     void displayCommands();
-    void commandList();
+    void commandListScientists();
     //void checkForFileError();
-    void commandAdd();
-    string getName(string name);
+    void commandAddScientist();
+    void getName(string &name);
     bool checkName(string name, bool flag);
     string rightName(string name);
     void getGender(char &gender);
     void getBorn(int &born);
-    void validateInput (int &intValue);
-    void validateInput2 (int &command);
+    void validateCommand (int &command);
+    void validateYear (int begin, int &input);
     void getDeath(int &death, int born);
     bool checkIfDead();
     void commandDelete();
-    void commandFind();
+    void commandFindScientist();
     void subCommandFind(int command, vector <Legend> &toPrint);
     void commandClear();
     void fortyTwo();
@@ -46,7 +46,14 @@ private:
     void commandListComputerTypes();
     void addComputerType();
     void commandFindComputer();
-    void commandEdit();
+    void commandEditScientist();
+    void ascDesc();
+    void validateGender(char &gender);
+    void validateInputYN(char &toValidate);
+
+
+    int _numOfChoices;
+    int _currentYear = 2016;
 };
 
 #endif // CONSOLEUI_H

@@ -154,8 +154,6 @@ vector<Legend> dataAccess::sortLegend(int sort, bool ascDesc)
 
     query.exec("Select * FROM Scientists " + order + sortString + reverse);
 
-    qDebug() << "command; " << command << endl;
-
     returnLegends = pushingLegendVector(query);
 
     return returnLegends;

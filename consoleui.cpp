@@ -111,7 +111,7 @@ ostream& operator << (ostream& out, const vector<string>& rhs)
 
 ostream& operator << (ostream& out, const vector<Relation>& rhs)
 {
-    out << setw(7) << left << "No." << setw(30) << left << "Name" << setw(10) << "Computer Name"  << endl;
+    out << endl << setw(7) << left << "No." << setw(30) << left << "Name" << setw(10) << "Computer Name"  << endl;
 
     for(int i = 0; i < 40; i++)
     {
@@ -123,6 +123,8 @@ ostream& operator << (ostream& out, const vector<Relation>& rhs)
     {
         out << setw(7) << (i+1) << setw(30) << rhs[i].getLegendName() << setw(10) << rhs[i].getComputerName() << endl;
     }
+
+    out << endl;
 
     return out;
 }
@@ -137,134 +139,165 @@ ConsoleUI::ConsoleUI(){}
 */
 void ConsoleUI::run()
 {
-    int command;
-
-    do{
-
+    int command = 0;
+    int subCommand = 0;
+    while(command != 6)
+    {
         displayCommands();
-        validateInput(command);
+        _numOfChoices = 6;
 
-        if (command == 1)
+        validateCommand(command);
+
+        switch(command)
         {
+            case 1:
                 coutChoice(command);
 
-                validateInput2(command);
-                _service.setTableName(command);
+                _numOfChoices = 2;
 
-                if(command == 1)
-                { 
-                    commandList();
+                validateCommand(subCommand);
+
+                if(subCommand == 1)
+                {
+                    commandListScientists();
                 }
-                else if(command == 2)
+                else if(subCommand == 2)
                 {
                     commandListComputers();
                 }
-         }   
-    else if (command == 2)
-    {
-        int command;
-             coutChoice(command);
-
-             validateInput2(command);
-             _service.setTableName(command);
-            if(command == 1)
-            {
-                commandAdd();
-            }
-            else if(command == 2)
-            {
-                commandAddComputer();
-            }
-
-    }
-
-    else if (command == 4)
-    {
-        commandEdit();
-    }
-     else if (command == 3)
-    {
-        int command;
-          
-            coutChoice(command);
-
-             validateInput(command);
-             _service.setTableName(command);
-                if(command == 1)
+                else if(subCommand == 3)
                 {
-                    commandFind();
+                    cout << _service.requestRelationSearch();
                 }
-                else if(command == 2)
+
+            break;
+
+            case 2:
+                coutChoice(command);
+
+                _numOfChoices = 2;
+
+                validateCommand(subCommand);
+
+                if(subCommand == 1)
+                {
+                    commandAddScientist();
+                }
+                else if(subCommand == 2)
+                {
+                    commandAddComputer();
+                }
+
+            break;
+
+            case 3:
+                coutChoice(command);
+
+                _numOfChoices = 2;
+
+                validateCommand(subCommand);
+
+                if(subCommand == 1)
+                {
+                    commandFindScientist();
+                }
+                else if(subCommand == 2)
                 {
                     commandFindComputer();
                 }
-    }
-    else if(command == 5)
-    {
-        commandClear();
-    }
-    else if(command == 42)
-    {
-        fortyTwo();
-    }
-    else if(command == 999)
-    {
-       cout << _service.requestRelationSearch();
-    }
-    else
-    {
-        if(command != 6)
-        {cout << "Invalid Command!" << endl;}
-    }
-    cout << endl;
+            break;
 
-    }while(command != 6);
-}
-void ConsoleUI::validateInput2(int &command)
+            case 4:
+                coutChoice(command);
+
+                _numOfChoices = 2;
+
+                validateCommand(subCommand);
+
+                if(subCommand == 1)
+                {
+                    commandEditScientist();
+                }
+                else if(subCommand == 2)
+                {
+                    //commandEditComputer();
+                }
+            break;
+
+            case 5:
+                commandClear();
+            break;
+
+            case 6:
+                exit(1);
+            break;
+
+            case 42:
+                fortyTwo();
+            break;
+        }
+    }
+}//BUINN
+void ConsoleUI::validateCommand(int &command)
 {
     cin >> command;
-    while (cin.fail() || command != 2 && command != 1)      // runs if input is not an integer value
-    {      
-        cout <<endl<< "Please enter a valid input!!!" << endl;
-        std::cin.clear();
-        std::cin.ignore(256,'\n');
+
+    while (cin.fail() || ( command > _numOfChoices  && command < 0))
+    {
+        cout << endl << "Please enter a valid input" << endl;
+        cin.clear();
+        cin.ignore(256,'\n');
         cin >> command;
     }
 }
 
-void ConsoleUI::coutChoice(int command)
+void ConsoleUI::validateYear (int begin, int &input)
 {
+    cin >> input;
+    while (cin.fail() || (input < begin || input >_currentYear)){
+        cout << endl << "Please enter a valid input." << endl;
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> input;
+    }
+}
+
+void ConsoleUI::coutChoice(int command)
+{  
     string com = " ";
-    if(command == 1)
+
+    switch(command)
     {
-        cout << "Enter one of the following commands:" << endl;
-        cout << "[1] - to list scientists" << endl;
-        cout << "[2] - to list computers" << endl;
+        case 1:
+            com = "list";
+        break;
+
+        case 2:
+            com = "add";
+        break;
+
+        case 3:
+            com = "find";
+        break;
+
+        case 4:
+            com = "edit";
+        break;
     }
-    else if(command == 2)
-    {
-        com = "add";
-    }
-    else if(command ==3){
-        com = "find";
-    }
-    if(command ==2||command==3)
-    {
     cout << "Enter one of the following commands:" << endl;
-    cout << "[1] - to "<< com <<" a scientist" << endl;
-    cout << "[2] - to "<< com <<" a computer" << endl;
-    }
+    cout << "[1] - to " << com << " scientists" << endl;
+    cout << "[2] - to " << com << " computers" << endl;
+    cout << "[3] - to " << com << " relations" << endl;
 
 }
+//buinn
 
 /*function commandList, @return void.
 *outputs a list of sorting catagories and their commands, then outputs that to the sort function.
 */
-void ConsoleUI::commandList()
+void ConsoleUI::commandListScientists()
 {
     int sortCommand;
-
-    int ascDesc;
 
     cout << "How do you want to sort"<< endl;
     cout << "[1] - Alphabetical order" << endl;
@@ -273,28 +306,35 @@ void ConsoleUI::commandList()
     cout << "[4] - Still alive order(those who are still alive appear first)" << endl;
     cout << "[5] - No particular sorting" << endl << endl;
 
-    cin >> sortCommand;
+    _numOfChoices = 5;
+    validateCommand(sortCommand);
+
+    ascDesc();
+
+
+    _service.setCaseField(sortCommand);
+    cout << _service.requestLegendSort();
+
+}
+//buinn
+void ConsoleUI::ascDesc()
+{
+    int ascDesc;
 
     cout << "Do you want it:" << endl;
     cout << "[1] - Ascending" << endl;
     cout << "[2] - Descending"  << endl;
 
-    cin >> ascDesc;
-
-    _service.setCaseField(sortCommand);
+    _numOfChoices = 2;
+    validateCommand(ascDesc);
 
     _service.setAscDescOrder(ascDesc);
-
-    //sort(sortCommand);
-    cout << _service.requestLegendSort();
-
-
 }
-
+//buinn
 /*Function commandAdd checks if the year @parm list: gender, born, death, valid @return void.
 This function checks if the input name is valid, if it is already in the list.
 */
-void ConsoleUI::commandAdd()
+void ConsoleUI::commandAddScientist()
 {
     string name;
     char gender;
@@ -302,39 +342,33 @@ void ConsoleUI::commandAdd()
     int death;
     bool valid;
 
-    name = getName(name);
-    getGender(gender); //checking for a valid gender
+    getName(name);
+    getGender(gender);             //checking for a valid gender
     getBorn(born);
+
     getDeath(death, born);
+
     _service.requestLegendAdd(name, gender, born, death);
-
-    cout << endl << "Scientist Added!" << endl;
+    cout << endl << "Scientist Added!" << endl << endl;
 }
-
 /*Function getName @parm list: name, flag. @return name.
 *Takes the input name and checks if it is valid.
 */
-string ConsoleUI::getName(string name)
+void ConsoleUI::getName(string &name)
 {
     bool flag = true;
-
     do
     {
         cout << "Enter the name: ";
-
         cin.ignore();
         getline(cin,name);
-
         flag = checkName(name, flag);
         if(!flag)
         {
             cout << "Please enter a valid name" << endl;
         }
-
     }while(!flag);
-
     name = rightName(name);
-    return name;
 }
 
 /*Function checkName @parm list: name, flag @return bool(true/false).
@@ -392,19 +426,8 @@ string ConsoleUI::rightName(string name)
 */
 void ConsoleUI::getGender(char &gender)
 {
-    do
-    {
         cout << "Enter the gender (M/F): ";
-        cin >> gender;
-
-        gender = toupper(gender);
-
-        if(gender != toupper('m') && gender != toupper('f'))
-        {
-            cout << "Please enter a valid gender" << endl;
-        }
-
-    }while(gender != toupper('m') && gender != toupper('f'));
+        validateGender(gender);
 }
 
 /*Function getBorn @parm list: born @return void.
@@ -412,34 +435,9 @@ void ConsoleUI::getGender(char &gender)
 */
 void ConsoleUI::getBorn(int &born)
 {
-    do
-    {
         cout << "Enter the year of birth (up to 4 digits): ";
-        validateInput(born);
-
-        if(born < 0 || born > 2016)
-        {
-             cout << "Please enter a valid year of birth" <<endl;
-        }
-
-    }while(born < 0 || born > 2016);
-
-}
-
-/*function validateInput, @param an integer value, @return void.
-* validates that the input from the user is an integer value.
-*/
-void ConsoleUI::validateInput(int &intValue)
-{
-    cin >> intValue;
-    while (cin.fail())      // runs if input is not an integer value
-    {
-        cout <<endl<< "Please enter a valid input" << endl;
-        std::cin.clear();
-        std::cin.ignore(256,'\n');
-        cin >> intValue;
-    }
-}
+        validateYear(0, born);
+}//buinn
 
 /*Function getDeath checks if the year @parm list: death @return void.
 *Checks if the year of death is valid.
@@ -448,23 +446,14 @@ void ConsoleUI::getDeath(int &death, int born)
 {
    if(checkIfDead())
    {
-        do
-        {
-            cout << "Enter the year of death (up to 4 digits): ";
-            validateInput(death);
-
-            if(death < born || death > 2016)
-            {
-                cout << "Please enter a valid year of death" << endl;
-            }
-
-        }while(death < born || death > 2016);
-    }
-    else
+       cout << "Enter the year of death (up to 4 digits): ";
+       validateYear(born, death);
+   }
+   else
    {
        death = 0;
    }
-}
+}//buinn
 
 /*Function checkIfDead @parm list: command @return bool(true/false).
 *Checks if the person is still alive, and errorchecks the input.
@@ -473,19 +462,9 @@ bool ConsoleUI::checkIfDead()
 {
     char command = ' ';
 
-    while(command != toupper('y') && command != toupper('n'))
-    {
-        cout << "Are they alive (y/n)? ";
+    cout << "Are they alive (y/n)? ";
 
-        cin >> command;
-
-        command = toupper(command);
-
-        if(command != toupper('y') && command != toupper('n'))
-        {
-            cout << "Please enter a valid command" << endl;
-        }
-    }
+    validateInputYN(command);
 
     if(command == toupper('y'))
     {
@@ -497,15 +476,17 @@ bool ConsoleUI::checkIfDead()
     }
 }
 
-void ConsoleUI::commandFind()
+void ConsoleUI::commandFindScientist()
 {
     cout << "Which parameter would you like to search for?" << endl;
     cout << "[1] - Name" << endl;
     cout << "[2] - Gender" << endl;
     cout << "[3] - Born (year)" << endl;
     cout << "[4] - Died (year)" << endl;
+
     int whatToFind;
-    cin >> whatToFind;
+    validateCommand(whatToFind);
+
     _service.setCaseField(whatToFind);
     vector <Legend> toPrint;
 
@@ -518,62 +499,66 @@ void ConsoleUI::commandFind()
     {
         cout << endl <<"No results from that query!" << endl;
     }
-}
+}//buinn
 
 /*function subCommandFind, @param an integer value, @return void.
 * validates that the input from the user is an integer value.
 */
 void ConsoleUI::subCommandFind(int command, vector <Legend> &toPrint)
 {
-    if (command == 1)
+    switch(command)
     {
-        string name;
-        cout << "Enter a name to search for: ";
-        
-        cin.ignore();
-        getline(cin,name);
-
-        name = rightName(name);
-        _service.setSearchField (name);
-
-        toPrint = _service.requestLegendSearch(); // sends the input name into the search function
-                                             // and assigns its value to the return value.
-
-    } 
-    else if (command == 2)
-    {
-        char gender;
-        cout << "Enter a gender to search for(M/F): ";
-        cin >> gender;
-        if (toupper (gender) == 'M'|| toupper(gender) == 'F')
+        case 1:
         {
+            string name;
+            cout << "Enter a name to search for: ";
+
+            cin.ignore();
+            getline(cin,name);
+
+            name = rightName(name);
+            _service.setSearchField (name);
+
+            toPrint = _service.requestLegendSearch();
+
+            break;
+        }
+        case 2:
+        {
+            char gender;
+            cout << "Enter a gender to search for(M/F): ";
+            cin >> gender;
+            validateGender(gender);
             _service.setSearchField(gender);
-            toPrint = _service.requestLegendSearch();           //sends in the input gender to the
-                                                             //search function.
+            toPrint = _service.requestLegendSearch();
 
+            break;
         }
-
-        else
+        case 3:
         {
-            cout << "Please enter a valid gender (M/F): ";
-            subCommandFind (command, toPrint);
-        }
-    } 
-    else if (command == 3 || command == 4)
-    {
-        int year;
-        cout << "Enter a year to search for: (3 or 4 digits)";
-        validateInput(year);
-        _service.setSearchField(year);
-        toPrint = _service.requestLegendSearch();
+            int born = 0;
+            cout << "Enter a year to search for: (3 or 4 digits): ";
+            validateYear(0,born);
 
+            _service.setSearchField(born);
+            toPrint = _service.requestLegendSearch();
+
+            break;
+        }
+        case 4:
+        {
+            int death = 0;
+
+            cout << "Enter a year to search for: (3 or 4 digits): ";
+            validateYear(0, death);
+
+            _service.setSearchField(death);
+            toPrint = _service.requestLegendSearch();
+
+            break;
+        }
     }
-    else
-    {
-        cout << "Please enter a valid command (n/g/b/d)" << endl;
-        commandFind();
-    }
-}
+}//buinn
 
 void ConsoleUI::commandFindComputer()
 {
@@ -608,22 +593,23 @@ void ConsoleUI::commandAddComputer()
     bool valid;
     char built;
 
-
     cout << "Enter the name: ";
-
     cin.ignore();
     getline(cin,computerName);
+
     cout << "was it built (y/n): ";
-    cin >> built;
-    if(built == 'y')
+
+    validateInputYN(built);
+    if(built == toupper('y'))
     {
         cout << "Year of build (4 digits): ";
-        validateInput(buildYear);
+        validateYear(0, buildYear);
     }
 
     commandListComputerTypes();
 
     cout << "Enter Computer Type(0-" << _service.requestComputerTypes().size() << "): ";
+
     cin >> index;
 
     if(index == 0)
@@ -633,29 +619,27 @@ void ConsoleUI::commandAddComputer()
     }
 
     char yesNo;
+
     _service.requestComputerAdd(computerName, buildYear, computerType, wasBuilt, index);
 
-    do{
+    do
+    {
         cout << "Add relation (y/n): ";
-        cin >> yesNo;
-
-        if(yesNo == 'y')
+        validateInputYN(yesNo);
+        if(yesNo == 'Y')
         {
+            int indexCommand;
             _service.setCaseField(1);
             vector<Legend> print = _service.requestLegendSort();
             cout << print;
-
-            int indexCommand;
-
             cout << "Relation (1-"<<_service.requestLegendSort().size() <<"): ";
             cin >> indexCommand;
+
             scientistName = print[indexCommand-1].getName();
+            _service.requestRelationAdd(scientistName, computerName);
         }
-        _service.requestRelationAdd(scientistName, computerName);
-
-    }while(yesNo != 'n' || yesNo != 'N');
+    }while(yesNo != 'N');
 }
-
 void ConsoleUI::commandListComputers()
 {
     int command;
@@ -669,25 +653,19 @@ void ConsoleUI::commandListComputers()
     cout << "[4] - Type of computer order" << endl;
     cout << "[5] - No particular sorting" << endl << endl;
 
-    cin >> command;
+    _numOfChoices = 5;
+    validateCommand(command);
 
-    cout << "Do you want it:" << endl;
-    cout << "[1] - Ascending" << endl;
-    cout << "[2] - Descending"  << endl;
-
-    cin >> commandtwo;
+    ascDesc();
 
     _service.setCaseField(command);
-
-     _service.setAscDescOrder(commandtwo);
 
     cout << _service.requestComputerSort();
 
 
-
 }
 
-void ConsoleUI::commandEdit()
+void ConsoleUI::commandEditScientist()
 {
     int index = 0;
     string name;
@@ -695,7 +673,7 @@ void ConsoleUI::commandEdit()
     int born = 0;
     int death = 0;
 
-    commandFind();
+    commandFindScientist();
 
     cout << "Who do you want to edit? ";
     cin >> index;
@@ -711,10 +689,10 @@ void ConsoleUI::commandEdit()
     cin >> gender;
     cout << "Old birth Year: " << oldLegend.getBorn() << endl;
     cout << "New birth Year: ";
-    validateInput(born);
+    validateYear(0, born);
     cout << "Old death year: " << oldLegend.getDeath() << endl;
     cout << "New death year: ";
-    validateInput(death);
+    validateYear(born,death);
 
     cout << endl;
     
@@ -785,4 +763,31 @@ void ConsoleUI::addComputerType()
     _service.requestComputerTypeAdd(name);
 }
 
+void ConsoleUI::validateGender(char &gender)
+{
+    do
+    {
+        cin >> gender;
+        cin.clear();
+        gender = toupper(gender);
 
+        if(gender != toupper('m') && gender != toupper('f'))
+        {
+            cout << "Please enter a valid gender" << endl;
+        }
+
+    }while(gender != toupper('m') && gender != toupper('f'));
+}
+
+void ConsoleUI::validateInputYN(char &toValidate)
+{
+    cin >> toValidate;
+    toValidate = toupper(toValidate);
+    while (cin.fail() || (toValidate != 'Y' && toValidate != 'N'))
+    {
+        cout <<endl<< "Please enter (y/n) :";
+        std::cin.clear();
+        std::cin.ignore(256,'\n');
+        cin >> toValidate;
+    }
+}
