@@ -145,6 +145,10 @@ vector <Computer> Service::requestComputerSort()
 {
     return a.sortComputer(_caseField);
 }
+vector <Relation> Service::requestRelationSort()
+{
+    //return a.sortRelation(_caseField);
+}
 
 vector <string> Service::requestComputerTypes()
 {

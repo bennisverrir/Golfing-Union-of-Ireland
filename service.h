@@ -35,6 +35,7 @@ public:
         void requestRelationEdit(string scientistName, string computerName, Relation oldRelation);
         vector <Legend> requestLegendSort();
         vector <Computer> requestComputerSort();
+        vector <Relation> requestRelationSort();
         vector <string> requestComputerTypes();
         void requestComputerTypeAdd(string name);
 
