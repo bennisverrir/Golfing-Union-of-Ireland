@@ -111,18 +111,9 @@ void dataAccess::deleteLine(vector<Legend> &deleteLegend, bool &fileOpen){}
 
 vector<Legend> dataAccess::sortLegend(int sort, bool ascDesc)
 {
-    QString sortString;
+    QString sortString = "";
+    QString reverse = "";
     QString order = "ORDER BY ";
-    QString reverse;
-
-    if (ascDesc)
-    {
-        reverse = " ASC";
-    }
-    else
-    {
-        reverse = " DESC";
-    }
 
 
     switch(sort)
@@ -140,9 +131,21 @@ vector<Legend> dataAccess::sortLegend(int sort, bool ascDesc)
             sortString = "Death";
         break;
         case 4:
-            order = "";
-            reverse = "";
-        break;
+            sortString = "";
+    }
+
+    if(sort == 4)
+    {
+        sortString = "";
+        order = "";
+    }
+    else if (ascDesc)
+    {
+        reverse = " ASC";
+    }
+    else
+    {
+        reverse = " DESC";
     }
 
     vector<Legend> returnLegends;
@@ -153,16 +156,18 @@ vector<Legend> dataAccess::sortLegend(int sort, bool ascDesc)
 
     QString command = "Select * FROM Scientists " + order + sortString + reverse;
 
-    query.exec("Select * FROM Scientists " + order + sortString + reverse);
+
+    query.exec(command);
 
     returnLegends = pushingLegendVector(query);
 
     return returnLegends;
 }
 
-vector<Computer> dataAccess::sortComputer(int sort)
+vector<Computer> dataAccess::sortComputer(int sort, bool ascDesc)
 {
     QString sortString;
+    QString reverse;
     QString order = "ORDER BY ";
 
     switch(sort)
@@ -180,8 +185,21 @@ vector<Computer> dataAccess::sortComputer(int sort)
             sortString = "c.WasBuilt";
         break;
         case 4:
-            order = "";
-        break;
+            sortString = "";
+    }
+
+    if (sort == 4)
+    {
+         reverse = "";
+         order = "";
+    }
+    else if (ascDesc)
+    {
+        reverse = " ASC";
+    }
+    else
+    {
+        reverse = " DESC";
     }
 
     vector<Computer> returnLegends;
@@ -190,13 +208,10 @@ vector<Computer> dataAccess::sortComputer(int sort)
 
     QSqlQuery query(db);
 
-    QString sqlCommand = "Select c.Name, c.BuildYear, ct.Name AS TypeName, c.WasBuilt FROM Computer c "
+    QString command = "Select c.Name, c.BuildYear, ct.Name AS TypeName, c.WasBuilt FROM Computer c "
                          "INNER JOIN ComputerType ct "
-                         "ON c.ComputerTypeID = ct.ID "+ order + sortString + " ASC";
-
-    query.exec(sqlCommand);
-
-    qDebug() << "COMMAND: " << sqlCommand;
+                         "ON c.ComputerTypeID = ct.ID " + order + sortString + reverse;
+    query.exec(command);
 
     returnLegends = pushingComputerVector(query);
 
