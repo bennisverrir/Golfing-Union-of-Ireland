@@ -547,21 +547,29 @@ int dataAccess::getID(QSqlQuery query,  QString name, QString tableName)
 *finds scientist by name, gender, birth or death and returns it vector of legand
 *finds relation by name of scientis or name of computer
 */
-vector<Relation> dataAccess::findRelation(string nameToFind)
+vector<Relation> dataAccess::findRelation(string nameToFind, int sort)
 {
     QSqlQuery query(db);
 
-    string scientistName;
-    string computerName;
-    int scientistID;
-    int computerID;
+    QString whatToFind;
+
+    switch(sort)
+    {
+        case 1:
+        whatToFind = "sName";
+        break;
+        case 2:
+        whatToFind = "cName";
+        break;
+    }
+
     QString name = QString::fromStdString(nameToFind);
 
 
     vector<Relation> returnVector;
 
-    QString command = " SELECT  s.Name, s.ID as sID, c.ID ad cID, c.Name AS ComputerName  From Scientists s, Computer c, Combine co"
-                       " ON s.ID = co.Sc AND c.ID = co.Co Where s.Name LIKE '%" + name + "%' OR ComputerName LIKE '%" + name + "%'";
+    QString command = " SELECT  s.Name AS sName, s.ID as sID, c.ID as cID, c.Name AS cName  From Scientists s, Computer c, Combine co"
+                       " ON sID = co.Sc AND cID = co.Co Where " + whatToFind + " LIKE '%" + name + "%'";
 
     query.prepare(command);
 
@@ -572,10 +580,10 @@ vector<Relation> dataAccess::findRelation(string nameToFind)
 
     while(query.next())
     {
-        scientistID = query.value("sID").toUInt();
-        computerID = query.value("cID").toUInt();
-        scientistName = query.value("Name").toString().toStdString();
-        computerName = query.value("ComputerName").toString().toStdString();
+        int scientistID = query.value("sID").toUInt();
+        int computerID = query.value("cID").toUInt();
+        string scientistName = query.value("sName").toString().toStdString();
+        string computerName = query.value("cName").toString().toStdString();
 
         returnVector.push_back(Relation(scientistID, computerID, scientistName, computerName));
     }
