@@ -25,50 +25,82 @@ void ConsoleUI::displayCommands()
 ostream& operator << (ostream& out,const vector<Legend>& rhs)
 {
     out << endl;
-
-    out << setw(7) << left <<  "No." << setw(30) << left << "Name" << setw(11) << "Gender" << setw(10) <<
-            "Born" <<  setw(11) << " Died" << endl;
+    cout << "|";
     for(int i = 0; i < 44; i++)
     {
         out << "--";
     }
+    cout << "|";
+    out << endl;
+    cout << "|";
+    out << setw(7) << left <<  "No." << setw(30) << left << "Name" << setw(11) << "Gender" << setw(10) <<
+            "Born" <<  setw(11) << " Died                         |" << endl;
+
+    cout << "|";
+    for(int i = 0; i < 44; i++)
+    {
+        out << "--";
+    }
+    cout << "|";
     out << endl;
 
     for (size_t i = 0; i < rhs.size(); i++) //creating the output table
     {
+        cout << "|";
         out << setw(7) << (i+1) << setw(30) << left << rhs[i].getName();
+
         out << setw(10) << rhs[i].getGender() << " ";
+
         out << setw(10) <<  rhs[i].getBorn() << " ";
         if(rhs[i].getDeath() != 0)                                      // output information about legend.
         {
             out << setw(10) << rhs[i].getDeath();
             out << setw(5) <<"Died " << rhs[i].getDeathAge() <<" years old";
+            cout << "  |";
         }
         else
         {
             out << setw(10) << "     " << rhs[i].getAge()<< " years old";
+            cout << "       |";
         }
 
         out << endl;
-    }
 
+    }
+    cout << "|";
+    for(int i = 0; i < 44; i++)
+    {
+        out << "--";
+    }
+    cout << "|";
+    cout << endl;
     return out;
 }
 ostream& operator << (ostream& out,const vector<Computer>& rhs)
 {
     out << endl;
-
-   out << setw(7) << left <<  "No." << setw(30) << left << "Name" << setw(11) << "Build Year" << setw(5) << " " <<
-            "Computer Type" << endl;
+    cout << "|";
     for(int i = 0; i < 35; i++)
     {
         out << "--";
     }
+    cout << "|";
+    cout << endl;
+    cout << "|";
+   out << setw(7) << left <<  "No." << setw(30) << left << "Name" << setw(11) << "Build Year" << setw(5) << " " <<
+            "Computer Type";
+   cout << "    |" << endl;
+   cout << "|";
+   for(int i = 0; i < 35; i++)
+    {
+        out << "--";
+    }
+   cout << "|";
     out << endl;
 
     for (size_t i = 0; i < rhs.size(); i++) //creating the output table
     {
-
+        cout << "|";
         out << setw(7) << (i+1) << setw(30) << left << rhs[i].getName();
 
         if(rhs[i].getBuildYear() != 0)
@@ -79,11 +111,40 @@ ostream& operator << (ostream& out,const vector<Computer>& rhs)
         {
             out << setw(10) << "    " << setw(6) << " ";
         }
-        out << setw(5) << rhs[i].getComputerType() ;
+        out << setw(5) << rhs[i].getComputerType();
+
+
+
+        if (rhs[i].getComputerType() == "Electrical")
+        {
+            cout << "       |";
+        }
+        else if(rhs[i].getComputerType() == "Electromechanical")
+        {
+            cout << "|";
+        }
+        else if(rhs[i].getComputerType() == "Abstract machine")
+        {
+            cout << " |";
+        }
+        else if(rhs[i].getComputerType() == "Transistor")
+        {
+            cout << "       |";
+        }
+        else if(rhs[i].getComputerType() == "Mechanical")
+        {
+            cout << "       |";
+        }
 
         out << endl;
     }
-
+    cout << "|";
+    for(int i = 0; i < 35; i++)
+    {
+        out << "--";
+    }
+    cout << "|";
+    cout << endl;
     return out;
 }
 
