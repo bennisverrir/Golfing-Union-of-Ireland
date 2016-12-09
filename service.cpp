@@ -173,3 +173,7 @@ vector<Relation> Service::findRelation(string name)
     return a.findRelation(name);
 }
 
+void Service::requestRelationDelete(Relation deleteRelation)
+{
+   a.deleteRelation(deleteRelation);
+}
