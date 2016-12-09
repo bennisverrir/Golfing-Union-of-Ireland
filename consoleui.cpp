@@ -187,16 +187,17 @@ ostream& operator << (ostream& out, const vector<Relation>& rhs)
 {
     int nameLength;
     out << "|";
-    for(int i = 0; i < 33; i++)
+    for(int i = 0; i < 26; i++)
     {
-        out << "--";
+        out << "---";
     }
     out << "|";
-    out << endl<<"|"<< setw(7) << left << "No." << setw(30) << left << "Name" << setw(10) << "Computer Name"  <<"                |"<< endl;
+    out << endl<<"|"<< setw(7) << left << "No." << setw(30) << left << "Name" << setw(10) << "Computer Name"
+        <<"                            |"<< endl;
     out << "|";
-    for(int i = 0; i < 33; i++)
+    for(int i = 0; i < 26; i++)
     {
-        out << "--";
+        out << "---";
     }
     out << "|";
     out << endl;
@@ -205,21 +206,20 @@ ostream& operator << (ostream& out, const vector<Relation>& rhs)
     {
         nameLength = rhs[i].getComputerName().size();
         out << "|" << setw(7) << (i+1) << setw(30) << rhs[i].getLegendName() << setw(10) << rhs[i].getComputerName()
-            <<'\t'<<'\t' << '\t'<<setw(30-nameLength)<<"|" << endl;
-
-
+            <<'\t'<<'\t' << '\t'<< '\t'<<"|" << endl;
     }
 
     out << "|";
-    for(int i = 0; i < 33; i++)
+    for(int i = 0; i < 26; i++)
     {
-        out << "--";
+        out << "---";
     }
     out << "|";
     out << endl;
 
     return out;
 }
+
 
 
 ConsoleUI::ConsoleUI(){}
