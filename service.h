@@ -41,6 +41,7 @@ public:
         void requestComputerTypeAdd(string name);
         vector<Relation> findRelation(string name);
         void requestRelationDelete(Relation deleteRelation);
+        string getJoke();
 
 
 
