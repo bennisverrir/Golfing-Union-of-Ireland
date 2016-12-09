@@ -258,9 +258,13 @@ void Service::requestComputerTypeAdd(string name)
 *
 *
 */
-vector<Relation> Service::findRelation(string name)
+vector<Relation> Service::findRelation(int ID, int select)
 {
-    return a.findRelation(name);
+    return a.findRelation(ID, select);
+}
+vector<Relation> Service::findRelation(string name, int select)
+{
+    return a.findRelation(name, select);
 }
 
 
