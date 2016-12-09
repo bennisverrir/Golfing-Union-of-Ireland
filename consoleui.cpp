@@ -171,7 +171,7 @@ void ConsoleUI::run()
     int subCommand = 0;
     
     
-    while(command != 6)
+    while(command != 7)
     {
         displayCommands();
         _numOfChoices = 6;
