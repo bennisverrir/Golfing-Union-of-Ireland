@@ -35,7 +35,6 @@ void Service::setCaseField (int command)
 
 /*Function setAscDescOrder, @param int
 *Decides where items should be sorted in ascending or descending order in the sorting function.
-*
 */
 void Service::setAscDescOrder (int command)
 {
@@ -49,22 +48,32 @@ void Service::setAscDescOrder (int command)
     }
 }
 
+/*Function setSearchField, @param string
+*Sets the string that will be searched for when passed to the dataAccess layer.
+*/
 void Service::setSearchField (string toSearch)
 {
     _searchString = toSearch;
 }
 
+/*Function setSearchField, @param int
+*Sets the string that will be searched for when passed to the dataAccess layer.
+*/
 void Service::setSearchField (int toSearch)
 {
     _searchString = to_string(toSearch);
 }
-
+/*Function setSearchField, @param char
+*Sets the string that will be searched for when passed to the dataAccess layer.
+*/
 void Service::setSearchField (char toSearch)
 {
     string s(1,toSearch);
     _searchString = s;
 }
-
+/*Function setSearchField, @param bool
+*Sets the string that will be searched for when passed to the dataAccess layer.
+*/
 void Service::setSearchField (bool toSearch)
 {
     if (toSearch)
@@ -76,17 +85,23 @@ void Service::setSearchField (bool toSearch)
         _searchString = "0";
     }
 }
-
+/*Function getTableName, @param
+*gets the name of the currently selected table.
+*/
 string Service::getTableName() const
 {
     return _tableName;
 }
-
+/*Function getCaseField, @param string
+*Gets the currently selected parameter to search for.
+*/
 int Service::getCaseField () const
 {
     return _caseField;
 }
-
+/*Function getSearchField, @param string
+*get the string that was inputted to be searched for.
+*/
 string Service::getSearchField() const
 {
     return _searchString;
