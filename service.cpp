@@ -142,15 +142,18 @@ void Service::requestRelationAdd (int scientistID, int computerID)
     a.addRelation (myNewRelation);
 }
 
-void Service::requestLegendEdit (string name, char gender, int born, int death, Legend oldLegend){
+void Service::requestLegendEdit (string name, char gender, int born, int death, Legend oldLegend)
+{
     Legend myEditedLegend (name, gender, born, death);
     a.editLegend(oldLegend, myEditedLegend);
 }
-void Service::requestComputerEdit (string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer, int index){
+void Service::requestComputerEdit (string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer, int index)
+{
     Computer myEditedComputer (name, yearBuilt, computerType, wasBuilt);
     a.editComputer(oldComputer, myEditedComputer, index);
 }
-void Service::requestRelationEdit (string scientistName, string computerName, Relation oldRelation){
+void Service::requestRelationEdit (string scientistName, string computerName, Relation oldRelation)
+{
     Relation myEditedRelation (scientistName, computerName);
     a.editRelation (oldRelation, myEditedRelation);
 }
