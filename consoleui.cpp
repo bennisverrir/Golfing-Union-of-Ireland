@@ -401,6 +401,8 @@ void ConsoleUI::commandListScientists()
         cout << "--";
     }
     
+    cout << endl;
+    
     _numOfChoices = 5;
     validateCommand(sortCommand);
     if(sortCommand != 5)
