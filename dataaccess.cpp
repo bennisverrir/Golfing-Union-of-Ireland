@@ -283,7 +283,7 @@ vector<Computer> dataAccess::findComputer(int whatToFind, string find)
         break;
 
         case 2:
-            collumnToFind = "ct.Name ";
+            collumnToFind = "TypeName ";
             findString  = "'" + findString + "'";
             keyWord = " LIKE ";
         break;
