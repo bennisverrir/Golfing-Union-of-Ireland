@@ -170,21 +170,40 @@ ostream& operator << (ostream& out, const vector<string>& rhs)
     return out;
 }
 
+
 ostream& operator << (ostream& out, const vector<Relation>& rhs)
 {
-    out << endl << setw(7) << left << "No." << setw(30) << left << "Name" << setw(10) << "Computer Name"  << endl;
-
-    for(int i = 0; i < 40; i++)
+    int nameLength;
+    out << "|";
+    for(int i = 0; i < 33; i++)
     {
         out << "--";
     }
+    out << "|";
+    out << endl<<"|"<< setw(7) << left << "No." << setw(30) << left << "Name" << setw(10) << "Computer Name"  <<"                |"<< endl;
+    out << "|";
+    for(int i = 0; i < 33; i++)
+    {
+        out << "--";
+    }
+    out << "|";
     out << endl;
 
     for(size_t i = 0; i < rhs.size(); i++)
     {
-        out << setw(7) << (i+1) << setw(30) << rhs[i].getLegendName() << setw(10) << rhs[i].getComputerName() << endl;
+        nameLength = rhs[i].getComputerName().size();
+        out << "|" << setw(7) << (i+1) << setw(30) << rhs[i].getLegendName() << setw(10) << rhs[i].getComputerName()
+            <<'\t'<<'\t' << '\t'<<setw(30-nameLength)<<"|" << endl;
+
+
     }
 
+    out << "|";
+    for(int i = 0; i < 33; i++)
+    {
+        out << "--";
+    }
+    out << "|";
     out << endl;
 
     return out;
