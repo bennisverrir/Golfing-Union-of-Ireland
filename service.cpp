@@ -147,11 +147,13 @@ void Service::requestLegendEdit (string name, char gender, int born, int death, 
     Legend myEditedLegend (name, gender, born, death);
     a.editLegend(oldLegend, myEditedLegend);
 }
+
 void Service::requestComputerEdit (string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer, int index)
 {
     Computer myEditedComputer (name, yearBuilt, computerType, wasBuilt);
     a.editComputer(oldComputer, myEditedComputer, index);
 }
+
 void Service::requestRelationEdit (string scientistName, string computerName, Relation oldRelation)
 {
     Relation myEditedRelation (scientistName, computerName);
