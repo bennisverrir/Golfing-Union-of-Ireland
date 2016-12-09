@@ -667,7 +667,6 @@ void ConsoleUI::commandFindScientist()
     int whatToFind;
     validateCommand(whatToFind);
     
-    _service.setCaseField(whatToFind);
     vector <Legend> toPrint;
     
     subCommandFind (whatToFind, toPrint);
@@ -706,6 +705,7 @@ void ConsoleUI::findRelation()
  */
 void ConsoleUI::subCommandFind(int command, vector <Legend> &toPrint)
 {
+     _service.setCaseField(command);
     switch(command)
     {
         case 1:
