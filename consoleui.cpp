@@ -958,11 +958,24 @@ void ConsoleUI::commandListComputers()
 void ConsoleUI::commandListRelations()
 {
     int command = 0;
+    cout << "|";
+    for(int i = 0; i < 31; i++)
+    {
+        cout << "--";
+    }
+    cout << "|" << endl;
     
-    cout << "How do you want to sort"<< endl;
-    cout << "[1] - By scientist name" << endl;
-    cout << "[2] - By computer name" << endl;
+    cout << "|" << "How do you want to sort"<< "                                       |"<< endl;
+    cout << "|"  << "[1] - By scientist name"<< "                                       |" << endl;
+    cout << "|"<< "[2] - By computer name"<<  "                                        |" << endl;
     
+    cout << "|";
+    for(int i = 0; i < 31; i++)
+    {
+        cout << "--";
+    }
+    cout << "|" << endl;
+
     _numOfChoices = 2;
     validateCommand(command);
     ascDesc();
