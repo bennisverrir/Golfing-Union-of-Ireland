@@ -1205,25 +1205,6 @@ void ConsoleUI::validateInputYN(char &toValidate)
     }
 }
 
-void ConsoleUI::commandEditRelation()
-{
-    int SciComp;
-    Relation oldRelation;
-    
-    cout << "[1] - Edit Scientist" << endl;
-    cout << "[2] - Edit Computer" << endl;
-    
-    cin >> SciComp;
-    
-    if(SciComp == 1)
-    {
-        commandFindScientist();
-    }
-    else if(SciComp == 2)
-    {
-    }
-    
-}
 
 void ConsoleUI::commandAddRelation()
 {
