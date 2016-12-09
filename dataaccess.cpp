@@ -218,7 +218,7 @@ vector<Computer> dataAccess::sortComputer(int sort, bool ascDesc)
 
     QSqlQuery query(db);
 
-    QString command = "Select c.ID, c.Name, c.BuildYear, ct.Name AS TypeName, c.WasBuilt FROM Computer c "
+    QString command = "Select c.ID as cID, c.Name, c.BuildYear, ct.Name AS TypeName, c.WasBuilt FROM Computer c "
                          "INNER JOIN ComputerType ct "
                          "ON c.ComputerTypeID = ct.ID " + order + sortString + reverse;
     query.exec(command);
