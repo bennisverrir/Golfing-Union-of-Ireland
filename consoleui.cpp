@@ -376,9 +376,9 @@ void ConsoleUI::coutChoice(int command)
     
     cout << "|"<< endl;
     cout << "|" << "Enter one of the following commands:" << "                          |" << endl;
-    cout << "|" << "[1] - to " << com << " scientists"<< "                                      |" << endl;
-    cout << "|" << "[2] - to " << com << " computers" << "                                       |" << endl;
-    cout << "|" << "[3] - to " << com << " relations" << "                                       |" <<endl;
+    cout << "|" << "[1] - to " << com << " scientists"<< "                                       |" << endl;
+    cout << "|" << "[2] - to " << com << " computers" << "                                        |" << endl;
+    cout << "|" << "[3] - to " << com << " relations" << "                                        |" <<endl;
     
     cout << "|";
     for(int i = 0; i < 31; i++)
