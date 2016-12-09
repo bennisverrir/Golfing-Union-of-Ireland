@@ -629,6 +629,10 @@ void dataAccess::editRelation(Relation oldRelation, Relation editedRelation)
                " WHERE Sc = " + oldScientistID + " AND Co = " + oldComputerID);
 }
 
+/*Function joke, @return vector<string>
+*return a vector of all the jokes in the joke table in sql
+*
+*/
 vector<string> dataAccess::joke()
 {
     string joke;
