@@ -40,7 +40,8 @@ public:
     int getID(QSqlQuery query,QString name, QString tableName);
     void findNonRelatedRelation(Legend scientist);
     void findNonRelatedRelation(Computer computer);
-    vector<Relation> findRelation(string nameToFind);
+    vector<Relation> findRelation(int nameToFind, int sort);
+    vector<Relation> findRelation(string nameToFind, int sort);
     void deleteRelation(Relation relationToDelete);
     void editRelation(Relation oldRelation, Relation editedRelation);
     vector<string>joke();
