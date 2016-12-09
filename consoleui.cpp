@@ -920,6 +920,9 @@ void ConsoleUI::commandAddComputer()
     
     _service.requestComputerAdd(computerName, buildYear, computerType, wasBuilt, index);
     
+    cout << endl << "Computer Added!" << endl << endl;
+
+    
 }
 
 void ConsoleUI::getComputerName(string &computerName)
