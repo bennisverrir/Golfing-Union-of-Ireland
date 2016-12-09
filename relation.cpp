@@ -62,3 +62,13 @@ int Relation::getComputerID ()
 {
     return _computerID;
 }
+
+void Relation::setScientistID (int ID)
+{
+    _scientistID = ID;
+}
+
+void Relation::setComputerID (int ID)
+{
+    _computerID = ID;
+}
