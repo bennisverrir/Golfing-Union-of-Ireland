@@ -707,6 +707,7 @@ void ConsoleUI::findRelation()
 
     _numOfChoices = 2;
     validateCommand(command);
+    cout << "Enter name to find: ";
     cin.ignore();
     getline(cin, name);
 
