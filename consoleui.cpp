@@ -93,9 +93,9 @@ ostream& operator << (ostream& out,const vector<Computer>& rhs)
 {
     out << endl;
     cout << "|";
-    for(int i = 0; i < 41; i++)
+    for(int i = 0; i < 82; i++)
     {
-        out << "--";
+        out << "-";
     }
     cout << "|";
     cout << endl;
@@ -104,9 +104,9 @@ ostream& operator << (ostream& out,const vector<Computer>& rhs)
     "Computer Type";
     cout << "                |" << endl;
     cout << "|";
-    for(int i = 0; i < 41; i++)
+    for(int i = 0; i < 82; i++)
     {
-        out << "--";
+        out << "-";
     }
     cout << "|";
     out << endl;
@@ -130,15 +130,14 @@ ostream& operator << (ostream& out,const vector<Computer>& rhs)
         out << endl;
     }
     cout << "|";
-    for(int i = 0; i < 41; i++)
+    for(int i = 0; i < 82; i++)
     {
-        out << "--";
+        out << "-";
     }
     cout << "|";
     cout << endl;
     return out;
 }
-
 ostream& operator << (ostream& out, const vector<string>& rhs)
 {
     out << setw(7) << left << "No." << setw(30) << left << "Type" << endl;
