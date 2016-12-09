@@ -39,10 +39,8 @@ private:
     void fortyTwo();
     void commandListComputers();
     void commandAddComputer();
-    void getBuildYear(int buildYear);
     void getComputerType(int computerType);
     bool getWasBuilt(bool wasBuilt);
-    string getComputerName(string ComputerName);
     void sortComputer(char sortComputerCommand, vector<Computer>& computers);
     void commandListComputerTypes();
     void addComputerType();
@@ -51,7 +49,16 @@ private:
     void ascDesc();
     void validateGender(char &gender);
     void validateInputYN(char &toValidate);
-    void subCommandFindComputer(int command, vector<Computer> &toPrint);
+    void commandEditRelation();
+    void findRelation();
+    void commandListRelations();
+    void commandAddRelation();
+    void subCommandFindComputer(int command, vector <Computer> &toPrint);
+    void getComputerName(string &computerName);
+    void getBuildYear(int &buildYear, bool &wasBuilt);
+    bool checkIfBuilt(bool &wasBuilt);
+
+
 
 
     int _numOfChoices;
