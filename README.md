@@ -24,13 +24,13 @@ Menu (from start):
 
 Please enter one of the following numbers:
 
-[1] - To list all the computer scientists or computers   
+[1] - To list all the computer scientists, computers or relations
 
-[2] - To add a computer scientist or a computer 
+[2] - To add a computer scientist,a computer or a relation
 
-[3] - To find a computer scientist from the list or a computer
+[3] - To find a computer scientist, computer or a relation from the list
 
-[4] - This will edit a computer scientists from the list    
+[4] - This will edit a computer scientists, computer or a relation from the list    
 
 [5] - To delete a relation                  
 
