@@ -39,20 +39,20 @@ ostream& operator << (ostream& out,const vector<Legend>& rhs)
 {
     out << endl;
     cout << "|";
-    for(int i = 0; i < 44; i++)
+    for(int i = 0; i < 87; i++)
     {
-        out << "--";
+        out << "-";
     }
     cout << "|";
     out << endl;
     cout << "|";
     out << setw(7) << left <<  "No." << setw(30) << left << "Name" << setw(11) << "Gender" << setw(10) <<
-    "Born" <<  setw(11) << " Died                         |" << endl;
+    "Born" <<  setw(11) << " Died                        |" << endl;
     
     cout << "|";
-    for(int i = 0; i < 44; i++)
+    for(int i = 0; i < 87; i++)
     {
-        out << "--";
+        out << "-";
     }
     cout << "|";
     out << endl;
@@ -69,21 +69,21 @@ ostream& operator << (ostream& out,const vector<Legend>& rhs)
         {
             out << setw(10) << rhs[i].getDeath();
             out << setw(5) <<"Died " << rhs[i].getDeathAge() <<" years old";
-            cout << "  |";
+            cout <<setw(1) <<'\t'<< "|";
         }
         else
         {
             out << setw(10) << "     " << rhs[i].getAge()<< " years old";
-            cout << "       |";
+            cout <<'\t' <<"|";
         }
         
         out << endl;
         
     }
     cout << "|";
-    for(int i = 0; i < 44; i++)
+    for(int i = 0; i < 87; i++)
     {
-        out << "--";
+        out << "-";
     }
     cout << "|";
     cout << endl;
