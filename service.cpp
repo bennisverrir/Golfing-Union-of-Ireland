@@ -156,40 +156,67 @@ void Service::requestRelationEdit (string scientistName, string computerName, Re
     a.editRelation (oldRelation, myEditedRelation);
 }
 
-vector <Legend> Service::requestLegendSort()
-{
-    return a.sortLegend(_caseField, _ascDescOrder);
-}
-
-vector <Computer> Service::requestComputerSort()
+/*Function requestComputerSort, @returns vector<Computer>
+*
+*
+*/
+vector<Computer> Service::requestComputerSort()
 {
     return a.sortComputer(_caseField, _ascDescOrder);
 }
-vector <Relation> Service::requestRelationSort()
+
+/*Function requestRelationSort, @returns vector<Relation>
+* calles the function sortRelation in the dataAccess class
+*and returns a sorted vector of Relation
+*/
+vector<Relation> Service::requestRelationSort()
 {
     return a.sortRelation(_caseField, _ascDescOrder);
 }
+
+/*Function requestComputerTypes, @returns vector<string>
+* calles the function getComputerType in the dataAccess class
+*and returns a vector of strings containing all computer types
+*/
 
 vector <string> Service::requestComputerTypes()
 {
     return a.getComputerTypes();
 }
 
+/*Function requestComputerTypeAdd, @parma string
+* calles the function addComputerType in the dataAccess class
+*
+*/
 void Service::requestComputerTypeAdd(string name)
 {
     a.addComputerType(name);
 }
 
+/*Function findRelation, @parma string
+*
+*
+*/
 vector<Relation> Service::findRelation(string name)
 {
     return a.findRelation(name);
 }
 
+
+/*Function requestRelationDelete, @parma Relation
+* calles the function addRelation in the dataAccess class
+*
+*/
 void Service::requestRelationDelete(Relation deleteRelation)
 {
    a.deleteRelation(deleteRelation);
 }
 
+
+/*Function getJoke, @return string
+*
+*
+*/
 string Service::getJoke()
 {
     string joke;
