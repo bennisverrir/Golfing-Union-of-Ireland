@@ -383,8 +383,8 @@ void ConsoleUI::coutChoice(int command)
     cout << "|"<< endl;
     cout << "|" << "Enter one of the following commands:" << '\t' <<'\t'<< '\t'<< '\t'<<" |" << endl;
     cout << "|" << "[1] - to " << com << " scientists" << '\t' <<'\t'<< '\t'<<'\t'<< '\t'<<" |" << endl;
-    cout << "|" << "[2] - to " << com << " computers" << setw(50) <<"   |" << endl;
-    cout << "|" << "[3] - to " << com << " relations" << setw(50) <<  "   |" << endl;
+    cout << "|" << "[2] - to "<<setw(1) << com << setw(1) << " computers" << setw(42) <<"   |" << endl;
+    cout << "|" << "[3] - to " << com << " relations" << setw(42) <<  "   |" << endl;
 
     cout << "|";
     for(int i = 0; i < 32; i++)
