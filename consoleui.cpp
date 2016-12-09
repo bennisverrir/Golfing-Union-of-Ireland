@@ -163,32 +163,36 @@ ostream& operator << (ostream& out, const vector<Relation>& rhs)
 {
     int nameLength;
     out << "|";
-    for(int i = 0; i < 26; i++)
+    for(int i = 0; i < 78; i++)
     {
-        out << "---";
+        out << "-";
     }
     out << "|";
     out << endl<<"|"<< setw(7) << left << "No." << setw(30) << left << "Name" << setw(10) << "Computer Name"
-    <<"                            |"<< endl;
+    <<'\t'<<'\t'<<'\t'<<'\t' <<"|"<< endl;
     out << "|";
-    for(int i = 0; i < 26; i++)
+    for(int i = 0; i < 78; i++)
     {
-        out << "---";
+        out << "-";
     }
     out << "|";
     out << endl;
     
     for(size_t i = 0; i < rhs.size(); i++)
-    {
-        nameLength = rhs[i].getComputerName().size();
-        out << "|" << setw(7) << (i+1) << setw(30) << rhs[i].getLegendName() << setw(10) << rhs[i].getComputerName()
-        <<'\t'<<'\t' << '\t'<< '\t'<<"|" << endl;
-    }
-    
+        {
+            nameLength = rhs[i].getComputerName().size();
+            if(nameLength <18)
+            {out << "|" << setw(7) << (i+1) << setw(30) << rhs[i].getLegendName() << setw(10) << rhs[i].getComputerName()
+            <<'\t'<<'\t'<<'\t'<<'\t' <<setw(30) <<"|"<< endl;}
+            else if(nameLength > 18)
+            {out << "|" << setw(7) << (i+1) << setw(30) << rhs[i].getLegendName() << setw(10) << rhs[i].getComputerName()
+            <<'\t'<<'\t'<<'\t' <<setw(30) <<"|"<< endl;}
+        }
+
     out << "|";
-    for(int i = 0; i < 26; i++)
+    for(int i = 0; i < 78; i++)
     {
-        out << "---";
+        out << "-";
     }
     out << "|";
     out << endl;
