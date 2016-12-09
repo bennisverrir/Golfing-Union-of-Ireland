@@ -684,13 +684,21 @@ void ConsoleUI::commandFindScientist()
 void ConsoleUI::findRelation()
 {
     string name;
-    cout << "What do you want to find? ";
+
+    int command = 0;
+
+    cout << "How do you want to sort"<< endl;
+    cout << "[1] - By scientist name" << endl;
+    cout << "[2] - By computer name" << endl;
+
+    _numOfChoices = 2;
+    validateCommand(command);
     cin.ignore();
-    getline(cin,name);
-    
-    vector<Relation> toPrint = _service.findRelation(name);
-    
-    cout << _service.findRelation(name);
+    getline(cin, name);
+
+    vector<Relation> toPrint = _service.findRelation(name, command);
+
+    cout << _service.findRelation(name, command);
 }
 
 /*function subCommandFind, @param an integer value, @return void.
