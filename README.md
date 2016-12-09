@@ -34,9 +34,7 @@ Please enter one of the following numbers:
 
 [5] - To delete a relation                  
 
-[6] - this will clear the screen     
-
-[7] - This will quit the program                              
+[6] - This will quit the program                              
 
 
 (if the user inputs "1" from main menu)
