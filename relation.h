@@ -18,6 +18,8 @@ public:
     void setComputerName(string computerName);
     int getScientistID();
     int getComputerID();
+    void setScientistID(int ID);
+    void setComputerID(int ID);
 
 private:
     int _scientistID;
