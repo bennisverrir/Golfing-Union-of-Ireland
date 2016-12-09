@@ -754,10 +754,24 @@ void ConsoleUI::commandFindComputer()
     string name;
     int command = 0;
     
-    cout << "Which parameter would you like to search for?" << endl;
-    cout << "[1] - Name" << endl;
-    cout << "[2] - Build (year)" << endl;
-    cout << "[3] - Type" << endl;
+    cout << "|";
+    for(int i = 0; i < 31; i++)
+    {
+        cout << "--";
+    }
+    cout << "|" << endl;
+
+    cout << "|" << "Which parameter would you like to search for?"<< "                 |" << endl;
+    cout << "|" << "[1] - Name"<< "                                                    |" << endl;
+    cout << "|" << "[2] - Build (year)"<< "                                            |" << endl;
+    cout << "|" << "[3] - Type"<< "                                                    |" << endl;
+
+    cout << "|";
+    for(int i = 0; i < 31; i++)
+    {
+        cout << "--";
+    }
+    cout << "|" << endl;
     
     _numOfChoices = 3;
     validateCommand(command);
