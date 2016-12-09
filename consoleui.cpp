@@ -15,7 +15,7 @@ void ConsoleUI::displayCommands()
     cout << "|";
     cout << endl;
     cout << "|" << "Please enter one of the following numbers:"<< "                    |"<< endl;
-    cout << "|" << "[1] - To list all the computer scientists or computers" << "        |"<< endl;
+    cout << "|" << "[1] - To list all the computer scientists, computers or relation" << "|"<< endl;
     cout << "|" << "[2] - To add a computer scientist or a computer "<< "              |" << endl;
     cout << "|" << "[3] - To find a computer scientist from the list or a computer"<< "|" << endl;
     cout << "|" << "[4] - This will edit a computer scientists from the list" << "      |"<< endl;
@@ -1279,6 +1279,9 @@ void ConsoleUI::commandAddRelation()
     relationComputer = _service.requestComputerSort()[computerIndex-1].getID();
     
     _service.requestRelationAdd(relationLegend, relationComputer);
+    
+    cout << endl << "Relation Added!" << endl << endl;
+
 }
 /*function deleteRelation, @return void.
  * choosing who to delete and deleting him.
