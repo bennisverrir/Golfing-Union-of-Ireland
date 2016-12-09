@@ -413,7 +413,6 @@ void dataAccess::addRelation(Relation relation)
     query.exec();
 
 
-    qDebug() << "ERROR <<<<" << query.previous();
 }
 
 
@@ -508,12 +507,14 @@ vector<Relation> dataAccess::findRelation(string nameToFind)
 
     string scientistName;
     string computerName;
+    int scientistID;
+    int computerID;
     QString name = QString::fromStdString(nameToFind);
 
 
     vector<Relation> returnVector;
 
-    QString command = " SELECT  s.Name, c.Name AS ComputerName  From Scientists s, Computer c, Combine co"
+    QString command = " SELECT  s.Name, s.ID as sID, c.ID ad cID, c.Name AS ComputerName  From Scientists s, Computer c, Combine co"
                        " ON s.ID = co.Sc AND c.ID = co.Co Where s.Name LIKE '%" + name + "%' OR ComputerName LIKE '%" + name + "%'";
 
     query.prepare(command);
@@ -525,10 +526,12 @@ vector<Relation> dataAccess::findRelation(string nameToFind)
 
     while(query.next())
     {
+        scientistID = query.value("sID").toUInt();
+        computerID = query.value("cID").toUInt();
         scientistName = query.value("Name").toString().toStdString();
         computerName = query.value("ComputerName").toString().toStdString();
 
-        returnVector.push_back(Relation(scientistName, computerName));
+        returnVector.push_back(Relation(scientistID, computerID, scientistName, computerName));
     }
 
 

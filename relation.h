@@ -8,15 +8,17 @@ class Relation
 {
 public:
     Relation();
+    Relation (int scientistID, int computerID, string legendName, string computerName);
     Relation (string legendName, string computerName);
-
     friend bool operator == (Relation &lhs, Relation &rhs);
     string getLegendName() const;
     string getComputerName()const;
-    string setLegendName(string legendName);
-    string setComputerName(string computerName);
+    void setLegendName(string legendName);
+    void setComputerName(string computerName);
 
 private:
+    int _scientistID;
+    int _computerID;
     string _legendName;
     string _computerName;
 };

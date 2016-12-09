@@ -17,8 +17,17 @@ Relation::Relation()
 {
 
 }
+Relation::Relation (int scientistID, int computerID, string legendName, string computerName)
+{
+    _scientistID = scientistID;
+    _computerID = computerID;
+    _legendName = legendName;
+    _computerName = computerName;
+}
 Relation::Relation (string legendName, string computerName)
 {
+    _scientistID = 0;
+    _computerID = 0;
     _legendName = legendName;
     _computerName = computerName;
 }
@@ -30,11 +39,11 @@ string Relation::getComputerName()const
 {
     return _computerName;
 }
-string Relation::setLegendName(string legendName)
+void Relation::setLegendName(string legendName)
 {
     _legendName = legendName;
 }
-string Relation::setComputerName(string computerName)
+void Relation::setComputerName(string computerName)
 {
     _computerName = computerName;
 }
