@@ -32,7 +32,7 @@ void ConsoleUI::displayCommands()
 }
 
 /*function <<, @param instance of ostream and Legend vector instance, @return ostream.
- * outputs all information about listed legends in a table.
+ * outputs all information about listed scientists in a table.
  */
 
 ostream& operator << (ostream& out,const vector<Legend>& rhs)
@@ -89,6 +89,9 @@ ostream& operator << (ostream& out,const vector<Legend>& rhs)
     cout << endl;
     return out;
 }
+/*function <<
+ * outputs all information about listed computers in a table.
+ */
 ostream& operator << (ostream& out,const vector<Computer>& rhs)
 {
     out << endl;
@@ -138,6 +141,9 @@ ostream& operator << (ostream& out,const vector<Computer>& rhs)
     cout << endl;
     return out;
 }
+/*function <<
+ * outputs all information of the header in a table.
+ */
 ostream& operator << (ostream& out, const vector<string>& rhs)
 {
     out << setw(7) << left << "No." << setw(30) << left << "Type" << endl;
@@ -157,7 +163,9 @@ ostream& operator << (ostream& out, const vector<string>& rhs)
     return out;
 }
 
-
+/*function <<,
+ * outputs all information about listed relation between scientists and computers in a table.
+ */
 ostream& operator << (ostream& out, const vector<Relation>& rhs)
 {
     int nameLength;
@@ -204,9 +212,8 @@ ostream& operator << (ostream& out, const vector<Relation>& rhs)
 ConsoleUI::ConsoleUI(){}
 
 
-/*function deleteLegend, @return void.
- * reads input from user, if input matches a command it performs that command, if not outputs error.
- * runs until the user inputs the quit command.
+/*function run, @return void.
+ * The main menu. Takes input from the user.
  */
 void ConsoleUI::run()
 {
@@ -331,6 +338,9 @@ void ConsoleUI::run()
         }
     }
 }
+/*function validateCommand,@parm list:command, @return void.
+ * Validates input from the user. Checks if it is an integer and in the valid range.
+ */
 void ConsoleUI::validateCommand(int &command)
 {
     cin >> command;
@@ -343,7 +353,9 @@ void ConsoleUI::validateCommand(int &command)
         cin >> command;
     }
 }
-
+/*function validateYear,@parm list:begin, input @return void.
+ * Validates input from the user. Checks if it is an integer and not higher than the current year.
+ */
 void ConsoleUI::validateYear (int begin, int &input)
 {
     cin >> input;
@@ -354,7 +366,9 @@ void ConsoleUI::validateYear (int begin, int &input)
         cin >> input;
     }
 }
-
+/*function coutChoice,@parm list:command @return void.
+ * outputs choices for the users
+ */
 void ConsoleUI::coutChoice(int command)
 {
     string com = " ";
@@ -397,10 +411,8 @@ void ConsoleUI::coutChoice(int command)
     cout << "|" << endl;
     
 }
-//buinn
-
-/*function commandList, @return void.
- *outputs a list of sorting catagories and their commands, then outputs that to the sort function.
+/*function commandListScientist, @return void.
+ *outputs a list of sorting catagories and their commands to list a scientist, then outputs that to the sort function.
  */
 void ConsoleUI::commandListScientists()
 {
@@ -438,7 +450,9 @@ void ConsoleUI::commandListScientists()
     cout << _service.requestLegendSort();
     
 }
-//buinn
+/*function ascDesc, @return void.
+ *Asking the user how if he wants ascending or desending.
+ */
 void ConsoleUI::ascDesc()
 {
     int ascDesc;
@@ -467,8 +481,7 @@ void ConsoleUI::ascDesc()
     
     _service.setAscDescOrder(ascDesc);
 }
-//buinn
-/*Function commandAdd checks if the year @parm list: gender, born, death, valid @return void.
+/*Function commandAddScientist checks if the year @parm list: gender, born, death, valid @return void.
  This function checks if the input name is valid, if it is already in the list.
  */
 void ConsoleUI::commandAddScientist()
@@ -602,7 +615,7 @@ void ConsoleUI::getBorn(int &born)
 {
     cout << "Enter the year of birth (up to 4 digits): ";
     validateYear(0, born);
-}//buinn
+}
 
 /*Function getDeath checks if the year @parm list: death @return void.
  *Checks if the year of death is valid.
@@ -618,7 +631,7 @@ void ConsoleUI::getDeath(int &death, int born)
     {
         death = 0;
     }
-}//buinn
+}
 
 /*Function checkIfDead @parm list: command @return bool(true/false).
  *Checks if the person is still alive, and errorchecks the input.
@@ -679,7 +692,9 @@ void ConsoleUI::commandFindScientist()
         cout << endl <<"No results from that query!" << endl;
     }
 }
-
+/*Function findRelation command @return void
+ *Takes in user input to find a Relation
+ */
 void ConsoleUI::findRelation()
 {
     string name;
@@ -727,7 +742,6 @@ void ConsoleUI::subCommandFind(int command, vector <Legend> &toPrint)
         {
             char gender;
             cout << "Enter a gender to search for(M/F): ";
-            cin >> gender;
             validateGender(gender);
             _service.setSearchField(gender);
             toPrint = _service.requestLegendSearch();
@@ -758,8 +772,10 @@ void ConsoleUI::subCommandFind(int command, vector <Legend> &toPrint)
             break;
         }
     }
-}//buinn
-
+}
+/*Function commandFindComputer command @return void
+ *Takes the user input to decide how to search for the computer and lists how it can be done.
+ */
 void ConsoleUI::commandFindComputer()
 {
     string name;
@@ -802,8 +818,8 @@ void ConsoleUI::commandFindComputer()
     
 }
 
-/*function subCommandFind, @param an integer value, @return void.
- * validates that the input from the user is an integer value.
+/*function subCommandFindComputer, @param command, vector <Computer> &toPrint) @return void.
+ * A Function to find the computers.
  */
 void ConsoleUI::subCommandFindComputer(int command, vector <Computer> &toPrint)
 {
@@ -856,9 +872,11 @@ void ConsoleUI::subCommandFindComputer(int command, vector <Computer> &toPrint)
  */
 void ConsoleUI::commandClear()
 {
-    system("cls"); // clears the screen
+    system("cls"); 
 }
-
+/*function commandAddComputer @return void.
+ * A Function to add computers to the list and checks for a valid input..
+ */
 void ConsoleUI::commandAddComputer()
 {
     string computerName;
@@ -924,14 +942,18 @@ void ConsoleUI::commandAddComputer()
 
     
 }
-
+/*function getComputerName, @param &computerName) @return void.
+ * takes user input for a name.
+ */
 void ConsoleUI::getComputerName(string &computerName)
 {
     cout << "Enter the name: ";
     cin.ignore();
     getline(cin,computerName);
 }
-
+/*function getBuildYear, @param &buildYear, wasBuilt. @return bool(true/false).
+ * A Function that takes user input for when the compter was built.
+ */
 void ConsoleUI::getBuildYear(int &buildYear, bool &wasBuilt)
 {
     if(checkIfBuilt(wasBuilt))
@@ -944,7 +966,9 @@ void ConsoleUI::getBuildYear(int &buildYear, bool &wasBuilt)
         buildYear = 0;
     }
 }
-
+/*function checkIfBuilt, @param &wasBuilt. @return bool(true/false).
+ * A Function that takes user input to check if a computer was built.
+ */
 bool ConsoleUI::checkIfBuilt(bool &wasBuilt)
 {
     char command = ' ';
@@ -964,7 +988,9 @@ bool ConsoleUI::checkIfBuilt(bool &wasBuilt)
         wasBuilt = false;
     }
 }
-
+/*function commandListComputers, @return void.
+ * list posslible ways to sort the Computer list and takes the user input
+ */
 void ConsoleUI::commandListComputers()
 {
     int command;
@@ -1002,7 +1028,9 @@ void ConsoleUI::commandListComputers()
     
     
 }
-
+/*function commandListRelations, @return void.
+ * Lists relations and takes the user input to decide how it is sorted.
+ */
 void ConsoleUI::commandListRelations()
 {
     int command = 0;
@@ -1032,7 +1060,9 @@ void ConsoleUI::commandListRelations()
     
     cout << _service.requestRelationSort();
 }
-
+/*function commandEditScientist, @return void.
+ * a Function to edit scientists, finds who and replaces him.
+ */
 void ConsoleUI::commandEditScientist()
 {
     int index = 0;
@@ -1066,7 +1096,9 @@ void ConsoleUI::commandEditScientist()
     
     _service.requestLegendEdit(name, toupper(gender), born, death, oldLegend);
 }
-
+/*function commandEditComputer, @return void.
+ * a Function to edit computers, finds who and replaces him.
+ */
 void ConsoleUI::commandEditComputer()
 {
     int index = 0;
@@ -1166,7 +1198,9 @@ void ConsoleUI::fortyTwo()
     cout<<"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"<<endl;
     cout<<"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"<<endl;
 }
-
+/*function commandAddComputerType, @return void.
+ * To Add a new type for a computer
+ */
 void ConsoleUI::addComputerType()
 {
     string name;
@@ -1178,7 +1212,9 @@ void ConsoleUI::addComputerType()
     
     _service.requestComputerTypeAdd(name);
 }
-
+/*function validateGender, @param gender, @return void.
+ * Validating gender input from the user
+ */
 void ConsoleUI::validateGender(char &gender)
 {
     do
@@ -1194,7 +1230,9 @@ void ConsoleUI::validateGender(char &gender)
         
     }while(gender != toupper('m') && gender != toupper('f'));
 }
-
+/*function validateInputYN, @param toValidate, @return void.
+ * Validating input for yes or no questions from the user
+ */
 void ConsoleUI::validateInputYN(char &toValidate)
 {
     cin >> toValidate;
@@ -1207,7 +1245,9 @@ void ConsoleUI::validateInputYN(char &toValidate)
         cin >> toValidate;
     }
 }
-
+/*function commandAddRelation, @return void.
+ * Validating gender input from the user
+ */
 
 void ConsoleUI::commandAddRelation()
 {
@@ -1239,7 +1279,9 @@ void ConsoleUI::commandAddRelation()
     
     _service.requestRelationAdd(relationLegend, relationComputer);
 }
-
+/*function deleteRelation, @return void.
+ * choosing who to delete and deleting him.
+ */
 void ConsoleUI::deleteRelation()
 {
     _service.setCaseField(1);
@@ -1265,7 +1307,9 @@ void ConsoleUI::outputJoke(){
 
     cout << endl << _service.getJoke()<<endl<<endl;
 }
-
+/*function commandEditRelation, @return void.
+ * Lists possible relations for scientists and computers
+ */
 void ConsoleUI::commandEditRelation()
 {
     int command;
