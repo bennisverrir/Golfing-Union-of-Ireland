@@ -7,14 +7,26 @@ using namespace std;
 */
 void ConsoleUI::displayCommands()
 {
-    cout << "Please enter one of the following numbers:"<< endl;
-    cout << "[1] - To list all the computer scientists or computers" << endl;
-    cout << "[2] - To add a computer scientist or a computer " << endl;
-    cout << "[3] - To find a computer scientist from the list or a computer" << endl;
-    cout << "[4] - This will edit a computer scientists from the list" << endl;
-    cout << "[5] - this will clear the screen" << endl;
-    cout << "[6] - This will quit the program" << endl;
-
+    cout << "|";
+    for(int i = 0; i < 31; i++)
+    {
+        cout << "--";
+    }
+    cout << "|";
+    cout << endl;
+    cout << "|" << "Please enter one of the following numbers:"<< "                    |"<< endl;
+    cout << "|" << "[1] - To list all the computer scientists or computers" << "        |"<< endl;
+    cout << "|" << "[2] - To add a computer scientist or a computer "<< "              |" << endl;
+    cout << "|" << "[3] - To find a computer scientist from the list or a computer"<< "|" << endl;
+    cout << "|" << "[4] - This will edit a computer scientists from the list" << "      |"<< endl;
+    cout << "|" << "[5] - this will clear the screen" << "                              |"<< endl;
+    cout << "|" << "[6] - This will quit the program" << "                              |"<< endl;
+    cout << "|";
+    for(int i = 0; i < 31; i++)
+    {
+        cout << "--";
+    }
+    cout << "|";
     cout << endl;
 }
 
