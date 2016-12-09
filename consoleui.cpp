@@ -324,6 +324,9 @@ void ConsoleUI::run()
             case 6:
                 exit(1);
             break;
+            case 7:
+                deleteRelation();
+            break;
 
             case 42:
                 fortyTwo();
@@ -1142,4 +1145,27 @@ void ConsoleUI::commandAddRelation()
     relationComputer = _service.requestComputerSort()[computerIndex-1].getID();
 
     _service.requestRelationAdd(relationLegend, relationComputer);
+}
+
+void ConsoleUI::deleteRelation()
+{
+    _service.setCaseField(1);
+
+    vector<Relation> toprint = _service.requestRelationSort();
+
+    cout << toprint;
+
+    int index;
+
+    cout << "What index to you want to delete? ";
+
+    _numOfChoices = toprint.size();
+
+    validateCommand(index);
+
+    Relation deleteRelation = toprint[index-1];
+
+    _service.requestRelationDelete(deleteRelation);
+
+
 }
