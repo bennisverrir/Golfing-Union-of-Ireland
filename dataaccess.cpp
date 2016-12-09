@@ -47,7 +47,7 @@ vector<Computer> dataAccess::pushingComputerVector(QSqlQuery query)
 
     while(query.next())
     {
-        int ID = query.value("ID").toUInt();
+        int ID = query.value("cID").toUInt();
         string name = query.value("Name").toString().toStdString();
         int buildYear = query.value("BuildYear").toUInt();
         string computerType = query.value("TypeName").toString().toStdString();
@@ -313,7 +313,7 @@ vector<Computer> dataAccess::findComputer(int whatToFind, string find)
 
     QSqlQuery query(db);
 
-    QString command = "Select c.Name,c.BuildYear, c.WasBuilt, ct.Name AS TypeName "
+    QString command = "Select c.ID AS cID, c.Name,c.BuildYear, c.WasBuilt, ct.Name AS TypeName "
                        "FROM Computer c, ComputerType ct WHERE c.ComputerTypeID = ct.ID AND " + collumnToFind + keyWord +  findString;
 
     query.exec(command);
