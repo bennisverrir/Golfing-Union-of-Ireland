@@ -19,8 +19,9 @@ void ConsoleUI::displayCommands()
     cout << "|" << "[2] - To add a computer scientist or a computer "<< "              |" << endl;
     cout << "|" << "[3] - To find a computer scientist from the list or a computer"<< "|" << endl;
     cout << "|" << "[4] - This will edit a computer scientists from the list" << "      |"<< endl;
-    cout << "|" << "[5] - this will clear the screen" << "                              |"<< endl;
-    cout << "|" << "[6] - This will quit the program" << "                              |"<< endl;
+    cout << "|" << "[5] - To delete a relation"                                      "|"  << endl;
+    cout << "|" << "[6] - this will clear the screen" << "                              |"<< endl;
+    cout << "|" << "[7] - This will quit the program" << "                              |"<< endl;
     cout << "|";
     for(int i = 0; i < 31; i++)
     {
@@ -330,14 +331,14 @@ void ConsoleUI::run()
             break;
 
             case 5:
-                commandClear();
+                deleteRelation();
             break;
 
             case 6:
-                exit(1);
+                commandClear();
             break;
             case 7:
-                deleteRelation();
+                exit(1);
             break;
 
             case 42:
