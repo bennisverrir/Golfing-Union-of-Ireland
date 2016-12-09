@@ -2,9 +2,9 @@
 
 ## Helgi, Benni, Elvar, Sara, Þorfinnur, Kolbeinn
 
-A team of extreme dreams
+Club of fans
 
-Link to this repository: https://github.com/bennisverrir/DreamTeamExtreme/
+Link to this repository: https://github.com/bennisverrir/GucciManeFanclub
 
 This project is a collective work of 6 people, individual commits can have been moderated and/or monitored by 2 or more people. It is a layered structure of database handling.
 
@@ -16,41 +16,49 @@ Data access layer - DataAccess, handles the opening, reading and writing request
 
 Data (source) - External source of information.
 
-This program is a database that keeps basic information about famous computer scientists. In the program the user has the options of listing all the computer scientists in different kind of sorts. The user can add new famous computer scientists and delete existing scientists. The user can search in the list of famous computer scientists and can also clear the screen of the program. If the user wants to know the answer to life, the universe and everything, type 42 in the commands menu.
+This program is a database that keeps basic information about famous computer scientists, computers and their relations. In the program the user has the options of listing any of the 3 lists (Scientists/Computers/Relations) with various different sorting. The user can add, and edit scientists, computers and relations and search for a specific entry in the database. If the user wants to know the answer to life, the universe and everything, type 42 in the commands menu.
 
 Availible commands:
 
 Menu (from start):
 
-list   - This will list all the computer scientists (goes into sorting options)
+[1] - To list all the computer scientists, computers or relations
 
-add    - This will add a computer scientists (goes into input mode, will validate if name is already input)
+[2] - To add a computer scientist, computer or a relation
 
-find   - This will find a computer scientists from the list (goes into find options)
+[3] - To find a computer scientist, computer or relation
 
-delete - This will delete a computer scientists from the list (goes into delete options)
+[4] - This will edit a computer scientist, computer or relation
 
-clear  - this will clear the screen
+[5] - this will clear the screen
 
-quit   - This will quit the program
+[6] - This will quit the program
 
-the answer to life - (hidden) (displays the meaning of life)
-
-(if the user inputs "list" from menu)
+(if the user inputs "1" from main menu)
 
 list:
 
-(sorting options)
+Enter one of the following commands:
 
-a - Alphabetical order
+[1] - to list scientists  //Offers you various ways to sort the computer scientists listed
 
-n - No particular sorting
+[2] - to list computers //Offers you various ways to sort the list of the computers listed
 
-g - Gender order
+[3] - to list relations //Offers you various ways to sort the list of relations listed
 
-b - Year of birth order
+(if the user inputs "1" from the list menu)
 
-l - Still alive order(those who are still alive appear first)
+List => Scientists
+
+[1] - Alphabetical order //Lists the computer scientists in alphabetical order
+
+[2] - Gender order //Lists the computer scientists in order of gender
+
+[3] - Year of birth order //Lists the computer scientists in order of Year of birth
+
+[4] - Still alive order(those who are still alive appear first) //Lists the computer scientists based on if they're still alive or not
+
+[5] - No particular sorting //Lists the computer scientists by the order they were input in. 
 
 (if the user inputs "add" from the menu)
 
