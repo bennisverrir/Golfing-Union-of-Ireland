@@ -4,6 +4,10 @@ Service::Service()
 
 }
 
+/*Function setTableName, @param int
+*
+*
+*
 void Service::setTableName (int command)
 {
     if (command == 1)
@@ -18,14 +22,22 @@ void Service::setTableName (int command)
     {
         _tableName = "Relations";
     }
-}
+}*/
 
+/*Function setCaseField, @parma int
+*TODO
+*
+*/
 void Service::setCaseField (int command)
 {
     _caseField = command - 1;
 
 }
 
+/*Function setAscDescOrder, @return vector<string>
+*return a vector of all the jokes in the joke table in sql
+*
+*/
 void Service::setAscDescOrder (int command)
 {
     if (command == 1)
