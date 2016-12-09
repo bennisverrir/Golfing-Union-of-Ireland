@@ -30,11 +30,11 @@ void Service::setAscDescOrder (int command)
 {
     if (command == 1)
     {
-        _ascDeseOrder = true;
+        _ascDescOrder = true;
     }
     else
     {
-        _ascDeseOrder = false;
+        _ascDescOrder = false;
     }
 }
 
@@ -99,32 +99,29 @@ vector <Computer> Service::requestComputerSearch()
 vector <Relation> Service::requestRelationSearch()
 {
     vector <Relation> returnVector;
-    bool myTempBool = true;
-    returnVector = a.getRelation();
+    returnVector = a.sortRelation(_caseField, _ascDescOrder);
     return returnVector;
 }
-void Service::requestNonRelatedComputer(string scientistName)
+/*void Service::requestNonRelatedComputer(string scientistName)
 {
-    a.findNonRelatedRelation(scientistName);
+   // a.findNonRelatedRelation(scientistName);
 }
 
 void Service::requestNonRelatedScientist(string computerName)
 {
-    a.findNonRelatedRelation (computerName);
-}
+   // a.findNonRelatedRelation (computerName);
+}*/
 
 void Service::requestLegendAdd(string name, char gender, int born, int death)
 {
     Legend myNewLegend (name, gender, born, death);
-    bool myTempBool = true;
-    a.writeFile(myNewLegend, myTempBool);
+    a.writeFile(myNewLegend);
 }
 
 void Service::requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt,int index)
 {
     Computer myNewComputer (name, yearBuilt, computerType, wasBuilt);
-    bool myTempBool = true;
-    a.writeComputerFile (myNewComputer, myTempBool, index);
+    a.writeComputerFile (myNewComputer, index);
 }
 
 void Service::requestRelationAdd (string scientistName, string computerName)
@@ -136,9 +133,9 @@ void Service::requestLegendEdit (string name, char gender, int born, int death, 
     Legend myEditedLegend (name, gender, born, death);
     a.editLegend(oldLegend, myEditedLegend);
 }
-void Service::requestComputerEdit (string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer){
+void Service::requestComputerEdit (string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer, int index){
     Computer myEditedComputer (name, yearBuilt, computerType, wasBuilt);
-    a.editComputer(oldComputer, myEditedComputer);
+    a.editComputer(oldComputer, myEditedComputer, index);
 }
 void Service::requestRelationEdit (string scientistName, string computerName, Relation oldRelation){
     Relation myEditedRelation (scientistName, computerName);
@@ -152,11 +149,11 @@ vector <Legend> Service::requestLegendSort()
 
 vector <Computer> Service::requestComputerSort()
 {
-    return a.sortComputer(_caseField, _ascDeseOrder);
+    return a.sortComputer(_caseField, _ascDescOrder);
 }
 vector <Relation> Service::requestRelationSort()
 {
-    return a.sortRelation(_caseField, _ascDeseOrder);
+    return a.sortRelation(_caseField, _ascDescOrder);
 }
 
 vector <string> Service::requestComputerTypes()
@@ -167,5 +164,10 @@ vector <string> Service::requestComputerTypes()
 void Service::requestComputerTypeAdd(string name)
 {
     a.addComputerType(name);
+}
+
+vector<Relation> Service::findRelation(string name)
+{
+    return a.findRelation(name);
 }
 
