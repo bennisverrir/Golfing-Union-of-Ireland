@@ -27,26 +27,26 @@ public:
         vector <Legend> requestLegendSearch();
         vector <Computer> requestComputerSearch();
         vector <Relation> requestRelationSearch();
-        void requestNonRelatedComputer(Legend);
-        void requestNonRelatedScientist(Computer);
+        void requestNonRelatedComputer(string name);
         void requestLegendAdd(string name, char gender, int born, int death);
         void requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt, int index);
         void requestRelationAdd (string scientistName, string computerName);
         void requestLegendEdit(string name, char gender, int born, int death, Legend oldLegend);
-        void requestComputerEdit(string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer);
+        void requestComputerEdit(string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer,int index);
         void requestRelationEdit(string scientistName, string computerName, Relation oldRelation);
         vector <Legend> requestLegendSort();
         vector <Computer> requestComputerSort();
         vector <Relation> requestRelationSort();
         vector <string> requestComputerTypes();
         void requestComputerTypeAdd(string name);
+        vector<Relation> findRelation(string name);
 
 
 private:
         dataAccess a;
         string _tableName;
         int _caseField;
-        bool _ascDeseOrder;
+        bool _ascDescOrder;
         string _searchString;
 };
 
