@@ -360,6 +360,7 @@ void dataAccess::addComputerType(string newComputerType)
 
 }
 
+
 /*Function sortRelation ,@param int and bool @return vector<Relation>
 * returns a vector of relation of all relation in the sql relation table in any order available in the programm
 *
@@ -423,7 +424,7 @@ vector<Relation> dataAccess::sortRelation(int sort, bool ascDesc)
 }
 
 /*Function addRelation ,@paramRelation
-*
+*adds a relation into the sql relation table
 *
 */
 void dataAccess::addRelation(Relation relation)
@@ -441,9 +442,8 @@ void dataAccess::addRelation(Relation relation)
 }
 
 /*Function editLegend ,@param Legend
-* TODO
-*
-*
+*edits a sientist in the sql table scientits
+*takes the oldLegend's ID and then puts the editLegend instead
 */
 void dataAccess::editLegend(Legend oldLegend, Legend editLegend)
 {
@@ -467,9 +467,9 @@ void dataAccess::editLegend(Legend oldLegend, Legend editLegend)
 }
 
 /*Function editComputer ,@param Computer and int
-* TODO
-*
-*
+* edits a computer in the sql table computer
+*takes the oldComputer'ID and then puts the editComputer instead
+*index is the computerTypeID
 */
 
 void dataAccess::editComputer(Computer oldComputer, Computer editComputer, int index)
@@ -544,9 +544,8 @@ int dataAccess::getID(QSqlQuery query,  QString name, QString tableName)
 
 
 /*Function findRelation ,@param string  @return vector<Relation>
-* TODO
-*
-*
+*finds scientist by name, gender, birth or death and returns it vector of legand
+*finds relation by name of scientis or name of computer
 */
 vector<Relation> dataAccess::findRelation(string nameToFind)
 {
@@ -586,8 +585,7 @@ vector<Relation> dataAccess::findRelation(string nameToFind)
 }
 
 /*Function deleteRelation, @param Relation
-* deletes Relation from the sql
-* TODO
+* deletes Relation from the sql relation table
 *
 */
 void dataAccess:: deleteRelation(Relation relationToDelete)
