@@ -22,61 +22,112 @@ Availible commands:
 
 Menu (from start):
 
-[1] - To list all the computer scientists, computers or relations
-
-[2] - To add a computer scientist, computer or a relation
-
-[3] - To find a computer scientist, computer or relation
-
-[4] - This will edit a computer scientist, computer or relation
-
-[5] - To delete a relation
-
-[6] - this will clear the screen
-
-[7] - This will quit the program
+|--------------------------------------------------------------|
+|Please enter one of the following numbers:                    |
+|[1] - To list all the computer scientists or computers        |
+|[2] - To add a computer scientist or a computer               |
+|[3] - To find a computer scientist from the list or a computer|
+|[4] - This will edit a computer scientists from the list      |
+|[5] - To delete a relation                                    |
+|[6] - this will clear the screen                              |
+|[7] - This will quit the program                              |
+|--------------------------------------------------------------|
 
 (if the user inputs "1" from main menu)
 
-list:
+List:
 
-Enter one of the following commands:
-
-[1] - to list scientists  //Offers you various ways to sort the computer scientists listed
-
-[2] - to list computers //Offers you various ways to sort the list of the computers listed
-
-[3] - to list relations //Offers you various ways to sort the list of relations listed
+|--------------------------------------------------------------|
+|Enter one of the following commands:                          |
+|[1] - to list scientists                                      |  //Offers ways to sort the list of scientists
+|[2] - to list computers                                       |  //Offers ways to sort the list of computers
+|[3] - to list relations                                       |  //Offers ways to sort the list of relations
+|--------------------------------------------------------------|
 
 (if the user inputs "1" from the list menu)
 
-List => Scientists
+List => Scientists:
 
-[1] - Alphabetical order //Lists the computer scientists in alphabetical order
+|---------------------------------------------------------------|
+|How do you want to sort                                        |
+|[1] - Alphabetical order                                       | //Lists scientists, sorted in alphabetical order
+|[2] - Gender order                                             | //Lists scientists, sorted in order by gender
+|[3] - Year of birth order                                      | //Lists scientists, sorted by birth year
+|[4] - Still alive order(those who are still alive appear first)| //Lists scientists, sorted by still alive (bool value)
+|[5] - No particular sorting                                    | //Lists scientists, sorted by the order of insertions
+|---------------------------------------------------------------|
 
-[2] - Gender order //Lists the computer scientists in order of gender
+(if the user inputs "2" from the list menu)
 
-[3] - Year of birth order //Lists the computer scientists in order of Year of birth
+List => Computers:
 
-[4] - Still alive order(those who are still alive appear first) //Lists the computer scientists based on if they're still alive or not
+|--------------------------------------------------------------|
+|How do you want to sort                                       |
+|[1] - Alphabetical order                                      |  //Lists computers, sorted in alphabetical order
+|[2] - Built year order                                        |  //Lists computers, sorted in order by year built
+|[3] - Was built                                               |  //Lists computers, sorted by was built (bool value)
+|[4] - Type of computer order                                  |  //Lists computers, sorted by computer type
+|[5] - No particular sorting                                   |  //Lists computers, sorted by the order of insertions
+|--------------------------------------------------------------|
 
-[5] - No particular sorting //Lists the computer scientists by the order they were input in. 
+(if the user inputs "3" from the list menu)
 
-(if the user inputs "add" from the menu)
+Lists => Relations:
 
-add:
+|--------------------------------------------------------------|
+|How do you want to sort                                       |
+|[1] - By scientist name                                       |  //Lists relations, sorted in alphabetical order of scientists
+|[2] - By computer name                                        |  //Lists computers, sorted in alphabetical order of computers
+|--------------------------------------------------------------|
 
-(input options)
+(if the user inputs "2" from the main menu)
 
-Enter the name: John Doe ("John Doe" is a sample input)
+Add:
 
-Enter the gender: M ('M' is a sample input, non-case sensitive, expects a single char input 'M'/'F')
+|--------------------------------------------------------------|
+|Enter one of the following commands:                          |
+|[1] - to add scientists                                       |
+|[2] - to add computers                                        |
+|[3] - to add relations                                        |
+|--------------------------------------------------------------|
 
-Enter the year of birth: 555 ("555" is a sample input, expects a number from 0 to 2016) 
+(if the user inputs "1" from the add menu)
 
-Are they alive (y/n)? n ('n' is a  sample input, expects a single char 'y' or 'n')
+Add => Scientists:
 
-Enter the year of death: 777 ("777" is a sample input, expects a number between 0 and 2016)
+Input options:
+
+Enter the name: John Doe ("John Doe" is a sample input - expects a string of undefined length)
+
+Enter the gender (M/F): M ('M' is a sample input, non-case sensitive - expects a char of either 'm' or 'f')
+
+Enter the year of birth (up to 4 digits): 1750 ("1750" is a sample input - expects a numeric value between 0 and current year)
+
+Are they alive (y/n)? n ('n' is a sample input - expects a char value of either 'y' or 'n' (if y then the user is prompted with a followup question of death year))
+
+Enter the year of death (up to 4 digits): 1800 ('1800' is a sample input - expects a numeric value between born and current year)
+
+(if the user inputs "2" from the add menu)
+
+Add => Computers:
+
+Input options:
+
+Enter the name: MeanMachine42 ("MeanMachine42" is a sample input - expects a string value name)
+
+Was it built (y/n)? y ('y' is a sample input - expects a char value of either 'y' or 'n' (if y then the user is prompted with a followup question of build year))
+
+Year of build (4 digits): 2015 ("2015" is a sample input - expects a numeric value of 0 to current year)
+
+No.    Type
+----------------------------------------
+1      Mechanical
+2      Electrical
+3      Transistor
+4      Electromechanical
+5      Abstract machine
+6      Add a computerType
+Enter Computer Type(0-6): 5
 
 (if the user inputs "find" from menu)
 
