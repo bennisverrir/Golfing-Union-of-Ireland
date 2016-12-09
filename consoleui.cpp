@@ -1274,3 +1274,111 @@ void ConsoleUI::outputJoke(){
     cout << endl << _service.getJoke()<<endl<<endl;
 }
 
+void ConsoleUI::commandEditRelation()
+{
+    int command;
+    int scientistID;
+    int computerID;
+    Relation oldRelation;
+    Relation newRelation;
+
+
+    cout << "[1] - Edit Scientist" << endl;
+    cout << "[2] - Edit Computer" << endl;
+
+    _numOfChoices = 2;
+    int index = 0;
+    int temp;
+    validateCommand(command);
+    vector<Relation> relationsToEdit;
+
+    if(command == 1)
+    {
+        int select = 1;
+        vector <Legend> toPrint;
+        subCommandFind(select, toPrint);
+
+
+        if(toPrint.size() > 0)
+        {
+            cout << toPrint;
+            _numOfChoices = toPrint.size();
+            cout << "Who do you want to edit?: ";
+            validateCommand(index);
+            scientistID = toPrint[index - 1].getID();
+            cout << "DEBUG this is the id selected: " << scientistID << endl;
+            cout << "scientist id:" << scientistID << endl;
+            relationsToEdit = _service.findRelation(scientistID, command);
+            cout << relationsToEdit;
+            _numOfChoices = relationsToEdit.size();
+            cout << "Select relation to edit: ";
+            validateCommand(index);
+            computerID = relationsToEdit[index - 1].getComputerID();
+            cout << endl << "ComputerID " << computerID << endl;
+            temp = 5;
+            _service.setCaseField(temp);
+            cout << _service.requestComputerSort();
+            cout << "Enter the new relation: ";
+
+            oldRelation.setComputerID(computerID);
+            oldRelation.setScientistID(scientistID);
+            _service.requestRelationDelete(oldRelation);
+
+            _numOfChoices = _service.requestComputerSort().size();
+            validateCommand(index);
+            computerID = _service.requestComputerSort()[index -1].getID();
+            newRelation.setComputerID(computerID);
+            newRelation.setScientistID(scientistID);
+            cout << "computerID:" << computerID << " scientistID: " << scientistID << endl;
+            _service.requestRelationAdd(scientistID, computerID);
+        }
+        else
+        {
+            cout << endl <<"No results from that query!" << endl;
+        }
+
+    }
+    else if(command == 2)
+    {
+        int select = 1;
+        vector <Computer> toPrint;
+        subCommandFindComputer(select, toPrint);
+
+        if(toPrint.size() > 0)
+        {
+            cout << toPrint;
+            _numOfChoices = toPrint.size();
+            cout << "Who do you want to edit?: ";
+            validateCommand(index);
+            computerID = toPrint[index - 1].getID();
+            cout << "DEBUG this is the id selected: " << computerID << endl;
+
+            relationsToEdit = _service.findRelation(computerID, command);
+            cout << relationsToEdit;
+            _numOfChoices = relationsToEdit.size();
+            cout << "Select relation to edit: ";
+            validateCommand(index);
+            scientistID = relationsToEdit[index - 1].getScientistID();
+            cout << endl << "SAELIR " << scientistID << endl;
+            temp = 4;
+            _service.setCaseField(temp);
+            cout << _service.requestLegendSort();
+            cout << "Enter the new relation: ";
+
+            oldRelation.setComputerID(computerID);
+            oldRelation.setScientistID(scientistID);
+            _service.requestRelationDelete(oldRelation);
+
+            _numOfChoices = _service.requestLegendSort().size();
+            validateCommand(index);
+            scientistID = _service.requestLegendSort()[index -1].getID();
+            cout << "computerID:" << computerID << " scientistID: " << scientistID << endl;
+            _service.requestRelationAdd(scientistID, computerID);
+        }
+        else
+        {
+            cout << endl <<"No results from that query!" << endl;
+        }
+    }
+
+}
