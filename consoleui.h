@@ -57,6 +57,7 @@ private:
     void getComputerName(string &computerName);
     void getBuildYear(int &buildYear, bool &wasBuilt);
     bool checkIfBuilt(bool &wasBuilt);
+    void deleteRelation();
 
 
 
