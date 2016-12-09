@@ -631,3 +631,18 @@ void dataAccess::editRelation(Relation oldRelation, Relation editedRelation)
                " WHERE Sc = " + oldScientistID + " AND Co = " + oldComputerID);
 }
 
+vector<string> dataAccess::joke()
+{
+    string joke;
+    vector<string>toReturn;
+    QSqlQuery query(db);
+    query.exec("SELECT * FROM Jokes");
+
+    while(query.next())
+    {
+        joke = query.value("col_2").toString().toStdString();
+        toReturn.push_back(joke);
+    }
+    return toReturn;
+}
+

@@ -177,3 +177,11 @@ void Service::requestRelationDelete(Relation deleteRelation)
 {
    a.deleteRelation(deleteRelation);
 }
+
+string Service::getJoke()
+{
+    string joke;
+    joke = a.joke()[rand() % a.joke().size()];
+
+    return joke;
+}

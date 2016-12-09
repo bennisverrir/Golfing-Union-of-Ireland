@@ -58,6 +58,7 @@ private:
     void getBuildYear(int &buildYear, bool &wasBuilt);
     bool checkIfBuilt(bool &wasBuilt);
     void deleteRelation();
+    void outputJoke();
 
 
 
