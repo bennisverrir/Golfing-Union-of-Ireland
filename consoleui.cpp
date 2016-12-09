@@ -102,7 +102,7 @@ ostream& operator << (ostream& out,const vector<Computer>& rhs)
     cout << "|";
     out << setw(7) << left <<  "No." << setw(30) << left << "Name" << setw(11) << "Build Year" << setw(5) << " " <<
     "Computer Type";
-    cout << "                 |" << endl;
+    cout << "                |" << endl;
     cout << "|";
     for(int i = 0; i < 41; i++)
     {
