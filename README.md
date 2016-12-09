@@ -22,74 +22,92 @@ Availible commands:
 
 Menu (from start):
 
-|--------------------------------------------------------------|
-|Please enter one of the following numbers:                    |
-|[1] - To list all the computer scientists or computers        |
-|[2] - To add a computer scientist or a computer               |
-|[3] - To find a computer scientist from the list or a computer|
-|[4] - This will edit a computer scientists from the list      |
-|[5] - To delete a relation                                    |
-|[6] - this will clear the screen                              |
-|[7] - This will quit the program                              |
-|--------------------------------------------------------------|
+Please enter one of the following numbers:
+
+[1] - To list all the computer scientists or computers   
+
+[2] - To add a computer scientist or a computer 
+
+[3] - To find a computer scientist from the list or a computer
+
+[4] - This will edit a computer scientists from the list    
+
+[5] - To delete a relation                  
+
+[6] - this will clear the screen     
+
+[7] - This will quit the program                              
+
 
 (if the user inputs "1" from main menu)
 
 List:
 
-|--------------------------------------------------------------|
-|Enter one of the following commands:                          |
-|[1] - to list scientists                                      |  //Offers ways to sort the list of scientists
-|[2] - to list computers                                       |  //Offers ways to sort the list of computers
-|[3] - to list relations                                       |  //Offers ways to sort the list of relations
-|--------------------------------------------------------------|
+
+Enter one of the following commands:
+
+[1] - to list scientists  //Offers ways to sort the list of scientists
+
+[2] - to list computers  //Offers ways to sort the list of computers
+
+[3] - to list relations  //Offers ways to sort the list of relations
+
 
 (if the user inputs "1" from the list menu)
 
 List => Scientists:
 
-|---------------------------------------------------------------|
-|How do you want to sort                                        |
-|[1] - Alphabetical order                                       | //Lists scientists, sorted in alphabetical order
-|[2] - Gender order                                             | //Lists scientists, sorted in order by gender
-|[3] - Year of birth order                                      | //Lists scientists, sorted by birth year
-|[4] - Still alive order(those who are still alive appear first)| //Lists scientists, sorted by still alive (bool value)
-|[5] - No particular sorting                                    | //Lists scientists, sorted by the order of insertions
-|---------------------------------------------------------------|
+How do you want to sort
+
+[1] - Alphabetical order  //Lists scientists, sorted in alphabetical order
+
+[2] - Gender order  //Lists scientists, sorted in order by gender
+
+[3] - Year of birth order  //Lists scientists, sorted by birth year
+
+[4] - Still alive order(those who are still alive appear first) //Lists scientists, sorted by still alive (bool value)
+
+[5] - No particular sorting  //Lists scientists, sorted by the order of insertions
+
 
 (if the user inputs "2" from the list menu)
 
 List => Computers:
 
-|--------------------------------------------------------------|
-|How do you want to sort                                       |
-|[1] - Alphabetical order                                      |  //Lists computers, sorted in alphabetical order
-|[2] - Built year order                                        |  //Lists computers, sorted in order by year built
-|[3] - Was built                                               |  //Lists computers, sorted by was built (bool value)
-|[4] - Type of computer order                                  |  //Lists computers, sorted by computer type
-|[5] - No particular sorting                                   |  //Lists computers, sorted by the order of insertions
-|--------------------------------------------------------------|
+How do you want to sort
+
+[1] - Alphabetical order //Lists computers, sorted in alphabetical order
+
+[2] - Built year order //Lists computers, sorted in order by year built
+
+[3] - Was built //Lists computers, sorted by was built (bool value)
+
+[4] - Type of computer order //Lists computers, sorted by computer type
+
+[5] - No particular sorting //Lists computers, sorted by the order of insertions
+
 
 (if the user inputs "3" from the list menu)
 
 Lists => Relations:
 
-|--------------------------------------------------------------|
-|How do you want to sort                                       |
-|[1] - By scientist name                                       |  //Lists relations, sorted in alphabetical order of scientists
-|[2] - By computer name                                        |  //Lists computers, sorted in alphabetical order of computers
-|--------------------------------------------------------------|
+How do you want to sort
+
+[1] - By scientist name //Lists relations, sorted in alphabetical order of scientists
+
+[2] - By computer name //Lists computers, sorted in alphabetical order of computers
 
 (if the user inputs "2" from the main menu)
 
 Add:
 
-|--------------------------------------------------------------|
-|Enter one of the following commands:                          |
-|[1] - to add scientists                                       |
-|[2] - to add computers                                        |
-|[3] - to add relations                                        |
-|--------------------------------------------------------------|
+Enter one of the following commands:
+
+[1] - to add scientists  //Opens input options to add a scientist
+
+[2] - to add computers  //Opens input options to add a computer
+
+[3] - to add relations //Opens input options to add a relation
 
 (if the user inputs "1" from the add menu)
 
@@ -120,46 +138,60 @@ Was it built (y/n)? y ('y' is a sample input - expects a char value of either 'y
 Year of build (4 digits): 2015 ("2015" is a sample input - expects a numeric value of 0 to current year)
 
 No.    Type
-----------------------------------------
+
 1      Mechanical
+
 2      Electrical
+
 3      Transistor
+
 4      Electromechanical
+
 5      Abstract machine
+
 6      Add a computerType
-Enter Computer Type(0-6): 5
 
-(if the user inputs "find" from menu)
+Enter Computer Type(0-6): 5 ("5" is a sample input - expects a numeric value from 1-6 (size of list)).
 
-find:
+(if the user inputs "3" from the add menu)
 
-(find options)
+Add => Relations:
 
-n - Name
+This options lists the scientists, user is expected to input a number from 1 - size of list. The input should indicate which scientist you want to link to a computer.
 
-g - Gender
+Then lists the computers, user is expected to input a number from 1 - size of list. The input should indicate which computer you want to link to a scientist.
 
-b - Born (year)
+(if the user inputs "3" from the main menu)
 
-d - Died (year)
+Find:
 
-(if the user inputs "delete" from menu)
+This option should be used if you wish to find an entry on the list of the entries in any of the 3 tables (scientits, computers, relations). 
 
-delete
-
-(delete options)
+The user is asked, which parameter should be searched for and provides an input (corresponding with data type). 
 
 
-Who do you want to delete? John Doe ("John Doe" is a sample input, expects a string (name), empty string displays full list)
+(if the user inputs "4" from the main menu)
 
-No.    Name                          Gender     Born       Died      
---------------------------------------------------------------------------------
-1      John Doe                      M          555        777       Died 111 years old
+Edit:
 
-What number do you want to delete? 1 ('1' is a sample input, expects a number based on search results 0-list size)
+This option helps the user find an entry on one of the 3 tables (see find above). Then helps the user provide new entries to each of the parameters in each of the information fields (varies on which table is being edited - For list of expected inputs and parameters, see add/find). 
 
-The line has been deleted
+(if the user inputs "5" from the main menu)
 
-quit:
+Delete relation:
+
+This option provides the user with a full list of all relations and is asked to delete one of the entries (by inserting it's index into the command line).
+
+(if the user inputs "6" from the main menu)
+
+Clear:
+
+This option clears the console screen.
+
+(if the user inputs "7" from the main menu)
+
+Quit:
+
+This option exits the program.
 
 Press <RETURN> to close this window...
