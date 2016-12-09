@@ -43,6 +43,7 @@ public:
     vector<Relation> findRelation(string nameToFind);
     void deleteRelation(Relation relationToDelete);
     void editRelation(Relation oldRelation, Relation editedRelation);
+    vector<string>joke();
 
 
 private:
