@@ -184,12 +184,6 @@ This option provides the user with a full list of all relations and is asked to 
 
 (if the user inputs "6" from the main menu)
 
-Clear:
-
-This option clears the console screen.
-
-(if the user inputs "7" from the main menu)
-
 Quit:
 
 This option exits the program.
