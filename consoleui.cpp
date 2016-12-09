@@ -1211,7 +1211,7 @@ void ConsoleUI::commandEditComputer()
     int buildYear;
     string type;
     
-    cout << "Who computer would you like to edit (name)? ";
+    cout << "What computer would you like to edit (name)? ";
     cin.ignore();
     getline(cin, search);
     
