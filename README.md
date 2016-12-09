@@ -16,7 +16,7 @@ Data access layer - DataAccess, handles the opening, reading and writing request
 
 Data (source) - External source of information.
 
-This program is a database that keeps basic information about famous computer scientists, computers and their relations. In the program the user has the options of listing any of the 3 lists (Scientists/Computers/Relations) with various different sorting. The user can add, and edit scientists, computers and relations and search for a specific entry in the database. If the user wants to know the answer to life, the universe and everything, type 42 in the commands menu.
+This program is a database that keeps basic information about famous computer scientists, computers and their relations. In the program the user has the options of listing any of the 3 lists (Scientists/Computers/Relations) with various different sorting. The user can add, and edit scientists, computers and relations and search for a specific entry in the database. If the user wants to know the answer to life, the universe and everything, type 42 in the commands menu. If the user wants some funny jokes, type 69 in the command menu.
 
 Availible commands:
 
