@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <vector>
+#include <cstdlib>
 #include "legend.h"
 #include "dataaccess.h"
 #include "computer.h"
