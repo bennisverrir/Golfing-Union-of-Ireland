@@ -349,8 +349,10 @@ This function checks if the input name is valid, if it is already in the list.
 */
 void ConsoleUI::commandAddScientist()
 {
-    string computerName;
+    int computerID;
+    int scientistID;
     string scientistName;
+
     char gender;
     int born;
     int death;
@@ -380,8 +382,8 @@ void ConsoleUI::commandAddScientist()
             cout << print;
             cout << "Relation (1-"<<_numOfChoices <<"): ";
             cin >> indexCommand;
-            computerName = print[indexCommand-1].getName();
-            _service.requestRelationAdd(scientistName, computerName);
+            computerID = print[indexCommand-1].getID();
+            _service.requestRelationAdd(scientistID, computerID);
         }
     }while(yesNo != 'N');
 
@@ -699,7 +701,8 @@ void ConsoleUI::commandClear()
 void ConsoleUI::commandAddComputer()
 {
     string computerName;
-    string scientistName;
+    int scientistID;
+    int computerID;
     int buildYear;
     int index = 0;
     string computerType;
@@ -746,8 +749,8 @@ void ConsoleUI::commandAddComputer()
 
             cout << "Relation (1-"<<_numOfChoices <<"): ";
             cin >> indexCommand;
-            scientistName = print[indexCommand-1].getName();
-            _service.requestRelationAdd(scientistName, computerName);
+            scientistID = print[indexCommand-1].getID();
+            _service.requestRelationAdd(scientistID, computerID);
         }
     }while(yesNo != 'N');
 
@@ -1036,8 +1039,9 @@ void ConsoleUI::commandAddRelation()
 
     int index;
     int computerIndex;
-    string relationLegend;
-    string relationComputer;
+    string relationLegendName;
+    int relationLegend;
+    int relationComputer;
 
     cout << _service.requestLegendSort();
 
@@ -1046,15 +1050,16 @@ void ConsoleUI::commandAddRelation()
     cin >> index;
 
 
-    relationLegend = _service.requestLegendSort()[index-1].getName();
+    relationLegend = _service.requestLegendSort()[index-1].getID();
+    relationLegendName = _service.requestLegendSort()[index-1].getName();
 
     cout << _service.requestComputerSort();
 
-    cout << "What computer do you want to relate to " << relationLegend << "? ";
+    cout << "What computer do you want to relate to " << relationLegendName << "? ";
 
     cin >> computerIndex;
 
-    relationComputer = _service.requestComputerSort()[computerIndex-1].getName();
+    relationComputer = _service.requestComputerSort()[computerIndex-1].getID();
 
     _service.requestRelationAdd(relationLegend, relationComputer);
 }

@@ -31,9 +31,14 @@ Computer::Computer (int iD, string name, int buildYear, string computerType, boo
     setComputerType(computerType);
     setWasBuilt(wasBuilt);
 }
-void Computer::setID(int iD)
+void Computer::setID(int ID)
 {
-    _myID = iD;
+    _myID = ID;
+}
+
+int Computer::getID()
+{
+    return _myID;
 }
 
 void Computer::setName(string name)

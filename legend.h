@@ -14,6 +14,7 @@ public:
     friend bool operator == (Legend &lhs, Legend &rhs);
     void setID (int iD);
     void setName(string);
+    int getID();
     void setGender(char);
     void setBorn(int);
     void setDeath(int);

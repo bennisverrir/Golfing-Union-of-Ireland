@@ -124,11 +124,13 @@ void Service::requestComputerAdd(string name, int yearBuilt, string computerType
     a.writeComputerFile (myNewComputer, index);
 }
 
-void Service::requestRelationAdd (string scientistName, string computerName)
+
+void Service::requestRelationAdd (int scientistID, int computerID)
 {
-    Relation myNewRelation (scientistName, computerName);
+    Relation myNewRelation (scientistID, computerID);
     a.addRelation (myNewRelation);
 }
+
 void Service::requestLegendEdit (string name, char gender, int born, int death, Legend oldLegend){
     Legend myEditedLegend (name, gender, born, death);
     a.editLegend(oldLegend, myEditedLegend);

@@ -37,11 +37,14 @@ public:
     void addRelation(Relation relation);
     void editLegend(Legend oldLegend, Legend editLegend);
     void editComputer(Computer oldComputer, Computer editComputer, int index);
-    void editRelation(Relation oldRelation, Relation relation);
     int getID(QSqlQuery query,QString name, QString tableName);
     void findNonRelatedRelation(Legend scientist);
     void findNonRelatedRelation(Computer computer);
     vector<Relation> findRelation(string nameToFind);
+    void deleteRelation(Relation relationToDelete);
+    void editRelation(Relation oldRelation, Relation editedRelation);
+
+
 private:
     const string fileName = "legend.txt";
 };

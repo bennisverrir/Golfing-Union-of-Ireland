@@ -22,13 +22,13 @@ vector<Legend> dataAccess::pushingLegendVector(QSqlQuery query)
 
     while(query.next())
     {
-
+        int ID = query.value("ID").toUInt();
         string name = query.value("Name").toString().toStdString();
         string gender = query.value("Gender").toString().toStdString();
         int born = query.value("Birth").toUInt();
         int death = query.value("Death").toUInt();
 
-        legends.push_back(Legend(name, gender[0], born, death));
+        legends.push_back(Legend(ID, name, gender[0], born, death));
     }
 
     return legends;
@@ -40,12 +40,13 @@ vector<Computer> dataAccess::pushingComputerVector(QSqlQuery query)
 
     while(query.next())
     {
+        int ID = query.value("ID").toUInt();
         string name = query.value("Name").toString().toStdString();
         int buildYear = query.value("BuildYear").toUInt();
         string computerType = query.value("TypeName").toString().toStdString();
         bool wasBuilt = query.value("WasBuilt").toBool();
 
-        computers.push_back(Computer(name, buildYear, computerType, wasBuilt));
+        computers.push_back(Computer(ID, name, buildYear, computerType, wasBuilt));
     }
 
     return computers;
@@ -208,7 +209,7 @@ vector<Computer> dataAccess::sortComputer(int sort, bool ascDesc)
 
     QSqlQuery query(db);
 
-    QString command = "Select c.Name, c.BuildYear, ct.Name AS TypeName, c.WasBuilt FROM Computer c "
+    QString command = "Select c.ID, c.Name, c.BuildYear, ct.Name AS TypeName, c.WasBuilt FROM Computer c "
                          "INNER JOIN ComputerType ct "
                          "ON c.ComputerTypeID = ct.ID " + order + sortString + reverse;
     query.exec(command);
@@ -395,24 +396,14 @@ void dataAccess::addRelation(Relation relation)
 {
 
     QSqlQuery query(db);
-    QString scientistName = QString::fromStdString(relation.getLegendName());
-    QString computerName = QString::fromStdString(relation.getComputerName());
-    int scientistID = 0;
-    int computerID = 0;
-
-    scientistID = getID(query, scientistName, "Scientists");
-
-    computerID = getID(query, computerName, "Computer");
 
     query.prepare("INSERT INTO Combine(Sc,Co) Values(:sc, :co)");
 
-    query.bindValue(":sc", scientistID);
-    query.bindValue(":co", computerID);
+    query.bindValue(":sc", relation.getScientistID());
+    query.bindValue(":co", relation.getComputerID());
 
 
     query.exec();
-
-
 }
 
 
@@ -472,7 +463,7 @@ int dataAccess::getID(QSqlQuery query,  QString name, QString tableName)
     return returnInt;
 }
 
-void dataAccess::editRelation(Relation relation, Relation oldRelation)
+/*void dataAccess::editRelation(Relation relation, Relation oldRelation)
 {
 
     QSqlQuery query(db);
@@ -499,7 +490,7 @@ void dataAccess::editRelation(Relation relation, Relation oldRelation)
 
     query.exec();
 
-}
+}*/
 
 vector<Relation> dataAccess::findRelation(string nameToFind)
 {
@@ -537,3 +528,50 @@ vector<Relation> dataAccess::findRelation(string nameToFind)
 
     return returnVector;
 }
+
+/*Function deleteRelation, @param Relation relationToDelete
+* deletes Relation from the sql
+* TODO
+*
+*/
+void dataAccess:: deleteRelation(Relation relationToDelete)
+{
+    QSqlQuery query(db);
+
+    QString scientistID = QString::fromStdString(to_string(relationToDelete.getScientistID()));
+
+    QString computerID = QString::fromStdString(to_string(relationToDelete.getComputerID()));
+
+
+    QString command = "DELETE FROM Combine WHERE Sc = "+ scientistID +" AND Co = "+ computerID;
+
+    query.prepare(command);
+
+    query.exec();
+
+    qDebug() << command;
+
+}
+
+/*Function editRelation, @param Relation oldRelation, Relation editeRelation
+* TODO
+*
+*
+*/
+void dataAccess::editRelation(Relation oldRelation, Relation editedRelation)
+{
+    QSqlQuery query(db);
+
+    QString scientistID = QString::fromStdString(to_string(editedRelation.getScientistID()));
+
+    QString computerID = QString::fromStdString(to_string(editedRelation.getComputerID()));
+
+    QString oldScientistID = QString::fromStdString(to_string(oldRelation.getScientistID()));
+
+    QString oldComputerID = QString::fromStdString(to_string(oldRelation.getComputerID()));
+
+
+    query.exec("UPDATE Combine Set Sc = " + scientistID  + ", Co = " + computerID +
+               " WHERE Sc = " + oldScientistID + " AND Co = " + oldComputerID);
+}
+

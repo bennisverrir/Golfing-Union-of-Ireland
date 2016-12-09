@@ -13,7 +13,8 @@ public:
     Computer (int iD, string name, int buildYear, string computerType, bool wasBuilt);
 
     friend bool operator == (Computer &lhs, Computer &rhs);
-    void setID(int iD);
+    int getID();
+    void setID(int ID);
     void setName(string);
     void setBuildYear(int);
     void setComputerType(string);

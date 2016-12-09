@@ -57,7 +57,10 @@ void Legend::setDeath(int death)
 }
 
 
-
+int Legend::getID()
+{
+    return _myID;
+}
 string Legend::getName() const
 {
     return _name;

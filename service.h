@@ -30,7 +30,7 @@ public:
         void requestNonRelatedComputer(string name);
         void requestLegendAdd(string name, char gender, int born, int death);
         void requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt, int index);
-        void requestRelationAdd (string scientistName, string computerName);
+        void requestRelationAdd (int scientistID, int computerID);
         void requestLegendEdit(string name, char gender, int born, int death, Legend oldLegend);
         void requestComputerEdit(string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer,int index);
         void requestRelationEdit(string scientistName, string computerName, Relation oldRelation);
@@ -40,6 +40,7 @@ public:
         vector <string> requestComputerTypes();
         void requestComputerTypeAdd(string name);
         vector<Relation> findRelation(string name);
+
 
 
 private:
