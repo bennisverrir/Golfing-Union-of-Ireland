@@ -1,5 +1,4 @@
 #include "dataaccess.h"
-#include <QDebug>
 
 dataAccess::dataAccess()
 {
@@ -180,6 +179,15 @@ vector<Computer> dataAccess::sortComputer(int sort, bool ascDesc)
     QString reverse;
     QString order = "ORDER BY ";
 
+    if (ascDesc)
+    {
+        reverse = " ASC";
+    }
+    else
+    {
+        reverse = " DESC";
+    }
+
     switch(sort)
     {
         case 0:
@@ -192,25 +200,12 @@ vector<Computer> dataAccess::sortComputer(int sort, bool ascDesc)
             sortString = "ct.Name";
         break;
         case 3:
-            sortString = "c.WasBuilt";
-        break;
-        case 4:
             sortString = "";
+            reverse = "";
+            order = "";
+        break;
     }
 
-    if (sort == 4)
-    {
-         reverse = "";
-         order = "";
-    }
-    else if (ascDesc)
-    {
-        reverse = " ASC";
-    }
-    else
-    {
-        reverse = " DESC";
-    }
 
     vector<Computer> returnLegends;
 
@@ -222,6 +217,7 @@ vector<Computer> dataAccess::sortComputer(int sort, bool ascDesc)
                          "INNER JOIN ComputerType ct "
                          "ON c.ComputerTypeID = ct.ID " + order + sortString + reverse;
     query.exec(command);
+
 
     returnLegends = pushingComputerVector(query);
 
@@ -318,7 +314,6 @@ vector<Computer> dataAccess::findComputer(int whatToFind, string find)
 
     query.exec(command);
 
-    qDebug() << "COMMAND: " << command;
 
     returnComputers = pushingComputerVector(query);
 
@@ -578,7 +573,6 @@ vector<Relation> dataAccess::findRelation(int IDToFind, int sort)
 
     query.exec();
 
-    qDebug() << command;
 
     while(query.next())
     {
@@ -623,8 +617,6 @@ vector<Relation> dataAccess::findRelation(string nameToFind, int sort)
 
     query.exec();
 
-    qDebug() << command;
-
     while(query.next())
     {
         int scientistID = query.value("sID").toUInt();
@@ -657,8 +649,6 @@ void dataAccess:: deleteRelation(Relation relationToDelete)
     query.prepare(command);
 
     query.exec();
-
-    qDebug() << command;
 
 }
 
