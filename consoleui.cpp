@@ -640,12 +640,27 @@ bool ConsoleUI::checkIfDead()
 
 void ConsoleUI::commandFindScientist()
 {
-    cout << "Which parameter would you like to search for?" << endl;
-    cout << "[1] - Name" << endl;
-    cout << "[2] - Gender" << endl;
-    cout << "[3] - Born (year)" << endl;
-    cout << "[4] - Died (year)" << endl;
-    
+    cout << "|";
+    for(int i = 0; i < 31; i++)
+    {
+        cout << "--";
+    }
+    cout << "|" << endl;
+
+    cout << "|" << "Which parameter would you like to search for?"<< "                 |" << endl;
+    cout << "|" << "[1] - Name" << "                                                    |" << endl;
+    cout << "|" << "[2] - Gender"<< "                                                  |" << endl;
+    cout << "|" << "[3] - Born (year)" << "                                             |" << endl;
+    cout << "|" << "[4] - Died (year)"<< "                                             |" << endl;
+    cout << "|";
+
+
+    for(int i = 0; i < 31; i++)
+    {
+        cout << "--";
+    }
+    cout << "|" << endl;
+
     int whatToFind;
     validateCommand(whatToFind);
     
@@ -661,7 +676,7 @@ void ConsoleUI::commandFindScientist()
     {
         cout << endl <<"No results from that query!" << endl;
     }
-}//buinn
+}
 
 void ConsoleUI::findRelation()
 {
