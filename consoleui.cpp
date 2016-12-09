@@ -319,6 +319,12 @@ void ConsoleUI::run()
             case 42:
                 fortyTwo();
                 break;
+            case 69:
+                outputJoke();
+            break;
+
+            default:
+                cout << endl<< "Wrong command!"<<endl<<endl;
         }
     }
 }
@@ -1229,7 +1235,11 @@ void ConsoleUI::deleteRelation()
     
     Relation deleteRelation = toprint[index-1];
     
-    _service.requestRelationDelete(deleteRelation);
-    
-    
+    _service.requestRelationDelete(deleteRelation); 
 }
+
+void ConsoleUI::outputJoke(){
+
+    cout << endl << _service.getJoke()<<endl<<endl;
+}
+
