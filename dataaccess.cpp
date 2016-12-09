@@ -372,7 +372,7 @@ vector<Relation> dataAccess::sortRelation(int sort, bool ascDesc)
 
     QSqlQuery query(db);
 
-    QString sqlCommand = "SELECT  s.Name, c.Name AS ComputerName From Scientists s, Computer c, Combine co "
+    QString sqlCommand = "SELECT  s.ID AS sID, c.ID as cID, s.Name, c.Name AS ComputerName From Scientists s, Computer c, Combine co "
                          "WHERE  s.ID = co.Sc AND c.ID = co.Co " + orderCommand + order + reverse;
     string scientistName;
     string computerName;
@@ -383,10 +383,12 @@ vector<Relation> dataAccess::sortRelation(int sort, bool ascDesc)
 
     while(query.next())
     {
+        int scientistID = query.value("sID").toUInt();
+        int computerID = query.value("cID").toUInt();
         scientistName = query.value("Name").toString().toStdString();
         computerName = query.value("ComputerName").toString().toStdString();
 
-        returnVector.push_back(Relation(scientistName, computerName));
+        returnVector.push_back(Relation(scientistID, computerID, scientistName, computerName));
     }
 
     return returnVector;
