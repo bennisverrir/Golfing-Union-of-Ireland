@@ -547,6 +547,53 @@ int dataAccess::getID(QSqlQuery query,  QString name, QString tableName)
 *finds scientist by name, gender, birth or death and returns it vector of legand
 *finds relation by name of scientis or name of computer
 */
+vector<Relation> dataAccess::findRelation(int IDToFind, int sort)
+{
+    QSqlQuery query(db);
+
+    QString whatToFind;
+    QString ID = QString::fromStdString(to_string(IDToFind));
+
+    switch(sort)
+    {
+        case 1:
+        whatToFind = "s.ID";
+        break;
+        case 2:
+        whatToFind = "c.ID";
+        break;
+    }
+
+
+
+
+
+    vector<Relation> returnVector;
+
+    QString command = " SELECT  s.Name, s.ID as sID, c.ID as cID, c.Name AS ComputerName  From Scientists s, Computer c, Combine co"
+                       " ON s.ID = co.Sc AND c.ID = co.Co Where " + whatToFind + " = " + ID;
+
+    query.prepare(command);
+
+
+    query.exec();
+
+    qDebug() << command;
+
+    while(query.next())
+    {
+        int scientistID = query.value("sID").toUInt();
+        int computerID = query.value("cID").toUInt();
+        string scientistName = query.value("Name").toString().toStdString();
+        string computerName = query.value("ComputerName").toString().toStdString();
+
+        returnVector.push_back(Relation(scientistID, computerID, scientistName, computerName));
+    }
+
+
+    return returnVector;
+}
+
 vector<Relation> dataAccess::findRelation(string nameToFind, int sort)
 {
     QSqlQuery query(db);
