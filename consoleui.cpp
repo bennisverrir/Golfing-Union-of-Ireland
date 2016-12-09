@@ -7,12 +7,11 @@ using namespace std;
 */
 void ConsoleUI::displayCommands()
 {
-    cout << endl;
     cout << "Please enter one of the following numbers:"<< endl;
     cout << "[1] - To list all the computer scientists or computers" << endl;
     cout << "[2] - To add a computer scientist or a computer " << endl;
     cout << "[3] - To find a computer scientist from the list or a computer" << endl;
-    cout << "[4] - This will delete a computer scientists from the list" << endl;
+    cout << "[4] - This will edit a computer scientists from the list" << endl;
     cout << "[5] - this will clear the screen" << endl;
     cout << "[6] - This will quit the program" << endl;
 
@@ -142,11 +141,12 @@ void ConsoleUI::run()
 {
     int command = 0;
     int subCommand = 0;
+
+
     while(command != 6)
     {
         displayCommands();
         _numOfChoices = 6;
-
         validateCommand(command);
 
         switch(command)
@@ -168,7 +168,7 @@ void ConsoleUI::run()
                 }
                 else if(subCommand == 3)
                 {
-                    cout << _service.requestRelationSearch();
+                    commandListRelations();
                 }
 
             break;
@@ -176,7 +176,7 @@ void ConsoleUI::run()
             case 2:
                 coutChoice(command);
 
-                _numOfChoices = 2;
+                _numOfChoices = 3;
 
                 validateCommand(subCommand);
 
@@ -187,6 +187,10 @@ void ConsoleUI::run()
                 else if(subCommand == 2)
                 {
                     commandAddComputer();
+                }
+                else if(subCommand == 3)
+                {
+                    commandAddRelation();
                 }
 
             break;
@@ -206,12 +210,16 @@ void ConsoleUI::run()
                 {
                     commandFindComputer();
                 }
+                else if(subCommand == 3)
+                {
+                    findRelation();
+                }
             break;
 
             case 4:
                 coutChoice(command);
 
-                _numOfChoices = 2;
+                _numOfChoices = 3;
 
                 validateCommand(subCommand);
 
@@ -221,7 +229,11 @@ void ConsoleUI::run()
                 }
                 else if(subCommand == 2)
                 {
-                    //commandEditComputer();
+                    commandEditComputer();
+                }
+                else if(subCommand == 3)
+                {
+                    commandEditRelation();
                 }
             break;
 
@@ -238,7 +250,7 @@ void ConsoleUI::run()
             break;
         }
     }
-}//BUINN
+}
 void ConsoleUI::validateCommand(int &command)
 {
     cin >> command;
@@ -310,10 +322,8 @@ void ConsoleUI::commandListScientists()
     _numOfChoices = 5;
     validateCommand(sortCommand);
 
-    if(sortCommand != 5)
-    {
-        ascDesc();
-    }
+    ascDesc();
+
 
     _service.setCaseField(sortCommand);
     cout << _service.requestLegendSort();
@@ -339,18 +349,42 @@ This function checks if the input name is valid, if it is already in the list.
 */
 void ConsoleUI::commandAddScientist()
 {
-    string name;
+    string computerName;
+    string scientistName;
     char gender;
     int born;
     int death;
 
-    getName(name);
+    getName(scientistName);
     getGender(gender);             //checking for a valid gender
     getBorn(born);
 
     getDeath(death, born);
 
-    _service.requestLegendAdd(name, gender, born, death);
+    _service.requestLegendAdd(scientistName, gender, born, death);
+
+    char yesNo;
+
+    do
+    {
+        cout << "Add relation (y/n): ";
+        validateInputYN(yesNo);
+        if(yesNo == 'Y')
+        {
+            int indexCommand;
+            _service.setCaseField(1);
+            vector<Computer> print = _service.requestComputerSort();
+
+            _numOfChoices = print.size();
+
+            cout << print;
+            cout << "Relation (1-"<<_numOfChoices <<"): ";
+            cin >> indexCommand;
+            computerName = print[indexCommand-1].getName();
+            _service.requestRelationAdd(scientistName, computerName);
+        }
+    }while(yesNo != 'N');
+
     cout << endl << "Scientist Added!" << endl << endl;
 }
 /*Function getName @parm list: name, flag. @return name.
@@ -365,11 +399,14 @@ void ConsoleUI::getName(string &name)
         cin.ignore();
         getline(cin,name);
         flag = checkName(name, flag);
+
         if(!flag)
         {
             cout << "Please enter a valid name" << endl;
         }
+
     }while(!flag);
+
     name = rightName(name);
 }
 
@@ -464,7 +501,7 @@ bool ConsoleUI::checkIfDead()
 {
     char command = ' ';
 
-    cout << "Are they alive (Y/N)? ";
+    cout << "Are they alive (y/n)? ";
 
     validateInputYN(command);
 
@@ -503,7 +540,17 @@ void ConsoleUI::commandFindScientist()
     }
 }//buinn
 
+void ConsoleUI::findRelation()
+{
+    string name;
+    cout << "What do you want to find? ";
+    cin.ignore();
+    getline(cin,name);
 
+    vector<Relation> toPrint = _service.findRelation(name);
+
+    cout << _service.findRelation(name);
+}
 
 /*function subCommandFind, @param an integer value, @return void.
 * validates that the input from the user is an integer value.
@@ -567,25 +614,19 @@ void ConsoleUI::subCommandFind(int command, vector <Legend> &toPrint)
 void ConsoleUI::commandFindComputer()
 {
     string name;
+    int command = 0;
 
     cout << "Which parameter would you like to search for?" << endl;
     cout << "[1] - Name" << endl;
     cout << "[2] - Build (year)" << endl;
     cout << "[3] - Type" << endl;
 
-   /* commandListComputerTypes();
+    _numOfChoices = 3;
+    validateCommand(command);
 
-    cout << "Enter Computer Type(0-" << _service.requestComputerTypes().size() << "): ";*/
-    int whatToFind;
-    validateCommand(whatToFind);
-
-    _service.setCaseField(1);
-    //cout << "What to search? "<<endl;
-
-    _service.setCaseField(whatToFind);
     vector <Computer> toPrint;
 
-    subCommandFindComputer(whatToFind, toPrint);
+    subCommandFindComputer(command, toPrint);
     if(toPrint.size() > 0)
     {
         cout << toPrint;
@@ -603,6 +644,8 @@ void ConsoleUI::commandFindComputer()
 */
 void ConsoleUI::subCommandFindComputer(int command, vector <Computer> &toPrint)
 {
+    _service.setCaseField(command);
+
     switch(command)
     {
         case 1:
@@ -634,20 +677,17 @@ void ConsoleUI::subCommandFindComputer(int command, vector <Computer> &toPrint)
         case 3:
         {
             int computerType = 0;
-            cout << "Enter a type to search for(1-"<< _service.requestComputerTypes().size() << "): ";
+            cout << "Enter a type to search for(1-"<< _service.requestComputerTypes().size() << "): " << endl;
             commandListComputerTypes();
             cin >> computerType;
 
-            _service.setCaseField(computerType);
             _service.setSearchField(_service.requestComputerTypes()[computerType-1]);
             toPrint = _service.requestComputerSearch();
 
             break;
         }
     }
-}//buinn
-
-
+}
 /*function commandClear, @return void
  * Clears the screen
  */
@@ -666,18 +706,200 @@ void ConsoleUI::commandAddComputer()
     bool wasBuilt;
     char built;
 
+    getComputerName(computerName);
+
+    getBuildYear(buildYear, wasBuilt);
+
+    commandListComputerTypes();
+
+    _numOfChoices = _service.requestComputerTypes().size();
+
+    cout << "Enter Computer Type(0-" << _numOfChoices << "): ";
+
+    validateCommand(index);
+
+    if(index == 0)
+    {
+        addComputerType();
+        index = _service.requestComputerTypes().size();
+    }
+
+    computerType = _service.requestComputerTypes()[index-1];
+
+    _service.requestComputerAdd(computerName, buildYear, computerType, wasBuilt, index);
+
+
+    char yesNo;
+
+    do
+    {
+        cout << "Add relation (y/n): ";
+        validateInputYN(yesNo);
+        if(yesNo == 'Y')
+        {
+            int indexCommand;
+            _service.setCaseField(1);
+            vector<Legend> print = _service.requestLegendSort();
+            cout << print;
+
+            _numOfChoices = print.size();
+
+            cout << "Relation (1-"<<_numOfChoices <<"): ";
+            cin >> indexCommand;
+            scientistName = print[indexCommand-1].getName();
+            _service.requestRelationAdd(scientistName, computerName);
+        }
+    }while(yesNo != 'N');
+
+    _service.requestComputerAdd(computerName, buildYear, computerType, wasBuilt, index);
+
+}
+
+void ConsoleUI::getComputerName(string &computerName)
+{
     cout << "Enter the name: ";
     cin.ignore();
     getline(cin,computerName);
+}
 
-    cout << "was it built (Y/N): ";
-
-    validateInputYN(built);
-    if(built == toupper('y'))
+void ConsoleUI::getBuildYear(int &buildYear, bool &wasBuilt)
+{
+    if(checkIfBuilt(wasBuilt))
     {
         cout << "Year of build (4 digits): ";
         validateYear(0, buildYear);
     }
+    else
+    {
+        buildYear = 0;
+    }
+}
+
+bool ConsoleUI::checkIfBuilt(bool &wasBuilt)
+{
+    char command = ' ';
+
+    cout << "Was it built (y/n)? ";
+
+    validateInputYN(command);
+
+    if(command == toupper('y'))
+    {
+        return true;
+        wasBuilt = true;
+    }
+    else
+    {
+        return false;
+        wasBuilt = false;
+    }
+}
+
+void ConsoleUI::commandListComputers()
+{
+    int command;
+
+    cout << "How do you want to sort"<< endl;
+    cout << "[1] - Alphabetical order" << endl;
+    cout << "[2] - Built year order" << endl;
+    cout << "[3] - Was built" << endl;
+    cout << "[4] - Type of computer order" << endl;
+    cout << "[5] - No particular sorting" << endl << endl;
+
+    _numOfChoices = 5;
+    validateCommand(command);
+
+    ascDesc();
+
+    _service.setCaseField(command);
+
+    cout << _service.requestComputerSort();
+
+
+}
+
+void ConsoleUI::commandListRelations()
+{
+    int command = 0;
+
+    cout << "How do you want to sort"<< endl;
+    cout << "[1] - By scientist name" << endl;
+    cout << "[2] - By computer name" << endl;
+
+    _numOfChoices = 2;
+    validateCommand(command);
+    ascDesc();
+
+     _service.setCaseField(command);
+
+     cout << _service.requestRelationSort();
+}
+
+void ConsoleUI::commandEditScientist()
+{
+    int index = 0;
+    string name;
+    char gender;
+    int born = 0;
+    int death = 0;
+
+    cout << "What Scientist would you like to edit(Name)? ";
+    cin.ignore();
+    getline(cin,name);
+    _service.setSearchField(name);
+    _service.setCaseField(1);
+    cout << _service.requestLegendSearch();
+    _numOfChoices = _service.requestLegendSearch().size();
+    cout << "Who do you want to edit? ";
+    validateCommand(index);
+
+    Legend oldLegend =  _service.requestLegendSearch()[index-1];
+
+    cout << "Old Name: " << oldLegend.getName() << endl;
+    getName(name);
+    cout << "Old gender: " << oldLegend.getGender() << endl;
+    getGender(gender);
+    cout << "Old birth Year: " << oldLegend.getBorn() << endl;
+    getBorn(born);
+    cout << "Old death year: " << oldLegend.getDeath() << endl;
+    getDeath(death, born);
+
+    cout << endl;
+    
+    _service.requestLegendEdit(name, toupper(gender), born, death, oldLegend);
+}
+
+void ConsoleUI::commandEditComputer()
+{
+    int index = 0;
+    string search;
+    string name;;
+    bool wasBuilt;
+    int buildYear;
+    string type;
+
+    cout << "Who computer would you like to edit (name)? ";
+    cin.ignore();
+    getline(cin, search);
+
+    _service.setSearchField(search);
+    _service.setCaseField(1);
+    vector<Computer> toPrint = _service.requestComputerSearch();
+
+    cout << toPrint;
+
+    _numOfChoices = toPrint.size();
+
+    validateCommand(index);
+
+    Computer oldComputer = toPrint[index-1];
+
+    cout << "Old Name: " << oldComputer.getName() << endl;
+    getComputerName(name);
+
+    getBuildYear(buildYear, wasBuilt);
+
+    cout << "Old computer type: " << oldComputer.getComputerType() << endl;   
 
     commandListComputerTypes();
 
@@ -691,117 +913,9 @@ void ConsoleUI::commandAddComputer()
         index = _service.requestComputerTypes().size();
     }
 
-    char yesNo;
-
-    _service.requestComputerAdd(computerName, buildYear, computerType, wasBuilt, index);
-
-    do
-    {
-        cout << "Add relation (Y/N): ";
-        validateInputYN(yesNo);
-        if(yesNo == 'Y')
-        {
-            int indexCommand;
-            _service.setCaseField(1);
-            vector<Legend> print = _service.requestLegendSort();
-            cout << print;
-            cout << "Relation (1-"<<_service.requestLegendSort().size() <<"): ";
-            cin >> indexCommand;
-
-            scientistName = print[indexCommand-1].getName();
-            _service.requestRelationAdd(scientistName, computerName);
-        }
-    }while(yesNo != 'N');
-}
-void ConsoleUI::commandListComputers()
-{
-    int command;
-
-    cout << "How do you want to sort"<< endl;
-    cout << "[1] - Alphabetical order" << endl;
-    cout << "[2] - Built year order" << endl;
-    cout << "[3] - Was built" << endl;
-    cout << "[4] - Type of computer order" << endl;
-    cout << "[5] - No particular sorting" << endl << endl;
-    
-    _numOfChoices = 5;
-    validateCommand(command);
-
-    if(command != 5)
-    {
-        ascDesc();
-    }
-    _service.setCaseField(command);
-    cout << _service.requestComputerSort();
-}
-
-void ConsoleUI::commandEditScientist()
-{
-    int index = 0;
-    string name;
-    char gender;
-    int born = 0;
-    int death = 0;
-
-    commandFindScientist();
-
-    cout << "Who do you want to edit? ";
-    cin >> index;
-
-    Legend oldLegend =  _service.requestLegendSearch()[index-1];
-
-    cout << "Old Name: " << oldLegend.getName() << endl;
-    cout << "New Name: ";
-    cin.ignore();
-    getline(cin, name);
-    cout << "Old gender: " << oldLegend.getGender() << endl;
-    cout << "New gender: ";
-    cin >> gender;
-    cout << "Old birth Year: " << oldLegend.getBorn() << endl;
-    cout << "New birth Year: ";
-    validateYear(0, born);
-    cout << "Old death year: " << oldLegend.getDeath() << endl;
-    cout << "New death year: ";
-    validateYear(born,death);
-
-    cout << endl;
-    
-    _service.requestLegendEdit(name, toupper(gender), born, death, oldLegend);
-}
-
-void ConsoleUI::commandEditComputer()
-{
-    int index = 0;
-    string name;;
-    bool wasBuilt;
-    int buildYear;
-    string type;
-
-    commandFindComputer();
-
-    cout << "Who do you want to edit? ";
-    cin >> index;
-
-    Computer oldComputer =  _service.requestComputerSearch()[index-1];
-
-    cout << "Old Name: " << oldComputer.getName() << endl;
-    cout << "New Name: ";
-
-    cin.ignore();
-    getline(cin, name);
-    cout << "Old was Built: " << oldComputer.getWasBuilt() << endl;
-    cout << "New was built: ";
-    cin >> wasBuilt;
-    cout << "Old built Year: " << oldComputer.getBuildYear() << endl;
-    cout << "New built Year: ";
-    cin >> buildYear;
-    cout << "Old computer type: " << oldComputer.getComputerType() << endl;
-    cout << "New computer type: ";
-    cin >> type;
-
     cout << endl;
 
-    _service.requestComputerEdit(name, buildYear, type, wasBuilt, oldComputer);
+    _service.requestComputerEdit(name, buildYear, type, wasBuilt, oldComputer, index);
 }
 void ConsoleUI::commandListComputerTypes()
 {
@@ -889,9 +1003,58 @@ void ConsoleUI::validateInputYN(char &toValidate)
     toValidate = toupper(toValidate);
     while (cin.fail() || (toValidate != 'Y' && toValidate != 'N'))
     {
-        cout <<endl<< "Please enter (Y/N) :";
+        cout <<endl<< "Please enter (y/n) :";
         std::cin.clear();
         std::cin.ignore(256,'\n');
         cin >> toValidate;
     }
+}
+
+void ConsoleUI::commandEditRelation()
+{
+    int SciComp;
+    Relation oldRelation;
+
+    cout << "[1] - Edit Scientist" << endl;
+    cout << "[2] - Edit Computer" << endl;
+
+    cin >> SciComp;
+
+    if(SciComp == 1)
+    {
+        commandFindScientist();
+    }
+    else if(SciComp == 2)
+    {
+    }
+
+}
+
+void ConsoleUI::commandAddRelation()
+{
+    _service.setCaseField(1);
+
+    int index;
+    int computerIndex;
+    string relationLegend;
+    string relationComputer;
+
+    cout << _service.requestLegendSort();
+
+    cout << "Who do you want to add a relation to? ";
+
+    cin >> index;
+
+
+    relationLegend = _service.requestLegendSort()[index-1].getName();
+
+    cout << _service.requestComputerSort();
+
+    cout << "What computer do you want to relate to " << relationLegend << "? ";
+
+    cin >> computerIndex;
+
+    relationComputer = _service.requestComputerSort()[computerIndex-1].getName();
+
+    _service.requestRelationAdd(relationLegend, relationComputer);
 }
