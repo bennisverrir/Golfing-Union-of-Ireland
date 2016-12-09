@@ -16,6 +16,9 @@ dataAccess::~dataAccess()
 
 }
 
+/*Function pushingLegendVector ,@param QSqlQuery query @return vector<Legend>
+* takes in SQlQuery and pushes the values from the query in to a vector of legend
+*/
 vector<Legend> dataAccess::pushingLegendVector(QSqlQuery query)
 {
     vector<Legend> legends;
@@ -34,6 +37,10 @@ vector<Legend> dataAccess::pushingLegendVector(QSqlQuery query)
     return legends;
 }
 
+
+/*Function pushingComputerVector ,@param QSqlQuery  @return vector<Computer>
+* takes in SQlQuery and pushes  the value from the query in to a vector of computer
+*/
 vector<Computer> dataAccess::pushingComputerVector(QSqlQuery query)
 {
     vector<Computer> computers;
@@ -52,9 +59,8 @@ vector<Computer> dataAccess::pushingComputerVector(QSqlQuery query)
     return computers;
 }
 
-/*Function writeFile, @param Legend and bool
-* Takes a Legend and writes all information about it in a new line in a file
-* sets fileOpen to true if file is open and false if it could not be open
+/*Function writeFile, @param Legend writeLegend
+* writes one legend into sql scientists table
 */
 
 void dataAccess::writeFile(Legend writeLegend)
@@ -86,7 +92,10 @@ void dataAccess::writeFile(Legend writeLegend)
 
 }
 
-
+/*Function writeComputerFile ,@param Computer and int
+* writes one computer and computerTypeID into sql computer table
+*
+*/
 void dataAccess::writeComputerFile(Computer writeComputer, int index)
 {
 
@@ -103,13 +112,10 @@ void dataAccess::writeComputerFile(Computer writeComputer, int index)
 
 }
 
-/*Function deleteLine, @param vector<Legend> and bool
-* Takes the @param which is a vector of all the Legend without the deleted Legend
-* writes over the file the information of all the Legend in the vector into the file.
-* sets fileOpen to true if file is open and false if it could not be open
-*/
-void dataAccess::deleteLine(vector<Legend> &deleteLegend){}
 
+/*Function sortLegend ,@param int and bool @return vector<Legend>
+* return a vector of legend of all scientist in the sql table in any order available in the programm
+*/
 vector<Legend> dataAccess::sortLegend(int sort, bool ascDesc)
 {
     QString sortString = "";
@@ -165,6 +171,9 @@ vector<Legend> dataAccess::sortLegend(int sort, bool ascDesc)
     return returnLegends;
 }
 
+/*Function sortComputer ,@param int and bool  @return vector<Computer>
+* return a vector of computer of all computers in the sql table in any order available in the programm
+*/
 vector<Computer> dataAccess::sortComputer(int sort, bool ascDesc)
 {
     QString sortString;
@@ -219,6 +228,11 @@ vector<Computer> dataAccess::sortComputer(int sort, bool ascDesc)
     return returnLegends;
 }
 
+/*Function findLegend ,@param int and string  @return vector<Legend>
+*finds scientist by name, gender, birth or death and returns it vector of legand
+*
+*/
+
 vector<Legend> dataAccess::findLegend(int whatToFind, string find)
 {
     QString findString = QString::fromStdString(find);
@@ -263,6 +277,9 @@ vector<Legend> dataAccess::findLegend(int whatToFind, string find)
     return returnLegends;
 }
 
+/*Function findComputer ,@param QSqlQuery and QString @return vector<Computer>
+*finds computer by name, build year or type name and returns it vector of computer
+*/
 vector<Computer> dataAccess::findComputer(int whatToFind, string find)
 {
     QString findString = QString::fromStdString(find);
@@ -308,6 +325,10 @@ vector<Computer> dataAccess::findComputer(int whatToFind, string find)
     return returnComputers;
 }
 
+/*Function getComputerTypes ,@return vector<string>
+*gets computer type and returns in a vector of string
+*
+*/
 vector<string> dataAccess::getComputerTypes()
 {
     vector<string> returnVector;
@@ -324,6 +345,9 @@ vector<string> dataAccess::getComputerTypes()
     return returnVector;
 }
 
+/*Function addComputerType ,@param string
+*adds a computer type into the sql computerType table
+*/
 void dataAccess::addComputerType(string newComputerType)
 {
     QSqlQuery query(db);
@@ -336,6 +360,10 @@ void dataAccess::addComputerType(string newComputerType)
 
 }
 
+/*Function sortRelation ,@param int and bool @return vector<Relation>
+* returns a vector of relation of all relation in the sql relation table in any order available in the programm
+*
+*/
 vector<Relation> dataAccess::sortRelation(int sort, bool ascDesc)
 {
     QString order = "";
@@ -394,6 +422,10 @@ vector<Relation> dataAccess::sortRelation(int sort, bool ascDesc)
     return returnVector;
 }
 
+/*Function addRelation ,@paramRelation
+*
+*
+*/
 void dataAccess::addRelation(Relation relation)
 {
 
@@ -408,14 +440,18 @@ void dataAccess::addRelation(Relation relation)
     query.exec();
 }
 
-
+/*Function editLegend ,@param Legend
+* TODO
+*
+*
+*/
 void dataAccess::editLegend(Legend oldLegend, Legend editLegend)
 {
     QSqlQuery query(db);
 
     QString name = QString::fromStdString(editLegend.getName());
     QString oldName = QString::fromStdString(oldLegend.getName());
-    QString ID = QString::fromStdString(to_string(getID(query, oldName, "Scientists")));
+    QString ID = QString::fromStdString(to_string(oldLegend.getID()));
     QString isDead = QString::fromStdString(to_string((editLegend.getDeath() == 0 ? 0 : 1)));
     QString born = QString::fromStdString(to_string(editLegend.getBorn()));
     QString death =  QString::fromStdString(to_string(editLegend.getDeath()));
@@ -430,13 +466,19 @@ void dataAccess::editLegend(Legend oldLegend, Legend editLegend)
 
 }
 
+/*Function editComputer ,@param Computer and int
+* TODO
+*
+*
+*/
+
 void dataAccess::editComputer(Computer oldComputer, Computer editComputer, int index)
 {
     QSqlQuery query(db);
 
     QString name = QString::fromStdString(editComputer.getName());
     QString oldName = QString::fromStdString(oldComputer.getName());
-    QString ID = QString::fromStdString(to_string(getID(query, oldName, "Computer")));
+    QString ID = QString::fromStdString(to_string(oldComputer.getID()));
     QString buildYear = QString::fromStdString(to_string(editComputer.getBuildYear()));
     QString wasBuilt = QString::fromStdString(to_string(editComputer.getBuildYear() == 0 ? 0 : 1));
     QString computerType = QString::fromStdString(editComputer.getComputerType());
@@ -454,6 +496,11 @@ void dataAccess::editComputer(Computer oldComputer, Computer editComputer, int i
     query.exec(command);
 }
 
+/*Function getID ,@param QSqlQuery and QString @return int
+* TODO
+*
+*
+*
 int dataAccess::getID(QSqlQuery query,  QString name, QString tableName)
 {
 
@@ -463,7 +510,7 @@ int dataAccess::getID(QSqlQuery query,  QString name, QString tableName)
     int returnInt = query.value("ID").toUInt();
 
     return returnInt;
-}
+}*/
 
 /*void dataAccess::editRelation(Relation relation, Relation oldRelation)
 {
@@ -494,6 +541,13 @@ int dataAccess::getID(QSqlQuery query,  QString name, QString tableName)
 
 }*/
 
+
+
+/*Function findRelation ,@param string  @return vector<Relation>
+* TODO
+*
+*
+*/
 vector<Relation> dataAccess::findRelation(string nameToFind)
 {
     QSqlQuery query(db);
@@ -531,7 +585,7 @@ vector<Relation> dataAccess::findRelation(string nameToFind)
     return returnVector;
 }
 
-/*Function deleteRelation, @param Relation relationToDelete
+/*Function deleteRelation, @param Relation
 * deletes Relation from the sql
 * TODO
 *
@@ -555,8 +609,8 @@ void dataAccess:: deleteRelation(Relation relationToDelete)
 
 }
 
-/*Function editRelation, @param Relation oldRelation, Relation editeRelation
-* TODO
+/*Function editRelation, @param Relation
+* edits relations TODO
 *
 *
 */
