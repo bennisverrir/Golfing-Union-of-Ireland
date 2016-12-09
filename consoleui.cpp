@@ -831,7 +831,6 @@ void ConsoleUI::subCommandFindComputer(int command, vector <Computer> &toPrint)
             int computerType = 0, numOfOptions = _service.requestComputerTypes().size();
             cout << "Enter a type to search for(1-"<< numOfOptions << "): " << endl;
             commandListComputerTypes();
-            _service.setCaseField(numOfOptions);
             validateCommand(computerType);
             
             _service.setSearchField(_service.requestComputerTypes()[computerType-1]);
