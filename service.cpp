@@ -7,7 +7,7 @@ Service::Service()
 /*Function setTableName, @param int
 *
 *
-*
+*/
 void Service::setTableName (int command)
 {
     if (command == 1)
@@ -22,7 +22,7 @@ void Service::setTableName (int command)
     {
         _tableName = "Relations";
     }
-}*/
+}
 
 /*Function setCaseField, @param int
 *Sets the search field (parameter selection). The value is transformed to a corresponding value or column in the data layer.
@@ -107,6 +107,10 @@ string Service::getSearchField() const
     return _searchString;
 }
 
+/*Function requestLegendSearch, @return vector <Legend>
+*
+*
+*/
 vector <Legend> Service::requestLegendSearch()
 {
     vector <Legend> returnVector;
@@ -115,6 +119,10 @@ vector <Legend> Service::requestLegendSearch()
     return returnVector;
 }
 
+/*Function requestComputerSearch, @return vector <Computer>
+*
+*
+*/
 vector <Computer> Service::requestComputerSearch()
 {
     vector <Computer> returnVector;
@@ -122,6 +130,10 @@ vector <Computer> Service::requestComputerSearch()
     return returnVector;
 }
 
+/*Function requestRelationSearch, @return vector <Relation>
+*
+*
+*/
 vector <Relation> Service::requestRelationSearch()
 {
     vector <Relation> returnVector;
@@ -138,42 +150,68 @@ void Service::requestNonRelatedScientist(string computerName)
    // a.findNonRelatedRelation (computerName);
 }*/
 
+
+/*Function requestLegendAdd, @parma string, char and int
+* calles the function writeFile in the dataAccess class
+*
+*/
 void Service::requestLegendAdd(string name, char gender, int born, int death)
 {
     Legend myNewLegend (name, gender, born, death);
     a.writeFile(myNewLegend);
 }
 
+/*Function requestComputerAdd, @parma int, string, char, bool and int
+* calles the function writeComputerFile in the dataAccess class
+*
+*/
 void Service::requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt,int index)
 {
     Computer myNewComputer (name, yearBuilt, computerType, wasBuilt);
     a.writeComputerFile (myNewComputer, index);
 }
 
-
+/*Function requestRelationAdd, @parma int
+* calles the function addRelation in the dataAccess class
+*
+*/
 void Service::requestRelationAdd (int scientistID, int computerID)
 {
     Relation myNewRelation (scientistID, computerID);
     a.addRelation (myNewRelation);
 }
 
+/*Function requestLegendEdit, @parma string, char, int and legend
+*calles the function editLegend in the dataAccess class
+*
+*/
 void Service::requestLegendEdit (string name, char gender, int born, int death, Legend oldLegend)
 {
     Legend myEditedLegend (name, gender, born, death);
     a.editLegend(oldLegend, myEditedLegend);
 }
 
+/*Function requestComputerEdit, @parma string, int, bool and Computer
+*calles the function editComputer in the dataAcess class
+*
+*/
 void Service::requestComputerEdit (string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer, int index)
 {
     Computer myEditedComputer (name, yearBuilt, computerType, wasBuilt);
     a.editComputer(oldComputer, myEditedComputer, index);
 }
 
+/*Function requestRelationEdit, @parma string and Relation
+* calles the function editRelation in the dataAccess class
+*
+*/
 void Service::requestRelationEdit (string scientistName, string computerName, Relation oldRelation)
 {
     Relation myEditedRelation (scientistName, computerName);
     a.editRelation (oldRelation, myEditedRelation);
 }
+
+
 vector <Legend> Service::requestLegendSort()
 {
     return a.sortLegend(_caseField, _ascDescOrder);
