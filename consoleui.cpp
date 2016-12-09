@@ -434,10 +434,25 @@ void ConsoleUI::ascDesc()
 {
     int ascDesc;
     
-    cout << "Do you want it:" << endl;
-    cout << "[1] - Ascending" << endl;
-    cout << "[2] - Descending"  << endl;
+    cout << "|";
+    for(int i = 0; i < 31; i++)
+    {
+        cout << "--";
+    }
+    cout << "|" << endl;
+
+    cout << "|" << "Do you want it:"<< "                                               |"  << endl;
+    cout << "|" << "[1] - Ascending"<< "                                               |"  << endl;
+    cout << "|" << "[2] - Descending"<< "                                              |"   << endl;
     
+    cout << "|";
+
+    for(int i = 0; i < 31; i++)
+    {
+        cout << "--";
+    }
+    cout << "|";
+    cout << endl;
     _numOfChoices = 2;
     validateCommand(ascDesc);
     
