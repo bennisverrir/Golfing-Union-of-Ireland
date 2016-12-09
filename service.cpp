@@ -24,9 +24,8 @@ void Service::setTableName (int command)
     }
 }*/
 
-/*Function setCaseField, @parma int
-*TODO
-*
+/*Function setCaseField, @param int
+*Sets the search field (parameter selection). The value is transformed to a corresponding value or column in the data layer.
 */
 void Service::setCaseField (int command)
 {
@@ -34,8 +33,8 @@ void Service::setCaseField (int command)
 
 }
 
-/*Function setAscDescOrder, @return vector<string>
-*return a vector of all the jokes in the joke table in sql
+/*Function setAscDescOrder, @param int
+*Decides where items should be sorted in ascending or descending order in the sorting function.
 *
 */
 void Service::setAscDescOrder (int command)
@@ -154,6 +153,10 @@ void Service::requestComputerEdit (string name, int yearBuilt, string computerTy
 void Service::requestRelationEdit (string scientistName, string computerName, Relation oldRelation){
     Relation myEditedRelation (scientistName, computerName);
     a.editRelation (oldRelation, myEditedRelation);
+}
+vector <Legend> Service::requestLegendSort()
+{
+    return a.sortLegend(_caseField, _ascDescOrder);
 }
 
 /*Function requestComputerSort, @returns vector<Computer>
