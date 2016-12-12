@@ -157,7 +157,6 @@ vector<Legend> dataAccess::sortLegend(int sort, bool ascDesc)
     vector<Legend> returnLegends;
 
 
-
     QSqlQuery query(db);
 
     QString command = "Select * FROM Scientists " + order + sortString + reverse;
@@ -175,6 +174,8 @@ vector<Legend> dataAccess::sortLegend(int sort, bool ascDesc)
 */
 vector<Computer> dataAccess::sortComputer(int sort, bool ascDesc)
 {
+
+
     QString sortString;
     QString reverse;
     QString order = "ORDER BY ";
@@ -214,10 +215,9 @@ vector<Computer> dataAccess::sortComputer(int sort, bool ascDesc)
     QSqlQuery query(db);
 
     QString command = "Select c.ID as cID, c.Name, c.BuildYear, ct.Name AS TypeName, c.WasBuilt FROM Computer c "
-                         "INNER JOIN ComputerType ct "
-                         "ON c.ComputerTypeID = ct.ID " + order + sortString + reverse;
+                      "INNER JOIN ComputerType ct "
+                      "ON c.ComputerTypeID = ct.ID " + order + sortString + reverse;
     query.exec(command);
-
 
     returnLegends = pushingComputerVector(query);
 

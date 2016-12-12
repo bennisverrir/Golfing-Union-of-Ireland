@@ -16,7 +16,7 @@ Data access layer - DataAccess, handles the opening, reading and writing request
 
 Data (source) - External source of information.
 
-This program is a database that keeps basic information about famous computer scientists, computers and their relations. In the program the user has the options of listing any of the 3 lists (Scientists/Computers/Relations) with various different sorting. The user can add, and edit scientists, computers and relations and search for a specific entry in the database. If the user wants to know the answer to life, the universe and everything, type 42 in the commands menu. If the user wants some funny jokes, type 69 in the command menu (jokes gotten from  http://onelinefun.com/it/7/).
+This program is a database that keeps basic information about famous computer scientists, computers and their relations. In the program the user has the options of listing any of the 3 lists (Scientists/Computers/Relations) with various different sorting. The user can add, and edit scientists, computers and relations and search for a specific entry in the database. If the user wants to know the answer to life, the universe and everything, type 42 in the commands menu. If the user wants some funny jokes, type 69 in the command menu.
 
 Availible commands:
 
@@ -32,11 +32,9 @@ Please enter one of the following numbers:
 
 [4] - This will edit a computer scientists, computer or a relation from the list    
 
-[5] - To delete a relation  
+[5] - To delete a relation                  
 
-[6] - this will clear the screen
-
-[7] - This will quit the program                              
+[6] - This will quit the program                              
 
 
 (if the user inputs "1" from main menu)
@@ -183,12 +181,6 @@ Delete relation:
 This option provides the user with a full list of all relations and is asked to delete one of the entries (by inserting it's index into the command line).
 
 (if the user inputs "6" from the main menu)
-
-Clear:
- 
-This option clears the console screen.
-
-(if the user inputs "7" from the main menu)
 
 Quit:
 
