@@ -25,7 +25,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
-           <widget class="QTabWidget" name="Relations">
+           <widget class="QTabWidget" name="TableView">
             <property name="tabPosition">
              <enum>QTabWidget::North</enum>
             </property>
@@ -81,9 +81,87 @@
                 </column>
                </widget>
               </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_7">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_9">
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_8">
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_12">
+                      <item>
+                       <widget class="QLineEdit" name="ScientistName">
+                        <property name="inputMask">
+                         <string/>
+                        </property>
+                        <property name="text">
+                         <string>Scientist Name</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="ScientistGender"/>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_13">
+                      <item>
+                       <widget class="QLineEdit" name="ScientistBorn">
+                        <property name="text">
+                         <string>Birth year</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="ScientistDeath">
+                        <property name="text">
+                         <string>Death year</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_8">
+                  <item>
+                   <widget class="QPushButton" name="ButtonEditScientist">
+                    <property name="text">
+                     <string>Edit Scientist</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="ButtonAddScientist">
+                    <property name="text">
+                     <string>Add Scientist</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <spacer name="verticalSpacer">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
              </layout>
             </widget>
-            <widget class="QWidget" name="tab_4">
+            <widget class="QWidget" name="Computers">
              <attribute name="title">
               <string>Computers</string>
              </attribute>
@@ -115,7 +193,7 @@
               </item>
              </layout>
             </widget>
-            <widget class="QWidget" name="tab_5">
+            <widget class="QWidget" name="Relations">
              <attribute name="title">
               <string>Relations</string>
              </attribute>
@@ -167,111 +245,6 @@
       </item>
      </layout>
     </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <property name="spacing">
-       <number>6</number>
-      </property>
-      <item>
-       <widget class="QTabWidget" name="Add">
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <widget class="QWidget" name="Edit">
-         <attribute name="title">
-          <string>Edit</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
-           <widget class="QLineEdit" name="EditName"/>
-          </item>
-          <item>
-           <widget class="QComboBox" name="EditGender">
-            <item>
-             <property name="text">
-              <string>M</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>F</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="EditBorn"/>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="EditDeath"/>
-          </item>
-          <item>
-           <widget class="QPushButton" name="EditButton">
-            <property name="text">
-             <string>Edit Scientist</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-         <zorder>EditDeath</zorder>
-         <zorder>EditBorn</zorder>
-         <zorder>EditName</zorder>
-         <zorder>EditGender</zorder>
-         <zorder>EditButton</zorder>
-        </widget>
-        <widget class="QWidget" name="Add_2">
-         <attribute name="title">
-          <string>Add</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QLineEdit" name="addName">
-            <property name="placeholderText">
-             <string>Name</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="addGender">
-            <item>
-             <property name="text">
-              <string>M</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>F</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="addBorn">
-            <property name="placeholderText">
-             <string>Birth Year</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="addDeath">
-            <property name="placeholderText">
-             <string>Death Year</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="AddLegend">
-            <property name="text">
-             <string>Add Scientist</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-      </item>
-     </layout>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -280,7 +253,7 @@
      <x>0</x>
      <y>0</y>
      <width>1088</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
