@@ -33,7 +33,7 @@
              <enum>QTabWidget::Rounded</enum>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="Scientists">
              <attribute name="title">
@@ -153,6 +153,9 @@
                  <layout class="QHBoxLayout" name="horizontalLayout_8">
                   <item>
                    <widget class="QPushButton" name="ButtonEditScientist">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
                     <property name="text">
                      <string>Edit Scientist</string>
                     </property>
@@ -202,12 +205,12 @@
                 </attribute>
                 <column>
                  <property name="text">
-                  <string>New Column</string>
+                  <string>Name</string>
                  </property>
                 </column>
                 <column>
                  <property name="text">
-                  <string>Name</string>
+                  <string>Build Year</string>
                  </property>
                 </column>
                 <column>
@@ -252,6 +255,9 @@
                  <layout class="QHBoxLayout" name="horizontalLayout_11">
                   <item>
                    <widget class="QPushButton" name="ComputerEdit">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
                     <property name="text">
                      <string>Edit Computer</string>
                     </property>
@@ -341,6 +347,9 @@
                  <layout class="QHBoxLayout" name="horizontalLayout_17">
                   <item>
                    <widget class="QPushButton" name="EditRelation">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
                     <property name="text">
                      <string>Edit relation</string>
                     </property>
