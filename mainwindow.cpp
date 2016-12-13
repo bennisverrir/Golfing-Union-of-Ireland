@@ -10,7 +10,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     whatTable = ui->TableView->currentIndex();
-    _service.setCaseField(4);
     displayLegends(_service.requestLegendSort());
     displayComputers(_service.requestComputerSort());
     displayRelations(_service.requestRelationSort());
@@ -158,8 +157,6 @@ bool MainWindow::editLegend()
 {
     int index = ui->ScientistTable->currentRow();
 
-    _service.setCaseField(4);
-
     Legend oldLegend = _service.requestLegendSort()[index];
 
     string name = ui->ScientistName->text().toStdString();
@@ -173,8 +170,6 @@ bool MainWindow::editLegend()
 bool MainWindow::editComputer()
 {
     int index = ui->ComputerTable->currentRow();
-
-    _service.setCaseField(3);
 
     Computer oldComputer = _service.requestComputerSort()[index];
 
@@ -192,7 +187,6 @@ void MainWindow::on_ButtonEditScientist_clicked()
 {
     if(editLegend())
     {
-        _service.setCaseField(4);
         displayLegends(_service.requestLegendSort());
     }
     else
@@ -212,9 +206,6 @@ void MainWindow::on_ScientistTable_cellClicked()
 
     int index = ui->ScientistTable->item(row,4)->text().toInt();
 
-
-    _service.setCaseField(4);
-
     Legend oldLegend = _service.requestLegendSort()[index];
 
     ui->ScientistName->setText(QString::fromStdString(oldLegend.getName()));
@@ -231,20 +222,16 @@ void MainWindow::on_TableView_tabBarClicked(int index)
 
     if(index == 0)
     {
-
-        _service.setCaseField(4);
         displayLegends(_service.requestLegendSort());
         whatTable = 0;
     }
     else if(index == 1)
     {
-        _service.setCaseField(3);
         displayComputers(_service.requestComputerSort());
         whatTable = 1;
     }
     else if(index == 2)
     {
-        _service.setCaseField(3);
         displayRelations(_service.requestRelationSort());
         whatTable = 2;
     }
@@ -256,7 +243,6 @@ void MainWindow::on_TableView_tabBarClicked(int index)
 
 void MainWindow::on_ComputerAdd_clicked()
 {
-    _service.setCaseField(3);
 
     if(addComputer())
     {
@@ -283,7 +269,6 @@ void MainWindow::fillComputerTypeComboBox()
 
 void MainWindow::on_ComputerEdit_clicked()
 {
-    _service.setCaseField(3);
 
     if(editComputer())
     {
@@ -307,8 +292,6 @@ void MainWindow::on_ComputerTable_cellClicked()
 
     int index = ui->ComputerTable->item(row,3)->text().toInt();
 
-
-    _service.setCaseField(3);
 
     Computer oldComputer = _service.requestComputerSort()[index];
 
