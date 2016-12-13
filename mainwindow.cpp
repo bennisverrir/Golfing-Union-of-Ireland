@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    whatTable = ui->TableView->currentIndex();
     _service.setCaseField(4);
     displayLegends(_service.requestLegendSort());
     displayComputers(_service.requestComputerSort());
@@ -110,24 +111,39 @@ void MainWindow::on_findText_textChanged(const QString &arg1)
 
 bool MainWindow::addLegend()
 {
-    string name = ui->addName->text().toStdString();
-    string gender = ui->addGender->currentText().toStdString();
-    int born = ui->addBorn->text().toInt();
-    int death = ui->addDeath->text().toInt();
+    string name = ui->ScientistName->text().toStdString();
+    string gender = ui->ScientistGender->currentText().toStdString();
+    int born = ui->ScientistBorn->text().toInt();
+    int death = ui->ScientistDeath->text().toInt();
 
     return _service.requestLegendAdd(name, gender[0], born, death);
+}
+
+/*bool MainWindow::addComputer()
+{
+    string name = ui->computerName->text().toStdString();
+    int buildYear = ui->computerBuildYear->text().toInt();
+    string computerType = ui->computerTypeCombo->currentText().toStdString();
+    int computerTypeID = ui->computerTypeCombo->currentIndex();
+    int wasBuilt = (buildYear == 0 ? 0 : 1);
+
+    return _service.requestComputerAdd(name,buildYear,computerType,wasBuilt, computerTypeID);
+}*/
+
+bool MainWindow::addRelation()
+{
+   // string name = ui->relationScientistCombo->currentText().toStdString();
 
 }
 
-
-void MainWindow::on_AddLegend_clicked()
+void MainWindow::on_ButtonAddScientist_clicked()
 {
     if(addLegend())
     {
         displayLegends(_service.requestLegendSort());
-        ui->addName->clear();
-        ui->addBorn->clear();
-        ui->addDeath->clear();
+        ui->ScientistName->clear();
+        ui->ScientistBorn->clear();
+        ui->ScientistDeath->clear();
     }
     else
     {
@@ -144,15 +160,15 @@ bool MainWindow::editLegend()
 
     Legend oldLegend = _service.requestLegendSort()[index];
 
-    string name = ui->EditName->text().toStdString();
-    string gender = ui->EditGender->currentText().toStdString();
-    int born = ui->EditBorn->text().toInt();
-    int death = ui->EditDeath->text().toInt();
+    string name = ui->ScientistName->text().toStdString();
+    string gender = ui->ScientistGender->currentText().toStdString();
+    int born = ui->ScientistBorn->text().toInt();
+    int death = ui->ScientistDeath->text().toInt();
 
     return _service.requestLegendEdit(name,gender[0],born,death,oldLegend);
 }
 
-void MainWindow::on_EditButton_clicked()
+void MainWindow::on_ButtonEditScientist_clicked()
 {
     if(editLegend())
     {
@@ -164,21 +180,13 @@ void MainWindow::on_EditButton_clicked()
         //TODO:
         qDebug() << "ERROR";
     }
-    ui->EditName->setEnabled(false);
-    ui->EditGender->setEnabled(false);
-    ui->EditBorn->setEnabled(false);
-    ui->EditDeath->setEnabled(false);
-    ui->EditButton->setEnabled(false);
+    ui->ButtonEditScientist->setEnabled(false);
 
 }
 
 void MainWindow::on_ScientistTable_cellClicked()
 {
-    ui->EditName->setEnabled(true);
-    ui->EditGender->setEnabled(true);
-    ui->EditBorn->setEnabled(true);
-    ui->EditDeath->setEnabled(true);
-    ui->EditButton->setEnabled(true);
+    ui->ButtonEditScientist->setEnabled(true);
 
     int row = ui->ScientistTable->currentRow();
 
@@ -189,16 +197,21 @@ void MainWindow::on_ScientistTable_cellClicked()
 
     Legend oldLegend = _service.requestLegendSort()[index];
 
-    ui->EditName->setText(QString::fromStdString(oldLegend.getName()));
-    ui->EditGender->setCurrentText(QChar::fromLatin1(oldLegend.getGender()));
-    ui->EditBorn->setText(QString::number(oldLegend.getBorn()));
-    ui->EditDeath->setText(QString::number(oldLegend.getDeath()));
+    ui->ScientistName->setText(QString::fromStdString(oldLegend.getName()));
+    ui->ScientistGender->setCurrentText(QChar::fromLatin1(oldLegend.getGender()));
+    ui->ScientistBorn->setText(QString::number(oldLegend.getBorn()));
+    ui->ScientistDeath->setText(QString::number(oldLegend.getDeath()));
 }
 
-void MainWindow::on_Relations_tabBarClicked(int index)
+void MainWindow::on_TableView_tabBarClicked(int index)
 {
+    ui->ScientistTable->setSortingEnabled(false);
+    ui->ComputerTable->setSortingEnabled(false);
+    ui->RelationTable->setSortingEnabled(false);
+
     if(index == 0)
     {
+
         _service.setCaseField(4);
         displayLegends(_service.requestLegendSort());
         whatTable = 0;
@@ -215,4 +228,8 @@ void MainWindow::on_Relations_tabBarClicked(int index)
         displayRelations(_service.requestRelationSort());
         whatTable = 2;
     }
+
+    ui->ScientistTable->setSortingEnabled(true);
+    ui->ComputerTable->setSortingEnabled(true);
+    ui->RelationTable->setSortingEnabled(true);
 }
