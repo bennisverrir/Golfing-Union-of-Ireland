@@ -98,7 +98,10 @@
                          <string/>
                         </property>
                         <property name="text">
-                         <string>Scientist Name</string>
+                         <string/>
+                        </property>
+                        <property name="placeholderText">
+                         <string>Scientist name</string>
                         </property>
                        </widget>
                       </item>
@@ -112,6 +115,9 @@
                       <item>
                        <widget class="QLineEdit" name="ScientistBorn">
                         <property name="text">
+                         <string/>
+                        </property>
+                        <property name="placeholderText">
                          <string>Birth year</string>
                         </property>
                        </widget>
@@ -119,7 +125,10 @@
                       <item>
                        <widget class="QLineEdit" name="ScientistDeath">
                         <property name="text">
-                         <string>Death year</string>
+                         <string/>
+                        </property>
+                        <property name="placeholderText">
+                         <string>Death year (empty if not died)</string>
                         </property>
                        </widget>
                       </item>
@@ -197,6 +206,70 @@
                 </column>
                </widget>
               </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_3">
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_4">
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout">
+                    <item>
+                     <widget class="QLineEdit" name="ComputerName">
+                      <property name="placeholderText">
+                       <string>Computer name</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="ComputerBuilt">
+                      <property name="placeholderText">
+                       <string>Year build (empty if not built)</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_10">
+                    <item>
+                     <widget class="QComboBox" name="ComputerType"/>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_11">
+                  <item>
+                   <widget class="QPushButton" name="ComputerEdit">
+                    <property name="text">
+                     <string>Edit Computer</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="ComputerAdd">
+                    <property name="text">
+                     <string>Add computer</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <spacer name="verticalSpacer_2">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
              </layout>
             </widget>
             <widget class="QWidget" name="Relations">
@@ -232,6 +305,72 @@
                  </property>
                 </column>
                </widget>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_5">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_14">
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_15">
+                    <item>
+                     <widget class="QComboBox" name="RelationScientistName"/>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_16">
+                    <item>
+                     <widget class="QComboBox" name="RelationComputerName"/>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_17">
+                  <item>
+                   <widget class="QPushButton" name="EditRelation">
+                    <property name="text">
+                     <string>Edit relation</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="AddRelation">
+                    <property name="text">
+                     <string>Add relation</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <spacer name="verticalSpacer_3">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
               </item>
              </layout>
             </widget>
