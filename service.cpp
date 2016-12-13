@@ -140,75 +140,66 @@ vector <Relation> Service::requestRelationSearch()
     returnVector = a.sortRelation(_caseField, _ascDescOrder);
     return returnVector;
 }
-/*void Service::requestNonRelatedComputer(string scientistName)
-{
-   // a.findNonRelatedRelation(scientistName);
-}
-
-void Service::requestNonRelatedScientist(string computerName)
-{
-   // a.findNonRelatedRelation (computerName);
-}*/
-
 
 /*Function requestLegendAdd, @parma string, char and int
 * calles the function writeFile in the dataAccess class
 *
 */
-void Service::requestLegendAdd(string name, char gender, int born, int death)
+bool Service::requestLegendAdd(string name, char gender, int born, int death)
 {
     Legend myNewLegend (name, gender, born, death);
-    a.writeFile(myNewLegend);
+    return a.writeFile(myNewLegend);
 }
 
 /*Function requestComputerAdd, @parma int, string, char, bool and int
 * calles the function writeComputerFile in the dataAccess class
 *
 */
-void Service::requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt,int index)
+bool Service::requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt,int index)
 {
     Computer myNewComputer (name, yearBuilt, computerType, wasBuilt);
-    a.writeComputerFile (myNewComputer, index);
+    return a.writeComputerFile (myNewComputer, index);
 }
 
 /*Function requestRelationAdd, @parma int
 * calles the function addRelation in the dataAccess class
 *
 */
-void Service::requestRelationAdd (int scientistID, int computerID)
+bool Service::requestRelationAdd (int scientistID, int computerID)
 {
     Relation myNewRelation (scientistID, computerID);
-    a.addRelation (myNewRelation);
+    return a.addRelation (myNewRelation);
 }
 
 /*Function requestLegendEdit, @parma string, char, int and legend
 *calles the function editLegend in the dataAccess class
 *
 */
-void Service::requestLegendEdit (string name, char gender, int born, int death, Legend oldLegend)
+bool Service::requestLegendEdit (string name, char gender, int born, int death, Legend oldLegend)
 {
     Legend myEditedLegend (name, gender, born, death);
-    a.editLegend(oldLegend, myEditedLegend);
+    return a.editLegend(oldLegend, myEditedLegend);
+
 }
 
 /*Function requestComputerEdit, @parma string, int, bool and Computer
 *calles the function editComputer in the dataAcess class
 *
 */
-void Service::requestComputerEdit (string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer, int index)
+bool Service::requestComputerEdit (string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer, int index)
 {
     Computer myEditedComputer (name, yearBuilt, computerType, wasBuilt);
-    a.editComputer(oldComputer, myEditedComputer, index);
+    return a.editComputer(oldComputer, myEditedComputer, index);
 }
 
 /*Function requestRelationEdit, @parma string and Relation
 * calles the function editRelation in the dataAccess class
 *
 */
-void Service::requestRelationEdit (string scientistName, string computerName, Relation oldRelation)
+bool Service::requestRelationEdit (string scientistName, string computerName, Relation oldRelation)
 {
     Relation myEditedRelation (scientistName, computerName);
-    a.editRelation (oldRelation, myEditedRelation);
+    return a.editRelation (oldRelation, myEditedRelation);
 }
 
 
@@ -249,9 +240,9 @@ vector <string> Service::requestComputerTypes()
 * calles the function addComputerType in the dataAccess class
 *
 */
-void Service::requestComputerTypeAdd(string name)
+bool Service::requestComputerTypeAdd(string name)
 {
-    a.addComputerType(name);
+    return a.addComputerType(name);
 }
 
 /*Function findRelation, @parma string
@@ -272,9 +263,9 @@ vector<Relation> Service::findRelation(string name, int select)
 * calles the function addRelation in the dataAccess class
 *
 */
-void Service::requestRelationDelete(Relation deleteRelation)
+bool Service::requestRelationDelete(Relation deleteRelation)
 {
-   a.deleteRelation(deleteRelation);
+   return a.deleteRelation(deleteRelation);
 }
 
 

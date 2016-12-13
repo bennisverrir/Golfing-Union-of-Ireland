@@ -24,26 +24,26 @@ public:
     ~dataAccess();
     vector<Legend> pushingLegendVector(QSqlQuery query);
     vector<Computer> pushingComputerVector(QSqlQuery query);
-    void writeFile(Legend writeLegend);
-    void writeComputerFile(Computer writeComputer, int index);
+    bool writeFile(Legend writeLegend);
+    bool writeComputerFile(Computer writeComputer, int index);
     void deleteLine(vector<Legend> &deleteLegend);
     vector<Legend> sortLegend(int sort, bool ascDesc);
     vector<Computer> sortComputer(int sort, bool ascDesc);
     vector<Legend> findLegend(int whatToFind, string sort);
     vector<Computer> findComputer(int whatToFind, string find);
     vector<string> getComputerTypes();
-    void addComputerType(string newComputerType);
+    bool addComputerType(string newComputerType);
     vector<Relation> sortRelation(int sort, bool ascDesc);
-    void addRelation(Relation relation);
-    void editLegend(Legend oldLegend, Legend editLegend);
-    void editComputer(Computer oldComputer, Computer editComputer, int index);
+    bool addRelation(Relation relation);
+    bool editLegend(Legend oldLegend, Legend editLegend);
+    bool editComputer(Computer oldComputer, Computer editComputer, int index);
     int getID(QSqlQuery query,QString name, QString tableName);
     void findNonRelatedRelation(Legend scientist);
     void findNonRelatedRelation(Computer computer);
     vector<Relation> findRelation(int nameToFind, int sort);
     vector<Relation> findRelation(string nameToFind, int sort);
-    void deleteRelation(Relation relationToDelete);
-    void editRelation(Relation oldRelation, Relation editedRelation);
+    bool deleteRelation(Relation relationToDelete);
+    bool editRelation(Relation oldRelation, Relation editedRelation);
     vector<string>joke();
 
 

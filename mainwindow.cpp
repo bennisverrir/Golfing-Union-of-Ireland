@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     _service.setCaseField(4);
     displayLegends(_service.requestLegendSort());
 }
@@ -139,27 +140,35 @@ void MainWindow::on_RelationButton_clicked()
 
 }
 
-void MainWindow::addLegend()
+bool MainWindow::addLegend()
 {
     string name = ui->addName->text().toStdString();
     string gender = ui->addGender->currentText().toStdString();
     int born = ui->addBorn->text().toInt();
     int death = ui->addDeath->text().toInt();
 
-    _service.requestLegendAdd(name, gender[0], born, death);
+    return _service.requestLegendAdd(name, gender[0], born, death);
+
 }
 
 
 void MainWindow::on_AddLegend_clicked()
 {
-    addLegend();
-    displayLegends(_service.requestLegendSort());
-    ui->addName->clear();
-    ui->addBorn->clear();
-    ui->addDeath->clear();
+    if(addLegend())
+    {
+        displayLegends(_service.requestLegendSort());
+        ui->addName->clear();
+        ui->addBorn->clear();
+        ui->addDeath->clear();
+    }
+    else
+    {
+        //TODO:
+        qDebug() << "ERROR";
+    }
 }
 
-void MainWindow::editLegend()
+bool MainWindow::editLegend()
 {
     int index = ui->tableWidget->currentRow();
 
@@ -172,18 +181,37 @@ void MainWindow::editLegend()
     int born = ui->EditBorn->text().toInt();
     int death = ui->EditDeath->text().toInt();
 
-    _service.requestLegendEdit(name,gender[0],born,death, oldLegend);
+    return _service.requestLegendEdit(name,gender[0],born,death,oldLegend);
 }
 
 void MainWindow::on_EditButton_clicked()
 {
-    editLegend();
-    _service.setCaseField(4);
-    displayLegends(_service.requestLegendSort());
+    if(editLegend())
+    {
+        _service.setCaseField(4);
+        displayLegends(_service.requestLegendSort());
+    }
+    else
+    {
+        //TODO:
+        qDebug() << "ERROR";
+    }
+    ui->EditName->setEnabled(false);
+    ui->EditGender->setEnabled(false);
+    ui->EditBorn->setEnabled(false);
+    ui->EditDeath->setEnabled(false);
+    ui->EditButton->setEnabled(false);
+
 }
 
 void MainWindow::on_tableWidget_cellClicked()
 {
+    ui->EditName->setEnabled(true);
+    ui->EditGender->setEnabled(true);
+    ui->EditBorn->setEnabled(true);
+    ui->EditDeath->setEnabled(true);
+    ui->EditButton->setEnabled(true);
+
     int index = ui->tableWidget->currentRow();
 
     _service.setCaseField(4);

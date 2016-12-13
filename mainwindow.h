@@ -38,9 +38,9 @@ private slots:
 
     void on_RelationButton_clicked();
 
-    void addLegend();
+    bool addLegend();
 
-    void editLegend();
+    bool editLegend();
 
     void on_AddLegend_clicked();
 

@@ -3,7 +3,7 @@
 dataAccess::dataAccess()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    dbName = "ComputingDatabase.sqlite";
+    dbName = "ComputingRecords.sqlite";
     db.setDatabaseName(dbName);
 
     db.open();
@@ -62,32 +62,24 @@ vector<Computer> dataAccess::pushingComputerVector(QSqlQuery query)
 * writes one legend into sql scientists table
 */
 
-void dataAccess::writeFile(Legend writeLegend)
+bool dataAccess::writeFile(Legend writeLegend)
 {
 
     QSqlQuery query(db);
 
-    bool isDead;
-
-    if(writeLegend.getDeath() == 0)
-    {
-        isDead = 0;
-    }
-    else
-    {
-        isDead = 1;
-    }
-
-
-    query.prepare("INSERT INTO Scientists(Name, Gender, Birth,Death,IsDead) VALUES(:name, :gender, :born, :death, :isDead)");
+    query.prepare("INSERT INTO Scientists(Name, Gender, Birth,Death) VALUES(:name, :gender, :born, :death)");
 
     query.bindValue(":name", QString::fromStdString(writeLegend.getName()));
     query.bindValue(":gender", QChar::fromLatin1(writeLegend.getGender()));
     query.bindValue(":born", writeLegend.getBorn());
     query.bindValue(":death", writeLegend.getDeath());
-    query.bindValue(":isDead", isDead);
 
-    query.exec();
+
+    if(!query.exec())
+    {
+        return false;
+    }
+    return true;
 
 }
 
@@ -95,7 +87,7 @@ void dataAccess::writeFile(Legend writeLegend)
 * writes one computer and computerTypeID into sql computer table
 *
 */
-void dataAccess::writeComputerFile(Computer writeComputer, int index)
+bool dataAccess::writeComputerFile(Computer writeComputer, int index)
 {
 
     QSqlQuery query(db);
@@ -107,7 +99,7 @@ void dataAccess::writeComputerFile(Computer writeComputer, int index)
     query.bindValue(":wasBuilt", writeComputer.getWasBuilt());
     query.bindValue(":computerTypeID", index);
 
-    query.exec();
+    return query.exec();
 
 }
 
@@ -218,6 +210,8 @@ vector<Computer> dataAccess::sortComputer(int sort, bool ascDesc)
                       "INNER JOIN ComputerType ct "
                       "ON c.ComputerTypeID = ct.ID " + order + sortString + reverse;
     query.exec(command);
+
+    qDebug() << command << "      " << query.lastError();
 
     returnLegends = pushingComputerVector(query);
 
@@ -343,7 +337,7 @@ vector<string> dataAccess::getComputerTypes()
 /*Function addComputerType ,@param string
 *adds a computer type into the sql computerType table
 */
-void dataAccess::addComputerType(string newComputerType)
+bool dataAccess::addComputerType(string newComputerType)
 {
     QSqlQuery query(db);
 
@@ -351,7 +345,7 @@ void dataAccess::addComputerType(string newComputerType)
 
     query.bindValue(":name", QString::fromStdString(newComputerType));
 
-    query.exec();
+    return query.exec();
 
 }
 
@@ -415,6 +409,8 @@ vector<Relation> dataAccess::sortRelation(int sort, bool ascDesc)
         returnVector.push_back(Relation(scientistID, computerID, scientistName, computerName));
     }
 
+    qDebug() << "commandRelations: " << sqlCommand << "ERROR: " << query.lastError().text();
+
     return returnVector;
 }
 
@@ -422,7 +418,7 @@ vector<Relation> dataAccess::sortRelation(int sort, bool ascDesc)
 *adds a relation into the sql relation table
 *
 */
-void dataAccess::addRelation(Relation relation)
+bool dataAccess::addRelation(Relation relation)
 {
 
     QSqlQuery query(db);
@@ -433,14 +429,14 @@ void dataAccess::addRelation(Relation relation)
     query.bindValue(":co", relation.getComputerID());
 
 
-    query.exec();
+    return query.exec();
 }
 
 /*Function editLegend ,@param Legend
 *edits a sientist in the sql table scientits
 *takes the oldLegend's ID and then puts the editLegend instead
 */
-void dataAccess::editLegend(Legend oldLegend, Legend editLegend)
+bool dataAccess::editLegend(Legend oldLegend, Legend editLegend)
 {
     QSqlQuery query(db);
 
@@ -454,11 +450,10 @@ void dataAccess::editLegend(Legend oldLegend, Legend editLegend)
     QString command = "UPDATE Scientists"
                       " SET Name = '" + name + "', Gender = '" + editLegend.getGender() +
                       "' , Birth = " + born + ", Death = " + death +
-                      ", IsDead = " + isDead +
                       " WHERE ID = " + ID;
 
-    query.exec(command);
 
+    return query.exec(command);
 }
 
 /*Function editComputer ,@param Computer and int
@@ -467,7 +462,7 @@ void dataAccess::editLegend(Legend oldLegend, Legend editLegend)
 *index is the computerTypeID
 */
 
-void dataAccess::editComputer(Computer oldComputer, Computer editComputer, int index)
+bool dataAccess::editComputer(Computer oldComputer, Computer editComputer, int index)
 {
     QSqlQuery query(db);
 
@@ -478,7 +473,10 @@ void dataAccess::editComputer(Computer oldComputer, Computer editComputer, int i
     QString wasBuilt = QString::fromStdString(to_string(editComputer.getBuildYear() == 0 ? 0 : 1));
     QString computerType = QString::fromStdString(editComputer.getComputerType());
 
-    query.exec("SELECT * FROM ComputerType WHERE Name LIKE " + computerType);
+    if(!query.exec("SELECT * FROM ComputerType WHERE Name LIKE " + computerType))
+    {
+        return false;
+    }
 
     QString computerTypeID = QString::fromStdString(to_string(index));
 
@@ -488,55 +486,9 @@ void dataAccess::editComputer(Computer oldComputer, Computer editComputer, int i
                       ", WasBuilt = " + wasBuilt +
                       " WHERE ID = " + ID;
 
-    query.exec(command);
+    return query.exec(command);
+
 }
-
-/*Function getID ,@param QSqlQuery and QString @return int
-* TODO
-*
-*
-*
-int dataAccess::getID(QSqlQuery query,  QString name, QString tableName)
-{
-
-    query.exec("SELECT ID, Name FROM " + tableName + " WHERE Name LIKE '" + name + "'");
-    query.first();
-
-    int returnInt = query.value("ID").toUInt();
-
-    return returnInt;
-}*/
-
-/*void dataAccess::editRelation(Relation relation, Relation oldRelation)
-{
-
-    QSqlQuery query(db);
-    QString scientistName = QString::fromStdString(relation.getLegendName());
-    QString computerName = QString::fromStdString(relation.getComputerName());
-    QString oldScientistName = QString::fromStdString(relation.getLegendName());
-    QString oldComputerName = QString::fromStdString(relation.getComputerName());
-    QString scientistID ;
-    QString computerID ;
-    QString oldScientistID;
-    QString oldComputerID;
-
-    scientistID = QString::fromStdString(to_string(getID(query, scientistName, "Scientists")));
-
-    computerID =  QString::fromStdString(to_string(getID(query, computerName, "Computer")));
-
-    oldScientistID = QString::fromStdString(to_string(getID(query, oldScientistName, "Scientists")));
-
-    oldComputerID =  QString::fromStdString(to_string(getID(query, oldComputerName, "Computer")));
-
-    query.prepare("UPDATE Combine"
-                  " SET Sc = " + scientistID + ", Co = " + computerID +
-                  " WHERE Sc = " + oldScientistID + " AND Co + " + oldComputerID);
-
-    query.exec();
-
-}*/
-
-
 
 /*Function findRelation ,@param string  @return vector<Relation>
 *finds scientist by name, gender, birth or death and returns it vector of legand
@@ -635,7 +587,7 @@ vector<Relation> dataAccess::findRelation(string nameToFind, int sort)
 * deletes Relation from the sql relation table
 *
 */
-void dataAccess:: deleteRelation(Relation relationToDelete)
+bool dataAccess:: deleteRelation(Relation relationToDelete)
 {
     QSqlQuery query(db);
 
@@ -648,7 +600,7 @@ void dataAccess:: deleteRelation(Relation relationToDelete)
 
     query.prepare(command);
 
-    query.exec();
+    return query.exec();
 
 }
 
@@ -657,7 +609,7 @@ void dataAccess:: deleteRelation(Relation relationToDelete)
 *
 *
 */
-void dataAccess::editRelation(Relation oldRelation, Relation editedRelation)
+bool dataAccess::editRelation(Relation oldRelation, Relation editedRelation)
 {
     QSqlQuery query(db);
 
@@ -670,7 +622,7 @@ void dataAccess::editRelation(Relation oldRelation, Relation editedRelation)
     QString oldComputerID = QString::fromStdString(to_string(oldRelation.getComputerID()));
 
 
-    query.exec("UPDATE Combine Set Sc = " + scientistID  + ", Co = " + computerID +
+    return query.exec("UPDATE Combine Set Sc = " + scientistID  + ", Co = " + computerID +
                " WHERE Sc = " + oldScientistID + " AND Co = " + oldComputerID);
 }
 
