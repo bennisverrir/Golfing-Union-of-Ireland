@@ -107,52 +107,14 @@ bool dataAccess::writeComputerFile(Computer writeComputer, int index)
 /*Function sortLegend ,@param int and bool @return vector<Legend>
 * return a vector of legend of all scientist in the sql table in any order available in the programm
 */
-vector<Legend> dataAccess::sortLegend(int sort, bool ascDesc)
+vector<Legend> dataAccess::sortLegend()
 {
-    QString sortString = "";
-    QString reverse = "";
-    QString order = "ORDER BY ";
-
-
-    switch(sort)
-    {
-        case 0:
-            sortString = "Name";
-        break;
-        case 1:
-            sortString = "Gender";
-        break;
-        case 2:
-            sortString = "Birth";
-        break;
-        case 3:
-            sortString = "Death";
-        break;
-        case 4:
-            sortString = "";
-    }
-
-    if(sort == 4)
-    {
-        sortString = "";
-        order = "";
-    }
-    else if (ascDesc)
-    {
-        reverse = " ASC";
-    }
-    else
-    {
-        reverse = " DESC";
-    }
-
     vector<Legend> returnLegends;
 
 
     QSqlQuery query(db);
 
-    QString command = "Select * FROM Scientists " + order + sortString + reverse;
-
+    QString command = "Select * FROM Scientists ";
 
     query.exec(command);
 
@@ -164,40 +126,8 @@ vector<Legend> dataAccess::sortLegend(int sort, bool ascDesc)
 /*Function sortComputer ,@param int and bool  @return vector<Computer>
 * return a vector of computer of all computers in the sql table in any order available in the programm
 */
-vector<Computer> dataAccess::sortComputer(int sort, bool ascDesc)
+vector<Computer> dataAccess::sortComputer()
 {
-
-
-    QString sortString;
-    QString reverse;
-    QString order = "ORDER BY ";
-
-    if (ascDesc)
-    {
-        reverse = " ASC";
-    }
-    else
-    {
-        reverse = " DESC";
-    }
-
-    switch(sort)
-    {
-        case 0:
-            sortString = "c.Name";
-        break;
-        case 1:
-            sortString = "BuildYear";
-        break;
-        case 2:
-            sortString = "ct.Name";
-        break;
-        case 3:
-            sortString = "";
-            reverse = "";
-            order = "";
-        break;
-    }
 
 
     vector<Computer> returnLegends;
@@ -208,10 +138,8 @@ vector<Computer> dataAccess::sortComputer(int sort, bool ascDesc)
 
     QString command = "Select c.ID as cID, c.Name, c.BuildYear, ct.Name AS TypeName, c.WasBuilt FROM Computer c "
                       "INNER JOIN ComputerType ct "
-                      "ON c.ComputerTypeID = ct.ID " + order + sortString + reverse;
+                      "ON c.ComputerTypeID = ct.ID";
     query.exec(command);
-
-    qDebug() << command << "      " << query.lastError();
 
     returnLegends = pushingComputerVector(query);
 
@@ -304,44 +232,14 @@ bool dataAccess::addComputerType(string newComputerType)
 * returns a vector of relation of all relation in the sql relation table in any order available in the programm
 *
 */
-vector<Relation> dataAccess::sortRelation(int sort, bool ascDesc)
+vector<Relation> dataAccess::sortRelation()
 {
-    QString order = "";
-    QString orderCommand = " Order By ";
-    QString reverse;
-
-    if (ascDesc)
-    {
-        reverse = " ASC";
-    }
-    else
-    {
-        reverse = " DESC";
-    }
-
-    switch(sort)
-    {
-        case 0:
-            order = "s.Name";
-        break;
-
-        case 1:
-            order = "c.Name";
-        break;
-
-        case 2:
-            order = "";
-            orderCommand = "";
-            reverse = "";
-        break;
-    }
-
     vector<Relation> returnVector;
 
     QSqlQuery query(db);
 
     QString sqlCommand = "SELECT  s.ID AS sID, c.ID as cID, s.Name, c.Name AS ComputerName From Scientists s, Computer c, Combine co "
-                         "WHERE  s.ID = co.Sc AND c.ID = co.Co " + orderCommand + order + reverse;
+                         "WHERE  s.ID = co.Sc AND c.ID = co.Co ";
     string scientistName;
     string computerName;
 
@@ -358,8 +256,6 @@ vector<Relation> dataAccess::sortRelation(int sort, bool ascDesc)
 
         returnVector.push_back(Relation(scientistID, computerID, scientistName, computerName));
     }
-
-    qDebug() << "commandRelations: " << sqlCommand << "ERROR: " << query.lastError().text();
 
     return returnVector;
 }
