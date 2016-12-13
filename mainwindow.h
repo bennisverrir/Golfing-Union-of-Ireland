@@ -36,15 +36,17 @@ private slots:
 
     //bool addComputer();
 
+    bool addRelation();
+
     bool editLegend();
 
-    void on_AddLegend_clicked();
+    void on_ButtonAddScientist_clicked();
 
-    void on_EditButton_clicked();
+    void on_ButtonEditScientist_clicked();
 
     void on_ScientistTable_cellClicked();
 
-    void on_Tabs_tabBarClicked(int index);
+    void on_TableView_tabBarClicked(int index);
 
 private:
     Service _service;
