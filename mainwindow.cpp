@@ -48,6 +48,7 @@ void MainWindow::displayLegends(vector<Legend> legends)
         ui->tableWidget->setItem(row,1, new QTableWidgetItem(gender));
         ui->tableWidget->setItem(row,2, new QTableWidgetItem(born));
         ui->tableWidget->setItem(row,3, new QTableWidgetItem(death));
+        ui->tableWidget->setItem(row,4, new QTableWidgetItem(ID));
     }
 }
 void MainWindow::displayComputers(vector<Computer> computers)
@@ -212,7 +213,11 @@ void MainWindow::on_tableWidget_cellClicked()
     ui->EditDeath->setEnabled(true);
     ui->EditButton->setEnabled(true);
 
-    int index = ui->tableWidget->currentRow();
+    int row = ui->tableWidget->currentRow();
+
+    int index = ui->tableWidget->item(row,4)->text().toInt();
+
+    qDebug() << "ROW: " << row << "COLUMN " << index;
 
     _service.setCaseField(4);
 
