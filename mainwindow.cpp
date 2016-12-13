@@ -47,11 +47,6 @@ void MainWindow::displayLegends(vector<Legend> legends)
 }
 void MainWindow::displayComputers(vector<Computer> computers)
 {
-    ui->ComputerTable->clear();
-    ui->ComputerTable->setHorizontalHeaderItem(0, new QTableWidgetItem("Name"));
-    ui->ComputerTable->setHorizontalHeaderItem(1, new QTableWidgetItem("Build Year"));
-    ui->ComputerTable->setHorizontalHeaderItem(2, new QTableWidgetItem("Computer Type"));
-    ui->ComputerTable->showColumn(2);
     ui->ComputerTable->hideColumn(3);
     ui->ComputerTable->setRowCount(computers.size());
 
@@ -62,10 +57,12 @@ void MainWindow::displayComputers(vector<Computer> computers)
         QString name = QString::fromStdString(currentComputer.getName());
         QString buildYear = QString::number(currentComputer.getBuildYear());
         QString computerType = QString::fromStdString(currentComputer.getComputerType());
+        QString ID = QString::number(row);
 
         ui->ComputerTable->setItem(row,0, new QTableWidgetItem(name));
         ui->ComputerTable->setItem(row,1, new QTableWidgetItem(buildYear));
         ui->ComputerTable->setItem(row,2, new QTableWidgetItem(computerType));
+        ui->ComputerTable->setItem(row,3, new QTableWidgetItem(ID));
     }
 }
 void MainWindow::displayRelations(vector<Relation> relations)
@@ -173,6 +170,24 @@ bool MainWindow::editLegend()
     return _service.requestLegendEdit(name,gender[0],born,death,oldLegend);
 }
 
+bool MainWindow::editComputer()
+{
+    int index = ui->ComputerTable->currentRow();
+
+    _service.setCaseField(3);
+
+    Computer oldComputer = _service.requestComputerSort()[index];
+
+    string name = ui->ComputerName->text().toStdString();
+    int buildYear = ui->ComputerBuilt->text().toInt();
+    string computerType = ui->ComputerType->currentText().toStdString();
+    int computerTypeID = ui->ComputerType->currentIndex() + 1;
+
+    int wasBuilt = (buildYear == 0? 0 : 1);
+
+    return _service.requestComputerEdit(name, buildYear, computerType, wasBuilt, oldComputer, computerTypeID);
+}
+
 void MainWindow::on_ButtonEditScientist_clicked()
 {
     if(editLegend())
@@ -264,4 +279,40 @@ void MainWindow::fillComputerTypeComboBox()
     {
         ui->ComputerType->addItem(QString::fromStdString(computerTypes[i]));
     }
+}
+
+void MainWindow::on_ComputerEdit_clicked()
+{
+    _service.setCaseField(3);
+
+    if(editComputer())
+    {
+        displayComputers(_service.requestComputerSort());
+        ui->ComputerName->clear();
+        ui->ComputerBuilt->clear();
+    }
+    else
+    {
+        //TODO
+        qDebug() << "ERRORERROR";
+    }
+
+}
+
+void MainWindow::on_ComputerTable_cellClicked()
+{
+    ui->ComputerEdit->setEnabled(true);
+
+    int row = ui->ComputerTable->currentRow();
+
+    int index = ui->ComputerTable->item(row,3)->text().toInt();
+
+
+    _service.setCaseField(3);
+
+    Computer oldComputer = _service.requestComputerSort()[index];
+
+    ui->ComputerName->setText(QString::fromStdString(oldComputer.getName()));
+    ui->ComputerBuilt->setText(QString::number(oldComputer.getBuildYear()));
+    ui->ComputerType->setCurrentText(QString::fromStdString(oldComputer.getComputerType()));
 }

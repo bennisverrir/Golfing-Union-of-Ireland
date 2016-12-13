@@ -40,6 +40,8 @@ private slots:
 
     bool editLegend();
 
+    bool editComputer();
+
     void on_ButtonAddScientist_clicked();
 
     void on_ButtonEditScientist_clicked();
@@ -51,6 +53,10 @@ private slots:
     void on_ComputerAdd_clicked();
 
     void fillComputerTypeComboBox();
+
+    void on_ComputerEdit_clicked();
+
+    void on_ComputerTable_cellClicked();
 
 private:
     Service _service;
