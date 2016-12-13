@@ -34,7 +34,7 @@ private slots:
 
     bool addLegend();
 
-    //bool addComputer();
+    bool addComputer();
 
     bool addRelation();
 
@@ -47,6 +47,10 @@ private slots:
     void on_ScientistTable_cellClicked();
 
     void on_TableView_tabBarClicked(int index);
+
+    void on_ComputerAdd_clicked();
+
+    void fillComputerTypeComboBox();
 
 private:
     Service _service;

@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     displayLegends(_service.requestLegendSort());
     displayComputers(_service.requestComputerSort());
     displayRelations(_service.requestRelationSort());
+
+    fillComputerTypeComboBox();
 }
 
 MainWindow::~MainWindow()
@@ -119,16 +121,19 @@ bool MainWindow::addLegend()
     return _service.requestLegendAdd(name, gender[0], born, death);
 }
 
-/*bool MainWindow::addComputer()
+bool MainWindow::addComputer()
 {
-    string name = ui->computerName->text().toStdString();
-    int buildYear = ui->computerBuildYear->text().toInt();
-    string computerType = ui->computerTypeCombo->currentText().toStdString();
-    int computerTypeID = ui->computerTypeCombo->currentIndex();
+    string name = ui->ComputerName->text().toStdString();
+    int buildYear = ui->ComputerBuilt->text().toInt();
+    string computerType = ui->ComputerType->currentText().toStdString();
+    int computerTypeID = ui->ComputerType->currentIndex() + 1;
+
+    qDebug() << computerTypeID;
+
     int wasBuilt = (buildYear == 0 ? 0 : 1);
 
     return _service.requestComputerAdd(name,buildYear,computerType,wasBuilt, computerTypeID);
-}*/
+}
 
 bool MainWindow::addRelation()
 {
@@ -232,4 +237,31 @@ void MainWindow::on_TableView_tabBarClicked(int index)
     ui->ScientistTable->setSortingEnabled(true);
     ui->ComputerTable->setSortingEnabled(true);
     ui->RelationTable->setSortingEnabled(true);
+}
+
+void MainWindow::on_ComputerAdd_clicked()
+{
+    _service.setCaseField(3);
+
+    if(addComputer())
+    {
+        displayComputers(_service.requestComputerSort());
+        ui->ComputerName->clear();
+        ui->ComputerBuilt->clear();
+    }
+    else
+    {
+        //TODO
+        qDebug() << "ERRORERROR";
+    }
+}
+
+void MainWindow::fillComputerTypeComboBox()
+{
+    vector<string> computerTypes = _service.requestComputerTypes();
+
+    for(size_t i = 0; i < computerTypes.size(); i++)
+    {
+        ui->ComputerType->addItem(QString::fromStdString(computerTypes[i]));
+    }
 }
