@@ -260,7 +260,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_11">
                   <item>
-                   <widget class="QPushButton" name="ComputerEdit">
+                   <widget class="QPushButton" name="ButtonEditComputer">
                     <property name="enabled">
                      <bool>false</bool>
                     </property>
@@ -270,7 +270,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="ComputerAdd">
+                   <widget class="QPushButton" name="ButtonAddComputer">
                     <property name="text">
                      <string>Add computer</string>
                     </property>
@@ -355,7 +355,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_17">
                   <item>
-                   <widget class="QPushButton" name="EditRelation">
+                   <widget class="QPushButton" name="ButtonEditRelation">
                     <property name="enabled">
                      <bool>false</bool>
                     </property>
@@ -365,9 +365,16 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="AddRelation">
+                   <widget class="QPushButton" name="ButtonAddRelation">
                     <property name="text">
                      <string>Add relation</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="ButtonDeleteRelation">
+                    <property name="text">
+                     <string>Delete relation</string>
                     </property>
                    </widget>
                   </item>
