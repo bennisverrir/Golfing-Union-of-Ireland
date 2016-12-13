@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <string>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -10,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     _service.setCaseField(4);
     displayLegends(_service.requestLegendSort());
+    displayComputers(_service.requestComputerSort());
+    displayRelations(_service.requestRelationSort());
 }
 
 MainWindow::~MainWindow()
@@ -19,20 +22,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::displayLegends(vector<Legend> legends)
 {
-    whatTable = 0;
-
-    whatTable = 1;
-
-    ui->tableWidget->clear();
-    ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem("Name"));
-    ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem("Gender"));
-    ui->tableWidget->setHorizontalHeaderItem(2, new QTableWidgetItem("Birth Year"));
-    ui->tableWidget->setHorizontalHeaderItem(3, new QTableWidgetItem("Death Year"));
-    ui->tableWidget->setHorizontalHeaderItem(4, new QTableWidgetItem("ID"));
-    ui->tableWidget->showColumn(2);
-    ui->tableWidget->showColumn(3);
-    ui->tableWidget->hideColumn(4);
-    ui->tableWidget->setRowCount(legends.size());
+    ui->ScientistTable->hideColumn(4);
+    ui->ScientistTable->setRowCount(legends.size());
 
     for(size_t row = 0; row < legends.size(); row++)
     {
@@ -44,24 +35,22 @@ void MainWindow::displayLegends(vector<Legend> legends)
         QString death = QString::number(currentLegend.getDeath());
         QString ID = QString::number(row);
 
-        ui->tableWidget->setItem(row,0, new QTableWidgetItem(name));
-        ui->tableWidget->setItem(row,1, new QTableWidgetItem(gender));
-        ui->tableWidget->setItem(row,2, new QTableWidgetItem(born));
-        ui->tableWidget->setItem(row,3, new QTableWidgetItem(death));
-        ui->tableWidget->setItem(row,4, new QTableWidgetItem(ID));
+        ui->ScientistTable->setItem(row,0, new QTableWidgetItem(name));
+        ui->ScientistTable->setItem(row,1, new QTableWidgetItem(gender));
+        ui->ScientistTable->setItem(row,2, new QTableWidgetItem(born));
+        ui->ScientistTable->setItem(row,3, new QTableWidgetItem(death));
+        ui->ScientistTable->setItem(row,4, new QTableWidgetItem(ID));
     }
 }
 void MainWindow::displayComputers(vector<Computer> computers)
 {
-    whatTable = 3;
-
-    ui->tableWidget->clear();
-    ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem("Name"));
-    ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem("Build Year"));
-    ui->tableWidget->setHorizontalHeaderItem(2, new QTableWidgetItem("Computer Type"));
-    ui->tableWidget->showColumn(2);
-    ui->tableWidget->hideColumn(3);
-    ui->tableWidget->setRowCount(computers.size());
+    ui->ComputerTable->clear();
+    ui->ComputerTable->setHorizontalHeaderItem(0, new QTableWidgetItem("Name"));
+    ui->ComputerTable->setHorizontalHeaderItem(1, new QTableWidgetItem("Build Year"));
+    ui->ComputerTable->setHorizontalHeaderItem(2, new QTableWidgetItem("Computer Type"));
+    ui->ComputerTable->showColumn(2);
+    ui->ComputerTable->hideColumn(3);
+    ui->ComputerTable->setRowCount(computers.size());
 
     for(size_t row = 0; row < computers.size(); row++)
     {
@@ -71,21 +60,19 @@ void MainWindow::displayComputers(vector<Computer> computers)
         QString buildYear = QString::number(currentComputer.getBuildYear());
         QString computerType = QString::fromStdString(currentComputer.getComputerType());
 
-        ui->tableWidget->setItem(row,0, new QTableWidgetItem(name));
-        ui->tableWidget->setItem(row,1, new QTableWidgetItem(buildYear));
-        ui->tableWidget->setItem(row,2, new QTableWidgetItem(computerType));
+        ui->ComputerTable->setItem(row,0, new QTableWidgetItem(name));
+        ui->ComputerTable->setItem(row,1, new QTableWidgetItem(buildYear));
+        ui->ComputerTable->setItem(row,2, new QTableWidgetItem(computerType));
     }
 }
 void MainWindow::displayRelations(vector<Relation> relations)
 {
-    whatTable = 2;
-
-    ui->tableWidget->clear();
-    ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem("Scientist Name"));
-    ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem("Computer Name"));
-    ui->tableWidget->hideColumn(2);
-    ui->tableWidget->hideColumn(3);
-    ui->tableWidget->setRowCount(relations.size());
+    ui->RelationTable->clear();
+    ui->RelationTable->setHorizontalHeaderItem(0, new QTableWidgetItem("Scientist Name"));
+    ui->RelationTable->setHorizontalHeaderItem(1, new QTableWidgetItem("Computer Name"));
+    ui->RelationTable->hideColumn(2);
+    ui->RelationTable->hideColumn(3);
+    ui->RelationTable->setRowCount(relations.size());
 
     for(size_t row = 0; row < relations.size(); row++)
     {
@@ -94,50 +81,30 @@ void MainWindow::displayRelations(vector<Relation> relations)
         QString scientistName = QString::fromStdString(currentRelation.getLegendName());
         QString computerName = QString::fromStdString(currentRelation.getComputerName());
 
-        ui->tableWidget->setItem(row,0, new QTableWidgetItem(scientistName));
-        ui->tableWidget->setItem(row,1, new QTableWidgetItem(computerName));
+        ui->RelationTable->setItem(row,0, new QTableWidgetItem(scientistName));
+        ui->RelationTable->setItem(row,1, new QTableWidgetItem(computerName));
 
     }
 }
 
 void MainWindow::on_findText_textChanged(const QString &arg1)
 {
-    string nameToFind = ui->findText->text().toStdString();\
+    string nameToFind = ui->findText->text().toStdString();
 
-    _service.setCaseField(1);
     _service.setSearchField(nameToFind);
 
-    if(whatTable == 1)
+    if(whatTable == 0)
     {
         displayLegends(_service.requestLegendSearch());
     }
-    else if(whatTable == 2)
+    else if(whatTable == 1)
     {
         displayRelations(_service.requestRelationSearch());
     }
-    else if(whatTable == 3)
+    else if(whatTable == 2)
     {
         displayComputers(_service.requestComputerSearch());
     }
-
-}
-
-void MainWindow::on_LegendButton_clicked()
-{
-    _service.setCaseField(4);
-    displayLegends(_service.requestLegendSort());
-}
-
-void MainWindow::on_ComputerButton_clicked()
-{
-    _service.setCaseField(1);
-    displayComputers(_service.requestComputerSort());
-}
-
-void MainWindow::on_RelationButton_clicked()
-{
-    _service.setCaseField(1);
-    displayRelations(_service.requestRelationSort());
 
 }
 
@@ -171,7 +138,7 @@ void MainWindow::on_AddLegend_clicked()
 
 bool MainWindow::editLegend()
 {
-    int index = ui->tableWidget->currentRow();
+    int index = ui->ScientistTable->currentRow();
 
     _service.setCaseField(4);
 
@@ -205,7 +172,7 @@ void MainWindow::on_EditButton_clicked()
 
 }
 
-void MainWindow::on_tableWidget_cellClicked()
+void MainWindow::on_ScientistTable_cellClicked()
 {
     ui->EditName->setEnabled(true);
     ui->EditGender->setEnabled(true);
@@ -213,11 +180,10 @@ void MainWindow::on_tableWidget_cellClicked()
     ui->EditDeath->setEnabled(true);
     ui->EditButton->setEnabled(true);
 
-    int row = ui->tableWidget->currentRow();
+    int row = ui->ScientistTable->currentRow();
 
-    int index = ui->tableWidget->item(row,4)->text().toInt();
+    int index = ui->ScientistTable->item(row,4)->text().toInt();
 
-    qDebug() << "ROW: " << row << "COLUMN " << index;
 
     _service.setCaseField(4);
 
@@ -227,4 +193,26 @@ void MainWindow::on_tableWidget_cellClicked()
     ui->EditGender->setCurrentText(QChar::fromLatin1(oldLegend.getGender()));
     ui->EditBorn->setText(QString::number(oldLegend.getBorn()));
     ui->EditDeath->setText(QString::number(oldLegend.getDeath()));
+}
+
+void MainWindow::on_Relations_tabBarClicked(int index)
+{
+    if(index == 0)
+    {
+        _service.setCaseField(4);
+        displayLegends(_service.requestLegendSort());
+        whatTable = 0;
+    }
+    else if(index == 1)
+    {
+        _service.setCaseField(3);
+        displayComputers(_service.requestComputerSort());
+        whatTable = 1;
+    }
+    else if(index == 2)
+    {
+        _service.setCaseField(3);
+        displayRelations(_service.requestRelationSort());
+        whatTable = 2;
+    }
 }

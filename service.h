@@ -40,8 +40,7 @@ public:
         vector <Relation> requestRelationSort();
         vector <string> requestComputerTypes();
         bool requestComputerTypeAdd(string name);
-        vector<Relation> findRelation(string name, int select);
-        vector<Relation> findRelation(int ID, int select);
+        vector<Relation> findRelation(string name);
         bool requestRelationDelete(Relation deleteRelation);
         string getJoke();
 

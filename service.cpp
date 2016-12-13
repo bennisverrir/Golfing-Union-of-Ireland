@@ -114,7 +114,7 @@ string Service::getSearchField() const
 vector <Legend> Service::requestLegendSearch()
 {
     vector <Legend> returnVector;
-    returnVector = a.findLegend (_caseField, _searchString);
+    returnVector = a.findLegend (_searchString);
 
     return returnVector;
 }
@@ -126,7 +126,7 @@ vector <Legend> Service::requestLegendSearch()
 vector <Computer> Service::requestComputerSearch()
 {
     vector <Computer> returnVector;
-    returnVector = a.findComputer (_caseField, _searchString);
+    returnVector = a.findComputer (_searchString);
     return returnVector;
 }
 
@@ -245,17 +245,9 @@ bool Service::requestComputerTypeAdd(string name)
     return a.addComputerType(name);
 }
 
-/*Function findRelation, @parma string
-*
-*
-*/
-vector<Relation> Service::findRelation(int ID, int select)
+vector<Relation> Service::findRelation(string name)
 {
-    return a.findRelation(ID, select);
-}
-vector<Relation> Service::findRelation(string name, int select)
-{
-    return a.findRelation(name, select);
+    return a.findRelation(name);
 }
 
 

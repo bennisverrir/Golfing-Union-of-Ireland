@@ -32,12 +32,6 @@ private slots:
 
     void on_findText_textChanged(const QString &arg1);
 
-    void on_LegendButton_clicked();
-
-    void on_ComputerButton_clicked();
-
-    void on_RelationButton_clicked();
-
     bool addLegend();
 
     bool editLegend();
@@ -46,7 +40,9 @@ private slots:
 
     void on_EditButton_clicked();
 
-    void on_tableWidget_cellClicked();
+    void on_ScientistTable_cellClicked();
+
+    void on_Relations_tabBarClicked(int index);
 
 private:
     Service _service;

@@ -25,81 +25,132 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
-           <widget class="QPushButton" name="ComputerButton">
-            <property name="text">
-             <string>Computers</string>
+           <widget class="QTabWidget" name="Relations">
+            <property name="tabPosition">
+             <enum>QTabWidget::North</enum>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="RelationButton">
-            <property name="text">
-             <string>Relations</string>
+            <property name="tabShape">
+             <enum>QTabWidget::Rounded</enum>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="LegendButton">
-            <property name="text">
-             <string>Scientists</string>
+            <property name="currentIndex">
+             <number>0</number>
             </property>
+            <widget class="QWidget" name="Scientists">
+             <attribute name="title">
+              <string>Scientists</string>
+             </attribute>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <widget class="QTableWidget" name="ScientistTable">
+                <property name="sizeAdjustPolicy">
+                 <enum>QAbstractScrollArea::AdjustIgnored</enum>
+                </property>
+                <attribute name="horizontalHeaderCascadingSectionResizes">
+                 <bool>false</bool>
+                </attribute>
+                <attribute name="horizontalHeaderDefaultSectionSize">
+                 <number>250</number>
+                </attribute>
+                <attribute name="horizontalHeaderStretchLastSection">
+                 <bool>true</bool>
+                </attribute>
+                <column>
+                 <property name="text">
+                  <string>Name</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>New Column</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Birth Year</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>New Column</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>ID</string>
+                 </property>
+                </column>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="tab_4">
+             <attribute name="title">
+              <string>Computers</string>
+             </attribute>
+             <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <item>
+               <widget class="QTableWidget" name="ComputerTable">
+                <attribute name="horizontalHeaderDefaultSectionSize">
+                 <number>250</number>
+                </attribute>
+                <attribute name="horizontalHeaderStretchLastSection">
+                 <bool>true</bool>
+                </attribute>
+                <column>
+                 <property name="text">
+                  <string>New Column</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Name</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Computer Type</string>
+                 </property>
+                </column>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="tab_5">
+             <attribute name="title">
+              <string>Relations</string>
+             </attribute>
+             <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <item>
+               <widget class="QTableWidget" name="RelationTable">
+                <attribute name="horizontalHeaderDefaultSectionSize">
+                 <number>250</number>
+                </attribute>
+                <attribute name="horizontalHeaderMinimumSectionSize">
+                 <number>20</number>
+                </attribute>
+                <attribute name="horizontalHeaderStretchLastSection">
+                 <bool>true</bool>
+                </attribute>
+                <attribute name="verticalHeaderCascadingSectionResizes">
+                 <bool>false</bool>
+                </attribute>
+                <column>
+                 <property name="text">
+                  <string>Scientist Name</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Computer Name</string>
+                 </property>
+                </column>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </widget>
           </item>
          </layout>
-        </item>
-        <item>
-         <widget class="QTableWidget" name="tableWidget">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::Panel</enum>
-          </property>
-          <property name="editTriggers">
-           <set>QAbstractItemView::NoEditTriggers</set>
-          </property>
-          <property name="dragEnabled">
-           <bool>false</bool>
-          </property>
-          <property name="alternatingRowColors">
-           <bool>true</bool>
-          </property>
-          <property name="selectionBehavior">
-           <enum>QAbstractItemView::SelectRows</enum>
-          </property>
-          <property name="gridStyle">
-           <enum>Qt::SolidLine</enum>
-          </property>
-          <property name="sortingEnabled">
-           <bool>true</bool>
-          </property>
-          <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>200</number>
-          </attribute>
-          <attribute name="horizontalHeaderStretchLastSection">
-           <bool>true</bool>
-          </attribute>
-          <column>
-           <property name="text">
-            <string>Name</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Gender</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Born Year</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Death Year</string>
-           </property>
-          </column>
-         </widget>
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -229,7 +280,7 @@
      <x>0</x>
      <y>0</y>
      <width>1088</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

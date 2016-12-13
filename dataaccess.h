@@ -29,8 +29,8 @@ public:
     void deleteLine(vector<Legend> &deleteLegend);
     vector<Legend> sortLegend(int sort, bool ascDesc);
     vector<Computer> sortComputer(int sort, bool ascDesc);
-    vector<Legend> findLegend(int whatToFind, string sort);
-    vector<Computer> findComputer(int whatToFind, string find);
+    vector<Legend> findLegend(string sort);
+    vector<Computer> findComputer(string find);
     vector<string> getComputerTypes();
     bool addComputerType(string newComputerType);
     vector<Relation> sortRelation(int sort, bool ascDesc);
@@ -40,8 +40,7 @@ public:
     int getID(QSqlQuery query,QString name, QString tableName);
     void findNonRelatedRelation(Legend scientist);
     void findNonRelatedRelation(Computer computer);
-    vector<Relation> findRelation(int nameToFind, int sort);
-    vector<Relation> findRelation(string nameToFind, int sort);
+    vector<Relation> findRelation(string nameToFind);
     bool deleteRelation(Relation relationToDelete);
     bool editRelation(Relation oldRelation, Relation editedRelation);
     vector<string>joke();

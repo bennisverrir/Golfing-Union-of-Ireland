@@ -223,42 +223,15 @@ vector<Computer> dataAccess::sortComputer(int sort, bool ascDesc)
 *
 */
 
-vector<Legend> dataAccess::findLegend(int whatToFind, string find)
+vector<Legend> dataAccess::findLegend(string find)
 {
     QString findString = QString::fromStdString(find);
-    QString collumnToFind;
-    QString keyWord;
-
-    switch(whatToFind)
-    {
-        case 0:
-            collumnToFind = "Name ";
-            keyWord = "LIKE ";
-            findString  = "'%" + findString + "%'";
-        break;
-        case 1:
-            collumnToFind = "Gender ";
-            keyWord = "= ";
-            findString = "'" + findString + "'";
-        break;
-        case 2:
-            collumnToFind = "Birth ";
-            keyWord = "= ";
-        break;
-        case 3:
-            collumnToFind = "Death ";
-            keyWord = "= ";
-        break;
-    }
-
-
     vector<Legend> returnLegends;
-
-
 
     QSqlQuery query(db);
 
-    QString command = "Select * FROM Scientists WHERE " + collumnToFind + keyWord +  findString;
+
+    QString command = "Select * FROM Scientists WHERE Name LIKE '%" + findString + "%' OR Cast(Birth As Varchar) LIKE '%" + findString + "%' OR Cast(Death As Varchar) LIKE '%" + findString + "%'";
 
     query.exec(command);
 
@@ -270,32 +243,9 @@ vector<Legend> dataAccess::findLegend(int whatToFind, string find)
 /*Function findComputer ,@param QSqlQuery and QString @return vector<Computer>
 *finds computer by name, build year or type name and returns it vector of computer
 */
-vector<Computer> dataAccess::findComputer(int whatToFind, string find)
+vector<Computer> dataAccess::findComputer(string find)
 {
     QString findString = QString::fromStdString(find);
-    QString collumnToFind;
-    QString keyWord;
-
-    switch(whatToFind)
-    {
-        case 0:
-            collumnToFind = "c.Name ";
-            keyWord = "LIKE ";
-            findString  = "'%" + findString + "%'";
-
-        break;
-        case 1:
-            collumnToFind = "c.BuildYear ";
-            keyWord = "= ";
-        break;
-
-        case 2:
-            collumnToFind = "TypeName ";
-            findString  = "'" + findString + "'";
-            keyWord = " LIKE ";
-        break;
-    }
-
 
     vector<Computer> returnComputers;
 
@@ -303,8 +253,8 @@ vector<Computer> dataAccess::findComputer(int whatToFind, string find)
 
     QSqlQuery query(db);
 
-    QString command = "Select c.ID AS cID, c.Name,c.BuildYear, c.WasBuilt, ct.Name AS TypeName "
-                       "FROM Computer c, ComputerType ct WHERE c.ComputerTypeID = ct.ID AND " + collumnToFind + keyWord +  findString;
+    QString command = "Select c.ID AS cID, c.Name,c.BuildYear, c.WasBuilt, ct.Name AS TypeName FROM Computer c, ComputerType ct WHERE c.ComputerTypeID = ct.ID "
+                      "AND (c.Name LIKE '%" + findString + "%' OR Cast(c.BuildYear AS Varchar) LIKE '%" + findString + "%' OR TypeName LIKE '%" + findString +"%')";
 
     query.exec(command);
 
@@ -490,71 +440,10 @@ bool dataAccess::editComputer(Computer oldComputer, Computer editComputer, int i
 
 }
 
-/*Function findRelation ,@param string  @return vector<Relation>
-*finds scientist by name, gender, birth or death and returns it vector of legand
-*finds relation by name of scientis or name of computer
-*/
-vector<Relation> dataAccess::findRelation(int IDToFind, int sort)
+
+vector<Relation> dataAccess::findRelation(string nameToFind)
 {
     QSqlQuery query(db);
-
-    QString whatToFind;
-    QString ID = QString::fromStdString(to_string(IDToFind));
-
-    switch(sort)
-    {
-        case 1:
-        whatToFind = "s.ID";
-        break;
-        case 2:
-        whatToFind = "c.ID";
-        break;
-    }
-
-
-
-
-
-    vector<Relation> returnVector;
-
-    QString command = " SELECT  s.Name, s.ID as sID, c.ID as cID, c.Name AS ComputerName  From Scientists s, Computer c, Combine co"
-                       " ON s.ID = co.Sc AND c.ID = co.Co Where " + whatToFind + " = " + ID;
-
-    query.prepare(command);
-
-
-    query.exec();
-
-
-    while(query.next())
-    {
-        int scientistID = query.value("sID").toUInt();
-        int computerID = query.value("cID").toUInt();
-        string scientistName = query.value("Name").toString().toStdString();
-        string computerName = query.value("ComputerName").toString().toStdString();
-
-        returnVector.push_back(Relation(scientistID, computerID, scientistName, computerName));
-    }
-
-
-    return returnVector;
-}
-
-vector<Relation> dataAccess::findRelation(string nameToFind, int sort)
-{
-    QSqlQuery query(db);
-
-    QString whatToFind;
-
-    switch(sort)
-    {
-        case 1:
-        whatToFind = "sName";
-        break;
-        case 2:
-        whatToFind = "cName";
-        break;
-    }
 
     QString name = QString::fromStdString(nameToFind);
 
@@ -562,10 +451,11 @@ vector<Relation> dataAccess::findRelation(string nameToFind, int sort)
     vector<Relation> returnVector;
 
     QString command = " SELECT  s.Name AS sName, s.ID as sID, c.ID as cID, c.Name AS cName  From Scientists s, Computer c, Combine co"
-                       " ON sID = co.Sc AND cID = co.Co Where " + whatToFind + " LIKE '%" + name + "%'";
+                       " ON sID = co.Sc AND cID = co.Co Where sName LIKE '%" + name + "%' OR cName LIKE '%" + name + "%'" ;
 
     query.prepare(command);
 
+    qDebug() << command;
 
     query.exec();
 
