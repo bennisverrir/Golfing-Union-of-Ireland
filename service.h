@@ -43,7 +43,6 @@ public:
 private:
         dataAccess a;
         string _tableName;
-        int _caseField;
         bool _ascDescOrder;
         string _searchString;
 };
