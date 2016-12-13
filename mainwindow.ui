@@ -52,7 +52,7 @@
                  <bool>false</bool>
                 </attribute>
                 <attribute name="horizontalHeaderDefaultSectionSize">
-                 <number>125</number>
+                 <number>200</number>
                 </attribute>
                 <attribute name="horizontalHeaderStretchLastSection">
                  <bool>true</bool>
@@ -64,7 +64,7 @@
                 </column>
                 <column>
                  <property name="text">
-                  <string>New Column</string>
+                  <string>Gender</string>
                  </property>
                 </column>
                 <column>
@@ -74,7 +74,7 @@
                 </column>
                 <column>
                  <property name="text">
-                  <string>New Column</string>
+                  <string>Death Year</string>
                  </property>
                 </column>
                 <column>
@@ -106,7 +106,18 @@
                        </widget>
                       </item>
                       <item>
-                       <widget class="QComboBox" name="ScientistGender"/>
+                       <widget class="QComboBox" name="ScientistGender">
+                        <item>
+                         <property name="text">
+                          <string>M</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>F</string>
+                         </property>
+                        </item>
+                       </widget>
                       </item>
                      </layout>
                     </item>
@@ -184,7 +195,7 @@
                  <set>QAbstractItemView::NoEditTriggers</set>
                 </property>
                 <attribute name="horizontalHeaderDefaultSectionSize">
-                 <number>125</number>
+                 <number>200</number>
                 </attribute>
                 <attribute name="horizontalHeaderStretchLastSection">
                  <bool>true</bool>
@@ -283,7 +294,7 @@
                  <set>QAbstractItemView::NoEditTriggers</set>
                 </property>
                 <attribute name="horizontalHeaderDefaultSectionSize">
-                 <number>250</number>
+                 <number>300</number>
                 </attribute>
                 <attribute name="horizontalHeaderMinimumSectionSize">
                  <number>20</number>
