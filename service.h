@@ -15,20 +15,14 @@ class Service
 {
 public:
     Service();
-        void setTableName (int command);
-        void setCaseField (int command);
-        void setAscDescOrder (int command);
         void setSearchField (string toSearch);
         void setSearchField (int toSearch);
         void setSearchField (char toSearch);
         void setSearchField (bool toSearch);
-        string getTableName () const;
-        int getCaseField() const;
         string getSearchField() const;
         vector <Legend> requestLegendSearch();
         vector <Computer> requestComputerSearch();
         vector <Relation> requestRelationSearch();
-        void requestNonRelatedComputer(string name);
         bool requestLegendAdd(string name, char gender, int born, int death);
         bool requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt, int index);
         bool requestRelationAdd(int scientistID, int computerID);

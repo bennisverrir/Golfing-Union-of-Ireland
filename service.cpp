@@ -4,50 +4,6 @@ Service::Service()
 
 }
 
-/*Function setTableName, @param int
-*
-*
-*/
-void Service::setTableName (int command)
-{
-    if (command == 1)
-    {
-        _tableName = "Scientists";
-    }
-    else if (command == 2)
-    {
-        _tableName = "Computers";
-    }
-    else if (command == 3)
-    {
-        _tableName = "Relations";
-    }
-}
-
-/*Function setCaseField, @param int
-*Sets the search field (parameter selection). The value is transformed to a corresponding value or column in the data layer.
-*/
-void Service::setCaseField (int command)
-{
-    _caseField = command - 1;
-
-}
-
-/*Function setAscDescOrder, @param int
-*Decides where items should be sorted in ascending or descending order in the sorting function.
-*/
-void Service::setAscDescOrder (int command)
-{
-    if (command == 1)
-    {
-        _ascDescOrder = true;
-    }
-    else
-    {
-        _ascDescOrder = false;
-    }
-}
-
 /*Function setSearchField, @param string
 *Sets the string that will be searched for when passed to the dataAccess layer.
 */
@@ -85,31 +41,19 @@ void Service::setSearchField (bool toSearch)
         _searchString = "0";
     }
 }
-/*Function getTableName, @param
-*gets the name of the currently selected table.
-*/
-string Service::getTableName() const
-{
-    return _tableName;
-}
+
 /*Function getCaseField, @param string
 *Gets the currently selected parameter to search for.
+* returns a case field to search for
 */
-int Service::getCaseField () const
-{
-    return _caseField;
-}
-/*Function getSearchField, @param string
-*get the string that was inputted to be searched for.
-*/
+
 string Service::getSearchField() const
 {
     return _searchString;
 }
 
 /*Function requestLegendSearch, @return vector <Legend>
-*
-*
+* forwards the findLegend function to data-access class
 */
 vector <Legend> Service::requestLegendSearch()
 {
@@ -120,8 +64,7 @@ vector <Legend> Service::requestLegendSearch()
 }
 
 /*Function requestComputerSearch, @return vector <Computer>
-*
-*
+* forwards the findComputer function to data-access class
 */
 vector <Computer> Service::requestComputerSearch()
 {
@@ -131,8 +74,7 @@ vector <Computer> Service::requestComputerSearch()
 }
 
 /*Function requestRelationSearch, @return vector <Relation>
-*
-*
+* forwards the findRelation function to data-access class
 */
 vector <Relation> Service::requestRelationSearch()
 {
@@ -141,9 +83,9 @@ vector <Relation> Service::requestRelationSearch()
     return returnVector;
 }
 
-/*Function requestLegendAdd, @parma string, char and int
-* calles the function writeFile in the dataAccess class
-*
+/*Function requestLegendAdd, @parma string, char, int, int
+* forwards the function addLegend to the data-access class
+* returns a value of success or fail
 */
 bool Service::requestLegendAdd(string name, char gender, int born, int death)
 {
@@ -152,8 +94,8 @@ bool Service::requestLegendAdd(string name, char gender, int born, int death)
 }
 
 /*Function requestComputerAdd, @parma int, string, char, bool and int
-* calles the function writeComputerFile in the dataAccess class
-*
+* forwards the function addComputer to the data-access class
+* returns a value of success or fail
 */
 bool Service::requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt,int index)
 {
@@ -162,8 +104,8 @@ bool Service::requestComputerAdd(string name, int yearBuilt, string computerType
 }
 
 /*Function requestRelationAdd, @parma int
-* calles the function addRelation in the dataAccess class
-*
+* forwards the function addRelation to the data-access class
+* returns a value of success or fail
 */
 bool Service::requestRelationAdd (int scientistID, int computerID)
 {
@@ -172,8 +114,8 @@ bool Service::requestRelationAdd (int scientistID, int computerID)
 }
 
 /*Function requestLegendEdit, @parma string, char, int and legend
-*calles the function editLegend in the dataAccess class
-*
+* forwards the function editLegend to the data-access class
+* returns a value of success or fail
 */
 bool Service::requestLegendEdit (string name, char gender, int born, int death, Legend oldLegend)
 {
@@ -183,7 +125,7 @@ bool Service::requestLegendEdit (string name, char gender, int born, int death, 
 }
 
 /*Function requestComputerEdit, @parma string, int, bool and Computer
-*calles the function editComputer in the dataAcess class
+* forwards the function editComputer in the data-acess class
 *
 */
 bool Service::requestComputerEdit (string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer, int index)
@@ -193,8 +135,8 @@ bool Service::requestComputerEdit (string name, int yearBuilt, string computerTy
 }
 
 /*Function requestRelationEdit, @parma string and Relation
-* calles the function editRelation in the dataAccess class
-*
+* forwards the function editRelation to the data-access class
+* returns a value of success or fail
 */
 bool Service::requestRelationEdit (string scientistName, string computerName, Relation oldRelation)
 {
@@ -209,8 +151,8 @@ vector <Legend> Service::requestLegendSort()
 }
 
 /*Function requestComputerSort, @returns vector<Computer>
-*
-*
+* forwards the function computer sorting to the data-access class
+* returns a vector of computers
 */
 vector<Computer> Service::requestComputerSort()
 {
@@ -218,8 +160,8 @@ vector<Computer> Service::requestComputerSort()
 }
 
 /*Function requestRelationSort, @returns vector<Relation>
-* calles the function sortRelation in the dataAccess class
-*and returns a sorted vector of Relation
+* forwards the function sortRelation to the data-access class
+* and returns a vector of relations
 */
 vector<Relation> Service::requestRelationSort()
 {
@@ -227,8 +169,8 @@ vector<Relation> Service::requestRelationSort()
 }
 
 /*Function requestComputerTypes, @returns vector<string>
-* calles the function getComputerType in the dataAccess class
-*and returns a vector of strings containing all computer types
+* forwards the function getComputerType to the data-access class
+* and returns a vector of strings containing all computer types
 */
 
 vector <string> Service::requestComputerTypes()
@@ -237,14 +179,17 @@ vector <string> Service::requestComputerTypes()
 }
 
 /*Function requestComputerTypeAdd, @parma string
-* calles the function addComputerType in the dataAccess class
-*
+* forwards the function addComputerType to the data-access class
+* returns a bool of success or fail
 */
 bool Service::requestComputerTypeAdd(string name)
 {
     return a.addComputerType(name);
 }
-
+/*Function requestComputerTypeAdd, @parma string
+* forwards the function find relation to the data-access class
+* returns a vector of relations
+*/
 vector<Relation> Service::findRelation(string name)
 {
     return a.findRelation(name);
