@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    whatTable = ui->Tabs->currentIndex();
     _service.setCaseField(4);
     displayLegends(_service.requestLegendSort());
     displayComputers(_service.requestComputerSort());
@@ -116,8 +117,18 @@ bool MainWindow::addLegend()
     int death = ui->addDeath->text().toInt();
 
     return _service.requestLegendAdd(name, gender[0], born, death);
-
 }
+
+/*bool MainWindow::addComputer()
+{
+    string name = ui->computerName->text().toStdString();
+    int buildYear = ui->computerBuildYear->text().toInt();
+    string computerType = ui->computerTypeCombo->currentText().toStdString();
+    int computerTypeID = ui->computerTypeCombo->currentIndex();
+    int wasBuilt = (buildYear == 0 ? 0 : 1);
+
+    return _service.requestComputerAdd(name,buildYear,computerType,wasBuilt, computerTypeID);
+}*/
 
 
 void MainWindow::on_AddLegend_clicked()
@@ -195,10 +206,15 @@ void MainWindow::on_ScientistTable_cellClicked()
     ui->EditDeath->setText(QString::number(oldLegend.getDeath()));
 }
 
-void MainWindow::on_Relations_tabBarClicked(int index)
+void MainWindow::on_Tabs_tabBarClicked(int index)
 {
+    ui->ScientistTable->setSortingEnabled(false);
+    ui->ComputerTable->setSortingEnabled(false);
+    ui->RelationTable->setSortingEnabled(false);
+
     if(index == 0)
     {
+
         _service.setCaseField(4);
         displayLegends(_service.requestLegendSort());
         whatTable = 0;
@@ -215,4 +231,8 @@ void MainWindow::on_Relations_tabBarClicked(int index)
         displayRelations(_service.requestRelationSort());
         whatTable = 2;
     }
+
+    ui->ScientistTable->setSortingEnabled(true);
+    ui->ComputerTable->setSortingEnabled(true);
+    ui->RelationTable->setSortingEnabled(true);
 }

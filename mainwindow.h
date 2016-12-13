@@ -34,6 +34,8 @@ private slots:
 
     bool addLegend();
 
+    //bool addComputer();
+
     bool editLegend();
 
     void on_AddLegend_clicked();
@@ -42,7 +44,7 @@ private slots:
 
     void on_ScientistTable_cellClicked();
 
-    void on_Relations_tabBarClicked(int index);
+    void on_Tabs_tabBarClicked(int index);
 
 private:
     Service _service;
