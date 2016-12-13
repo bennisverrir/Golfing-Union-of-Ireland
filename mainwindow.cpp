@@ -286,7 +286,7 @@ void MainWindow::on_ComputerEdit_clicked()
 
 void MainWindow::on_ComputerTable_cellClicked()
 {
-    ui->ComputerEdit->setEnabled(true);
+    ui->ButtonEditComputer->setEnabled(true);
 
     int row = ui->ComputerTable->currentRow();
 

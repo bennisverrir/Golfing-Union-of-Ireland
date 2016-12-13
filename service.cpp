@@ -79,7 +79,7 @@ vector <Computer> Service::requestComputerSearch()
 vector <Relation> Service::requestRelationSearch()
 {
     vector <Relation> returnVector;
-    returnVector = a.sortRelation(_caseField, _ascDescOrder);
+    returnVector = a.sortRelation();
     return returnVector;
 }
 
@@ -147,7 +147,7 @@ bool Service::requestRelationEdit (string scientistName, string computerName, Re
 
 vector <Legend> Service::requestLegendSort()
 {
-    return a.sortLegend(_caseField, _ascDescOrder);
+    return a.sortLegend();
 }
 
 /*Function requestComputerSort, @returns vector<Computer>
@@ -156,7 +156,7 @@ vector <Legend> Service::requestLegendSort()
 */
 vector<Computer> Service::requestComputerSort()
 {
-    return a.sortComputer(_caseField, _ascDescOrder);
+    return a.sortComputer();
 }
 
 /*Function requestRelationSort, @returns vector<Relation>
@@ -165,7 +165,7 @@ vector<Computer> Service::requestComputerSort()
 */
 vector<Relation> Service::requestRelationSort()
 {
-    return a.sortRelation(_caseField, _ascDescOrder);
+    return a.sortRelation();
 }
 
 /*Function requestComputerTypes, @returns vector<string>
