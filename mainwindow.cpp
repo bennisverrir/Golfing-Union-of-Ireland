@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
     displayRelations(_service.requestRelationSort());
 
     fillComputerTypeComboBox();
+    fillLegendRelationComboBox();
+    fillComputerRelationComboBox();
 }
 
 MainWindow::~MainWindow()
@@ -183,6 +185,33 @@ bool MainWindow::editComputer()
     return _service.requestComputerEdit(name, buildYear, computerType, wasBuilt, oldComputer, computerTypeID);
 }
 
+bool MainWindow::editRelations()
+{
+
+}
+
+void MainWindow::fillLegendRelationComboBox()
+{
+    vector<Legend> legends = _service.requestLegendSort();
+
+    qDebug() << legends.size();
+
+    for(size_t i = 0; i < legends.size(); i++)
+    {
+        ui->RelationScientistName->addItem(QString::fromStdString(legends[i].getName()));
+    }
+}
+
+void MainWindow::fillComputerRelationComboBox()
+{
+    vector<Computer> computers = _service.requestComputerSort();
+
+    for(size_t i = 0; i < computers.size(); i++)
+    {
+        ui->RelationComputerName->addItem(QString::fromStdString(computers[i].getName()));
+    }
+}
+
 void MainWindow::on_ButtonEditScientist_clicked()
 {
     if(editLegend())
@@ -233,6 +262,8 @@ void MainWindow::on_TableView_tabBarClicked(int index)
     else if(index == 2)
     {
         displayRelations(_service.requestRelationSort());
+        fillLegendRelationComboBox();
+        fillComputerTypeComboBox();
         whatTable = 2;
     }
 
@@ -241,7 +272,7 @@ void MainWindow::on_TableView_tabBarClicked(int index)
     ui->RelationTable->setSortingEnabled(true);
 }
 
-void MainWindow::on_ComputerAdd_clicked()
+void MainWindow::on_ButtonAddComputer_clicked()
 {
 
     if(addComputer())
@@ -267,7 +298,7 @@ void MainWindow::fillComputerTypeComboBox()
     }
 }
 
-void MainWindow::on_ComputerEdit_clicked()
+void MainWindow::on_ButtonEditComputer_clicked()
 {
 
     if(editComputer())
