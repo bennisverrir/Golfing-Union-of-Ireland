@@ -1,16 +1,5 @@
 #include "computer.h"
 
-bool operator == (Computer &lhs, Computer &rhs)
-{
-    if(lhs._name == rhs._name && lhs._buildYear == rhs._buildYear && lhs._computerType == rhs._computerType && lhs._wasBuilt == rhs._wasBuilt)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
 
 Computer::Computer()
 {
