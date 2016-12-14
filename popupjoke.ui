@@ -6,26 +6,32 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>668</width>
-    <height>564</height>
+    <width>424</width>
+    <height>156</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>JOKES</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 170, 0);</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>JOKE</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QTextEdit" name="textEdit_Joke">
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);</string>
+     </property>
      <property name="readOnly">
       <bool>true</bool>
      </property>
@@ -33,6 +39,9 @@
    </item>
    <item>
     <widget class="QPushButton" name="GetANewJoke">
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(206, 206, 206);</string>
+     </property>
      <property name="text">
       <string>New Joke</string>
      </property>
