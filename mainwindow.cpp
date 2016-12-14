@@ -29,6 +29,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::displayLegends(vector<Legend> legends)
 {
+    ui->ScientistTable->setSortingEnabled(false);
+
     ui->ScientistTable->clear();
     ui->ScientistTable->hideColumn(4);
     ui->ScientistTable->setRowCount(legends.size());
@@ -49,9 +51,13 @@ void MainWindow::displayLegends(vector<Legend> legends)
         ui->ScientistTable->setItem(row,3, new QTableWidgetItem(death));
         ui->ScientistTable->setItem(row,4, new QTableWidgetItem(ID));
     }
+
+    ui->ScientistTable->setSortingEnabled(true);
 }
 void MainWindow::displayComputers(vector<Computer> computers)
 {
+    ui->ComputerTable->setSortingEnabled(false);
+
     ui->ComputerTable->clear();
     ui->ComputerTable->hideColumn(3);
     ui->ComputerTable->setRowCount(computers.size());
@@ -70,9 +76,13 @@ void MainWindow::displayComputers(vector<Computer> computers)
         ui->ComputerTable->setItem(row,2, new QTableWidgetItem(computerType));
         ui->ComputerTable->setItem(row,3, new QTableWidgetItem(ID));
     }
+
+    ui->ComputerTable->setSortingEnabled(true);
 }
 void MainWindow::displayRelations(vector<Relation> relations)
 {
+    ui->RelationTable->setSortingEnabled(false);
+
     ui->RelationTable->clear();
     ui->RelationTable->hideColumn(2);
     ui->RelationTable->hideColumn(3);
@@ -91,8 +101,9 @@ void MainWindow::displayRelations(vector<Relation> relations)
         ui->RelationTable->setItem(row,1, new QTableWidgetItem(computerName));
         ui->RelationTable->setItem(row,2, new QTableWidgetItem(scientistID));
         ui->RelationTable->setItem(row,3, new QTableWidgetItem(computerID));
-
     }
+
+    ui->RelationTable->setSortingEnabled(true);
 }
 
 void MainWindow::on_findText_textChanged(const QString &arg1)
@@ -150,8 +161,6 @@ bool MainWindow::addRelation()
 
 void MainWindow::on_ButtonAddScientist_clicked()
 {
-    ui->ScientistTable->setSortingEnabled(false);
-
     if(addScientisInputIsValid())
     {
         if(addLegend())
@@ -167,8 +176,6 @@ void MainWindow::on_ButtonAddScientist_clicked()
             qDebug() << "ERROR";
         }
     }
-
-    ui->ScientistTable->setSortingEnabled(true);
 }
 
 bool MainWindow::editLegend()
@@ -266,7 +273,6 @@ void MainWindow::fillComputerRelationComboBox()
 
     for(size_t i = 0; i < computers.size(); i++)
     {
-        //ui->RelationComputerName->setInsertPolicy(QComboBox::NoInsert);
         ui->RelationComputerName->insertItem(i, QString::fromStdString(computers[i].getName()));
     }
 
@@ -274,8 +280,6 @@ void MainWindow::fillComputerRelationComboBox()
 
 void MainWindow::on_ButtonEditScientist_clicked()
 {
-    ui->ScientistTable->setSortingEnabled(false);
-
     if(editLegend())
     {
         displayLegends(_service.requestLegendSort());
@@ -286,9 +290,6 @@ void MainWindow::on_ButtonEditScientist_clicked()
         qDebug() << "ERROR";
     }
     ui->ButtonEditScientist->setEnabled(false);
-
-    ui->ScientistTable->setSortingEnabled(true);
-
 }
 
 void MainWindow::on_ScientistTable_cellClicked()
@@ -305,10 +306,6 @@ void MainWindow::on_ScientistTable_cellClicked()
 
 void MainWindow::on_TableView_tabBarClicked(int index)
 {
-    ui->ScientistTable->setSortingEnabled(false);
-    ui->ComputerTable->setSortingEnabled(false);
-    ui->RelationTable->setSortingEnabled(false);
-
     if(index == 0)
     {
         displayLegends(_service.requestLegendSort());
@@ -328,16 +325,10 @@ void MainWindow::on_TableView_tabBarClicked(int index)
         fillComputerRelationComboBox();
         whatTable = 2;
     }
-
-    ui->ScientistTable->setSortingEnabled(true);
-    ui->ComputerTable->setSortingEnabled(true);
-    ui->RelationTable->setSortingEnabled(true);
 }
 
 void MainWindow::on_ButtonAddComputer_clicked()
 {
-    ui->ComputerTable->setSortingEnabled(false);
-
     if(addComputerInputIsValid())
     {
         if(addComputer())
@@ -352,8 +343,6 @@ void MainWindow::on_ButtonAddComputer_clicked()
             qDebug() << "ERRORERROR";
         }
     }
-
-    ui->ComputerTable->setSortingEnabled(true);
 }
 
 void MainWindow::fillComputerTypeComboBox()
@@ -372,8 +361,6 @@ void MainWindow::on_ButtonEditComputer_clicked()
 {
     ui->ButtonEditComputer->setEnabled(false);
 
-    ui->ComputerTable->setSortingEnabled(false);
-
     if(editComputer())
     {
         displayComputers(_service.requestComputerSort());
@@ -385,8 +372,6 @@ void MainWindow::on_ButtonEditComputer_clicked()
         //TODO
         qDebug() << "ERRORERROR";
     }
-
-    ui->ComputerTable->setSortingEnabled(true);
 
 }
 
@@ -403,8 +388,6 @@ void MainWindow::on_ComputerTable_cellClicked()
 
 void MainWindow::on_ButtonAddRelation_clicked()
 {
-    ui->RelationTable->setSortingEnabled(false);
-
     if(addRelation())
     {
         displayRelations(_service.requestRelationSort());
@@ -414,8 +397,6 @@ void MainWindow::on_ButtonAddRelation_clicked()
         //TODO:
         qDebug() << "ERRORERROR";
     }
-
-    ui->RelationTable->setSortingEnabled(true);
 }
 
 void MainWindow::on_RelationTable_cellClicked()
@@ -431,7 +412,6 @@ void MainWindow::on_RelationTable_cellClicked()
 void MainWindow::on_ButtonEditRelation_clicked()
 {
     ui->ButtonEditRelation->setEnabled(false);
-    ui->RelationTable->setSortingEnabled(false);
 
     if(editRelations())
     {
@@ -442,14 +422,10 @@ void MainWindow::on_ButtonEditRelation_clicked()
         //TODO:
         qDebug() << "ERRORERROR";
     }
-
-    ui->RelationTable->setSortingEnabled(true);
 }
 
 void MainWindow::on_ButtonDeleteRelation_clicked()
 {
-    ui->RelationTable->setSortingEnabled(false);
-
     if(deleteRelations())
     {
         displayRelations(_service.requestRelationSort());
@@ -459,8 +435,6 @@ void MainWindow::on_ButtonDeleteRelation_clicked()
         //TODO:
         qDebug() << "ERRORERROR";
     }
-
-    ui->RelationTable->setSortingEnabled(true);
 }
 
 bool MainWindow::addScientisInputIsValid()
