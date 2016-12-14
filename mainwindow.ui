@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Computer Scientists list</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -28,6 +28,14 @@
            <widget class="QTabWidget" name="TableView">
             <property name="enabled">
              <bool>true</bool>
+            </property>
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>8</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
             </property>
             <property name="tabPosition">
              <enum>QTabWidget::North</enum>
@@ -100,6 +108,14 @@
                      <layout class="QHBoxLayout" name="horizontalLayout_19">
                       <item>
                        <widget class="QLabel" name="labelScientistName">
+                        <property name="font">
+                         <font>
+                          <family>Arial</family>
+                          <pointsize>8</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
                         <property name="text">
                          <string>Scientist Name  </string>
                         </property>
@@ -123,6 +139,13 @@
                       </item>
                       <item>
                        <widget class="QLabel" name="labelGender">
+                        <property name="font">
+                         <font>
+                          <family>Arial</family>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
                         <property name="text">
                          <string>Gender</string>
                         </property>
@@ -150,6 +173,12 @@
                      <layout class="QHBoxLayout" name="horizontalLayout_12">
                       <item>
                        <widget class="QLineEdit" name="ScientistName">
+                        <property name="font">
+                         <font>
+                          <weight>50</weight>
+                          <bold>false</bold>
+                         </font>
+                        </property>
                         <property name="inputMask">
                          <string/>
                         </property>
@@ -184,9 +213,29 @@
                      </layout>
                     </item>
                     <item>
+                     <spacer name="horizontalSpacer_8">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
                      <layout class="QHBoxLayout" name="horizontalLayout_20">
                       <item>
                        <widget class="QLabel" name="labelBirthName">
+                        <property name="font">
+                         <font>
+                          <family>Arial</family>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
                         <property name="text">
                          <string>Birth Year</string>
                         </property>
@@ -194,6 +243,12 @@
                       </item>
                       <item>
                        <widget class="QLabel" name="labelDeatYear">
+                        <property name="font">
+                         <font>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
                         <property name="text">
                          <string>Death Year</string>
                         </property>
@@ -205,6 +260,14 @@
                      <layout class="QHBoxLayout" name="horizontalLayout_13">
                       <item>
                        <widget class="QLineEdit" name="ScientistBorn">
+                        <property name="font">
+                         <font>
+                          <family>Arial</family>
+                          <pointsize>8</pointsize>
+                          <weight>50</weight>
+                          <bold>false</bold>
+                         </font>
+                        </property>
                         <property name="text">
                          <string/>
                         </property>
@@ -215,6 +278,12 @@
                       </item>
                       <item>
                        <widget class="QLineEdit" name="ScientistDeath">
+                        <property name="font">
+                         <font>
+                          <weight>50</weight>
+                          <bold>false</bold>
+                         </font>
+                        </property>
                         <property name="text">
                          <string/>
                         </property>
@@ -243,11 +312,29 @@
                  </spacer>
                 </item>
                 <item>
+                 <spacer name="horizontalSpacer_10">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_8">
                   <item>
                    <widget class="QPushButton" name="ButtonEditScientist">
                     <property name="enabled">
                      <bool>false</bool>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Arial</family>
+                     </font>
                     </property>
                     <property name="text">
                      <string>Edit Scientist</string>
@@ -256,6 +343,11 @@
                   </item>
                   <item>
                    <widget class="QPushButton" name="ButtonAddScientist">
+                    <property name="font">
+                     <font>
+                      <family>Arial</family>
+                     </font>
+                    </property>
                     <property name="text">
                      <string>Add Scientist</string>
                     </property>
@@ -368,6 +460,12 @@
                    <layout class="QHBoxLayout" name="horizontalLayout_23">
                     <item>
                      <widget class="QLabel" name="labelComputerName">
+                      <property name="font">
+                       <font>
+                        <weight>75</weight>
+                        <bold>true</bold>
+                       </font>
+                      </property>
                       <property name="text">
                        <string>Computer Name</string>
                       </property>
@@ -375,6 +473,12 @@
                     </item>
                     <item>
                      <widget class="QLabel" name="labelYearBuild">
+                      <property name="font">
+                       <font>
+                        <weight>75</weight>
+                        <bold>true</bold>
+                       </font>
+                      </property>
                       <property name="text">
                        <string>Year Build</string>
                       </property>
@@ -401,7 +505,26 @@
                    </layout>
                   </item>
                   <item>
+                   <spacer name="horizontalSpacer_9">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
                    <widget class="QLabel" name="labelComputerType">
+                    <property name="font">
+                     <font>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
                     <property name="text">
                      <string>Computer Type</string>
                     </property>
@@ -415,6 +538,19 @@
                    </layout>
                   </item>
                  </layout>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_11">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                 <item>
                  <spacer name="horizontalSpacer_3">
@@ -550,6 +686,12 @@
                  <layout class="QHBoxLayout" name="horizontalLayout_24">
                   <item>
                    <widget class="QLabel" name="labelScientists">
+                    <property name="font">
+                     <font>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
                     <property name="text">
                      <string>Scientists</string>
                     </property>
@@ -557,6 +699,12 @@
                   </item>
                   <item>
                    <widget class="QLabel" name="labelComputers">
+                    <property name="font">
+                     <font>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
                     <property name="text">
                      <string>Computers</string>
                     </property>
@@ -584,6 +732,19 @@
                 </item>
                 <item>
                  <spacer name="horizontalSpacer_7">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_12">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
