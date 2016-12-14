@@ -10,6 +10,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     whatTable = ui->TableView->currentIndex();
+
+    qDebug() << whatTable;
+
     displayLegends(_service.requestLegendSort());
     displayComputers(_service.requestComputerSort());
     displayRelations(_service.requestRelationSort());
@@ -71,8 +74,6 @@ void MainWindow::displayRelations(vector<Relation> relations)
     ui->RelationTable->clear();
     ui->RelationTable->setHorizontalHeaderItem(0, new QTableWidgetItem("Scientist Name"));
     ui->RelationTable->setHorizontalHeaderItem(1, new QTableWidgetItem("Computer Name"));
-    ui->RelationTable->hideColumn(2);
-    ui->RelationTable->hideColumn(3);
     ui->RelationTable->setRowCount(relations.size());
 
     for(size_t row = 0; row < relations.size(); row++)
@@ -84,7 +85,6 @@ void MainWindow::displayRelations(vector<Relation> relations)
 
         ui->RelationTable->setItem(row,0, new QTableWidgetItem(scientistName));
         ui->RelationTable->setItem(row,1, new QTableWidgetItem(computerName));
-
     }
 }
 
@@ -100,11 +100,11 @@ void MainWindow::on_findText_textChanged(const QString &arg1)
     }
     else if(whatTable == 1)
     {
-        displayRelations(_service.requestRelationSearch());
+         displayComputers(_service.requestComputerSearch());
     }
     else if(whatTable == 2)
     {
-        displayComputers(_service.requestComputerSearch());
+         displayRelations(_service.requestRelationSearch());
     }
 
 }
@@ -194,8 +194,6 @@ void MainWindow::fillLegendRelationComboBox()
 {
     vector<Legend> legends = _service.requestLegendSort();
 
-    qDebug() << legends.size();
-
     for(size_t i = 0; i < legends.size(); i++)
     {
         ui->RelationScientistName->addItem(QString::fromStdString(legends[i].getName()));
@@ -204,12 +202,18 @@ void MainWindow::fillLegendRelationComboBox()
 
 void MainWindow::fillComputerRelationComboBox()
 {
+
+
+    QStringList list;
+
     vector<Computer> computers = _service.requestComputerSort();
 
     for(size_t i = 0; i < computers.size(); i++)
     {
-        ui->RelationComputerName->addItem(QString::fromStdString(computers[i].getName()));
+        //ui->RelationComputerName->setInsertPolicy(QComboBox::NoInsert);
+        ui->RelationComputerName->insertItem(i, QString::fromStdString(computers[i].getName()));
     }
+
 }
 
 void MainWindow::on_ButtonEditScientist_clicked()

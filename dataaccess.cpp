@@ -186,7 +186,6 @@ vector<Computer> dataAccess::findComputer(string find)
 
     query.exec(command);
 
-
     returnComputers = pushingComputerVector(query);
 
     return returnComputers;
@@ -344,7 +343,7 @@ vector<Relation> dataAccess::findRelation(string nameToFind)
 
     query.prepare(command);
 
-    qDebug() << command;
+    qDebug() << command << query.lastError();
 
     query.exec();
 

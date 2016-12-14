@@ -79,7 +79,9 @@ vector <Computer> Service::requestComputerSearch()
 vector <Relation> Service::requestRelationSearch()
 {
     vector <Relation> returnVector;
-    returnVector = a.sortRelation();
+
+    qDebug() << "SAELIR";
+    returnVector = a.findRelation(_searchString);
     return returnVector;
 }
 
