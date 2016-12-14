@@ -1,18 +1,5 @@
 #include "relation.h"
 
-
-bool operator == (Relation &lhs, Relation &rhs)
-{
-    if(lhs._legendName == rhs._legendName && lhs._computerName == rhs._legendName)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
 Relation::Relation()
 {
 
@@ -36,14 +23,7 @@ Relation::Relation (string legendName, string computerName)
     _legendName = legendName;
     _computerName = computerName;
 }
-string Relation::getLegendName() const
-{
-    return _legendName;
-}
-string Relation::getComputerName()const
-{
-    return _computerName;
-}
+
 void Relation::setLegendName(string legendName)
 {
     _legendName = legendName;
@@ -52,7 +32,24 @@ void Relation::setComputerName(string computerName)
 {
     _computerName = computerName;
 }
+void Relation::setScientistID (int ID)
+{
+    _scientistID = ID;
+}
 
+void Relation::setComputerID (int ID)
+{
+    _computerID = ID;
+}
+
+string Relation::getLegendName() const
+{
+    return _legendName;
+}
+string Relation::getComputerName()const
+{
+    return _computerName;
+}
 int Relation::getScientistID ()
 {
     return _scientistID;
@@ -63,12 +60,4 @@ int Relation::getComputerID ()
     return _computerID;
 }
 
-void Relation::setScientistID (int ID)
-{
-    _scientistID = ID;
-}
 
-void Relation::setComputerID (int ID)
-{
-    _computerID = ID;
-}

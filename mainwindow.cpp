@@ -29,6 +29,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::displayLegends(vector<Legend> legends)
 {
+    ui->ScientistTable->setSortingEnabled(false);
+
     ui->ScientistTable->clear();
     ui->ScientistTable->hideColumn(4);
     ui->ScientistTable->setRowCount(legends.size());
@@ -40,7 +42,7 @@ void MainWindow::displayLegends(vector<Legend> legends)
         QString name = QString::fromStdString(currentLegend.getName());
         QChar gender = QChar::fromLatin1(currentLegend.getGender());
         QString born = QString::number(currentLegend.getBorn());
-        QString death = QString::number(currentLegend.getDeath());
+        QString death = (currentLegend.getDeath() == 0 ? "" : QString::number(currentLegend.getDeath()));
         QString ID = QString::number(currentLegend.getID());
 
         ui->ScientistTable->setItem(row,0, new QTableWidgetItem(name));
@@ -49,9 +51,13 @@ void MainWindow::displayLegends(vector<Legend> legends)
         ui->ScientistTable->setItem(row,3, new QTableWidgetItem(death));
         ui->ScientistTable->setItem(row,4, new QTableWidgetItem(ID));
     }
+
+    ui->ScientistTable->setSortingEnabled(true);
 }
 void MainWindow::displayComputers(vector<Computer> computers)
 {
+    ui->ComputerTable->setSortingEnabled(false);
+
     ui->ComputerTable->clear();
     ui->ComputerTable->hideColumn(3);
     ui->ComputerTable->setRowCount(computers.size());
@@ -61,7 +67,7 @@ void MainWindow::displayComputers(vector<Computer> computers)
         Computer currentComputer = computers[row];
 
         QString name = QString::fromStdString(currentComputer.getName());
-        QString buildYear = QString::number(currentComputer.getBuildYear());
+        QString buildYear = (currentComputer.getBuildYear() == 0 ? "" : QString::number(currentComputer.getBuildYear()));
         QString computerType = QString::fromStdString(currentComputer.getComputerType());
         QString ID = QString::number(currentComputer.getID());
 
@@ -70,9 +76,13 @@ void MainWindow::displayComputers(vector<Computer> computers)
         ui->ComputerTable->setItem(row,2, new QTableWidgetItem(computerType));
         ui->ComputerTable->setItem(row,3, new QTableWidgetItem(ID));
     }
+
+    ui->ComputerTable->setSortingEnabled(true);
 }
 void MainWindow::displayRelations(vector<Relation> relations)
 {
+    ui->RelationTable->setSortingEnabled(false);
+
     ui->RelationTable->clear();
     ui->RelationTable->hideColumn(2);
     ui->RelationTable->hideColumn(3);
@@ -91,8 +101,9 @@ void MainWindow::displayRelations(vector<Relation> relations)
         ui->RelationTable->setItem(row,1, new QTableWidgetItem(computerName));
         ui->RelationTable->setItem(row,2, new QTableWidgetItem(scientistID));
         ui->RelationTable->setItem(row,3, new QTableWidgetItem(computerID));
-
     }
+
+    ui->RelationTable->setSortingEnabled(true);
 }
 
 void MainWindow::on_findText_textChanged(const QString &arg1)
@@ -154,6 +165,7 @@ void MainWindow::on_ButtonAddScientist_clicked()
     {
         if(addLegend())
         {
+            ui->labelErrorScientist->setText("");
             displayLegends(_service.requestLegendSort());
             ui->ScientistName->clear();
             ui->ScientistBorn->clear();
@@ -161,8 +173,8 @@ void MainWindow::on_ButtonAddScientist_clicked()
         }
         else
         {
-            //TODO:
-            qDebug() << "ERROR";
+
+            ui->labelErrorScientist->setText("<span style='color: red'>Error!! Scientist was not added!</span>");
         }
     }
 }
@@ -225,7 +237,9 @@ bool MainWindow::editRelations()
 
     Relation oldRelation(oldScientistID, oldComputerID, oldScientistName, oldComputerName);
 
+
     return _service.requestRelationEdit(scientistID, computerID, oldRelation);
+
 }
 
 bool MainWindow::deleteRelations()
@@ -260,7 +274,6 @@ void MainWindow::fillComputerRelationComboBox()
 
     for(size_t i = 0; i < computers.size(); i++)
     {
-        //ui->RelationComputerName->setInsertPolicy(QComboBox::NoInsert);
         ui->RelationComputerName->insertItem(i, QString::fromStdString(computers[i].getName()));
     }
 
@@ -270,15 +283,15 @@ void MainWindow::on_ButtonEditScientist_clicked()
 {
     if(editLegend())
     {
+        ui->labelErrorEdidScienti->setText("");
         displayLegends(_service.requestLegendSort());
     }
     else
     {
-        //TODO:
-        qDebug() << "ERROR";
+        ui->labelErrorEdidScienti->setText("<span style='color: red'>Error!! Scientist was not edited!</span>");
     }
+    
     ui->ButtonEditScientist->setEnabled(false);
-
 }
 
 void MainWindow::on_ScientistTable_cellClicked()
@@ -295,10 +308,6 @@ void MainWindow::on_ScientistTable_cellClicked()
 
 void MainWindow::on_TableView_tabBarClicked(int index)
 {
-    ui->ScientistTable->setSortingEnabled(false);
-    ui->ComputerTable->setSortingEnabled(false);
-    ui->RelationTable->setSortingEnabled(false);
-
     if(index == 0)
     {
         displayLegends(_service.requestLegendSort());
@@ -318,27 +327,22 @@ void MainWindow::on_TableView_tabBarClicked(int index)
         fillComputerRelationComboBox();
         whatTable = 2;
     }
-
-    ui->ScientistTable->setSortingEnabled(true);
-    ui->ComputerTable->setSortingEnabled(true);
-    ui->RelationTable->setSortingEnabled(true);
 }
 
 void MainWindow::on_ButtonAddComputer_clicked()
 {
-
     if(addComputerInputIsValid())
     {
         if(addComputer())
         {
+            ui->labelErrorEdidScienti->setText("");
             displayComputers(_service.requestComputerSort());
             ui->ComputerName->clear();
             ui->ComputerBuilt->clear();
         }
         else
         {
-            //TODO
-            qDebug() << "ERRORERROR";
+             ui->labelErrorComptuer->setText("<span style='color: red'>Error!! Computer was not added!</span>");
         }
     }
 }
@@ -357,17 +361,18 @@ void MainWindow::fillComputerTypeComboBox()
 
 void MainWindow::on_ButtonEditComputer_clicked()
 {
+    ui->ButtonEditComputer->setEnabled(false);
 
     if(editComputer())
     {
+        ui->labelErrorEditComputer->setText("");
         displayComputers(_service.requestComputerSort());
         ui->ComputerName->clear();
         ui->ComputerBuilt->clear();
     }
     else
     {
-        //TODO
-        qDebug() << "ERRORERROR";
+        ui->labelErrorEditComputer->setText("<span style='color: red'>Error!! Computer was not edited!</span>");
     }
 
 }
@@ -387,12 +392,12 @@ void MainWindow::on_ButtonAddRelation_clicked()
 {
     if(addRelation())
     {
+        ui->labelErrorAddRelation->setText("");
         displayRelations(_service.requestRelationSort());
     }
     else
     {
-        //TODO:
-        qDebug() << "ERRORERROR";
+        ui->labelErrorAddRelation->setText("<span style='color: red'>Error!! Relation was not added!</span>");
     }
 }
 
@@ -408,14 +413,17 @@ void MainWindow::on_RelationTable_cellClicked()
 
 void MainWindow::on_ButtonEditRelation_clicked()
 {
+    ui->ButtonEditRelation->setEnabled(false);
+
     if(editRelations())
     {
+        ui->labelErrorAddRelation->setText("");
         displayRelations(_service.requestRelationSort());
     }
     else
     {
-        //TODO:
-        qDebug() << "ERRORERROR";
+         ui->labelErrorEditRelation->setText("<span style='color: red'>Error!! Relation was not edited!</span>");
+
     }
 }
 
@@ -423,12 +431,12 @@ void MainWindow::on_ButtonDeleteRelation_clicked()
 {
     if(deleteRelations())
     {
+        ui->labelErrorAddRelation->setText("");
         displayRelations(_service.requestRelationSort());
     }
     else
     {
-        //TODO:
-        qDebug() << "ERRORERROR";
+         ui->labelErrorDeleteRelation->setText("<span style='color: red'>Error!! Relation was not delete!</span>");
     }
 }
 

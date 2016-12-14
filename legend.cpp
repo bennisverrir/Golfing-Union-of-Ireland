@@ -1,16 +1,5 @@
 #include "legend.h"
 
-bool operator == (Legend &lhs, Legend &rhs)
-{
-    if(lhs._name == rhs._name && lhs._gender == rhs._gender && lhs._born == rhs._born && lhs._death == rhs._death)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
 
 Legend::Legend()
 {
