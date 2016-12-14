@@ -186,7 +186,6 @@ vector<Computer> dataAccess::findComputer(string find)
 
     query.exec(command);
 
-
     returnComputers = pushingComputerVector(query);
 
     return returnComputers;
@@ -318,14 +317,7 @@ bool dataAccess::editComputer(Computer oldComputer, Computer editComputer, int i
     QString buildYear = QString::fromStdString(to_string(editComputer.getBuildYear()));
     QString wasBuilt = QString::fromStdString(to_string(editComputer.getBuildYear() == 0 ? 0 : 1));
     QString computerType = QString::fromStdString(editComputer.getComputerType());
-
-    if(!query.exec("SELECT * FROM ComputerType WHERE Name LIKE " + computerType))
-    {
-        return false;
-    }
-
-    QString computerTypeID = QString::fromStdString(to_string(index));
-
+    QString computerTypeID = QString::number(index);
     QString command = "UPDATE Computer"
                       " SET Name = '" + name + "',  BuildYear = '" + buildYear +
                       "' , ComputerTypeID = " + computerTypeID + ", BuildYear = " + buildYear +
@@ -351,7 +343,7 @@ vector<Relation> dataAccess::findRelation(string nameToFind)
 
     query.prepare(command);
 
-    qDebug() << command;
+    qDebug() << command << query.lastError();
 
     query.exec();
 

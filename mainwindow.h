@@ -42,6 +42,12 @@ private slots:
 
     bool editComputer();
 
+    bool editRelations();
+
+    void fillLegendRelationComboBox();
+
+    void fillComputerRelationComboBox();
+
     void on_ButtonAddScientist_clicked();
 
     void on_ButtonEditScientist_clicked();
@@ -50,11 +56,11 @@ private slots:
 
     void on_TableView_tabBarClicked(int index);
 
-    void on_ComputerAdd_clicked();
+    void on_ButtonAddComputer_clicked();
 
     void fillComputerTypeComboBox();
 
-    void on_ComputerEdit_clicked();
+    void on_ButtonEditComputer_clicked();
 
     void on_ComputerTable_cellClicked();
 
