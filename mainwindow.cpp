@@ -165,6 +165,7 @@ void MainWindow::on_ButtonAddScientist_clicked()
     {
         if(addLegend())
         {
+            ui->labelErrorScientist->setText("");
             displayLegends(_service.requestLegendSort());
             ui->ScientistName->clear();
             ui->ScientistBorn->clear();
@@ -172,8 +173,8 @@ void MainWindow::on_ButtonAddScientist_clicked()
         }
         else
         {
-            //TODO:
-            qDebug() << "ERROR";
+
+            ui->labelErrorScientist->setText("<span style='color: red'>Error!! Scientist was not added!</span>");
         }
     }
 }
@@ -282,13 +283,14 @@ void MainWindow::on_ButtonEditScientist_clicked()
 {
     if(editLegend())
     {
+        ui->labelErrorEdidScienti->setText("");
         displayLegends(_service.requestLegendSort());
     }
     else
     {
-        //TODO:
-        qDebug() << "ERROR";
+        ui->labelErrorEdidScienti->setText("<span style='color: red'>Error!! Scientist was not edited!</span>");
     }
+    
     ui->ButtonEditScientist->setEnabled(false);
 }
 
@@ -333,14 +335,14 @@ void MainWindow::on_ButtonAddComputer_clicked()
     {
         if(addComputer())
         {
+            ui->labelErrorEdidScienti->setText("");
             displayComputers(_service.requestComputerSort());
             ui->ComputerName->clear();
             ui->ComputerBuilt->clear();
         }
         else
         {
-            //TODO
-            qDebug() << "ERRORERROR";
+             ui->labelErrorComptuer->setText("<span style='color: red'>Error!! Computer was not added!</span>");
         }
     }
 }
@@ -363,14 +365,14 @@ void MainWindow::on_ButtonEditComputer_clicked()
 
     if(editComputer())
     {
+        ui->labelErrorEditComputer->setText("");
         displayComputers(_service.requestComputerSort());
         ui->ComputerName->clear();
         ui->ComputerBuilt->clear();
     }
     else
     {
-        //TODO
-        qDebug() << "ERRORERROR";
+        ui->labelErrorEditComputer->setText("<span style='color: red'>Error!! Computer was not edited!</span>");
     }
 
 }
@@ -390,12 +392,12 @@ void MainWindow::on_ButtonAddRelation_clicked()
 {
     if(addRelation())
     {
+        ui->labelErrorAddRelation->setText("");
         displayRelations(_service.requestRelationSort());
     }
     else
     {
-        //TODO:
-        qDebug() << "ERRORERROR";
+        ui->labelErrorAddRelation->setText("<span style='color: red'>Error!! Relation was not added!</span>");
     }
 }
 
@@ -415,12 +417,13 @@ void MainWindow::on_ButtonEditRelation_clicked()
 
     if(editRelations())
     {
+        ui->labelErrorAddRelation->setText("");
         displayRelations(_service.requestRelationSort());
     }
     else
     {
-        //TODO:
-        qDebug() << "ERRORERROR";
+         ui->labelErrorEditRelation->setText("<span style='color: red'>Error!! Relation was not edited!</span>");
+
     }
 }
 
@@ -428,12 +431,12 @@ void MainWindow::on_ButtonDeleteRelation_clicked()
 {
     if(deleteRelations())
     {
+        ui->labelErrorAddRelation->setText("");
         displayRelations(_service.requestRelationSort());
     }
     else
     {
-        //TODO:
-        qDebug() << "ERRORERROR";
+         ui->labelErrorDeleteRelation->setText("<span style='color: red'>Error!! Relation was not delete!</span>");
     }
 }
 
