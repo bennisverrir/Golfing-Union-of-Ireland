@@ -150,17 +150,20 @@ bool MainWindow::addRelation()
 
 void MainWindow::on_ButtonAddScientist_clicked()
 {
-    if(addLegend())
+    if(addScientisInputIsValid())
     {
-        displayLegends(_service.requestLegendSort());
-        ui->ScientistName->clear();
-        ui->ScientistBorn->clear();
-        ui->ScientistDeath->clear();
-    }
-    else
-    {
-        //TODO:
-        qDebug() << "ERROR";
+        if(addLegend())
+        {
+            displayLegends(_service.requestLegendSort());
+            ui->ScientistName->clear();
+            ui->ScientistBorn->clear();
+            ui->ScientistDeath->clear();
+        }
+        else
+        {
+            //TODO:
+            qDebug() << "ERROR";
+        }
     }
 }
 
@@ -324,16 +327,19 @@ void MainWindow::on_TableView_tabBarClicked(int index)
 void MainWindow::on_ButtonAddComputer_clicked()
 {
 
-    if(addComputer())
+    if(addComputerInputIsValid())
     {
-        displayComputers(_service.requestComputerSort());
-        ui->ComputerName->clear();
-        ui->ComputerBuilt->clear();
-    }
-    else
-    {
-        //TODO
-        qDebug() << "ERRORERROR";
+        if(addComputer())
+        {
+            displayComputers(_service.requestComputerSort());
+            ui->ComputerName->clear();
+            ui->ComputerBuilt->clear();
+        }
+        else
+        {
+            //TODO
+            qDebug() << "ERRORERROR";
+        }
     }
 }
 
@@ -424,4 +430,39 @@ void MainWindow::on_ButtonDeleteRelation_clicked()
         //TODO:
         qDebug() << "ERRORERROR";
     }
+}
+
+bool MainWindow::addScientisInputIsValid()
+{
+    bool isValid = true;
+
+    if(ui->ScientistName->text().isEmpty())
+    {
+        ui->ScientistName->setPlaceholderText("<span style = 'color: red'>Name cannot be empty</span>");
+
+        isValid = false;
+    }
+    if(ui->ScientistBorn->text().isEmpty())
+    {
+        ui->ScientistBorn->setPlaceholderText("Year born cannot be emty");
+
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+bool MainWindow::addComputerInputIsValid()
+{
+    bool isValid = true;
+
+    if(ui->ComputerName->text().isEmpty())
+    {
+        ui->ComputerName->setPlaceholderText("Name cannot be empty");
+
+        isValid = false;
+    }
+
+    return isValid;
+
 }

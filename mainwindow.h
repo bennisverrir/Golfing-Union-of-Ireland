@@ -74,6 +74,10 @@ private slots:
 
     void on_ButtonDeleteRelation_clicked();
 
+    bool addScientisInputIsValid();
+
+    bool addComputerInputIsValid();
+
 private:
     Service _service;
     Ui::MainWindow *ui;
