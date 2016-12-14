@@ -387,20 +387,15 @@ bool dataAccess:: deleteRelation(Relation relationToDelete)
 *
 *
 */
-bool dataAccess::editRelation(Relation oldRelation, Relation editedRelation)
+bool dataAccess::editRelation(int scientistID, int computerID, Relation oldRelation)
 {
     QSqlQuery query(db);
 
-    QString scientistID = QString::fromStdString(to_string(editedRelation.getScientistID()));
+    QString oldScientistID = QString::number(oldRelation.getScientistID());
 
-    QString computerID = QString::fromStdString(to_string(editedRelation.getComputerID()));
+    QString oldComputerID = QString::number(oldRelation.getComputerID());
 
-    QString oldScientistID = QString::fromStdString(to_string(oldRelation.getScientistID()));
-
-    QString oldComputerID = QString::fromStdString(to_string(oldRelation.getComputerID()));
-
-
-    return query.exec("UPDATE Combine Set Sc = " + scientistID  + ", Co = " + computerID +
+    return query.exec("UPDATE Combine Set Sc = " + QString::number(scientistID)  + ", Co = " + QString::number(computerID) +
                " WHERE Sc = " + oldScientistID + " AND Co = " + oldComputerID);
 }
 

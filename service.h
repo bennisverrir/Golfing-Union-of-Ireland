@@ -28,7 +28,7 @@ public:
         bool requestRelationAdd(int scientistID, int computerID);
         bool requestLegendEdit(string name, char gender, int born, int death, Legend oldLegend);
         bool requestComputerEdit(string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer,int index);
-        bool requestRelationEdit(string scientistName, string computerName, Relation oldRelation);
+        bool requestRelationEdit(int scientistID, int computerID, Relation oldRelation);
         vector <Legend> requestLegendSort();
         vector <Computer> requestComputerSort();
         vector <Relation> requestRelationSort();

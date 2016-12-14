@@ -40,7 +40,7 @@ public:
     int getID(QSqlQuery query,QString name, QString tableName);
     vector<Relation> findRelation(string nameToFind);
     bool deleteRelation(Relation relationToDelete);
-    bool editRelation(Relation oldRelation, Relation editedRelation);
+    bool editRelation(int scientistID, int computerID, Relation oldRelation);
     vector<string>joke();
 };
 

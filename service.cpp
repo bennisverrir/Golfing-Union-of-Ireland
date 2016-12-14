@@ -140,10 +140,9 @@ bool Service::requestComputerEdit (string name, int yearBuilt, string computerTy
 * forwards the function editRelation to the data-access class
 * returns a value of success or fail
 */
-bool Service::requestRelationEdit (string scientistName, string computerName, Relation oldRelation)
+bool Service::requestRelationEdit (int scientistID, int computerID, Relation oldRelation)
 {
-    Relation myEditedRelation (scientistName, computerName);
-    return a.editRelation (oldRelation, myEditedRelation);
+    return a.editRelation (scientistID, computerID, oldRelation);
 }
 
 

@@ -29,6 +29,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::displayLegends(vector<Legend> legends)
 {
+    ui->ScientistTable->clear();
     ui->ScientistTable->hideColumn(4);
     ui->ScientistTable->setRowCount(legends.size());
 
@@ -40,7 +41,7 @@ void MainWindow::displayLegends(vector<Legend> legends)
         QChar gender = QChar::fromLatin1(currentLegend.getGender());
         QString born = QString::number(currentLegend.getBorn());
         QString death = QString::number(currentLegend.getDeath());
-        QString ID = QString::number(row);
+        QString ID = QString::number(currentLegend.getID());
 
         ui->ScientistTable->setItem(row,0, new QTableWidgetItem(name));
         ui->ScientistTable->setItem(row,1, new QTableWidgetItem(gender));
@@ -51,6 +52,7 @@ void MainWindow::displayLegends(vector<Legend> legends)
 }
 void MainWindow::displayComputers(vector<Computer> computers)
 {
+    ui->ComputerTable->clear();
     ui->ComputerTable->hideColumn(3);
     ui->ComputerTable->setRowCount(computers.size());
 
@@ -61,7 +63,7 @@ void MainWindow::displayComputers(vector<Computer> computers)
         QString name = QString::fromStdString(currentComputer.getName());
         QString buildYear = QString::number(currentComputer.getBuildYear());
         QString computerType = QString::fromStdString(currentComputer.getComputerType());
-        QString ID = QString::number(row);
+        QString ID = QString::number(currentComputer.getID());
 
         ui->ComputerTable->setItem(row,0, new QTableWidgetItem(name));
         ui->ComputerTable->setItem(row,1, new QTableWidgetItem(buildYear));
@@ -72,8 +74,8 @@ void MainWindow::displayComputers(vector<Computer> computers)
 void MainWindow::displayRelations(vector<Relation> relations)
 {
     ui->RelationTable->clear();
-    ui->RelationTable->setHorizontalHeaderItem(0, new QTableWidgetItem("Scientist Name"));
-    ui->RelationTable->setHorizontalHeaderItem(1, new QTableWidgetItem("Computer Name"));
+    ui->RelationTable->hideColumn(2);
+    ui->RelationTable->hideColumn(3);
     ui->RelationTable->setRowCount(relations.size());
 
     for(size_t row = 0; row < relations.size(); row++)
@@ -82,9 +84,14 @@ void MainWindow::displayRelations(vector<Relation> relations)
 
         QString scientistName = QString::fromStdString(currentRelation.getLegendName());
         QString computerName = QString::fromStdString(currentRelation.getComputerName());
+        QString scientistID = QString::number(currentRelation.getScientistID());
+        QString computerID = QString::number(currentRelation.getComputerID());
 
         ui->RelationTable->setItem(row,0, new QTableWidgetItem(scientistName));
         ui->RelationTable->setItem(row,1, new QTableWidgetItem(computerName));
+        ui->RelationTable->setItem(row,2, new QTableWidgetItem(scientistID));
+        ui->RelationTable->setItem(row,3, new QTableWidgetItem(computerID));
+
     }
 }
 
@@ -135,8 +142,10 @@ bool MainWindow::addComputer()
 
 bool MainWindow::addRelation()
 {
-   // string name = ui->relationScientistCombo->currentText().toStdString();
+   int scientistID = ui->RelationScientistName->currentIndex() + 1;
+   int computerID = ui->RelationComputerName->currentIndex() + 1;
 
+   return _service.requestRelationAdd(scientistID, computerID);
 }
 
 void MainWindow::on_ButtonAddScientist_clicked()
@@ -157,9 +166,17 @@ void MainWindow::on_ButtonAddScientist_clicked()
 
 bool MainWindow::editLegend()
 {
-    int index = ui->ScientistTable->currentRow();
+    int row = ui->ScientistTable->currentRow();
 
-    Legend oldLegend = _service.requestLegendSort()[index];
+    string oldName = ui->ScientistTable->item(row, 0)->text().toStdString();
+    string oldGender = ui->ScientistTable->item(row, 1)->text().toStdString();
+    int oldBorn = ui->ScientistTable->item(row, 2)->text().toInt();
+    int oldDeath = ui->ScientistTable->item(row, 3)->text().toInt();
+    int oldID = ui->ScientistTable->item(row,4)->text().toInt();
+
+    qDebug() << "OLDID" << oldID;
+
+    Legend oldLegend(oldID, oldName, oldGender[0], oldBorn, oldDeath);
 
     string name = ui->ScientistName->text().toStdString();
     string gender = ui->ScientistGender->currentText().toStdString();
@@ -171,9 +188,15 @@ bool MainWindow::editLegend()
 
 bool MainWindow::editComputer()
 {
-    int index = ui->ComputerTable->currentRow();
+    int row = ui->ComputerTable->currentRow();
 
-    Computer oldComputer = _service.requestComputerSort()[index];
+    string oldName = ui->ComputerTable->item(row, 0)->text().toStdString();
+    int oldBuildYear = ui->ComputerTable->item(row, 1)->text().toInt();
+    bool oldWasBuilt = (oldBuildYear == 0 ? 0 : 1);
+    string oldComputerType = ui->ComputerTable->item(row, 0)->text().toStdString();
+    int oldID = ui->ComputerTable->item(row, 3)->text().toInt();
+
+    Computer oldComputer(oldID,oldName,oldBuildYear, oldComputerType, oldWasBuilt);
 
     string name = ui->ComputerName->text().toStdString();
     int buildYear = ui->ComputerBuilt->text().toInt();
@@ -187,7 +210,33 @@ bool MainWindow::editComputer()
 
 bool MainWindow::editRelations()
 {
+    int scientistID = ui->RelationScientistName->currentIndex() + 1;
+    int computerID = ui->RelationComputerName->currentIndex() + 1;
 
+    int row = ui->RelationTable->currentRow();
+
+    string oldScientistName = ui->RelationTable->item(row, 0)->text().toStdString();
+    string oldComputerName = ui->RelationTable->item(row, 1)->text().toStdString();
+    int oldScientistID = ui->RelationTable->item(row,2)->text().toInt();
+    int oldComputerID = ui->RelationTable->item(row,3)->text().toInt();
+
+    Relation oldRelation(oldScientistID, oldComputerID, oldScientistName, oldComputerName);
+
+    return _service.requestRelationEdit(scientistID, computerID, oldRelation);
+}
+
+bool MainWindow::deleteRelations()
+{
+    int row = ui->RelationTable->currentRow();
+
+    string deleteScientistName = ui->RelationTable->item(row, 0)->text().toStdString();
+    string deleteComputerName = ui->RelationTable->item(row, 1)->text().toStdString();
+    int deleteScientistID = ui->RelationTable->item(row,2)->text().toInt();
+    int deleteComputerID = ui->RelationTable->item(row,3)->text().toInt();
+
+    Relation deleteRelation(deleteScientistID, deleteComputerID, deleteScientistName, deleteComputerName);
+
+    return _service.requestRelationDelete(deleteRelation);
 }
 
 void MainWindow::fillLegendRelationComboBox()
@@ -202,8 +251,6 @@ void MainWindow::fillLegendRelationComboBox()
 
 void MainWindow::fillComputerRelationComboBox()
 {
-
-
     QStringList list;
 
     vector<Computer> computers = _service.requestComputerSort();
@@ -237,14 +284,10 @@ void MainWindow::on_ScientistTable_cellClicked()
 
     int row = ui->ScientistTable->currentRow();
 
-    int index = ui->ScientistTable->item(row,4)->text().toInt();
-
-    Legend oldLegend = _service.requestLegendSort()[index];
-
-    ui->ScientistName->setText(QString::fromStdString(oldLegend.getName()));
-    ui->ScientistGender->setCurrentText(QChar::fromLatin1(oldLegend.getGender()));
-    ui->ScientistBorn->setText(QString::number(oldLegend.getBorn()));
-    ui->ScientistDeath->setText(QString::number(oldLegend.getDeath()));
+    ui->ScientistName->setText(ui->ScientistTable->item(row, 0)->text());
+    ui->ScientistGender->setCurrentText(ui->ScientistTable->item(row, 1)->text());
+    ui->ScientistBorn->setText(ui->ScientistTable->item(row, 2)->text());
+    ui->ScientistDeath->setText(ui->ScientistTable->item(row, 3)->text());
 }
 
 void MainWindow::on_TableView_tabBarClicked(int index)
@@ -266,8 +309,10 @@ void MainWindow::on_TableView_tabBarClicked(int index)
     else if(index == 2)
     {
         displayRelations(_service.requestRelationSort());
+        ui->RelationComputerName->clear();
+        ui->RelationScientistName->clear();
         fillLegendRelationComboBox();
-        fillComputerTypeComboBox();
+        fillComputerRelationComboBox();
         whatTable = 2;
     }
 
@@ -327,12 +372,56 @@ void MainWindow::on_ComputerTable_cellClicked()
 
     int row = ui->ComputerTable->currentRow();
 
-    int index = ui->ComputerTable->item(row,3)->text().toInt();
+    ui->ComputerName->setText(ui->ComputerTable->item(row, 0)->text());
+    ui->ComputerBuilt->setText(ui->ComputerTable->item(row, 1)->text());
+    ui->ComputerType->setCurrentText(ui->ComputerTable->item(row,2)->text());
+}
 
+void MainWindow::on_ButtonAddRelation_clicked()
+{
+    if(addRelation())
+    {
+        displayRelations(_service.requestRelationSort());
+    }
+    else
+    {
+        //TODO:
+        qDebug() << "ERRORERROR";
+    }
+}
 
-    Computer oldComputer = _service.requestComputerSort()[index];
+void MainWindow::on_RelationTable_cellClicked()
+{
+    ui->ButtonEditRelation->setEnabled(true);
 
-    ui->ComputerName->setText(QString::fromStdString(oldComputer.getName()));
-    ui->ComputerBuilt->setText(QString::number(oldComputer.getBuildYear()));
-    ui->ComputerType->setCurrentText(QString::fromStdString(oldComputer.getComputerType()));
+    int row = ui->RelationTable->currentRow();
+
+    ui->RelationScientistName->setCurrentText(ui->RelationTable->item(row, 0)->text());
+    ui->RelationComputerName->setCurrentText(ui->RelationTable->item(row, 1)->text());
+}
+
+void MainWindow::on_ButtonEditRelation_clicked()
+{
+    if(editRelations())
+    {
+        displayRelations(_service.requestRelationSort());
+    }
+    else
+    {
+        //TODO:
+        qDebug() << "ERRORERROR";
+    }
+}
+
+void MainWindow::on_ButtonDeleteRelation_clicked()
+{
+    if(deleteRelations())
+    {
+        displayRelations(_service.requestRelationSort());
+    }
+    else
+    {
+        //TODO:
+        qDebug() << "ERRORERROR";
+    }
 }

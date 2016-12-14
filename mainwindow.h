@@ -44,6 +44,8 @@ private slots:
 
     bool editRelations();
 
+    bool deleteRelations();
+
     void fillLegendRelationComboBox();
 
     void fillComputerRelationComboBox();
@@ -63,6 +65,14 @@ private slots:
     void on_ButtonEditComputer_clicked();
 
     void on_ComputerTable_cellClicked();
+
+    void on_ButtonAddRelation_clicked();
+
+    void on_RelationTable_cellClicked();
+
+    void on_ButtonEditRelation_clicked();
+
+    void on_ButtonDeleteRelation_clicked();
 
 private:
     Service _service;
