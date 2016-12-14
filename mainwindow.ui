@@ -33,7 +33,7 @@
              <enum>QTabWidget::Rounded</enum>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="Scientists">
              <attribute name="title">
@@ -94,6 +94,56 @@
                   <item>
                    <layout class="QVBoxLayout" name="verticalLayout_8">
                     <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_19">
+                      <item>
+                       <widget class="QLabel" name="labelScientistName">
+                        <property name="text">
+                         <string>Scientist Name  </string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <spacer name="horizontalSpacer_2">
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                        <property name="sizeType">
+                         <enum>QSizePolicy::Expanding</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>344</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="labelGender">
+                        <property name="text">
+                         <string>Gender</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <spacer name="horizontalSpacer_6">
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                        <property name="sizeType">
+                         <enum>QSizePolicy::Fixed</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>30</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
                      <layout class="QHBoxLayout" name="horizontalLayout_12">
                       <item>
                        <widget class="QLineEdit" name="ScientistName">
@@ -104,12 +154,18 @@
                          <string/>
                         </property>
                         <property name="placeholderText">
-                         <string>Scientist name</string>
+                         <string/>
                         </property>
                        </widget>
                       </item>
                       <item>
                        <widget class="QComboBox" name="ScientistGender">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>200</verstretch>
+                         </sizepolicy>
+                        </property>
                         <item>
                          <property name="text">
                           <string>M</string>
@@ -125,6 +181,24 @@
                      </layout>
                     </item>
                     <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_20">
+                      <item>
+                       <widget class="QLabel" name="labelBirthName">
+                        <property name="text">
+                         <string>Birth Year</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="labelDeatYear">
+                        <property name="text">
+                         <string>Death Year</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
                      <layout class="QHBoxLayout" name="horizontalLayout_13">
                       <item>
                        <widget class="QLineEdit" name="ScientistBorn">
@@ -132,7 +206,7 @@
                          <string/>
                         </property>
                         <property name="placeholderText">
-                         <string>Birth year</string>
+                         <string/>
                         </property>
                        </widget>
                       </item>
@@ -142,7 +216,7 @@
                          <string/>
                         </property>
                         <property name="placeholderText">
-                         <string>Death year (empty if not died)</string>
+                         <string>Empty if not died</string>
                         </property>
                        </widget>
                       </item>
@@ -151,6 +225,19 @@
                    </layout>
                   </item>
                  </layout>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_4">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_8">
@@ -231,22 +318,47 @@
                 <item>
                  <layout class="QVBoxLayout" name="verticalLayout_4">
                   <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_23">
+                    <item>
+                     <widget class="QLabel" name="labelComputerName">
+                      <property name="text">
+                       <string>Computer Name</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="labelYearBuild">
+                      <property name="text">
+                       <string>Year Build</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
                    <layout class="QHBoxLayout" name="horizontalLayout">
                     <item>
                      <widget class="QLineEdit" name="ComputerName">
                       <property name="placeholderText">
-                       <string>Computer name</string>
+                       <string/>
                       </property>
                      </widget>
                     </item>
                     <item>
                      <widget class="QLineEdit" name="ComputerBuilt">
                       <property name="placeholderText">
-                       <string>Year build (empty if not built)</string>
+                       <string>Empty if not built</string>
                       </property>
                      </widget>
                     </item>
                    </layout>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelComputerType">
+                    <property name="text">
+                     <string>Computer Type</string>
+                    </property>
+                   </widget>
                   </item>
                   <item>
                    <layout class="QHBoxLayout" name="horizontalLayout_10">
@@ -256,6 +368,19 @@
                    </layout>
                   </item>
                  </layout>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_3">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_11">
@@ -335,6 +460,24 @@
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_5">
                 <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_24">
+                  <item>
+                   <widget class="QLabel" name="labelScientists">
+                    <property name="text">
+                     <string>Scientists</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelComputers">
+                    <property name="text">
+                     <string>Computers</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_14">
                   <item>
                    <layout class="QHBoxLayout" name="horizontalLayout_15">
@@ -351,6 +494,19 @@
                    </layout>
                   </item>
                  </layout>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_7">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_17">
@@ -417,11 +573,44 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QLineEdit" name="findText">
-            <property name="placeholderText">
-             <string>Find Item</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_18">
+            <item>
+             <widget class="QLineEdit" name="findText">
+              <property name="placeholderText">
+               <string>Find Item</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="ButtonQuit">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>200</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Quit</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
