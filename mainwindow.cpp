@@ -300,6 +300,8 @@ void MainWindow::fillComputerTypeComboBox()
     {
         ui->ComputerType->addItem(QString::fromStdString(computerTypes[i]));
     }
+
+    ui->ComputerType->addItem(QString::fromStdString("Other"));
 }
 
 void MainWindow::on_ButtonEditComputer_clicked()
