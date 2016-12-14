@@ -489,11 +489,15 @@ bool MainWindow::addComputerInputIsValid()
 
 void MainWindow::on_JokeButton_clicked()
 {
-    PopUpJoke  joke;
-    joke.exec();
+    PopUpJoke  *joke = new PopUpJoke;
+
+    joke->exec();
+
+    delete joke;
 }
 
 void MainWindow::on_ButtonQuit_clicked()
 {
     exit(1);
 }
+

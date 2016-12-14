@@ -13,6 +13,8 @@ dataAccess::~dataAccess()
 {
      db.close();
 
+     qDebug() << "ESRAR SPANEI";
+
 }
 
 /*Function pushingLegendVector ,@param QSqlQuery query @return vector<Legend>
