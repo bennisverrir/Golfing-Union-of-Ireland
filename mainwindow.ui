@@ -26,6 +26,9 @@
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
            <widget class="QTabWidget" name="TableView">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
             <property name="tabPosition">
              <enum>QTabWidget::North</enum>
             </property>
@@ -33,7 +36,7 @@
              <enum>QTabWidget::Rounded</enum>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="Scientists">
              <attribute name="title">
@@ -261,6 +264,45 @@
                  </layout>
                 </item>
                 <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_22">
+                  <item>
+                   <widget class="QLabel" name="labelErrorEdidScienti">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelErrorScientist">
+                    <property name="enabled">
+                     <bool>true</bool>
+                    </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="textFormat">
+                     <enum>Qt::RichText</enum>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>false</bool>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_6"/>
+                </item>
+                <item>
                  <spacer name="verticalSpacer">
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -409,6 +451,36 @@
                  </layout>
                 </item>
                 <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_26">
+                  <item>
+                   <widget class="QLabel" name="labelErrorEditComputer">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelErrorComptuer">
+                    <property name="enabled">
+                     <bool>true</bool>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="textFormat">
+                     <enum>Qt::RichText</enum>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
                  <spacer name="verticalSpacer_2">
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -458,6 +530,16 @@
                 <column>
                  <property name="text">
                   <string>Computer Name</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>ScientistID</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>ComputerID</string>
                  </property>
                 </column>
                </widget>
@@ -536,6 +618,40 @@
                    <widget class="QPushButton" name="ButtonDeleteRelation">
                     <property name="text">
                      <string>Delete relation</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_27">
+                  <item>
+                   <widget class="QLabel" name="labelErrorEditRelation">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelErrorAddRelation">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelErrorDeleteRelation">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -631,7 +747,7 @@
      <x>0</x>
      <y>0</y>
      <width>1088</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
