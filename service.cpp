@@ -89,9 +89,9 @@ vector <Relation> Service::requestRelationSearch()
 * forwards the function addLegend to the data-access class
 * returns a value of success or fail
 */
-bool Service::requestLegendAdd(string name, char gender, int born, int death)
+bool Service::requestLegendAdd(string name, char gender, int born, int death, string bio)
 {
-    Legend myNewLegend (name, gender, born, death);
+    Legend myNewLegend (name, gender, born, death, bio);
     return a.writeFile(myNewLegend);
 }
 
@@ -119,9 +119,9 @@ bool Service::requestRelationAdd (int scientistID, int computerID)
 * forwards the function editLegend to the data-access class
 * returns a value of success or fail
 */
-bool Service::requestLegendEdit (string name, char gender, int born, int death, Legend oldLegend)
+bool Service::requestLegendEdit (string name, char gender, int born, int death, string bio, Legend oldLegend)
 {
-    Legend myEditedLegend (name, gender, born, death);
+    Legend myEditedLegend (name, gender, born, death, bio);
     return a.editLegend(oldLegend, myEditedLegend);
 
 }

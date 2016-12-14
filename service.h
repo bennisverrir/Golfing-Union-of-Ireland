@@ -23,10 +23,10 @@ public:
         vector <Legend> requestLegendSearch();
         vector <Computer> requestComputerSearch();
         vector <Relation> requestRelationSearch();
-        bool requestLegendAdd(string name, char gender, int born, int death);
+        bool requestLegendAdd(string name, char gender, int born, int death, string bio);
         bool requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt, int index);
         bool requestRelationAdd(int scientistID, int computerID);
-        bool requestLegendEdit(string name, char gender, int born, int death, Legend oldLegend);
+        bool requestLegendEdit(string name, char gender, int born, int death, string bio, Legend oldLegend);
         bool requestComputerEdit(string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer,int index);
         bool requestRelationEdit(int scientistID, int computerID, Relation oldRelation);
         vector <Legend> requestLegendSort();

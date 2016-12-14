@@ -29,8 +29,9 @@ vector<Legend> dataAccess::pushingLegendVector(QSqlQuery query)
         string gender = query.value("Gender").toString().toStdString();
         int born = query.value("Birth").toUInt();
         int death = query.value("Death").toUInt();
+        string bio = query.value("Bio").toString().toStdString();
 
-        legends.push_back(Legend(ID, name, gender[0], born, death));
+        legends.push_back(Legend(ID, name, gender[0], born, death, bio));
     }
 
     return legends;
@@ -67,12 +68,13 @@ bool dataAccess::writeFile(Legend writeLegend)
 
     QSqlQuery query(db);
 
-    query.prepare("INSERT INTO Scientists(Name, Gender, Birth,Death) VALUES(:name, :gender, :born, :death)");
+    query.prepare("INSERT INTO Scientists(Name, Gender, Birth,Death, Bio) VALUES(:name, :gender, :born, :death, :bio)");
 
     query.bindValue(":name", QString::fromStdString(writeLegend.getName()));
     query.bindValue(":gender", QChar::fromLatin1(writeLegend.getGender()));
     query.bindValue(":born", writeLegend.getBorn());
     query.bindValue(":death", writeLegend.getDeath());
+    query.bindValue(":bio", QString::fromStdString(writeLegend.getBio()));
 
 
     if(!query.exec())

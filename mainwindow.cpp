@@ -133,8 +133,9 @@ bool MainWindow::addLegend()
     string gender = ui->ScientistGender->currentText().toStdString();
     int born = ui->ScientistBorn->text().toInt();
     int death = ui->ScientistDeath->text().toInt();
+    string bio = ui->ScientistBio->toPlainText().toStdString();
 
-    return _service.requestLegendAdd(name, gender[0], born, death);
+    return _service.requestLegendAdd(name, gender[0], born, death, bio);
 }
 
 bool MainWindow::addComputer()
@@ -191,14 +192,14 @@ bool MainWindow::editLegend()
 
     qDebug() << "OLDID" << oldID;
 
-    Legend oldLegend(oldID, oldName, oldGender[0], oldBorn, oldDeath);
+    Legend oldLegend(oldID, oldName, oldGender[0], oldBorn, oldDeath, "");
 
     string name = ui->ScientistName->text().toStdString();
     string gender = ui->ScientistGender->currentText().toStdString();
     int born = ui->ScientistBorn->text().toInt();
     int death = ui->ScientistDeath->text().toInt();
 
-    return _service.requestLegendEdit(name,gender[0],born,death,oldLegend);
+    return _service.requestLegendEdit(name,gender[0],born,death, "", oldLegend);
 }
 
 bool MainWindow::editComputer()

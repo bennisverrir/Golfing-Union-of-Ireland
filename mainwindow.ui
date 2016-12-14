@@ -44,7 +44,7 @@
              <enum>QTabWidget::Rounded</enum>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="Scientists">
              <attribute name="title">
@@ -310,6 +310,9 @@
                    </size>
                   </property>
                  </spacer>
+                </item>
+                <item>
+                 <widget class="QTextEdit" name="ScientistBio"/>
                 </item>
                 <item>
                  <spacer name="horizontalSpacer_10">

@@ -12,12 +12,12 @@ public:
     /* Constructor without ID, used when adding a legend to the SQL
      * as ID is assigned in the SQL and not input by the user.
      */
-    Legend (string name, char gender, int born, int death);
+    Legend (string name, char gender, int born, int death, string bio);
 
     /* Constructor with ID, used when retrieving a legend from SQL
      * as ID index has been assigned.
      */
-    Legend (int iD,string name, char gender, int born, int death);
+    Legend (int iD,string name, char gender, int born, int death, string bio);
 
     // Set functions to set the different variables in the class.
     void setID (int iD);
@@ -25,6 +25,7 @@ public:
     void setGender(char);
     void setBorn(int);
     void setDeath(int);
+    void setBio(string);
 
     /* Get functions to get the value of the different
      * variables in the class
@@ -36,6 +37,7 @@ public:
     int getDeath() const;
     int getAge() const;
     int getDeathAge()const;
+    string getBio() const;
 
 private:
     // Private attributes of the class, used to identify the legend.
@@ -44,6 +46,7 @@ private:
     int _born;
     int _death;
     int _myID;
+    string _bio;
 };
 
 #endif // LEGEND_H

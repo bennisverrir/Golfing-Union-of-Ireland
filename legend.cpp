@@ -5,20 +5,22 @@ Legend::Legend()
 {
 
 }
-Legend::Legend(string name, char gender, int born, int death)
+Legend::Legend(string name, char gender, int born, int death, string bio)
 {
     setName(name);
     setGender(gender);
     setBorn(born);
     setDeath(death);
+    setBio(bio);
 }
-Legend::Legend (int iD, string name, char gender, int born, int death)
+Legend::Legend (int iD, string name, char gender, int born, int death, string bio)
 {
     setID (iD);
     setName(name);
     setGender(gender);
     setBorn(born);
     setDeath(death);
+    setBio(bio);
 }
 void Legend::setID (int iD)
 {
@@ -45,6 +47,11 @@ void Legend::setDeath(int death)
     _death = death;
 }
 
+void Legend::setBio(string bio)
+{
+    _bio = bio;
+}
+
 
 int Legend::getID()
 {
@@ -69,6 +76,11 @@ int Legend::getDeath() const
 int Legend::getDeathAge() const
 {
     return getDeath()-getBorn();
+}
+
+string Legend::getBio() const
+{
+    return _bio;
 }
 
 int Legend::getAge() const
