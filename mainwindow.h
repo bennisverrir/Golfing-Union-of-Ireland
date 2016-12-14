@@ -7,6 +7,7 @@
 #include "computer.h"
 #include "legend.h"
 #include "relation.h"
+#include "popupjoke.h"
 
 using namespace std;
 
@@ -77,6 +78,10 @@ private slots:
     bool addScientisInputIsValid();
 
     bool addComputerInputIsValid();
+
+    void on_JokeButton_clicked();
+
+    void on_ButtonQuit_clicked();
 
 private:
     Service _service;

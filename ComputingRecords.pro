@@ -20,7 +20,8 @@ SOURCES += \
         dataAccess.cpp \
         computer.cpp \
         legend.cpp \
-        relation.cpp
+        relation.cpp \
+        popupjoke.cpp
 
 HEADERS  += \
          mainwindow.h \
@@ -28,9 +29,15 @@ HEADERS  += \
          dataAccess.h \
          computer.h \
          legend.h \
-         relation.h
+         relation.h \
+         popupjoke.h
 
 
-FORMS    += mainwindow.ui
+
+FORMS    += \
+         mainwindow.ui \
+         popupjoke.ui
 
 RESOURCES +=
+
+DISTFILES +=

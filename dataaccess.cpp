@@ -415,6 +415,9 @@ vector<string> dataAccess::joke()
         joke = query.value("col_2").toString().toStdString();
         toReturn.push_back(joke);
     }
+
+    qDebug() << query.lastError();
+
     return toReturn;
 }
 

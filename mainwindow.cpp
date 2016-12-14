@@ -474,3 +474,14 @@ bool MainWindow::addComputerInputIsValid()
     return isValid;
 
 }
+
+void MainWindow::on_JokeButton_clicked()
+{
+    PopUpJoke  joke;
+    joke.exec();
+}
+
+void MainWindow::on_ButtonQuit_clicked()
+{
+    exit(1);
+}
