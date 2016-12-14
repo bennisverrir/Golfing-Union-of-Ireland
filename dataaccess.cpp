@@ -52,8 +52,9 @@ vector<Computer> dataAccess::pushingComputerVector(QSqlQuery query)
         int buildYear = query.value("BuildYear").toUInt();
         string computerType = query.value("TypeName").toString().toStdString();
         bool wasBuilt = query.value("WasBuilt").toBool();
+        string bio = query.value("Bio").toString().toStdString();
 
-        computers.push_back(Computer(ID, name, buildYear, computerType, wasBuilt));
+        computers.push_back(Computer(ID, name, buildYear, computerType, wasBuilt, bio));
     }
 
     return computers;
@@ -94,12 +95,13 @@ bool dataAccess::writeComputerFile(Computer writeComputer, int index)
 
     QSqlQuery query(db);
 
-    query.prepare("INSERT INTO Computer(Name, BuildYear, WasBuilt, ComputerTypeID) VALUES(:name, :buildYear, :wasBuilt, :computerTypeID)");
+    query.prepare("INSERT INTO Computer(Name, BuildYear, WasBuilt, ComputerTypeID, Bio) VALUES(:name, :buildYear, :wasBuilt, :computerTypeID, :bio)");
 
     query.bindValue(":name", QString::fromStdString(writeComputer.getName()));
     query.bindValue(":buildYear", writeComputer.getBuildYear());
     query.bindValue(":wasBuilt", writeComputer.getWasBuilt());
     query.bindValue(":computerTypeID", index);
+    query.bindValue(":bio", QString::fromStdString(writeComputer.getBio()));
 
     return query.exec();
 
@@ -130,15 +132,13 @@ vector<Legend> dataAccess::sortLegend()
 */
 vector<Computer> dataAccess::sortComputer()
 {
-
-
     vector<Computer> returnLegends;
 
 
 
     QSqlQuery query(db);
 
-    QString command = "Select c.ID as cID, c.Name, c.BuildYear, ct.Name AS TypeName, c.WasBuilt FROM Computer c "
+    QString command = "Select c.ID as cID, c.Name, c.BuildYear, ct.Name AS TypeName, c.WasBuilt, c.Bio AS Bio FROM Computer c "
                       "INNER JOIN ComputerType ct "
                       "ON c.ComputerTypeID = ct.ID";
     query.exec(command);
@@ -288,17 +288,17 @@ bool dataAccess::editLegend(Legend oldLegend, Legend editLegend)
     QSqlQuery query(db);
 
     QString name = QString::fromStdString(editLegend.getName());
-    QString oldName = QString::fromStdString(oldLegend.getName());
     QString ID = QString::fromStdString(to_string(oldLegend.getID()));
-    QString isDead = QString::fromStdString(to_string((editLegend.getDeath() == 0 ? 0 : 1)));
     QString born = QString::fromStdString(to_string(editLegend.getBorn()));
     QString death =  QString::fromStdString(to_string(editLegend.getDeath()));
+    QString bio = QString::fromStdString(editLegend.getBio());
 
     QString command = "UPDATE Scientists"
                       " SET Name = '" + name + "', Gender = '" + editLegend.getGender() +
-                      "' , Birth = " + born + ", Death = " + death +
-                      " WHERE ID = " + ID;
+                      "' , Birth = " + born + ", Death = " + death + ", Bio = '" + bio +
+                      "' WHERE ID = " + ID;
 
+    qDebug() << command;
 
     return query.exec(command);
 }
@@ -320,11 +320,13 @@ bool dataAccess::editComputer(Computer oldComputer, Computer editComputer, int i
     QString wasBuilt = QString::fromStdString(to_string(editComputer.getBuildYear() == 0 ? 0 : 1));
     QString computerType = QString::fromStdString(editComputer.getComputerType());
     QString computerTypeID = QString::number(index);
+    QString bio = QString::fromStdString(editComputer.getBio());
+
     QString command = "UPDATE Computer"
                       " SET Name = '" + name + "',  BuildYear = '" + buildYear +
                       "' , ComputerTypeID = " + computerTypeID + ", BuildYear = " + buildYear +
-                      ", WasBuilt = " + wasBuilt +
-                      " WHERE ID = " + ID;
+                      ", WasBuilt = " + wasBuilt + ", Bio = '" + bio +
+                      "' WHERE ID = " + ID;
 
     return query.exec(command);
 

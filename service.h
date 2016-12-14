@@ -24,10 +24,10 @@ public:
         vector <Computer> requestComputerSearch();
         vector <Relation> requestRelationSearch();
         bool requestLegendAdd(string name, char gender, int born, int death, string bio);
-        bool requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt, int index);
+        bool requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt, int index, string bio);
         bool requestRelationAdd(int scientistID, int computerID);
         bool requestLegendEdit(string name, char gender, int born, int death, string bio, Legend oldLegend);
-        bool requestComputerEdit(string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer,int index);
+        bool requestComputerEdit(string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer,int index, string bio);
         bool requestRelationEdit(int scientistID, int computerID, Relation oldRelation);
         vector <Legend> requestLegendSort();
         vector <Computer> requestComputerSort();

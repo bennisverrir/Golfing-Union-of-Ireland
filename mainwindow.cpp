@@ -33,6 +33,7 @@ void MainWindow::displayLegends(vector<Legend> legends)
 
     ui->ScientistTable->clear();
     ui->ScientistTable->hideColumn(4);
+    ui->ScientistTable->hideColumn(5);
     ui->ScientistTable->setRowCount(legends.size());
 
     for(size_t row = 0; row < legends.size(); row++)
@@ -44,12 +45,14 @@ void MainWindow::displayLegends(vector<Legend> legends)
         QString born = QString::number(currentLegend.getBorn());
         QString death = (currentLegend.getDeath() == 0 ? "" : QString::number(currentLegend.getDeath()));
         QString ID = QString::number(currentLegend.getID());
+        QString bio = QString::fromStdString(currentLegend.getBio());
 
         ui->ScientistTable->setItem(row,0, new QTableWidgetItem(name));
         ui->ScientistTable->setItem(row,1, new QTableWidgetItem(gender));
         ui->ScientistTable->setItem(row,2, new QTableWidgetItem(born));
         ui->ScientistTable->setItem(row,3, new QTableWidgetItem(death));
         ui->ScientistTable->setItem(row,4, new QTableWidgetItem(ID));
+        ui->ScientistTable->setItem(row,5, new QTableWidgetItem(bio));
     }
 
     ui->ScientistTable->setSortingEnabled(true);
@@ -60,6 +63,7 @@ void MainWindow::displayComputers(vector<Computer> computers)
 
     ui->ComputerTable->clear();
     ui->ComputerTable->hideColumn(3);
+    ui->ComputerTable->hideColumn(4);
     ui->ComputerTable->setRowCount(computers.size());
 
     for(size_t row = 0; row < computers.size(); row++)
@@ -70,11 +74,13 @@ void MainWindow::displayComputers(vector<Computer> computers)
         QString buildYear = (currentComputer.getBuildYear() == 0 ? "" : QString::number(currentComputer.getBuildYear()));
         QString computerType = QString::fromStdString(currentComputer.getComputerType());
         QString ID = QString::number(currentComputer.getID());
+        QString bio = QString::fromStdString(currentComputer.getBio());
 
         ui->ComputerTable->setItem(row,0, new QTableWidgetItem(name));
         ui->ComputerTable->setItem(row,1, new QTableWidgetItem(buildYear));
         ui->ComputerTable->setItem(row,2, new QTableWidgetItem(computerType));
         ui->ComputerTable->setItem(row,3, new QTableWidgetItem(ID));
+        ui->ComputerTable->setItem(row,4, new QTableWidgetItem(bio));
     }
 
     ui->ComputerTable->setSortingEnabled(true);
@@ -144,12 +150,13 @@ bool MainWindow::addComputer()
     int buildYear = ui->ComputerBuilt->text().toInt();
     string computerType = ui->ComputerType->currentText().toStdString();
     int computerTypeID = ui->ComputerType->currentIndex() + 1;
+    string bio = ui->ComputerBio->toPlainText().toStdString();
 
     qDebug() << computerTypeID;
 
     int wasBuilt = (buildYear == 0 ? 0 : 1);
 
-    return _service.requestComputerAdd(name,buildYear,computerType,wasBuilt, computerTypeID);
+    return _service.requestComputerAdd(name,buildYear,computerType,wasBuilt, computerTypeID, bio);
 }
 
 bool MainWindow::addRelation()
@@ -189,17 +196,17 @@ bool MainWindow::editLegend()
     int oldBorn = ui->ScientistTable->item(row, 2)->text().toInt();
     int oldDeath = ui->ScientistTable->item(row, 3)->text().toInt();
     int oldID = ui->ScientistTable->item(row,4)->text().toInt();
+    string oldBio = ui->ScientistTable->item(row,5)->text().toStdString();
 
-    qDebug() << "OLDID" << oldID;
-
-    Legend oldLegend(oldID, oldName, oldGender[0], oldBorn, oldDeath, "");
+    Legend oldLegend(oldID, oldName, oldGender[0], oldBorn, oldDeath, oldBio);
 
     string name = ui->ScientistName->text().toStdString();
     string gender = ui->ScientistGender->currentText().toStdString();
     int born = ui->ScientistBorn->text().toInt();
     int death = ui->ScientistDeath->text().toInt();
+    string bio = ui->ScientistBio->toPlainText().toStdString();
 
-    return _service.requestLegendEdit(name,gender[0],born,death, "", oldLegend);
+    return _service.requestLegendEdit(name,gender[0],born,death, bio, oldLegend);
 }
 
 bool MainWindow::editComputer()
@@ -209,19 +216,21 @@ bool MainWindow::editComputer()
     string oldName = ui->ComputerTable->item(row, 0)->text().toStdString();
     int oldBuildYear = ui->ComputerTable->item(row, 1)->text().toInt();
     bool oldWasBuilt = (oldBuildYear == 0 ? 0 : 1);
-    string oldComputerType = ui->ComputerTable->item(row, 0)->text().toStdString();
+    string oldComputerType = ui->ComputerTable->item(row, 2)->text().toStdString();
     int oldID = ui->ComputerTable->item(row, 3)->text().toInt();
+    string oldBio = ui->ComputerTable->item(row,4)->text().toStdString();
 
-    Computer oldComputer(oldID,oldName,oldBuildYear, oldComputerType, oldWasBuilt);
+    Computer oldComputer(oldID,oldName,oldBuildYear, oldComputerType, oldWasBuilt, oldBio);
 
     string name = ui->ComputerName->text().toStdString();
     int buildYear = ui->ComputerBuilt->text().toInt();
     string computerType = ui->ComputerType->currentText().toStdString();
     int computerTypeID = ui->ComputerType->currentIndex() + 1;
+    string bio = ui->ComputerBio->toPlainText().toStdString();
 
     int wasBuilt = (buildYear == 0? 0 : 1);
 
-    return _service.requestComputerEdit(name, buildYear, computerType, wasBuilt, oldComputer, computerTypeID);
+    return _service.requestComputerEdit(name, buildYear, computerType, wasBuilt, oldComputer, computerTypeID, bio);
 }
 
 bool MainWindow::editRelations()
@@ -305,6 +314,7 @@ void MainWindow::on_ScientistTable_cellClicked()
     ui->ScientistGender->setCurrentText(ui->ScientistTable->item(row, 1)->text());
     ui->ScientistBorn->setText(ui->ScientistTable->item(row, 2)->text());
     ui->ScientistDeath->setText(ui->ScientistTable->item(row, 3)->text());
+    ui->ScientistBio->setText(ui->ScientistTable->item(row, 5)->text());
 }
 
 void MainWindow::on_TableView_tabBarClicked(int index)
@@ -387,6 +397,7 @@ void MainWindow::on_ComputerTable_cellClicked()
     ui->ComputerName->setText(ui->ComputerTable->item(row, 0)->text());
     ui->ComputerBuilt->setText(ui->ComputerTable->item(row, 1)->text());
     ui->ComputerType->setCurrentText(ui->ComputerTable->item(row,2)->text());
+    ui->ComputerBio->setText(ui->ComputerTable->item(row, 4)->text());
 }
 
 void MainWindow::on_ButtonAddRelation_clicked()

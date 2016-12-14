@@ -99,9 +99,9 @@ bool Service::requestLegendAdd(string name, char gender, int born, int death, st
 * forwards the function addComputer to the data-access class
 * returns a value of success or fail
 */
-bool Service::requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt,int index)
+bool Service::requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt, int index, string bio)
 {
-    Computer myNewComputer (name, yearBuilt, computerType, wasBuilt);
+    Computer myNewComputer (name, yearBuilt, computerType, wasBuilt, bio);
     return a.writeComputerFile (myNewComputer, index);
 }
 
@@ -130,9 +130,9 @@ bool Service::requestLegendEdit (string name, char gender, int born, int death, 
 * forwards the function editComputer in the data-acess class
 *
 */
-bool Service::requestComputerEdit (string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer, int index)
+bool Service::requestComputerEdit (string name, int yearBuilt, string computerType, bool wasBuilt, Computer oldComputer, int index, string bio)
 {
-    Computer myEditedComputer (name, yearBuilt, computerType, wasBuilt);
+    Computer myEditedComputer (name, yearBuilt, computerType, wasBuilt, bio);
     return a.editComputer(oldComputer, myEditedComputer, index);
 }
 

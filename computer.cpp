@@ -5,20 +5,22 @@ Computer::Computer()
 {
 
 }
-Computer::Computer(string name, int buildYear, string computerType, bool wasBuilt)
+Computer::Computer(string name, int buildYear, string computerType, bool wasBuilt, string bio)
 {
     setName(name);
     setBuildYear(buildYear);
     setComputerType(computerType);
     setWasBuilt(wasBuilt);
+    setBio(bio);
 }
-Computer::Computer (int iD, string name, int buildYear, string computerType, bool wasBuilt)
+Computer::Computer (int iD, string name, int buildYear, string computerType, bool wasBuilt, string bio)
 {
     setID (iD);
     setName(name);
     setBuildYear(buildYear);
     setComputerType(computerType);
     setWasBuilt(wasBuilt);
+    setBio(bio);
 }
 void Computer::setID(int ID)
 {
@@ -50,6 +52,11 @@ void Computer::setWasBuilt(bool wasBuilt)
     _wasBuilt = wasBuilt;
 }
 
+void Computer::setBio(string bio)
+{
+    _bio = bio;
+}
+
 
 
 string Computer::getName() const
@@ -67,4 +74,8 @@ string Computer::getComputerType() const
 bool Computer::getWasBuilt() const
 {
     return _wasBuilt;
+}
+string Computer::getBio() const
+{
+    return _bio;
 }
