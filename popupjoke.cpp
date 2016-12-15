@@ -1,10 +1,13 @@
 #include "popupjoke.h"
 
-PopUpJoke::PopUpJoke(QWidget *parent) :
+PopUpJoke::PopUpJoke(vector<string> jokes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PopUpJoke)
 {
     ui->setupUi(this);
+
+    _jokes = jokes;
+
     printJoke();
 }
 
@@ -20,5 +23,7 @@ void PopUpJoke::on_GetANewJoke_clicked()
 
 void PopUpJoke::printJoke()
 {
-    ui->textEdit_Joke->setText(QString::fromStdString(_service.getJoke()));
+    string joke = _jokes[rand() % _jokes.size()];
+
+    ui->textEdit_Joke->setText(QString::fromStdString(joke));
 }

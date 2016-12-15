@@ -53,6 +53,11 @@ void MainWindow::displayLegends(vector<Legend> legends)
     ui->ScientistTable->hideColumn(5);
     ui->ScientistTable->setRowCount(legends.size());
 
+    ui->ScientistTable->setHorizontalHeaderItem(0,new QTableWidgetItem("Name"));
+    ui->ScientistTable->setHorizontalHeaderItem(1,new QTableWidgetItem("Gender"));
+    ui->ScientistTable->setHorizontalHeaderItem(2,new QTableWidgetItem("Birth Year"));
+    ui->ScientistTable->setHorizontalHeaderItem(3,new QTableWidgetItem("Death Year"));
+
     for(size_t row = 0; row < legends.size(); row++)
     {
         Legend currentLegend = legends[row];
@@ -83,6 +88,10 @@ void MainWindow::displayComputers(vector<Computer> computers)
     ui->ComputerTable->hideColumn(4);
     ui->ComputerTable->setRowCount(computers.size());
 
+    ui->ComputerTable->setHorizontalHeaderItem(0,new QTableWidgetItem("Name"));
+    ui->ComputerTable->setHorizontalHeaderItem(1,new QTableWidgetItem("Build Year"));
+    ui->ComputerTable->setHorizontalHeaderItem(2,new QTableWidgetItem("Computer Type"));
+
     for(size_t row = 0; row < computers.size(); row++)
     {
         Computer currentComputer = computers[row];
@@ -110,6 +119,9 @@ void MainWindow::displayRelations(vector<Relation> relations)
     ui->RelationTable->hideColumn(2);
     ui->RelationTable->hideColumn(3);
     ui->RelationTable->setRowCount(relations.size());
+
+    ui->RelationTable->setHorizontalHeaderItem(0,new QTableWidgetItem("Scientist Name"));
+    ui->RelationTable->setHorizontalHeaderItem(1,new QTableWidgetItem("Computer Name"));
 
     for(size_t row = 0; row < relations.size(); row++)
     {
@@ -518,7 +530,7 @@ bool MainWindow::addComputerInputIsValid()
 
 void MainWindow::on_JokeButton_clicked()
 {
-    PopUpJoke  *joke = new PopUpJoke;
+    PopUpJoke  *joke = new PopUpJoke(_service.getJoke());
 
     joke->exec();
 
@@ -541,7 +553,7 @@ QString MainWindow::getFilePath(bool justRemoved)
     QString newFilePath;
 
     newFilePath = path  + "/" +
-    ui->ScientistTable->item(ui->ScientistTable->currentRow(), 4)->text(); //+ ".jpg";
+                  ui->ScientistTable->item(ui->ScientistTable->currentRow(), 4)->text();
 
     QFile file(newFilePath);
 
@@ -567,7 +579,6 @@ void MainWindow::on_ButtonAddImage_clicked()
 
     QFileInfo oldInfo(oldFile);
 
-    //QString newFileExtension =  newInfo.fileName().split(".",QString::SkipEmptyParts).at(1);
 
     if(oldFile.exists() && oldInfo.fileName() != "default.jpg")
     {

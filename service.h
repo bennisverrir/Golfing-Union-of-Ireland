@@ -3,7 +3,6 @@
 
 #include <algorithm>
 #include <vector>
-#include <cstdlib>
 #include "legend.h"
 #include "dataaccess.h"
 #include "computer.h"
@@ -36,7 +35,7 @@ public:
         bool requestComputerTypeAdd(string name);
         vector<Relation> findRelation(string name);
         bool requestRelationDelete(Relation deleteRelation);
-        string getJoke();
+        vector<string> getJoke();
 
 
 

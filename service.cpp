@@ -211,10 +211,7 @@ bool Service::requestRelationDelete(Relation deleteRelation)
 *
 *
 */
-string Service::getJoke()
+vector<string> Service::getJoke()
 {
-    string joke;
-    joke = a.joke()[rand() % a.joke().size()];
-
-    return joke;
+    return a.joke();
 }

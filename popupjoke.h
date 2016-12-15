@@ -2,6 +2,8 @@
 #define POPUPJOKE_H
 
 #include <QDialog>
+#include <vector>
+#include <cstdlib>
 #include "ui_popupjoke.h"
 #include "service.h"
 #include "mainwindow.h"
@@ -16,7 +18,7 @@ class PopUpJoke : public QDialog
     Q_OBJECT
 
 public:
-    explicit PopUpJoke(QWidget *parent = 0);
+    explicit PopUpJoke(vector<string> jokes, QWidget *parent = 0);
     ~PopUpJoke();
 
 private slots:
@@ -25,7 +27,8 @@ private slots:
     void printJoke();
 
 private:
-    Service _service;
+
+    vector<string> _jokes;
     Ui::PopUpJoke *ui;
 };
 
