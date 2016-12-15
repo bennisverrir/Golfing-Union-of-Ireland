@@ -387,6 +387,19 @@
                        </layout>
                       </item>
                       <item>
+                       <spacer name="horizontalSpacer_4">
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item>
                        <layout class="QVBoxLayout" name="verticalLayout_7">
                         <item>
                          <layout class="QHBoxLayout" name="horizontalLayout_8">
@@ -414,6 +427,13 @@
                             </property>
                             <property name="text">
                              <string>Add Scientist</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QPushButton" name="ButtonClearScientist">
+                            <property name="text">
+                             <string>Clear</string>
                             </property>
                            </widget>
                           </item>
@@ -692,6 +712,13 @@
                    <widget class="QPushButton" name="ButtonAddComputer">
                     <property name="text">
                      <string>Add computer</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="ButtonClearComputer_2">
+                    <property name="text">
+                     <string>Clear</string>
                     </property>
                    </widget>
                   </item>
@@ -1037,7 +1064,7 @@
      <x>0</x>
      <y>0</y>
      <width>1579</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
