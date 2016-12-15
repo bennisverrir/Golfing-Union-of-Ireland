@@ -38,6 +38,7 @@ FORMS    += \
          mainwindow.ui \
          popupjoke.ui
 
-RESOURCES +=
+RESOURCES += \
+    resorces.qrc
 
 DISTFILES +=

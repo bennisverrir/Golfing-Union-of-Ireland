@@ -7,6 +7,23 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    QDir dir;
+
+    dir.relativeFilePath("/Images/");
+
+    if(dir.exists())
+    {
+        dir.mkdir("Images");
+    }
+
+    QString filePath = dir.currentPath() + "/Images/" + "default.jpg";
+
+    QFile defaultImage(":/Images/default.jpg");
+
+    QFile::copy(defaultImage.fileName(), filePath);
+
+    QPixmap defaultPixmap(filePath);
+
     ui->setupUi(this);
 
     whatTable = ui->TableView->currentIndex();
@@ -518,11 +535,6 @@ QString MainWindow::getFilePath(bool justRemoved)
     QDir dir;
 
     dir.relativeFilePath("/Images/");
-
-    if(dir.exists())
-    {
-        dir.mkdir("Images");
-    }
 
     QString path = dir.currentPath() + "/Images";
 
