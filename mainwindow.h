@@ -90,6 +90,10 @@ private slots:
 
     void displayPicture();
 
+    void on_ButtonClearScientist_clicked();
+
+    void on_ButtonClearComputer_clicked();
+
 private:
     Service _service;
     Ui::MainWindow *ui;

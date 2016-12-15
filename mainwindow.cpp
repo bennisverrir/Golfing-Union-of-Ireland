@@ -598,3 +598,26 @@ void MainWindow::on_ButtonAddImage_clicked()
     ui->ButtonAddImage->setEnabled(false);
 }
 
+
+void MainWindow::on_ButtonClearScientist_clicked()
+{
+    ui->ScientistName->clear();
+    ui->ScientistBorn->clear();
+    ui->ScientistDeath->clear();
+    ui->ScientistBio->clear();
+    ui->ButtonEditScientist->setEnabled(false);
+
+    QPixmap defaultPixmap(":/Images/default.png");
+
+    QPixmap newPixmap = defaultPixmap.scaled(QSize(150,350), Qt::KeepAspectRatio);
+
+    ui->PictureLabel->setPixmap(newPixmap);
+}
+
+void MainWindow::on_ButtonClearComputer_clicked()
+{
+    ui->ComputerName->clear();
+    ui->ComputerBuilt->clear();
+    ui->ComputerBio->clear();
+    ui->ButtonEditComputer->setEnabled(false);
+}
