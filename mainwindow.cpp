@@ -16,9 +16,9 @@ MainWindow::MainWindow(QWidget *parent) :
         dir.mkdir("Images");
     }
 
-    QString filePath = dir.currentPath() + "/Images/" + "default.jpg";
+    QString filePath = dir.currentPath() + "/Images/" + "default";
 
-    QFile defaultImage(":/Images/default.jpg");
+    QFile defaultImage(":/Images/default");
 
     QFile::copy(defaultImage.fileName(), filePath);
 
@@ -559,7 +559,7 @@ QString MainWindow::getFilePath(bool justRemoved)
 
     if(!file.exists() && !justRemoved)
     {
-        newFilePath = path  + "/default.jpg";
+        newFilePath = path  + "/default";
     }
 
     return newFilePath;
@@ -580,7 +580,7 @@ void MainWindow::on_ButtonAddImage_clicked()
     QFileInfo oldInfo(oldFile);
 
 
-    if(oldFile.exists() && oldInfo.fileName() != "default.jpg")
+    if(oldFile.exists() && oldInfo.fileName() != "default")
     {
         justRemoved = true;
 
