@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <vector>
+#include <QFileDialog>
 #include "service.h"
 #include "computer.h"
 #include "legend.h"
