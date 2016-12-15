@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QString filePath = dir.currentPath() + "/Images/" + "default";
 
-    QFile defaultImage(":/Images/default");
+    QFile defaultImage(":/Images/default.png");
 
     QFile::copy(defaultImage.fileName(), filePath);
 
@@ -353,7 +353,7 @@ void MainWindow::displayPicture()
 {
     QPixmap pixMap(getFilePath(false));
 
-    QPixmap newPixmap = pixMap.scaled(QSize(300,500), Qt::KeepAspectRatio);
+    QPixmap newPixmap = pixMap.scaled(QSize(100,250), Qt::KeepAspectRatio);
 
     ui->PictureLabel->setPixmap(newPixmap);
 }
