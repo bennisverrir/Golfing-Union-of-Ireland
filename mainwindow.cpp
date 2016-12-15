@@ -353,7 +353,7 @@ void MainWindow::displayPicture()
 {
     QPixmap pixMap(getFilePath(false));
 
-    QPixmap newPixmap = pixMap.scaled(QSize(150,300), Qt::KeepAspectRatio);
+    QPixmap newPixmap = pixMap.scaled(QSize(150,350), Qt::KeepAspectRatio);
 
     ui->PictureLabel->setPixmap(newPixmap);
 }

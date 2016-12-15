@@ -50,181 +50,268 @@
              <attribute name="title">
               <string>Scientists</string>
              </attribute>
-             <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <layout class="QHBoxLayout" name="horizontalLayout_29">
               <item>
-               <widget class="QTableWidget" name="ScientistTable">
-                <property name="sizeAdjustPolicy">
-                 <enum>QAbstractScrollArea::AdjustIgnored</enum>
-                </property>
-                <property name="editTriggers">
-                 <set>QAbstractItemView::NoEditTriggers</set>
-                </property>
-                <property name="alternatingRowColors">
-                 <bool>true</bool>
-                </property>
-                <property name="selectionBehavior">
-                 <enum>QAbstractItemView::SelectRows</enum>
-                </property>
-                <attribute name="horizontalHeaderCascadingSectionResizes">
-                 <bool>false</bool>
-                </attribute>
-                <attribute name="horizontalHeaderDefaultSectionSize">
-                 <number>200</number>
-                </attribute>
-                <attribute name="horizontalHeaderStretchLastSection">
-                 <bool>true</bool>
-                </attribute>
-                <column>
-                 <property name="text">
-                  <string>Name</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>Gender</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>Birth Year</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>Death Year</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>ID</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>Bio</string>
-                 </property>
-                </column>
-               </widget>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_29"/>
-              </item>
-              <item>
-               <layout class="QVBoxLayout" name="verticalLayout_7">
+               <layout class="QHBoxLayout" name="horizontalLayout_28">
                 <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_9">
+                 <widget class="QTableWidget" name="ScientistTable">
+                  <property name="sizeAdjustPolicy">
+                   <enum>QAbstractScrollArea::AdjustIgnored</enum>
+                  </property>
+                  <property name="editTriggers">
+                   <set>QAbstractItemView::NoEditTriggers</set>
+                  </property>
+                  <property name="alternatingRowColors">
+                   <bool>true</bool>
+                  </property>
+                  <property name="selectionBehavior">
+                   <enum>QAbstractItemView::SelectRows</enum>
+                  </property>
+                  <attribute name="horizontalHeaderCascadingSectionResizes">
+                   <bool>false</bool>
+                  </attribute>
+                  <attribute name="horizontalHeaderDefaultSectionSize">
+                   <number>200</number>
+                  </attribute>
+                  <attribute name="horizontalHeaderStretchLastSection">
+                   <bool>true</bool>
+                  </attribute>
+                  <column>
+                   <property name="text">
+                    <string>Name</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Gender</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Birth Year</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Death Year</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>ID</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Bio</string>
+                   </property>
+                  </column>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_13">
                   <item>
-                   <layout class="QVBoxLayout" name="verticalLayout_8">
+                   <layout class="QHBoxLayout" name="horizontalLayout_9">
                     <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_19">
+                     <layout class="QVBoxLayout" name="verticalLayout_8">
                       <item>
-                       <widget class="QLabel" name="labelScientistName">
-                        <property name="font">
-                         <font>
-                          <family>Arial</family>
-                          <pointsize>8</pointsize>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>Scientist Name  </string>
-                        </property>
-                       </widget>
+                       <layout class="QHBoxLayout" name="horizontalLayout_19">
+                        <item>
+                         <widget class="QLabel" name="labelScientistName">
+                          <property name="font">
+                           <font>
+                            <family>Arial</family>
+                            <pointsize>8</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>Scientist Name  </string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <spacer name="horizontalSpacer_2">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
+                          </property>
+                          <property name="sizeType">
+                           <enum>QSizePolicy::Expanding</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>344</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="labelGender">
+                          <property name="font">
+                           <font>
+                            <family>Arial</family>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>Gender</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <spacer name="horizontalSpacer_6">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
+                          </property>
+                          <property name="sizeType">
+                           <enum>QSizePolicy::Fixed</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>30</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                       </layout>
                       </item>
                       <item>
-                       <spacer name="horizontalSpacer_2">
+                       <layout class="QHBoxLayout" name="horizontalLayout_12">
+                        <item>
+                         <widget class="QLineEdit" name="ScientistName">
+                          <property name="font">
+                           <font>
+                            <weight>50</weight>
+                            <bold>false</bold>
+                           </font>
+                          </property>
+                          <property name="inputMask">
+                           <string/>
+                          </property>
+                          <property name="text">
+                           <string/>
+                          </property>
+                          <property name="placeholderText">
+                           <string/>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="ScientistGender">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>200</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <item>
+                           <property name="text">
+                            <string>M</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>F</string>
+                           </property>
+                          </item>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
+                       <spacer name="horizontalSpacer_8">
                         <property name="orientation">
                          <enum>Qt::Horizontal</enum>
                         </property>
-                        <property name="sizeType">
-                         <enum>QSizePolicy::Expanding</enum>
-                        </property>
                         <property name="sizeHint" stdset="0">
                          <size>
-                          <width>344</width>
+                          <width>40</width>
                           <height>20</height>
                          </size>
                         </property>
                        </spacer>
                       </item>
                       <item>
-                       <widget class="QLabel" name="labelGender">
-                        <property name="font">
-                         <font>
-                          <family>Arial</family>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>Gender</string>
-                        </property>
-                       </widget>
+                       <layout class="QHBoxLayout" name="horizontalLayout_20">
+                        <item>
+                         <widget class="QLabel" name="labelBirthName">
+                          <property name="font">
+                           <font>
+                            <family>Arial</family>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>Birth Year</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="labelDeatYear">
+                          <property name="font">
+                           <font>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>Death Year</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
                       </item>
                       <item>
-                       <spacer name="horizontalSpacer_6">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeType">
-                         <enum>QSizePolicy::Fixed</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>30</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
+                       <layout class="QHBoxLayout" name="horizontalLayout_13">
+                        <item>
+                         <widget class="QLineEdit" name="ScientistBorn">
+                          <property name="font">
+                           <font>
+                            <family>Arial</family>
+                            <pointsize>8</pointsize>
+                            <weight>50</weight>
+                            <bold>false</bold>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string/>
+                          </property>
+                          <property name="placeholderText">
+                           <string/>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLineEdit" name="ScientistDeath">
+                          <property name="font">
+                           <font>
+                            <weight>50</weight>
+                            <bold>false</bold>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string/>
+                          </property>
+                          <property name="placeholderText">
+                           <string>Empty if not died</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
                       </item>
                      </layout>
                     </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_12">
                     <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_12">
-                      <item>
-                       <widget class="QLineEdit" name="ScientistName">
-                        <property name="font">
-                         <font>
-                          <weight>50</weight>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="inputMask">
-                         <string/>
-                        </property>
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="placeholderText">
-                         <string/>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QComboBox" name="ScientistGender">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>200</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <item>
-                         <property name="text">
-                          <string>M</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>F</string>
-                         </property>
-                        </item>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <spacer name="horizontalSpacer_8">
+                     <spacer name="horizontalSpacer_10">
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
                       </property>
@@ -237,263 +324,157 @@
                      </spacer>
                     </item>
                     <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_20">
+                     <layout class="QVBoxLayout" name="verticalLayout_11">
                       <item>
-                       <widget class="QLabel" name="labelBirthName">
-                        <property name="font">
-                         <font>
-                          <family>Arial</family>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>Birth Year</string>
-                        </property>
-                       </widget>
+                       <layout class="QHBoxLayout" name="horizontalLayout_5">
+                        <item>
+                         <layout class="QVBoxLayout" name="verticalLayout_10">
+                          <item>
+                           <widget class="QLabel" name="PictureLabel">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="baseSize">
+                             <size>
+                              <width>200</width>
+                              <height>300</height>
+                             </size>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QPushButton" name="ButtonAddImage">
+                            <property name="text">
+                             <string>Add Image</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item>
+                         <layout class="QVBoxLayout" name="verticalLayout_6">
+                          <item>
+                           <widget class="QLabel" name="labelBioScientist">
+                            <property name="font">
+                             <font>
+                              <weight>75</weight>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>Bio</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QTextEdit" name="ScientistBio">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                              <horstretch>50</horstretch>
+                              <verstretch>200</verstretch>
+                             </sizepolicy>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                       </layout>
                       </item>
                       <item>
-                       <widget class="QLabel" name="labelDeatYear">
-                        <property name="font">
-                         <font>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>Death Year</string>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_13">
-                      <item>
-                       <widget class="QLineEdit" name="ScientistBorn">
-                        <property name="font">
-                         <font>
-                          <family>Arial</family>
-                          <pointsize>8</pointsize>
-                          <weight>50</weight>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="placeholderText">
-                         <string/>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QLineEdit" name="ScientistDeath">
-                        <property name="font">
-                         <font>
-                          <weight>50</weight>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="placeholderText">
-                         <string>Empty if not died</string>
-                        </property>
-                       </widget>
+                       <layout class="QVBoxLayout" name="verticalLayout_7">
+                        <item>
+                         <layout class="QHBoxLayout" name="horizontalLayout_8">
+                          <item>
+                           <widget class="QPushButton" name="ButtonEditScientist">
+                            <property name="enabled">
+                             <bool>false</bool>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Arial</family>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>Edit Scientist</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QPushButton" name="ButtonAddScientist">
+                            <property name="font">
+                             <font>
+                              <family>Arial</family>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>Add Scientist</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item>
+                         <layout class="QHBoxLayout" name="horizontalLayout_22">
+                          <item>
+                           <widget class="QLabel" name="labelErrorEdidScienti">
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="labelErrorScientist">
+                            <property name="enabled">
+                             <bool>true</bool>
+                            </property>
+                            <property name="layoutDirection">
+                             <enum>Qt::LeftToRight</enum>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="textFormat">
+                             <enum>Qt::RichText</enum>
+                            </property>
+                            <property name="scaledContents">
+                             <bool>false</bool>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item>
+                         <spacer name="verticalSpacer_4">
+                          <property name="orientation">
+                           <enum>Qt::Vertical</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>20</width>
+                            <height>40</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                       </layout>
                       </item>
                      </layout>
                     </item>
                    </layout>
                   </item>
                  </layout>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_4">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_33">
-                  <item>
-                   <spacer name="horizontalSpacer_12">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                     <enum>QSizePolicy::Fixed</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>105</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="labelBioScientist">
-                    <property name="font">
-                     <font>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>Bio</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_32">
-                  <item>
-                   <layout class="QVBoxLayout" name="verticalLayout_10">
-                    <item>
-                     <widget class="QLabel" name="PictureLabel">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="baseSize">
-                       <size>
-                        <width>200</width>
-                        <height>300</height>
-                       </size>
-                      </property>
-                      <property name="text">
-                       <string/>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="ButtonAddImage">
-                      <property name="text">
-                       <string>Add Image</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <widget class="QTextEdit" name="ScientistBio">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                      <horstretch>50</horstretch>
-                      <verstretch>200</verstretch>
-                     </sizepolicy>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_10">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_8">
-                  <item>
-                   <widget class="QPushButton" name="ButtonEditScientist">
-                    <property name="enabled">
-                     <bool>false</bool>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Arial</family>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>Edit Scientist</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="ButtonAddScientist">
-                    <property name="font">
-                     <font>
-                      <family>Arial</family>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>Add Scientist</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_22">
-                  <item>
-                   <widget class="QLabel" name="labelErrorEdidScienti">
-                    <property name="text">
-                     <string/>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="labelErrorScientist">
-                    <property name="enabled">
-                     <bool>true</bool>
-                    </property>
-                    <property name="layoutDirection">
-                     <enum>Qt::LeftToRight</enum>
-                    </property>
-                    <property name="text">
-                     <string/>
-                    </property>
-                    <property name="textFormat">
-                     <enum>Qt::RichText</enum>
-                    </property>
-                    <property name="scaledContents">
-                     <bool>false</bool>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_6"/>
-                </item>
-                <item>
-                 <spacer name="verticalSpacer">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
                 </item>
                </layout>
               </item>
@@ -1056,7 +1037,7 @@
      <x>0</x>
      <y>0</y>
      <width>1579</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
