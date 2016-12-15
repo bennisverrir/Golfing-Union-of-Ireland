@@ -2,4 +2,8 @@
     <qresource prefix="/Images">
         <file>default.png</file>
     </qresource>
+    <qresource prefix="/Icons">
+        <file>magnifying-glass-icon-4.png</file>
+        <file>icon-glass.png</file>
+    </qresource>
 </RCC>

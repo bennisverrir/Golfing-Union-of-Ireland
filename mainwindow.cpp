@@ -320,15 +320,18 @@ void MainWindow::fillComputerRelationComboBox()
 
 void MainWindow::on_ButtonEditScientist_clicked()
 {
-    if(editLegend())
-    {
-        ui->labelErrorEdidScienti->setText("");
-        displayLegends(_service.requestLegendSort());
-    }
-    else
-    {
-        ui->labelErrorEdidScienti->setText("<span style='color: red'>Error!! Scientist was not edited!</span>");
-    }
+   if(addScientisInputIsValid())
+   {
+        if(editLegend())
+        {
+            ui->labelErrorEdidScienti->setText("");
+            displayLegends(_service.requestLegendSort());
+        }
+        else
+        {
+            ui->labelErrorEdidScienti->setText("<span style='color: red'>Error!! Scientist was not edited!</span>");
+        }
+   }
     
     ui->ButtonEditScientist->setEnabled(false);
 }
@@ -415,16 +418,19 @@ void MainWindow::on_ButtonEditComputer_clicked()
 {
     ui->ButtonEditComputer->setEnabled(false);
 
-    if(editComputer())
+    if(addComputerInputIsValid())
     {
-        ui->labelErrorEditComputer->setText("");
-        displayComputers(_service.requestComputerSort());
-        ui->ComputerName->clear();
-        ui->ComputerBuilt->clear();
-    }
-    else
-    {
-        ui->labelErrorEditComputer->setText("<span style='color: red'>Error!! Computer was not edited!</span>");
+        if(editComputer())
+        {
+            ui->labelErrorEditComputer->setText("");
+            displayComputers(_service.requestComputerSort());
+            ui->ComputerName->clear();
+            ui->ComputerBuilt->clear();
+        }
+        else
+        {
+            ui->labelErrorEditComputer->setText("<span style='color: red'>Error!! Computer was not edited!</span>");
+        }
     }
 
 }
@@ -499,7 +505,7 @@ bool MainWindow::addScientisInputIsValid()
 
     if(ui->ScientistName->text().isEmpty())
     {
-        ui->ScientistName->setPlaceholderText("<span style = 'color: red'>Name cannot be empty</span>");
+        ui->ScientistName->setPlaceholderText("Name cannot be empty");
 
         isValid = false;
     }
