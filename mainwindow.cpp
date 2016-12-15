@@ -307,6 +307,7 @@ void MainWindow::on_ButtonEditScientist_clicked()
 void MainWindow::on_ScientistTable_cellClicked()
 {
     ui->ButtonEditScientist->setEnabled(true);
+    ui->ButtonAddImage->setEnabled(true);
 
     int row = ui->ScientistTable->currentRow();
 
@@ -315,6 +316,17 @@ void MainWindow::on_ScientistTable_cellClicked()
     ui->ScientistBorn->setText(ui->ScientistTable->item(row, 2)->text());
     ui->ScientistDeath->setText(ui->ScientistTable->item(row, 3)->text());
     ui->ScientistBio->setText(ui->ScientistTable->item(row, 5)->text());
+
+    displayPicture();
+}
+
+void MainWindow::displayPicture()
+{
+    QPixmap pixMap(getFilePath(false));
+
+    QPixmap newPixmap = pixMap.scaled(QSize(300,500), Qt::KeepAspectRatio);
+
+    ui->PictureLabel->setPixmap(newPixmap);
 }
 
 void MainWindow::on_TableView_tabBarClicked(int index)
@@ -499,5 +511,67 @@ void MainWindow::on_JokeButton_clicked()
 void MainWindow::on_ButtonQuit_clicked()
 {
     exit(1);
+}
+
+QString MainWindow::getFilePath(bool justRemoved)
+{
+    QDir dir;
+
+    dir.relativeFilePath("/Images/");
+
+    if(dir.exists())
+    {
+        dir.mkdir("Images");
+    }
+
+    QString path = dir.currentPath() + "/Images";
+
+    QString newFilePath;
+
+    newFilePath = path  + "/" +
+    ui->ScientistTable->item(ui->ScientistTable->currentRow(), 4)->text(); //+ ".jpg";
+
+    QFile file(newFilePath);
+
+    if(!file.exists() && !justRemoved)
+    {
+        newFilePath = path  + "/default.jpg";
+    }
+
+    return newFilePath;
+}
+
+void MainWindow::on_ButtonAddImage_clicked()
+{
+    QString filePath = QFileDialog::getOpenFileName(this, tr("Import Image"),"C:/", "Jpg Files(*.jpg);;Png Files(*.png)");
+
+    QFile newFile(filePath);
+
+    QFileInfo newInfo(newFile);
+
+    bool justRemoved = false;
+
+    QFile oldFile(getFilePath(justRemoved));
+
+    QFileInfo oldInfo(oldFile);
+
+    //QString newFileExtension =  newInfo.fileName().split(".",QString::SkipEmptyParts).at(1);
+
+    if(oldFile.exists() && oldInfo.fileName() != "default.jpg")
+    {
+        justRemoved = true;
+
+        oldFile.remove();
+    }
+    else
+    {
+        justRemoved = true;
+    }
+
+
+    QFile::copy(filePath,getFilePath(justRemoved));
+    displayPicture();
+
+    ui->ButtonAddImage->setEnabled(false);
 }
 

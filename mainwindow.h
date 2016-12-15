@@ -83,10 +83,17 @@ private slots:
 
     void on_ButtonQuit_clicked();
 
+    void on_ButtonAddImage_clicked();
+
+    QString getFilePath(bool justRemoved);
+
+    void displayPicture();
+
 private:
     Service _service;
     Ui::MainWindow *ui;
     int whatTable;
+
 };
 
 #endif // MAINWINDOW_H
