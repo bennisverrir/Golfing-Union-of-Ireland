@@ -985,6 +985,16 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_18">
             <item>
+             <widget class="QLabel" name="labelFindPic">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="resorces.qrc">:/Icons/magniglass35.png</pixmap>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QLineEdit" name="findText">
               <property name="placeholderText">
                <string>Find Item</string>
@@ -1085,6 +1095,8 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resorces.qrc"/>
+ </resources>
  <connections/>
 </ui>
