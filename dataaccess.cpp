@@ -12,9 +12,6 @@ dataAccess::dataAccess()
 dataAccess::~dataAccess()
 {
      db.close();
-
-     qDebug() << "ESRAR SPANEI";
-
 }
 
 /*Function pushingLegendVector ,@param QSqlQuery query @return vector<Legend>
@@ -300,7 +297,6 @@ bool dataAccess::editLegend(Legend oldLegend, Legend editLegend)
                       "' , Birth = " + born + ", Death = " + death + ", Bio = '" + bio +
                       "' WHERE ID = " + ID;
 
-    qDebug() << command;
 
     return query.exec(command);
 }
@@ -348,8 +344,6 @@ vector<Relation> dataAccess::findRelation(string nameToFind)
                        " ON sID = co.Sc AND cID = co.Co Where sName LIKE '%" + name + "%' OR cName LIKE '%" + name + "%'" ;
 
     query.prepare(command);
-
-    qDebug() << command << query.lastError();
 
     query.exec();
 
@@ -421,8 +415,6 @@ vector<string> dataAccess::joke()
         joke = query.value("col_2").toString().toStdString();
         toReturn.push_back(joke);
     }
-
-    qDebug() << query.lastError();
 
     return toReturn;
 }

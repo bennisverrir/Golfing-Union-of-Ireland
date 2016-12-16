@@ -80,7 +80,7 @@ vector <Relation> Service::requestRelationSearch()
 {
     vector <Relation> returnVector;
 
-    qDebug() << "SAELIR";
+
     returnVector = a.findRelation(_searchString);
     return returnVector;
 }

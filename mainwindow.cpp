@@ -32,8 +32,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     whatTable = ui->TableView->currentIndex();
 
-    qDebug() << whatTable;
-
     displayLegends(_service.requestLegendSort());
     displayComputers(_service.requestComputerSort());
     displayRelations(_service.requestRelationSort());

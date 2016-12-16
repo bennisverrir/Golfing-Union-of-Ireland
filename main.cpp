@@ -18,7 +18,6 @@ int main(int argc, char *argv[])
 
     QString lang = dialog.getItem(NULL, "Language", "Select Language", languages,0,true, &hitOk);
 
-    dialog.resize(100,100);
 
     if(hitOk)
     {
