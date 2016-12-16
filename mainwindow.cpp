@@ -22,9 +22,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QFile::copy(defaultImage.fileName(), filePath);
 
-    QPixmap defaultPixmap(filePath);
+    QPixmap defaultPixMap(filePath);
 
     ui->setupUi(this);
+
+    QPixmap newPixmap = defaultPixMap.scaled(QSize(150,350), Qt::KeepAspectRatio);
+
+    ui->PictureLabel->setPixmap(newPixmap);
 
     whatTable = ui->TableView->currentIndex();
 
