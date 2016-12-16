@@ -8,5 +8,6 @@
     </qresource>
     <qresource prefix="/Languages">
         <file>Islenska.qm</file>
+        <file>Braille.qm</file>
     </qresource>
 </RCC>

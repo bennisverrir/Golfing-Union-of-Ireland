@@ -12,12 +12,11 @@ int main(int argc, char *argv[])
     QTranslator translator;
 
     QStringList languages;
-    languages << "English" << "Íslenska";
+    languages << "English" << "Íslenska" << "Braille";
 
     QInputDialog dialog;
 
     QString lang = dialog.getItem(NULL, "Language", "Select Language", languages,0,true, &hitOk);
-
 
     if(hitOk)
     {
@@ -25,6 +24,10 @@ int main(int argc, char *argv[])
         {
             translator.load(":/Languages/Islenska.qm");
 
+        }
+        else if(lang == "Braille")
+        {
+            translator.load(":/Languages/Braille.qm");
         }
         a.installTranslator(&translator);
     }

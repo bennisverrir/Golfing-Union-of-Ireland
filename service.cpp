@@ -91,6 +91,7 @@ vector <Relation> Service::requestRelationSearch()
 */
 bool Service::requestLegendAdd(string name, char gender, int born, int death, string bio)
 {
+
     Legend myNewLegend (name, gender, born, death, bio);
     return a.writeFile(myNewLegend);
 }
@@ -101,6 +102,16 @@ bool Service::requestLegendAdd(string name, char gender, int born, int death, st
 */
 bool Service::requestComputerAdd(string name, int yearBuilt, string computerType, bool wasBuilt, int index, string bio)
 {
+    for(size_t i = 0; i < bio.size(); i++)
+    {
+        if(bio.at(i) == '\'')
+        {
+            bio.insert(i-1,"'",1);
+        }
+    }
+
+    qDebug() << QString::fromStdString(bio);
+
     Computer myNewComputer (name, yearBuilt, computerType, wasBuilt, bio);
     return a.writeComputerFile (myNewComputer, index);
 }
