@@ -6,4 +6,7 @@
         <file>magnifying-glass-icon-4.png</file>
         <file>icon-glass.png</file>
     </qresource>
+    <qresource prefix="/Languages">
+        <file>Islenska.qm</file>
+    </qresource>
 </RCC>

@@ -44,19 +44,18 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+/*Function displayLegends, @Param vector<Legend>, @return void
+ * Loops throught the vector and displays Name, gender, birth year and death year
+ * of each Legend and puts it in in a QWidgetTable
+ */
 void MainWindow::displayLegends(vector<Legend> legends)
 {
     ui->ScientistTable->setSortingEnabled(false);
 
-    ui->ScientistTable->clear();
+    ui->ScientistTable->clearContents();
     ui->ScientistTable->hideColumn(4);
     ui->ScientistTable->hideColumn(5);
     ui->ScientistTable->setRowCount(legends.size());
-
-    ui->ScientistTable->setHorizontalHeaderItem(0,new QTableWidgetItem("Name"));
-    ui->ScientistTable->setHorizontalHeaderItem(1,new QTableWidgetItem("Gender"));
-    ui->ScientistTable->setHorizontalHeaderItem(2,new QTableWidgetItem("Birth Year"));
-    ui->ScientistTable->setHorizontalHeaderItem(3,new QTableWidgetItem("Death Year"));
 
     for(size_t row = 0; row < legends.size(); row++)
     {
@@ -79,18 +78,20 @@ void MainWindow::displayLegends(vector<Legend> legends)
 
     ui->ScientistTable->setSortingEnabled(true);
 }
+
+/*Function displayComputers, @param vector<Computer>, @return void
+ * Loops throught the vector and displays Name, Build year and computerType
+ * of each Computer and puts it in a QWidgetTable
+ */
+
 void MainWindow::displayComputers(vector<Computer> computers)
 {
     ui->ComputerTable->setSortingEnabled(false);
 
-    ui->ComputerTable->clear();
+    ui->ComputerTable->clearContents();
     ui->ComputerTable->hideColumn(3);
     ui->ComputerTable->hideColumn(4);
     ui->ComputerTable->setRowCount(computers.size());
-
-    ui->ComputerTable->setHorizontalHeaderItem(0,new QTableWidgetItem("Name"));
-    ui->ComputerTable->setHorizontalHeaderItem(1,new QTableWidgetItem("Build Year"));
-    ui->ComputerTable->setHorizontalHeaderItem(2,new QTableWidgetItem("Computer Type"));
 
     for(size_t row = 0; row < computers.size(); row++)
     {
@@ -111,17 +112,20 @@ void MainWindow::displayComputers(vector<Computer> computers)
 
     ui->ComputerTable->setSortingEnabled(true);
 }
+
+/*Function displayRelations, @param vector<Computer>, @return void
+ * Loops throught the vector and displays Scientistname and Computername
+ * of each Relation and puts it in a QWidgetTable
+ */
+
 void MainWindow::displayRelations(vector<Relation> relations)
 {
     ui->RelationTable->setSortingEnabled(false);
 
-    ui->RelationTable->clear();
+    ui->RelationTable->clearContents();
     ui->RelationTable->hideColumn(2);
     ui->RelationTable->hideColumn(3);
     ui->RelationTable->setRowCount(relations.size());
-
-    ui->RelationTable->setHorizontalHeaderItem(0,new QTableWidgetItem("Scientist Name"));
-    ui->RelationTable->setHorizontalHeaderItem(1,new QTableWidgetItem("Computer Name"));
 
     for(size_t row = 0; row < relations.size(); row++)
     {
@@ -141,6 +145,11 @@ void MainWindow::displayRelations(vector<Relation> relations)
     ui->RelationTable->setSortingEnabled(true);
 }
 
+/*Function on_findText_textChanged
+ * The function is called when some text is put in the find box
+ * it then calls the appropriate display function witch displays all information
+ * that includes the find string
+ */
 void MainWindow::on_findText_textChanged(const QString &arg1)
 {
     string nameToFind = ui->findText->text().toStdString();
@@ -162,6 +171,12 @@ void MainWindow::on_findText_textChanged(const QString &arg1)
 
 }
 
+/*Function addLegend, @return bool
+ * Takes the text from the appropriate text boxes or combo boxes and
+ * passes the information to the requestLegendAdd in the service layer,
+ * returns true if adding the Legend was successfull
+ */
+
 bool MainWindow::addLegend()
 {
     string name = ui->ScientistName->text().toStdString();
@@ -172,6 +187,12 @@ bool MainWindow::addLegend()
 
     return _service.requestLegendAdd(name, gender[0], born, death, bio);
 }
+
+/*Function addComputer, @return bool
+ * Takes the text from the appropriate text boxes or combo boxes and
+ * passes the information to the requestComputerAdd in the service layer,
+ * returns true if adding the Computer was successfull
+ */
 
 bool MainWindow::addComputer()
 {
@@ -188,6 +209,12 @@ bool MainWindow::addComputer()
     return _service.requestComputerAdd(name,buildYear,computerType,wasBuilt, computerTypeID, bio);
 }
 
+/*Function addRelation, @return bool
+ * Takes the text from the appropriate combo boxes and
+ * passes the information to the requestRelationAdd in the service layer,
+ * returns true if adding the Relation was successfull
+ */
+
 bool MainWindow::addRelation()
 {
    int scientistID = ui->RelationScientistName->currentIndex() + 1;
@@ -196,6 +223,11 @@ bool MainWindow::addRelation()
    return _service.requestRelationAdd(scientistID, computerID);
 }
 
+/*Function on_ButtonAddScientist_clicked
+ * is called when the ButtonAddScientist button is clicked
+ * checks if it is successfull to add the scientist and calls the addLegend function
+ *
+ */
 void MainWindow::on_ButtonAddScientist_clicked()
 {
     if(addScientisInputIsValid())
@@ -211,10 +243,16 @@ void MainWindow::on_ButtonAddScientist_clicked()
         else
         {
 
-            ui->labelErrorScientist->setText("<span style='color: red'>Error!! Scientist was not added!</span>");
+            ui->labelErrorScientist->setText("Error!! Scientist was not added!");
         }
     }
 }
+
+/*Function editLegend, @return bool
+ * Checks what scientist is selected in the Scientist table
+ * Then takes the information from the appropriate text boxes or combo boxes
+ * and passes those information to requestLegendEdit in the service layer
+ */
 
 bool MainWindow::editLegend()
 {
@@ -238,6 +276,11 @@ bool MainWindow::editLegend()
     return _service.requestLegendEdit(name,gender[0],born,death, bio, oldLegend);
 }
 
+/*Function editComputer, @return bool
+ * Checks what scientist is selected in the Computer table
+ * Then takes the information from the appropriate text boxes or combo boxes
+ * and passes those information to requestComputerEdit in the service layer
+ */
 bool MainWindow::editComputer()
 {
     int row = ui->ComputerTable->currentRow();
@@ -262,6 +305,11 @@ bool MainWindow::editComputer()
     return _service.requestComputerEdit(name, buildYear, computerType, wasBuilt, oldComputer, computerTypeID, bio);
 }
 
+/*Function editRelation, @return bool
+ * Checks what scientist is selected in the Relation table
+ * Then takes the information from the appropriate combo boxes
+ * and passes those information to requestRelationEdit in the service layer
+ */
 bool MainWindow::editRelations()
 {
     int scientistID = ui->RelationScientistName->currentIndex() + 1;
@@ -281,6 +329,12 @@ bool MainWindow::editRelations()
 
 }
 
+/*Function deleteRelations @return bool
+ *checks what relation is selected in the relationTable
+ * passes the information about it to the deleteRelation function in the service layer
+ * returns true if relation was deleted
+ */
+
 bool MainWindow::deleteRelations()
 {
     int row = ui->RelationTable->currentRow();
@@ -295,6 +349,10 @@ bool MainWindow::deleteRelations()
     return _service.requestRelationDelete(deleteRelation);
 }
 
+/* Function fillLegendRelationComboBox @return void
+ * Fills the scientist name combo box in the relation section
+ *  with all Scientist names in the database
+ */
 void MainWindow::fillLegendRelationComboBox()
 {
     vector<Legend> legends = _service.requestLegendSort();
@@ -305,6 +363,10 @@ void MainWindow::fillLegendRelationComboBox()
     }
 }
 
+/* Function fillComputerRelationComboBox @return void
+ * Fills the computer name combo box in the relation section
+ *  with all Computer names in the database
+ */
 void MainWindow::fillComputerRelationComboBox()
 {
     QStringList list;
@@ -318,6 +380,11 @@ void MainWindow::fillComputerRelationComboBox()
 
 }
 
+
+/*Function on_ButtonEditScientist_clicked
+ * Is called when the ButtonEditScientist button is clicked
+ * checks if the input is valid and then calls the editLegend function
+ */
 void MainWindow::on_ButtonEditScientist_clicked()
 {
    if(addScientisInputIsValid())
@@ -329,13 +396,18 @@ void MainWindow::on_ButtonEditScientist_clicked()
         }
         else
         {
-            ui->labelErrorEdidScienti->setText("<span style='color: red'>Error!! Scientist was not edited!</span>");
+            ui->labelErrorEdidScienti->setText("Error!! Scientist was not edited!");
         }
    }
     
     ui->ButtonEditScientist->setEnabled(false);
 }
 
+/*Function on_ScientistTable_cellClicked
+ * Is called when row in the ScientistTable is clicked
+ * puts the information about the selected scientist in
+ * the appropriate text boxes or combo boxes.
+ */
 void MainWindow::on_ScientistTable_cellClicked()
 {
     ui->ButtonEditScientist->setEnabled(true);
@@ -352,6 +424,9 @@ void MainWindow::on_ScientistTable_cellClicked()
     displayPicture();
 }
 
+/*Function displayPicture, return @void
+ * Puts a picture from a filePath in a label
+ */
 void MainWindow::displayPicture()
 {
     QPixmap pixMap(getFilePath(false));
@@ -361,6 +436,10 @@ void MainWindow::displayPicture()
     ui->PictureLabel->setPixmap(newPixmap);
 }
 
+/*Function on_TableView_tabBarClicked @param int, @return void
+ * is called when one of the tabs on the tab bar is clicked
+ * takes a index witch tells the function what tab is selected.
+ */
 void MainWindow::on_TableView_tabBarClicked(int index)
 {
     if(index == 0)
@@ -384,6 +463,11 @@ void MainWindow::on_TableView_tabBarClicked(int index)
     }
 }
 
+/* Function on_ButtonAddComputer_clicked
+* is called when the ButtonAddComputer button is clicked
+* checks if it is possible to add the Computer and calls the addComputer function
+*
+*/
 void MainWindow::on_ButtonAddComputer_clicked()
 {
     if(addComputerInputIsValid())
@@ -397,11 +481,15 @@ void MainWindow::on_ButtonAddComputer_clicked()
         }
         else
         {
-             ui->labelErrorComptuer->setText("<span style='color: red'>Error!! Computer was not added!</span>");
+             ui->labelErrorComptuer->setText("Error!! Computer was not added!");
         }
     }
 }
 
+/* Function fillComputerTypeComboBox @return void
+ * Fills the Computer Type combo box in the Computer section
+ *  with all Computer Type names in the database
+ */
 void MainWindow::fillComputerTypeComboBox()
 {
     vector<string> computerTypes = _service.requestComputerTypes();
@@ -414,6 +502,10 @@ void MainWindow::fillComputerTypeComboBox()
     ui->ComputerType->addItem(QString::fromStdString("Other"));
 }
 
+/*Function on_ButtonEditComputer_clicked
+ * Is called when the ButtonEditComputer button is clicked
+ * checks if the input is valid and then calls the editComputer function
+ */
 void MainWindow::on_ButtonEditComputer_clicked()
 {
     ui->ButtonEditComputer->setEnabled(false);
@@ -429,12 +521,17 @@ void MainWindow::on_ButtonEditComputer_clicked()
         }
         else
         {
-            ui->labelErrorEditComputer->setText("<span style='color: red'>Error!! Computer was not edited!</span>");
+            ui->labelErrorEditComputer->setText("Error!! Computer was not edited!");
         }
     }
 
 }
 
+/*Function on_ComputerTable_cellClicked
+ * Is called when row in the ComputerTable is clicked
+ * puts the information about the selected computer in
+ * the appropriate text boxes or combo boxes.
+ */
 void MainWindow::on_ComputerTable_cellClicked()
 {
     ui->ButtonEditComputer->setEnabled(true);
@@ -447,6 +544,10 @@ void MainWindow::on_ComputerTable_cellClicked()
     ui->ComputerBio->setText(ui->ComputerTable->item(row, 4)->text());
 }
 
+/* Function on_ButtonAddRelation_clicked
+* is called when the ButtonAddRelation button is clicked
+* calls the addRelation function
+*/
 void MainWindow::on_ButtonAddRelation_clicked()
 {
     if(addRelation())
@@ -456,10 +557,15 @@ void MainWindow::on_ButtonAddRelation_clicked()
     }
     else
     {
-        ui->labelErrorAddRelation->setText("<span style='color: red'>Error!! Relation was not added!</span>");
+        ui->labelErrorAddRelation->setText("Error!! Relation was not added!");
     }
 }
 
+/*Function on_RelationTable_cellClicked
+ * Is called when row in the RelationTable is clicked
+ * puts the information about the selected Relation in
+ * the appropriate combo boxes.
+ */
 void MainWindow::on_RelationTable_cellClicked()
 {
     ui->ButtonEditRelation->setEnabled(true);
@@ -470,6 +576,10 @@ void MainWindow::on_RelationTable_cellClicked()
     ui->RelationComputerName->setCurrentText(ui->RelationTable->item(row, 1)->text());
 }
 
+/*Function on_ButtonEditRelation_clicked
+ * Is called when the ButtonEditRelation button is clicked
+ * and then calls the editRelation function
+ */
 void MainWindow::on_ButtonEditRelation_clicked()
 {
     ui->ButtonEditRelation->setEnabled(false);
@@ -481,11 +591,15 @@ void MainWindow::on_ButtonEditRelation_clicked()
     }
     else
     {
-         ui->labelErrorEditRelation->setText("<span style='color: red'>Error!! Relation was not edited!</span>");
+         ui->labelErrorEditRelation->setText("Error!! Relation was not edited!");
 
     }
 }
 
+/*Function on_ButtonDeleteRelation_clicked
+ * Is called when the ButtonDeleteRelation button is clicked
+ * and then calls the deleteRelations function
+ */
 void MainWindow::on_ButtonDeleteRelation_clicked()
 {
     if(deleteRelations())
@@ -495,10 +609,13 @@ void MainWindow::on_ButtonDeleteRelation_clicked()
     }
     else
     {
-         ui->labelErrorDeleteRelation->setText("<span style='color: red'>Error!! Relation was not delete!</span>");
+         ui->labelErrorDeleteRelation->setText("Error!! Relation was not delete!");
     }
 }
 
+/*Function addScientistInputIsValid @return bool
+ * Checks if its valid to add scientist
+ */
 bool MainWindow::addScientisInputIsValid()
 {
     bool isValid = true;
@@ -518,7 +635,9 @@ bool MainWindow::addScientisInputIsValid()
 
     return isValid;
 }
-
+/*Function addComputerInputIsValid @return bool
+ * Checks if its valid to add computer
+ */
 bool MainWindow::addComputerInputIsValid()
 {
     bool isValid = true;
@@ -534,6 +653,10 @@ bool MainWindow::addComputerInputIsValid()
 
 }
 
+/*Function on_JokeButton_clicked
+ * is called when the Joke button is clicked
+ * opens another PopUpWindow.
+ */
 void MainWindow::on_JokeButton_clicked()
 {
     PopUpJoke  *joke = new PopUpJoke(_service.getJoke());
@@ -543,11 +666,19 @@ void MainWindow::on_JokeButton_clicked()
     delete joke;
 }
 
+/*Function on_ButtonQuit_clicked
+ * is called when quit button is clicked
+ * quits the application
+ */
 void MainWindow::on_ButtonQuit_clicked()
 {
     exit(1);
 }
 
+/*Function getFilePath, @param bool, @return QString
+ * returns the newFilePath of the scientist Image selected
+ * sets the name of the image to the ID of the scientist
+ */
 QString MainWindow::getFilePath(bool justRemoved)
 {
     QDir dir;
@@ -570,7 +701,11 @@ QString MainWindow::getFilePath(bool justRemoved)
 
     return newFilePath;
 }
-
+/*Function on_ButtonAddImage_clicked
+ * Is called when the ButtonAddImage button is clicked
+ * opens a file dialog and copies the image selected in the
+ * image folder witch keeps all the scientist Images
+ */
 void MainWindow::on_ButtonAddImage_clicked()
 {
     QString filePath = QFileDialog::getOpenFileName(this, tr("Import Image"),"C:/", "Jpg Files(*.jpg);;Png Files(*.png)");
@@ -586,7 +721,7 @@ void MainWindow::on_ButtonAddImage_clicked()
     QFileInfo oldInfo(oldFile);
 
 
-    if(oldFile.exists() && oldInfo.fileName() != "default")
+    if(oldFile.exists() && oldInfo.fileName() != "default" && !filePath.isEmpty())
     {
         justRemoved = true;
 
@@ -600,11 +735,12 @@ void MainWindow::on_ButtonAddImage_clicked()
 
     QFile::copy(filePath,getFilePath(justRemoved));
     displayPicture();
-
-    ui->ButtonAddImage->setEnabled(false);
 }
 
-
+/*Function on_ButtonClearScientist_clicked
+ * Is called when ButtonClearScientist button is clicked
+ * clears the text boxes and image
+ */
 void MainWindow::on_ButtonClearScientist_clicked()
 {
     ui->ScientistName->clear();
@@ -619,7 +755,10 @@ void MainWindow::on_ButtonClearScientist_clicked()
 
     ui->PictureLabel->setPixmap(newPixmap);
 }
-
+/*Function on_ButtonClearComputer_clicked
+ * Is called when ButtonClearComputer button is clicked
+ * clears the text boxes and image
+ */
 void MainWindow::on_ButtonClearComputer_clicked()
 {
     ui->ComputerName->clear();
