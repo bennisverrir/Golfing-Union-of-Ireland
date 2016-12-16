@@ -5,6 +5,8 @@
     <qresource prefix="/Icons">
         <file>magnifying-glass-icon-4.png</file>
         <file>icon-glass.png</file>
+        <file>magniglass35.png</file>
+        <file>magniglass40.png</file>
     </qresource>
     <qresource prefix="/Languages">
         <file>Islenska.qm</file>
