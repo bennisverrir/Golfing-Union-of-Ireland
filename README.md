@@ -2,7 +2,7 @@
 
 ## Helgi, Benni, Elvar, Sara, Þorfinnur, Kolbeinn
 
-Club of fans
+Fans of clubs
 
 Link to this repository: https://github.com/bennisverrir/Golfing-Union-of-Ireland/
 
