@@ -1,9 +1,9 @@
 <RCC>
-    <qresource prefix="/Icons">
-        <file>magniglass35.png</file>
-    </qresource>
     <qresource prefix="/Images">
         <file>default.png</file>
+    </qresource>
+    <qresource prefix="/Icons">
+        <file>magniglass35.png</file>
     </qresource>
     <qresource prefix="/Languages">
         <file>Braille.qm</file>

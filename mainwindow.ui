@@ -44,7 +44,7 @@
              <enum>QTabWidget::Rounded</enum>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="Scientists">
              <attribute name="title">
@@ -905,6 +905,9 @@
                   </item>
                   <item>
                    <widget class="QPushButton" name="ButtonDeleteRelation">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
                     <property name="text">
                      <string>Delete relation</string>
                     </property>
@@ -1074,7 +1077,7 @@
      <x>0</x>
      <y>0</y>
      <width>1579</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

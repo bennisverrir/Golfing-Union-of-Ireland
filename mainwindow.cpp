@@ -580,6 +580,7 @@ void MainWindow::on_ButtonAddRelation_clicked()
  */
 void MainWindow::on_RelationTable_cellClicked()
 {
+    ui->ButtonDeleteRelation->setEnabled(true);
     ui->ButtonEditRelation->setEnabled(true);
 
     int row = ui->RelationTable->currentRow();
