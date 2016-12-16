@@ -44,7 +44,7 @@
              <enum>QTabWidget::Rounded</enum>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="Scientists">
              <attribute name="title">
@@ -905,6 +905,9 @@
                   </item>
                   <item>
                    <widget class="QPushButton" name="ButtonDeleteRelation">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
                     <property name="text">
                      <string>Delete relation</string>
                     </property>
@@ -985,6 +988,16 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_18">
             <item>
+             <widget class="QLabel" name="labelFindPic">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="resorces.qrc">:/Icons/magniglass35.png</pixmap>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QLineEdit" name="findText">
               <property name="placeholderText">
                <string>Find Item</string>
@@ -1064,7 +1077,7 @@
      <x>0</x>
      <y>0</y>
      <width>1579</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
@@ -1085,6 +1098,8 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resorces.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -187,6 +187,16 @@ bool MainWindow::addLegend()
     int death = ui->ScientistDeath->text().toInt();
     string bio = ui->ScientistBio->toPlainText().toStdString();
 
+    for(size_t i = 0; i < bio.size(); i++)
+    {
+        if(bio.at(i) == '\'')
+        {
+            bio.insert(i-1,"'",1);
+        }
+    }
+
+    qDebug() << QString::fromStdString(bio);
+
     return _service.requestLegendAdd(name, gender[0], born, death, bio);
 }
 
@@ -570,6 +580,7 @@ void MainWindow::on_ButtonAddRelation_clicked()
  */
 void MainWindow::on_RelationTable_cellClicked()
 {
+    ui->ButtonDeleteRelation->setEnabled(true);
     ui->ButtonEditRelation->setEnabled(true);
 
     int row = ui->RelationTable->currentRow();
